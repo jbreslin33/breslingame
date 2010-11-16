@@ -20,10 +20,10 @@ public:
     virtual ~Game(void);
 
 
-	void setGameServer(GameServer* gameServer);
+	void setGameServer(GameServer* gameServer) { mGameServer = gameServer; }
 
 protected:
-GameServer* gameServer;
+GameServer* mGameServer;
 
 };
 
