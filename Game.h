@@ -19,11 +19,13 @@ public:
 	Game();
     	virtual ~Game(void);
 
+	//GameServer if neccesary.....
 	void        setGameServer(GameServer* gameServer) { mGameServer = gameServer; }
 	GameServer* getGameServer()                       { return mGameServer;       }
 
 protected:
 
+//GameServer if neccesary.....
 GameServer* mGameServer;
 
 };
