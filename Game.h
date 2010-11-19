@@ -16,13 +16,14 @@ class Game
 {
 
 public:
-    Game();
-    virtual ~Game(void);
+	Game();
+    	virtual ~Game(void);
 
-
-	void setGameServer(GameServer* gameServer) { mGameServer = gameServer; }
+	void        setGameServer(GameServer* gameServer) { mGameServer = gameServer; }
+	GameServer* getGameServer()                       { return mGameServer;       }
 
 protected:
+
 GameServer* mGameServer;
 
 };
