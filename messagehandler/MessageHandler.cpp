@@ -18,6 +18,7 @@ MessageHandler::MessageHandler()
 	mGame         = NULL;
 	mListenServer = new ListenServer();	
 	mMessage      = NULL;
+	mListen       = false;
 }
 //-------------------------------------------------------------------------------------
 MessageHandler::~MessageHandler(void)
@@ -30,3 +31,15 @@ MessageHandler::~MessageHandler(void)
 void MessageHandler::translateMessage(std::string message)
 {
 }
+
+void MessageHandler::run()
+{
+	if (mListen == true)
+	{
+		mListenServer->processRequests();
+	}
+
+	
+	
+}
+

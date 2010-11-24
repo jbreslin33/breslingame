@@ -29,8 +29,13 @@ public:
 	//ListenServer
 	virtual void          setListenServer (ListenServer* listenServer  )  { mListenServer = listenServer; }
 	virtual ListenServer* getListenServer (                            )  { return mListenServer; }
+	
+	//are we looping ListenServer??
+	void setListen(bool b) { mListen = b; }
+	bool getListen() { return mListen; }
 
-
+	void run();
+	
 protected:
 
 	//Messaging
@@ -42,7 +47,7 @@ protected:
 	//ListenServer - this will not probably be subclassed
 	ListenServer* mListenServer;
 
-
+	bool mListen;
 };
 
 #endif

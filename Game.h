@@ -44,6 +44,8 @@ public:
         virtual  void   joinGame            (std::string userName, std::string ip, std::string port ) { }
         virtual  void   leaveGame           (std::string id                                   )       { }
 
+
+	virtual void run();
 protected:
 
         //Clients, server and clients could point to this? might as well right now.
@@ -51,6 +53,7 @@ protected:
 
         //Everybody needs a message handler 
         MessageHandler* mMessageHandler;
+
 
 };
 
