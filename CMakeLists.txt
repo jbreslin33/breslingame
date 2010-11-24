@@ -35,6 +35,7 @@ set(HDRS
 	listenserver/ListenServer.h
 	client/Client.h
 	server/questiongame/QuestionServerGame.h
+	messagehandler/MessageHandler.h
 )
 
 set(SRCS
@@ -44,6 +45,7 @@ set(SRCS
 	Main.cpp
 	client/Client.cpp
 	server/questiongame/QuestionServerGame.cpp
+	messagehandler/MessageHandler.cpp
 )
 
 

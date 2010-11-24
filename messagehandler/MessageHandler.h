@@ -10,7 +10,7 @@ Filename:    MessageHandler.h
 #include <stdlib.h>
 #include <string>
 
-class GameServer;
+class Game;
 class ListenServer;
 
 class MessageHandler
@@ -22,10 +22,9 @@ public:
 
 	//Messaging
 	virtual void translateMessage(std::string message);
-	
-	//GameServer
-	virtual void          setGameServer   (GameServer*   gameServer    )  { mGameServer = gameServer; }
-	virtual GameServer*   getGameServer   (                            )  { return mGameServer;       }	
+
+	virtual void          setGame (Game* game  )   { mGame = game; }
+	virtual Game*         getGame (            )   { return mGame; }
 
 	//ListenServer
 	virtual void          setListenServer (ListenServer* listenServer  )  { mListenServer = listenServer; }
@@ -38,7 +37,7 @@ protected:
 	char*         mMessage;
 	
 	//GameServer - this will be subclassed to fit a particular game
-	GameServer*   mGameServer;
+	Game*   mGame;
 
 	//ListenServer - this will not probably be subclassed
 	ListenServer* mListenServer;

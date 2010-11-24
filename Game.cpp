@@ -4,12 +4,12 @@ Filename:    Game.cpp
 */
 
 #include "Game.h"
-
+#include "messagehandler/MessageHandler.h"
 
 //-------------------------------------------------------------------------------------
 Game::Game()
 {
-	mMessageHandler = NULL;
+	mMessageHandler = new MessageHandler();
 }
 //-------------------------------------------------------------------------------------
 Game::~Game(void)

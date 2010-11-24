@@ -20,8 +20,9 @@ Filename:    QuestionServerGame.h
 #include <string>
 #include <vector>
 
+#include "../ServerGame.h"
 
-class QuestionServerGame
+class QuestionServerGame : public ServerGame
 {
 
 public:
