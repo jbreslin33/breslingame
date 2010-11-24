@@ -31,27 +31,27 @@ set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/dist")
 
 set(HDRS
 	Game.h
-	server/ServerGame.h
-        client/ClientGame.h
+	talker/Talker.h
+	messagehandler/MessageHandler.h
 	listenserver/ListenServer.h
 	client/Client.h
-	server/questiongame/QuestionServerGame.h
-	messagehandler/MessageHandler.h
-	talker/Talker.h
+        client/ClientGame.h
+	server/ServerGame.h
 	client/questiongame/QuestionClientGame.h
+	server/questiongame/QuestionServerGame.h
 )
 
 set(SRCS
 	Game.cpp
-	server/ServerGame.cpp
-        client/ClientGame.cpp
-	listenserver/ListenServer.cpp
-	Main.cpp
-	client/Client.cpp
-	server/questiongame/QuestionServerGame.cpp
-	messagehandler/MessageHandler.cpp
 	talker/Talker.cpp
+	messagehandler/MessageHandler.cpp
+	listenserver/ListenServer.cpp
+	client/Client.cpp
+        client/ClientGame.cpp
+	server/ServerGame.cpp
 	client/questiongame/QuestionClientGame.cpp
+	server/questiongame/QuestionServerGame.cpp
+	Main.cpp
 )
 
 

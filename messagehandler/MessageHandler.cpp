@@ -6,6 +6,7 @@ Filename:    MessageHandler.cpp
 
 #include "MessageHandler.h"
 #include "../listenserver/ListenServer.h"
+#include "../talker/Talker.h"
 
 #include <iostream>
 
@@ -16,7 +17,8 @@ MessageHandler::MessageHandler()
 	std::cout << "MessageHandler Constructor\n";
 
 	mGame         = NULL;
-	mListenServer = new ListenServer();	
+	mListenServer = new ListenServer();
+	mTalker       = new Talker();	
 	mMessage      = NULL;
 	mListen       = false;
 }

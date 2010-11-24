@@ -29,6 +29,7 @@ public:
 	QuestionClientGame();
     	virtual ~QuestionClientGame(void);
 
+	
 
 
 protected:

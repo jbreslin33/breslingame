@@ -10,10 +10,6 @@ Filename:    Game.cpp
 Game::Game()
 {
 	mMessageHandler = new MessageHandler();
-	mMessageHandler->setListen(true);
-	
-	//let's start it all up....
-	run();
 }
 //-------------------------------------------------------------------------------------
 Game::~Game(void)
