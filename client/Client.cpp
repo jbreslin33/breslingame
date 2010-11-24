@@ -1,17 +1,18 @@
 /*
 -----------------------------------------------------------------------------
-Filename:    ServerGame.cpp
+Filename:    Client.cpp
 */
 
-#include "ServerGame.h"
+#include "Client.h"
 
 
 //-------------------------------------------------------------------------------------
-ServerGame::ServerGame()
+Client::Client(std::string userName)
 {
+	mUserName = userName;
 }
 //-------------------------------------------------------------------------------------
-ServerGame::~ServerGame(void)
+Client::~Client(void)
 {
 }
 

@@ -1,17 +1,17 @@
 /*
 -----------------------------------------------------------------------------
-Filename:    ServerGame.cpp
+Filename:    QuestionServerGame.cpp
 */
 
-#include "ServerGame.h"
+#include "QuestionServerGame.h"
 
 
 //-------------------------------------------------------------------------------------
-ServerGame::ServerGame()
+QuestionServerGame::QuestionServerGame()
 {
 }
 //-------------------------------------------------------------------------------------
-ServerGame::~ServerGame(void)
+QuestionServerGame::~QuestionServerGame(void)
 {
 }
 
