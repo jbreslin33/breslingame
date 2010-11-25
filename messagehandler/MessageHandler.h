@@ -8,6 +8,7 @@ Filename:    MessageHandler.h
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
+#include <vector>
 
 class Game;
 
@@ -25,6 +26,7 @@ public:
         virtual Game*         getGame (            )   { return mGame; }
 
 
+
 protected:
 
         //Messaging
@@ -32,6 +34,9 @@ protected:
 
         //GameServer - this will be subclassed to fit a particular game
         Game*   mGame;
+
+	//Make a vector of function name and parameters
+	std::vector<std::string> functionVector;
 
 };
 

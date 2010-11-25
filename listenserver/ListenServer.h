@@ -18,7 +18,7 @@ Filename:    ListenServer.h
 
 #define MAXBUFLEN 100;
 
-class MessageHandler;
+class Game;
 
 class ListenServer
 {
@@ -26,28 +26,32 @@ class ListenServer
 
 
 public:
-    ListenServer();
+    ListenServer(Game* game);
     virtual ~ListenServer(void);
 
-    void *get_in_addr(struct sockaddr *sa);
-    void initializeVariables();
-    bool initializeListener();
-    void processRequests();
-    void setMessageHandler(MessageHandler* messageHandler) { mMessageHandler = messageHandler; }
+        void  *get_in_addr       (struct sockaddr *sa);
+        void  initializeVariables();
+        bool  initializeListener ();
+	void  processRequests    ();
+
+	void  setGame            (Game* game         )  { mGame = game; }
+	Game* getGame            (                   )  { return mGame; }
 
 protected:
+	//Game
+	Game*       mGame;
 
-    MessageHandler* mMessageHandler;
+	//Communications
+        int         sockfd;
+        struct      addrinfo hints, *servinfo, *p;
+        int         rv;
+        int         numbytes;
+        struct      sockaddr_storage their_addr;
+        socklen_t   addr_len;
+        char        s[INET6_ADDRSTRLEN];
+        const char* mPort;
+        int         mMaxBufferLength;
 
-    int sockfd;
-    struct addrinfo hints, *servinfo, *p;
-    int rv;
-    int numbytes;
-    struct sockaddr_storage their_addr;
-    socklen_t addr_len;
-    char s[INET6_ADDRSTRLEN];
-    const char* mPort;
-    int mMaxBufferLength;
 };
 
 #endif

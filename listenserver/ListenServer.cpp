@@ -4,14 +4,23 @@ Filename:    ListenServer.cpp
 */
 
 #include "ListenServer.h"
+#include "../Game.h"
+
 #include "../messagehandler/MessageHandler.h"
+
+
 
 #include <iostream>
 
 //-------------------------------------------------------------------------------------
-ListenServer::ListenServer()
+ListenServer::ListenServer(Game* game)
 {
 	std::cout << "ListenServer Constructor\n";
+
+	//Game	
+	mGame = game;	
+
+	//Communications
     	mMaxBufferLength = MAXBUFLEN;
    	mPort = "4950";
     	initializeVariables();
@@ -33,7 +42,6 @@ void *ListenServer::get_in_addr(struct sockaddr *sa)
 
 void ListenServer::initializeVariables()
 {
-    mMessageHandler = NULL;
 
     memset(&hints, 0, sizeof hints);
     hints.ai_family = AF_UNSPEC; // set to AF_INET to force IPv4
@@ -92,10 +100,11 @@ void ListenServer::processRequests()
     }
     printf("listener: packet contains \"%s\"\n", newClientMessage);
 
-    if (mMessageHandler != NULL)
+    if (mGame->getMessageHandler() != NULL)
     {
         printf("We have a MessageHandler\n");
-	mMessageHandler->translateMessage(newClientMessage);
+	mGame->getMessageHandler()->translateMessage(newClientMessage);
+	
     }
     else
     {

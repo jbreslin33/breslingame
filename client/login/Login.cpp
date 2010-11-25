@@ -5,6 +5,7 @@ Filename:    Login.cpp
 
 #include "Login.h"
 #include "../../Game.h"
+#include "../../talker/Talker.h"
 
 #include <iostream>
 
@@ -99,12 +100,17 @@ void Login::promptSignUpOrLogin()
 
 void Login::promptSignUp()
 {
+	promptUserName();
+	mGame->getTalker()->sendMessageToServer("signUp,userName"); //just see if this is available first
+	        
 
 }
+
 
 void Login::promptLogin()
 {
 	promptUserName();
+	promptPassword();
 }
 
 void Login::promptUserName()
@@ -116,7 +122,6 @@ void Login::promptUserName()
         getline (std::cin,str);
 
 	mTempUserName = str;
-	promptPassword();
 }
 
 void Login::promptPassword()

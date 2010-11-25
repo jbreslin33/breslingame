@@ -4,7 +4,7 @@ Filename:    Game.cpp
 */
 
 #include "Game.h"
-#include "messagehandler/MessageHandler.h"
+#include "listenserver/ListenServer.h"
 
 //-------------------------------------------------------------------------------------
 Game::Game()
@@ -22,6 +22,7 @@ Game::~Game(void)
 
 void Game::run()
 {
+	mListenServer->processRequests();
 	run();
 }
 
