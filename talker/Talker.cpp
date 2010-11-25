@@ -11,10 +11,12 @@
 #include <netdb.h>
 
 #include "Talker.h"
+#include "../Game.h"
 
-Talker::Talker()
+
+Talker::Talker(Game* game)
 {
-
+	mGame = game;
 }
 
 Talker::~Talker(void)
@@ -37,7 +39,7 @@ int Talker::sendMessageToServer (char newMessageToServer[100] )
 	hints.ai_family = AF_UNSPEC;
 	hints.ai_socktype = SOCK_DGRAM;
 
-	if ((rv = getaddrinfo(mServerIP, SERVERPORT, &hints, &servinfo)) != 0) {
+	if ((rv = getaddrinfo(mGame->getServerIP(), SERVERPORT, &hints, &servinfo)) != 0) {
 		fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
 		return 1;
 	}
@@ -66,7 +68,7 @@ int Talker::sendMessageToServer (char newMessageToServer[100] )
 
 	freeaddrinfo(servinfo);
 
-	printf("talker: sent %d bytes to %s\n", numbytes, mServerIP);
+	printf("talker: sent %d bytes to %s\n", numbytes, mGame->getServerIP());
 	close(sockfd);
 
 	return 0;

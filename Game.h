@@ -36,7 +36,8 @@ public:
     	virtual ~Game(void);
 
 	//ServerIP
-	virtual void   setServerIP(char* ip) { mServerIP = ip; }
+	virtual void   setServerIP           (char* ip                     )   { mServerIP = ip;                  }
+	virtual char*  getServerIP           (                             )   { return mServerIP;                } 
 	
 	//Client
 	virtual void    addNewClient        (Client*         client        )  { clientVector.push_back(client);   }

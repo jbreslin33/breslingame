@@ -3,24 +3,27 @@
 
 #define SERVERPORT "4950"	// the port users will be connecting to
 
+class Game;
+
 class Talker
 {
 
 public:
-    Talker();
+    Talker(Game* game);
     virtual ~Talker(void);
 
     int sendMessageToServer (char newMessageToServer[100] );
-    void setServerIP(char* ip) { mServerIP = ip; }
+//    void setServerIP(char* ip) { mServerIP = ip; }
     void sendMessageToClients(char newMessageToClients[100]);
 
     char* getMessage () { return mMessage;  }
-    char* getServerIP() { return mServerIP; }
+//    char* getServerIP() { return mServerIP; }
 
 protected:
 
-    char* mMessage;
-    char* mServerIP;
+Game* mGame;
+char* mMessage;
+//char* mServerIP;
 
 };
 
