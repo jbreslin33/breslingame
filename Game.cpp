@@ -9,16 +9,19 @@ Filename:    Game.cpp
 //-------------------------------------------------------------------------------------
 Game::Game()
 {
-	mMessageHandler = new MessageHandler();
 }
 //-------------------------------------------------------------------------------------
 Game::~Game(void)
 {
+	mLogin          = NULL;
+	mListenServer   = NULL;
+	mTalker         = NULL;
+	mMessageHandler = NULL;
+	mListen         = NULL;
 }
 
 void Game::run()
 {
-	mMessageHandler->run();
 	run();
 }
 

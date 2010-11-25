@@ -16,19 +16,29 @@ Filename:    Login.h
 #include <string>
 #include <vector>
 
+class Game;
 
 class Login
 {
 
 public:
-	Login();
+	Login(Game* game);
     	virtual ~Login(void);
 
+	virtual void promptServerIP();
+	
+	virtual void promptSignUpOrLogin();	
+	
+	virtual void promptSignUp();	
+	
+	virtual void promptLogin();	
+	
 	virtual void promptUserName();
 	virtual void promptPassword();
 
-protected:
 
+protected:
+Game* mGame;
 
 
 };

@@ -35,6 +35,7 @@ set(HDRS
 	messagehandler/MessageHandler.h
 	listenserver/ListenServer.h
 	client/Client.h
+	client/login/Login.h
         client/ClientGame.h
 	server/ServerGame.h
 	client/questiongame/QuestionClientGame.h
@@ -47,6 +48,7 @@ set(SRCS
 	messagehandler/MessageHandler.cpp
 	listenserver/ListenServer.cpp
 	client/Client.cpp
+	client/login/Login.cpp
         client/ClientGame.cpp
 	server/ServerGame.cpp
 	client/questiongame/QuestionClientGame.cpp
