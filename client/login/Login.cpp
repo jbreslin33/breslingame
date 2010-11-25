@@ -13,6 +13,7 @@ Login::Login(Game* game)
 {
 	mGame = game;
 	promptServerIP();
+
 }
 //-------------------------------------------------------------------------------------
 Login::~Login(void)
@@ -103,22 +104,30 @@ void Login::promptSignUp()
 
 void Login::promptLogin()
 {
-
+	promptUserName();
 }
 
 void Login::promptUserName()
 {
-/*
-	std::cout << "UserName:\n";
-
 	std::cout << "Enter UserName:\n";
-		char ip[16];
-		std::cin.getline(ip,16);	
-*/
+        
+	//get user response save to string
+        std::string str;
+        getline (std::cin,str);
+
+	mTempUserName = str;
+	promptPassword();
 }
 
 void Login::promptPassword()
 {
+	std::cout << "Enter Password:\n";
+        
+	//get user response save to string
+        std::string str;
+        getline (std::cin,str);
 
+	mTempPassword = str;
 }
+
 

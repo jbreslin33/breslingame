@@ -15,6 +15,7 @@ Filename:    Login.h
 #include <stdlib.h>
 #include <string>
 #include <vector>
+#include <iostream>
 
 class Game;
 
@@ -38,8 +39,10 @@ public:
 
 
 protected:
-Game* mGame;
 
+Game* mGame;
+std::string mTempUserName;
+std::string mTempPassword;
 
 };
 
