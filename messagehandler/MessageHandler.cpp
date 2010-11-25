@@ -53,11 +53,18 @@ void MessageHandler::translateMessage(std::string message)
 /**************check what function***************************/
 
 	//client to server
+
+
+	if (functionVector.at(0).compare("signUp") == 0)
+	{	
+		std::cout << "calling signUp(username)\n";
+		mGame->signUp(functionVector.at(1));		
+	}
+	
 	if (functionVector.at(0).compare("joingame") == 0)
-	{	//joinGame("Name","IP of client","port");
+	{	
 		mGame->joinGame(functionVector.at(1),functionVector.at(2),functionVector.at(3));		
 	}
-
 	
 
 	//server to client

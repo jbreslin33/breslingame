@@ -61,6 +61,8 @@ public:
         //are we looping ListenServer??
         void setListen(bool b) { mListen = b; }
         bool getListen() { return mListen; }
+
+	virtual void    signUp(std::string username);
 	
 	//generic leaving and joining
         virtual  void   joinGame            (std::string userName, std::string ip, std::string port ) { }
