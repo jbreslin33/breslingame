@@ -24,37 +24,46 @@ Talker::~Talker(void)
 }
 
 
-void Talker::translateMessage(std::string p1)
+void Talker::sendMessageToServer(char p1[100], char p2[100])
 {
-        sendMessageToServer(p1);
+	char str[200];
+  	strcat (str,p1);
+        strcat (str,p2);
+        puts (str);
+
+ 	sendMessageToServer(str);
 }
 
-void Talker::translateMessage(std::string p1, std::string p2)
+void Talker::sendMessageToServer(char p1[100], char p2[100], char p3[100])
 {
-        p1.append(p2);
-        sendMessageToServer(p1);
+        
+	char str[300];
+  	strcat (str,p1);
+        strcat (str,p2);
+	strcat (str,p3); 
+	puts (str);
+
+ 	sendMessageToServer(str);
 }
 
-void Talker::translateMessage(std::string p1, std::string p2, std::string p3)
-{
-        p1.append(p2);
-        p1.append(p3);
-        sendMessageToServer(p1);
-}
 
-
-void Talker::translateMessage(std::string p1, std::string p2, std::string p3, std::string p4)
+void Talker::sendMessageToServer(char p1[100], char p2[100], char p3[100], char p4[100])
 {
-        p1.append(p2);
-        p1.append(p3);
-        p1.append(p4);
-        sendMessageToServer(p1);
+
+	char str[400];
+  	strcat (str,p1);
+        strcat (str,p2);
+	strcat (str,p3); 
+	strcat (str,p4);
+	puts (str);
+
+ 	sendMessageToServer(str);
 }
 
 	
-int Talker::sendMessageToServer (char* newMessageToServer )
+int Talker::sendMessageToServer (char newMessageToServer[400] )
 {
-	if (strlen(newMessageToServer) > 100)
+	if (strlen(newMessageToServer) > 400)
 	{
 		perror("message too big!");
 	}

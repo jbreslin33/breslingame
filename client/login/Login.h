@@ -31,7 +31,8 @@ public:
 	virtual void promptSignUpOrLogin();	
 	
 	virtual void promptSignUp();	
-	
+	virtual void signUp(char userName[100]);
+
 	virtual void promptLogin();	
 	
 	virtual void promptUserName();
@@ -41,8 +42,8 @@ public:
 protected:
 
 Game* mGame;
-std::string mTempUserName;
-std::string mTempPassword;
+char  mTempUserName[100];
+char  mTempPassword[100];
 
 };
 

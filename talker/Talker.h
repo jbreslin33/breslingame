@@ -14,12 +14,11 @@ public:
     Talker(Game* game);
     virtual ~Talker(void);
 
-	void translateMessage(std::string p1);
-	void translateMessage(std::string p1, std::string p2);
-	void translateMessage(std::string p1, std::string p2, std::string p3);
-	void translateMessage(std::string p1, std::string p2, std::string p3, std::string p4);
+	void sendMessageToServer(char p1[100], char p2[100]);
+	void sendMessageToServer(char p1[100], char p2[100], char p3[100]);
+	void sendMessageToServer(char p1[100], char p2[100], char p3[100], char p4[100]);
 
-	int sendMessageToServer (char* newMessageToServer );
+	int sendMessageToServer (char mess[100] );
 	void sendMessageToClients(char newMessageToClients[100]);
 
 	char* getMessage () { return mMessage;  }

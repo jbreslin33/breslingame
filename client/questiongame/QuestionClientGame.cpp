@@ -11,10 +11,10 @@ Filename:    QuestionClientGame.cpp
 //-------------------------------------------------------------------------------------
 QuestionClientGame::QuestionClientGame()
 {
-	mTalker = new Talker(this); //no harm in creating this now i guess
-	mLogin = new Login(this);
+	mTalker         = new Talker        (this); //no harm in creating this now i guess
+	mMessageHandler = new MessageHandler(this);
+	mLogin          = new Login         (this);
 
-	//mMessageHandler = new MessageHandler(this);
 	
 }
 //-------------------------------------------------------------------------------------

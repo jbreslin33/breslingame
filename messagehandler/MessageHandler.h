@@ -20,11 +20,12 @@ public:
     virtual ~MessageHandler(void);
 
         //Messaging
-	virtual void translateMessage(std::string p1);
-	virtual void translateMessage(std::string p1,std::string p2);
-	virtual void translateMessage(std::string p1,std::string p2,std::string p3);
-	virtual void translateMessage(std::string p1,std::string p2,std::string p3,std::string p4);
         
+	virtual void translateMessage(char p1[100]);
+	virtual void translateMessage(char p1[100], char p2[100]);
+	virtual void translateMessage(char p1[100], char p2[100], char p3[100]);
+	virtual void translateMessage(char p1[100], char p2[100], char p3[100], char p4[100]);
+	
 	virtual void          setGame (Game* game  )   { mGame = game; }
         virtual Game*         getGame (            )   { return mGame; }
 

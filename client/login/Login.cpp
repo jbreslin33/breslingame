@@ -6,7 +6,7 @@ Filename:    Login.cpp
 #include "Login.h"
 #include "../../Game.h"
 #include "../../messagehandler/MessageHandler.h"
-
+//#include "../../talker/Talker.h"
 #include <iostream>
 
 //-------------------------------------------------------------------------------------
@@ -101,11 +101,13 @@ void Login::promptSignUpOrLogin()
 void Login::promptSignUp()
 {
 	promptUserName();
-	mGame->getMessageHandler()->translateMessage("signUp",mTempUserName); //just see if this is available first
-	        
-
+	signUp(mTempUserName);
 }
 
+void Login::signUp(char userName[100])
+{
+	mGame->getMessageHandler()->translateMessage("toServer","signUp",userName);
+}
 
 void Login::promptLogin()
 {
@@ -118,10 +120,8 @@ void Login::promptUserName()
 	std::cout << "Enter UserName:\n";
         
 	//get user response save to string
-        std::string str;
-        getline (std::cin,str);
+        std::cin.getline (mTempUserName,100);
 
-	mTempUserName = str;
 }
 
 void Login::promptPassword()
@@ -129,10 +129,8 @@ void Login::promptPassword()
 	std::cout << "Enter Password:\n";
         
 	//get user response save to string
-        std::string str;
-        getline (std::cin,str);
+        std::cin.getline (mTempPassword,100);
 
-	mTempPassword = str;
 }
 
 
