@@ -3,6 +3,8 @@
 
 #define SERVERPORT "4950"	// the port users will be connecting to
 
+#include <string>
+
 class Game;
 
 class Talker
@@ -12,12 +14,15 @@ public:
     Talker(Game* game);
     virtual ~Talker(void);
 
-    int sendMessageToServer (char newMessageToServer[100] );
-//    void setServerIP(char* ip) { mServerIP = ip; }
-    void sendMessageToClients(char newMessageToClients[100]);
+	void translateMessage(std::string p1);
+	void translateMessage(std::string p1, std::string p2);
+	void translateMessage(std::string p1, std::string p2, std::string p3);
+	void translateMessage(std::string p1, std::string p2, std::string p3, std::string p4);
 
-    char* getMessage () { return mMessage;  }
-//    char* getServerIP() { return mServerIP; }
+	int sendMessageToServer (char* newMessageToServer );
+	void sendMessageToClients(char newMessageToClients[100]);
+
+	char* getMessage () { return mMessage;  }
 
 protected:
 

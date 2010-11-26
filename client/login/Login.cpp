@@ -5,7 +5,7 @@ Filename:    Login.cpp
 
 #include "Login.h"
 #include "../../Game.h"
-#include "../../talker/Talker.h"
+#include "../../messagehandler/MessageHandler.h"
 
 #include <iostream>
 
@@ -101,7 +101,7 @@ void Login::promptSignUpOrLogin()
 void Login::promptSignUp()
 {
 	promptUserName();
-	mGame->getTalker()->sendMessageToServer("signUp,userName"); //just see if this is available first
+	mGame->getMessageHandler()->translateMessage("signUp",mTempUserName); //just see if this is available first
 	        
 
 }

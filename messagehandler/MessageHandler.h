@@ -20,11 +20,13 @@ public:
     virtual ~MessageHandler(void);
 
         //Messaging
-       virtual void translateMessage(std::string message);
-
-        virtual void          setGame (Game* game  )   { mGame = game; }
+	virtual void translateMessage(std::string p1);
+	virtual void translateMessage(std::string p1,std::string p2);
+	virtual void translateMessage(std::string p1,std::string p2,std::string p3);
+	virtual void translateMessage(std::string p1,std::string p2,std::string p3,std::string p4);
+        
+	virtual void          setGame (Game* game  )   { mGame = game; }
         virtual Game*         getGame (            )   { return mGame; }
-
 
 
 protected:

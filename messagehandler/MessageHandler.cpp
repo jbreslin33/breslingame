@@ -25,6 +25,28 @@ MessageHandler::~MessageHandler(void)
 {
 }
 
+void MessageHandler::translateMessage(std::string p1, std::string p2)
+{
+	p1.append(p2);
+	translateMessage(p1);
+}
+
+void MessageHandler::translateMessage(std::string p1, std::string p2, std::string p3)
+{
+	p1.append(p2);
+	p1.append(p3);
+	translateMessage(p1);
+}
+
+
+void MessageHandler::translateMessage(std::string p1, std::string p2, std::string p3, std::string p4)
+{
+	p1.append(p2);
+	p1.append(p3);
+	p1.append(p4);	
+	translateMessage(p1);
+}
+
 /*this should call a function on the client or the server */
 void MessageHandler::translateMessage(std::string message)
 {

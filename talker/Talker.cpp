@@ -23,7 +23,36 @@ Talker::~Talker(void)
 {
 }
 
-int Talker::sendMessageToServer (char newMessageToServer[100] )
+
+void Talker::translateMessage(std::string p1)
+{
+        sendMessageToServer(p1);
+}
+
+void Talker::translateMessage(std::string p1, std::string p2)
+{
+        p1.append(p2);
+        sendMessageToServer(p1);
+}
+
+void Talker::translateMessage(std::string p1, std::string p2, std::string p3)
+{
+        p1.append(p2);
+        p1.append(p3);
+        sendMessageToServer(p1);
+}
+
+
+void Talker::translateMessage(std::string p1, std::string p2, std::string p3, std::string p4)
+{
+        p1.append(p2);
+        p1.append(p3);
+        p1.append(p4);
+        sendMessageToServer(p1);
+}
+
+	
+int Talker::sendMessageToServer (char* newMessageToServer )
 {
 	if (strlen(newMessageToServer) > 100)
 	{
