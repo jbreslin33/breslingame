@@ -38,16 +38,13 @@ void MessageHandler::translateMessage(char p1[100], char p2[100], char p3[100])
 	if (strcmp(p1,"toServer") == 0)
 	{
 		std::cout << "going to send this message to server\n";
-	        //std::cout << ("p1:%s",p1);
 		char total[200];
 		strcpy (total,"");
 		strcat (total,p2);
 		strcat (total,",");
 		strcat (total,p3);
-	       // std::cout << ("p1:%s",p1);
         	puts (total);
 
-	       // std::cout << ("p1:%s",p1);
 		mGame->getTalker()->sendMessageToServer(total);
 	}
 }
@@ -91,7 +88,7 @@ std::cout << "here dog\n";
 	if (functionVector.at(0).compare("signUp") == 0)
 	{	
 		std::cout << "calling signUp(username)\n";
-		//mGame->signUp(functionVector.at(1));		
+		mGame->signUp(functionVector.at(1));		
 	}
 	
 	if (functionVector.at(0).compare("joingame") == 0)

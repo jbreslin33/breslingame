@@ -27,6 +27,9 @@ endif ()
 
 set(CMAKE_DEBUG_POSTFIX "_d")
 
+set(CMAKE_CXX_FLAGS "-lpthread")
+
+
 set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/dist")
 
 set(HDRS
@@ -59,5 +62,3 @@ set(SRCS
 
 
 add_executable(Game WIN32 ${HDRS} ${SRCS})
-
-
