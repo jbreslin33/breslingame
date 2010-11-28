@@ -18,31 +18,31 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
-#define NUM_THREADS	5
+#define NUM_THREADS     5
 
 QuestionServerGame* questionServerGame;
 
 void *PrintHello(void *threadid)
 {
-	std::cout << "jimbo is here\n";
+        std::cout << "jimbo is here\n";
    long tid;
    tid = (long)threadid;
    printf("Hello World! It's me, thread #%ld!\n", tid);
-	while (true)
-	{
+        while (true)
+        {
 
-	std::cout << "running PrintHello\n";
-	}
+        std::cout << "running PrintHello\n";
+        }
    pthread_exit(NULL);
 }
 
 void *RunListenServer(void *t)
 {
-	while(true)
-	{
-		std::cout << "running RunListenServer function\n";
-		questionServerGame->run();	
-	}
+        while(true)
+        {
+                std::cout << "running RunListenServer function\n";
+                questionServerGame->run();      
+        }
 }
 
 int main(int argc, char *argv[])
@@ -83,24 +83,24 @@ pthread_exit(NULL);
         if (one.compare(str) == 0)
         {
                 std::cout << "Launch A QuestionServerGame\n";
-		std::cout << "try a thread\n";
-		pthread_t listenServerThread1;
-		long t = 2;
+                std::cout << "try a thread\n";
+                pthread_t listenServerThread1;
+                long t = 2;
 
                 questionServerGame  = new QuestionServerGame();
-		//game->run();
-		int rc = pthread_create(&listenServerThread1, NULL, RunListenServer , (void *) t ); 		
+                //game->run();
+                int rc = pthread_create(&listenServerThread1, NULL, RunListenServer , (void *) t );             
 
-		if (rc)
-		{
-    			printf("ERROR; return code from pthread_create() is %d\n", rc);
-    			exit(-1);
-    		}
-  	
+                if (rc)
+                {
+                        printf("ERROR; return code from pthread_create() is %d\n", rc);
+                        exit(-1);
+                }
+        
 pthread_exit(NULL);
 //                QuestionServerGame* game = new QuestionServerGame();
-//		pthread_t listenServerThread2;
-//		pthread_create(&listenServerThread2, NULL, RunListenServer, (void *) t); 		
+//              pthread_t listenServerThread2;
+//              pthread_create(&listenServerThread2, NULL, RunListenServer, (void *) t);                
         }
         else if (two.compare(str) == 0)
         {
