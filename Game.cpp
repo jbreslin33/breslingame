@@ -27,9 +27,11 @@ void Game::signUp(std::string username)
 {
 	std::cout << "in signUp\n";
 
+	printf("clientVectorSize:%d",clientVector.size());
+
 	bool nameTaken = false;
 
-	for (int i = 0; clientVector.size(); i++)
+	for (int i = 0; i < clientVector.size(); i++)
 	{
 		if (clientVector.at(i)->getUserName().compare(username) == 0)
 		{
@@ -46,6 +48,8 @@ void Game::signUp(std::string username)
 	{
 		//create a client
 		std::cout << "Create a client\n";
+		Client* client = new Client(username);
+		clientVector.push_back(client);
 
 	}
 
