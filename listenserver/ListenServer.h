@@ -26,7 +26,7 @@ class ListenServer
 
 
 public:
-    ListenServer(Game* game);
+    ListenServer(Game* game, char* port);
     virtual ~ListenServer(void);
 
         void  *get_in_addr       (struct sockaddr *sa);
@@ -49,7 +49,7 @@ protected:
         struct      sockaddr_storage their_addr;
         socklen_t   addr_len;
         char        s[INET6_ADDRSTRLEN];
-        const char* mPort;
+        char* mPort;
         int         mMaxBufferLength;
 
 };

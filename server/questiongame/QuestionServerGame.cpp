@@ -15,7 +15,7 @@ QuestionServerGame::QuestionServerGame()
 {
 	mTalker         = new Talker(this);
 	mMessageHandler = new MessageHandler(this);
-	mListenServer   = new ListenServer(this);
+	mListenServer   = new ListenServer(this, "4950");
 }
 //-------------------------------------------------------------------------------------
 QuestionServerGame::~QuestionServerGame(void)

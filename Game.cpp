@@ -59,4 +59,3 @@ void Game::run()
 {
 	mListenServer->processRequests();
 }
-

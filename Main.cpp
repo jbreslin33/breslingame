@@ -22,21 +22,21 @@
 #define NUM_THREADS     5
 
 QuestionServerGame* questionServerGame;
+QuestionClientGame* questionClientGame;
 
-void *RunListenServer(void *t)
+void *RunListenServerForServer(void *t)
 {
-
-	std::ofstream myfile;
-	myfile.open ("example.txt",std::ios::app);
-        
 	while(true)
         {
-  		myfile << "Writing this to a file.\n";
-                myfile.close();
-
-
-                std::cout << "running RunListenServer function\n";
                 questionServerGame->run();      
+        }
+}
+
+void *RunListenServerForClient(void *t)
+{
+	while(true)
+        {
+                questionClientGame->run();
         }
 }
 
@@ -60,13 +60,13 @@ int main(int argc, char *argv[])
         if (one.compare(str) == 0)
         {
                 std::cout << "Launch A QuestionServerGame\n";
-                std::cout << "try a thread\n";
-                pthread_t listenServerThread1;
+               
+		pthread_t listenServerThreadForServer;
                 long t = 2;
 
                 questionServerGame  = new QuestionServerGame();
-                //game->run();
-                int rc = pthread_create(&listenServerThread1, NULL, RunListenServer , (void *) t );             
+                
+		int rc = pthread_create(&listenServerThreadForServer, NULL, RunListenServerForServer , (void *) t );             
 
                 if (rc)
                 {
@@ -80,7 +80,21 @@ int main(int argc, char *argv[])
 	else if (two.compare(str) == 0)
         {
                 std::cout << "Launch QuestionClientGame\n";
-                QuestionClientGame* game = new QuestionClientGame();
+		
+		pthread_t listenServerThreadForClient;
+                long t = 2;
+
+                questionClientGame  = new QuestionClientGame();
+                
+		int rc = pthread_create(&listenServerThreadForClient, NULL, RunListenServerForClient , (void *) t );             
+
+                if (rc)
+                {
+                        printf("ERROR; return code from pthread_create() is %d\n", rc);
+                        exit(-1);
+                }
+        
+		pthread_exit(NULL);
         }
 
         else

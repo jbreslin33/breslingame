@@ -13,7 +13,7 @@ Filename:    ListenServer.cpp
 #include <iostream>
 
 //-------------------------------------------------------------------------------------
-ListenServer::ListenServer(Game* game)
+ListenServer::ListenServer(Game* game, char* port)
 {
 	std::cout << "ListenServer Constructor\n";
 
@@ -22,7 +22,7 @@ ListenServer::ListenServer(Game* game)
 
 	//Communications
     	mMaxBufferLength = MAXBUFLEN;
-   	mPort = "4950";
+   	mPort = port;
     	initializeVariables();
     	initializeListener();
 }
