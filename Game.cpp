@@ -27,7 +27,6 @@ void Game::signUp(std::string username)
 {
 	std::cout << "in signUp\n";
 
-		std::cout << "booooooooooooooogers....";
 	bool nameTaken = false;
 
 	for (int i = 0; clientVector.size(); i++)
@@ -41,12 +40,12 @@ void Game::signUp(std::string username)
 	if (nameTaken)
 	{
 		//tell user to try again
-		std::cout << "tell user to try again....";
+		std::cout << "tell user to try again....\n";
 	}
 	else
 	{
 		//create a client
-		std::cout << "create a client";
+		std::cout << "Create a client\n";
 
 	}
 
