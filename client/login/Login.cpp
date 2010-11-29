@@ -36,6 +36,10 @@ void Login::promptServerIP()
         std::cout << "3 = 10.42.43.1\n";
         std::string three = "3";
 
+
+        std::cout << "4 = 71.23.229.73\n";
+        std::string four = "4";
+
         //get user response save to string
         std::string str;
         getline (std::cin,str);
@@ -56,6 +60,11 @@ void Login::promptServerIP()
         else if (three.compare(str) == 0)
         {
                 char ip[16] = "10.42.43.1";
+                mGame->setServerIP(ip);
+        }
+        else if (four.compare(str) == 0)
+        {
+                char ip[16] = "71.23.229.73";
                 mGame->setServerIP(ip);
         }
 	promptSignUpOrLogin();	
