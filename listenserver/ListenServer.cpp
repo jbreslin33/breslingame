@@ -63,7 +63,6 @@ bool ListenServer::initializeListener()
             perror("listener: socket");
             continue;
         }
-
         if (bind(sockfd, p->ai_addr, p->ai_addrlen) == -1) {
             close(sockfd);
             perror("listener: bind");
@@ -93,11 +92,25 @@ void ListenServer::processRequests()
     for (int i = 0; i < mMaxBufferLength; i++)
     newClientMessage[i] = NULL;
 
+
+
     if ((numbytes = recvfrom(sockfd, newClientMessage, mMaxBufferLength-1 , 0,
         (struct sockaddr *)&their_addr, &addr_len)) == -1) {
         perror("recvfrom");
         exit(1);
     }
+    //printf("ipclient:%s",their_addr);
+
+
+char ip4[INET_ADDRSTRLEN];  // space to hold the IPv4 string
+//struct sockaddr_in sa;      // pretend this is loaded with something
+
+inet_ntop(AF_INET, &(*their_addr.sin_addr), ip4, INET_ADDRSTRLEN);
+
+printf("The IPv4 address is: %s\n", ip4);
+
+
+
     printf("listener: packet contains \"%s\"\n", newClientMessage);
 
     if (mGame->getMessageHandler() != NULL)

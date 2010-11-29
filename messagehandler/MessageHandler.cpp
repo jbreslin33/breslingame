@@ -54,6 +54,11 @@ void MessageHandler::translateMessage(char p1[100], char p2[100], char p3[100], 
 {
 }
 
+void MessageHandler::translateMessage(Client* client, char p1[100], char p2[100])
+{
+	
+}
+
 /*this should call a function on the client or the server */
 void MessageHandler::translateMessage(char cstr[400])
 {
@@ -88,7 +93,8 @@ std::cout << "here dog\n";
 	if (functionVector.at(0).compare("signUp") == 0)
 	{	
 		std::cout << "calling signUp(username)\n";
-		mGame->signUp(functionVector.at(1));		
+		             //username           , ip                 , port
+		//mGame->signUp(functionVector.at(1),functionVector.at(2),functionVector.at(3));		
 	}
 	
 	if (functionVector.at(0).compare("joingame") == 0)

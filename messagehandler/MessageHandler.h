@@ -10,6 +10,7 @@ Filename:    MessageHandler.h
 #include <string>
 #include <vector>
 
+class Client;
 class Game;
 
 class MessageHandler
@@ -25,6 +26,8 @@ public:
 	virtual void translateMessage(char p1[100], char p2[100]);
 	virtual void translateMessage(char p1[100], char p2[100], char p3[100]);
 	virtual void translateMessage(char p1[100], char p2[100], char p3[100], char p4[100]);
+
+	virtual void translateMessage(Client* client, char p1[100], char p2[100]);
 	
 	virtual void          setGame (Game* game  )   { mGame = game; }
         virtual Game*         getGame (            )   { return mGame; }

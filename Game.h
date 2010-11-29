@@ -62,7 +62,7 @@ public:
         void setListen(bool b) { mListen = b; }
         bool getListen() { return mListen; }
 
-	virtual void    signUp(std::string username);
+	virtual void    signUp(std::string username, std::string ip, std::string port);
 	
 	//generic leaving and joining
         virtual  void   joinGame            (std::string userName, std::string ip, std::string port ) { }
