@@ -29,7 +29,7 @@ void Game::signUp(std::string username, std::string ip, std::string port)
 	std::cout << "in signUp\n";
 
 	//printf("clientVectorSize:%d",clientVector.size());
-/*
+
 	bool nameTaken = false;
 
         //create a client so we can communicate without jumping thru hoops
@@ -37,7 +37,7 @@ void Game::signUp(std::string username, std::string ip, std::string port)
         Client* client = new Client(username);
         clientVector.push_back(client);
 
-
+/*
 	for (int i = 0; i < clientVector.size(); i++)
 	{
 		if (client == clientVector.at(i))
