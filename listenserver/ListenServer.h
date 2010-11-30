@@ -15,21 +15,22 @@ Filename:    ListenServer.h
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <cstdlib>
 
 #define MAXBUFLEN 100;
+#define BUFLEN 512
+#define NPACK 10
 
 class Game;
 
 class ListenServer
 {
 
-
-
 public:
-    ListenServer(Game* game, char* port);
+    ListenServer(Game* game, short unsigned int port);
     virtual ~ListenServer(void);
 
-        void  *get_in_addr       (struct sockaddr *sa);
+	void  diep               (char* c);
         void  initializeVariables();
         bool  initializeListener ();
 	void  processRequests    ();
@@ -42,15 +43,17 @@ protected:
 	Game*       mGame;
 
 	//Communications
-        int         sockfd;
-        struct      addrinfo hints, *servinfo, *p;
-        int         rv;
-        int         numbytes;
-        struct      sockaddr_storage their_addr;
-        socklen_t   addr_len;
-        char        s[INET6_ADDRSTRLEN];
-        char* mPort;
-        int         mMaxBufferLength;
+        short unsigned int mPort;
+
+	//Communications
+        struct sockaddr_in si_me; //my (server) socket 
+        struct sockaddr_in si_other; //other (client) socket
+
+        int s;
+        int i;
+        int slen;
+        char buf[BUFLEN];
+
 
 };
 

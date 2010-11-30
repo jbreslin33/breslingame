@@ -12,7 +12,7 @@ Filename:    QuestionClientGame.cpp
 //-------------------------------------------------------------------------------------
 QuestionClientGame::QuestionClientGame()
 {
-	mListenServer   = new ListenServer  (this,"4951");
+	mListenServer   = new ListenServer  (this,4951);
 	mTalker         = new Talker        (this); //no harm in creating this now i guess
 	mMessageHandler = new MessageHandler(this);
 	mLogin          = new Login         (this);
