@@ -84,7 +84,8 @@ void ListenServer::processRequests()
     	if (mGame->getMessageHandler() != NULL)
     	{
         	printf("We have a MessageHandler\n");
-		mGame->getMessageHandler()->translateMessage(buf);
+		//sending ip and port info from client....
+		mGame->getMessageHandler()->translateMessage(buf,net_ntoa(si_other.sin_addr), ntohs(si_other.sin_port));
  	}
     	else
     	{
