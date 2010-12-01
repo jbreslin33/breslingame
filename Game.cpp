@@ -24,7 +24,7 @@ Game::~Game(void)
 	mListen         = NULL;
 }
 
-void Game::signUp(std::string username, std::string ip, std::string port)
+void Game::signUp(std::string username, std::string ip, unsigned int short port)
 {
 	std::cout << "in signUp\n";
 

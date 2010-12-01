@@ -76,16 +76,13 @@ void MessageHandler::translateMessage(char cstr[400], char* ip, unsigned short i
     		p=strtok(NULL,",");
   	}
 
-/**************check what function***************************/
-
-	//client to server
-std::cout << "here dog\n";
+/**************check what function to call***************************/
 
 	if (functionVector.at(0).compare("signUp") == 0)
 	{	
 		std::cout << "calling signUp(username)\n";
 		             //username           , ip                 , port
-		//mGame->signUp(functionVector.at(1),functionVector.at(2),functionVector.at(3));		
+		mGame->signUp(functionVector.at(1), ip , port);		
 	}
 	
 	if (functionVector.at(0).compare("joingame") == 0)

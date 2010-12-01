@@ -18,11 +18,11 @@ ListenServer::ListenServer(Game* game, short unsigned int port)
 	//Game	
 	mGame = game;	
 
-        slen=sizeof(si_other);
 	//Communications
-    	
+        slen = sizeof(si_other);
    	mPort = port;
-    	initializeVariables();
+    	
+	initializeVariables();
     	initializeListener();
 }
 //-------------------------------------------------------------------------------------
