@@ -18,7 +18,7 @@ ListenServer::ListenServer(Game* game, short unsigned int port)
 	//Game	
 	mGame = game;	
 
-        int slen=sizeof(si_other);
+        slen=sizeof(si_other);
 	//Communications
     	
    	mPort = port;
