@@ -64,18 +64,9 @@ void MessageHandler::translateMessage(Client* client, char p1[100], char p2[100]
 //this handles the info recieved from a client message buf,ip,port
 void MessageHandler::translateMessage(char cstr[400], char* ip, unsigned short int port)
 {
-	std::cout << "in translateMessage going to \n";
-/*
-	char * cstr, *p;
 
-  	//std::string str ("Please,split,this,phrase,into,tokens");
-
-  	cstr = new char [message.size()+1];
-  	strcpy (cstr, message.c_str());
-*/
   	// cstr now contains a c-string copy of str
 	char *p;
-	
 
   	p=strtok (cstr,",");
   	while (p!=NULL)
@@ -84,8 +75,6 @@ void MessageHandler::translateMessage(char cstr[400], char* ip, unsigned short i
 		functionVector.push_back(p);
     		p=strtok(NULL,",");
   	}
-
-  	//delete[] cstr;  
 
 /**************check what function***************************/
 
