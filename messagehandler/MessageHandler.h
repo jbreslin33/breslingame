@@ -22,7 +22,7 @@ public:
 
         //Messaging
         
-	virtual void translateMessage(char p1[100], unsigned short int ip, unsigned short int port);
+	virtual void translateMessage(char p1[100], char* ip, unsigned short int port);
 	virtual void translateMessage(char p1[100], char p2[100]);
 	virtual void translateMessage(char p1[100], char p2[100], char p3[100]);
 	virtual void translateMessage(char p1[100], char p2[100], char p3[100], char p4[100]);

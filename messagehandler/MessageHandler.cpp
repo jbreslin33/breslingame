@@ -62,7 +62,7 @@ void MessageHandler::translateMessage(Client* client, char p1[100], char p2[100]
 /*this should call a function on the client or the server */
 
 //this handles the info recieved from a client message buf,ip,port
-void MessageHandler::translateMessage(char cstr[400], unsigned short int ip, unsigned short int port)
+void MessageHandler::translateMessage(char cstr[400], char* ip, unsigned short int port)
 {
 	std::cout << "in translateMessage going to \n";
 /*
