@@ -82,7 +82,7 @@ void MessageHandler::translateMessage(char cstr[400], char* ip, unsigned short i
 	{	
 		std::cout << "calling signUp(username)\n";
 		             //username           , ip                 , port
-		mGame->signUp(functionVector.at(1), ip , port);		
+		mGame->signUp(functionVector.at(1), ip);		
 	}
 	
 	if (functionVector.at(0).compare("joingame") == 0)

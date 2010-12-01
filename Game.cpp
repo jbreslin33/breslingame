@@ -24,7 +24,7 @@ Game::~Game(void)
 	mListen         = NULL;
 }
 
-void Game::signUp(std::string username, std::string ip, unsigned int short port)
+void Game::signUp(std::string username, std::string ip)
 {
 	std::cout << "in signUp\n";
 
@@ -34,10 +34,10 @@ void Game::signUp(std::string username, std::string ip, unsigned int short port)
 
         //create a client so we can communicate without jumping thru hoops
         std::cout << "Create a client\n";
-        Client* client = new Client(username);
+        Client* client = new Client(username,ip);
         clientVector.push_back(client);
 
-/*
+
 	for (int i = 0; i < clientVector.size(); i++)
 	{
 		if (client == clientVector.at(i))
@@ -53,7 +53,7 @@ void Game::signUp(std::string username, std::string ip, unsigned int short port)
 	{
 		//tell user to try again
 		std::cout << "tell user to try again....\n";
-		getMessageHandler()->translateMessage(client, "toClient", "enterNewUserName");
+		getMessageHandler()->translateMessage("toClient", "enterNewUserName", client->getIP());
 	}
 	else
 	{

@@ -16,24 +16,20 @@ class Client
 {
 
 public:
-    Client(std::string userName);
+    Client(std::string userName, std::string ip);
     virtual ~Client(void);
 
 	//username
 	void        setUserName(std::string userName) { mUserName = userName; }
     	std::string getUserName(                    ) { return mUserName;     }
 
-	char*       getPort    (                    ) { return mPort;         }
-	void        setPort    (char* port          ) { mPort = port;         }
-
-	char*       getIP      (                    ) { return mIP;           }
+	std::string getIP      (                    ) { return mIP;           }
 	void        setIP      (char* IP            ) { mIP = IP;             }
 
 protected:
 
 std::string mUserName;
-char*       mPort;
-char*       mIP;
+std::string mIP;
 
 };
 

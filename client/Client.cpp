@@ -7,9 +7,11 @@ Filename:    Client.cpp
 
 
 //-------------------------------------------------------------------------------------
-Client::Client(std::string userName)
+Client::Client(std::string userName, std::string ip)
 {
+
 	mUserName = userName;
+	mIP       = ip;
 }
 //-------------------------------------------------------------------------------------
 Client::~Client(void)

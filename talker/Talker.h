@@ -1,8 +1,8 @@
 #ifndef __TALKER_h_
 #define __TALKER_h_
 
-#define SERVERPORT "4950"	// the port users will be connecting to
-
+#define SERVERPORT "38387"// the port users will be connecting to
+#define MAXBUFFER = 512;
 #include <string>
 
 class Game;
@@ -13,6 +13,10 @@ class Talker
 public:
     Talker(Game* game);
     virtual ~Talker(void);
+
+                        //who          , mess
+	void sendMessage(Client* client, char[MAXBUFFER]);
+	void sendMessage(Server* server, char[MAXBUFFER]);
 
 	void sendMessageToServer(char p1[100], char p2[100]);
 	void sendMessageToServer(char p1[100], char p2[100], char p3[100]);

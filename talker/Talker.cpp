@@ -23,7 +23,7 @@ Talker::~Talker(void)
 {
 }
 
-
+/*
 void Talker::sendMessageToServer(char p1[100], char p2[100])
 {
 	char str[200];
@@ -60,7 +60,17 @@ void Talker::sendMessageToServer(char p1[100], char p2[100], char p3[100], char 
  	sendMessageToServer(str);
 }
 
-	
+	*/
+
+//this will default to server
+int Talker::sendMessage(char message[MAXBUFFER])
+{
+
+
+}
+
+
+
 int Talker::sendMessageToServer (char newMessageToServer[400] )
 {
 	if (strlen(newMessageToServer) > 400)
