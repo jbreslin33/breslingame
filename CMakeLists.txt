@@ -43,6 +43,8 @@ set(HDRS
 	server/ServerGame.h
 	client/questiongame/QuestionClientGame.h
 	server/questiongame/QuestionServerGame.h
+	connection/ClientConnection.h
+	connection/ServerConnection.h
 )
 
 set(SRCS
@@ -56,6 +58,8 @@ set(SRCS
 	server/ServerGame.cpp
 	client/questiongame/QuestionClientGame.cpp
 	server/questiongame/QuestionServerGame.cpp
+	connection/ClientConnection.cpp
+	connection/ServerConnection.cpp
 	Main.cpp
 )
 
