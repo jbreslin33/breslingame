@@ -4,18 +4,12 @@ Filename:    QuestionServerGame.cpp
 */
 
 #include "QuestionServerGame.h"
-#include "../../talker/Talker.h"
-#include "../../messagehandler/MessageHandler.h"
-#include "../../listenserver/ListenServer.h"
-
-
+#include "../../communication/Communication.h"
 
 //-------------------------------------------------------------------------------------
 QuestionServerGame::QuestionServerGame()
 {
-	mTalker         = new Talker(this);
-	mMessageHandler = new MessageHandler(this);
-	mListenServer   = new ListenServer(this, 38387);
+	mCommunication   = new Communication(this, 38387);
 }
 //-------------------------------------------------------------------------------------
 QuestionServerGame::~QuestionServerGame(void)

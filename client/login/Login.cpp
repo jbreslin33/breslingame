@@ -117,7 +117,7 @@ void Login::signUp(char userName[100])
 {
 	
 //	mGame->getMessageHandler()->translateMessage("toServer","signUp",userName);
-	mGame->getMessageHandler()->sendMessage("toServer,signUp,%s",userName);
+	//mGame->getMessageHandler()->sendMessage("toServer,signUp,%s",userName);
 
 }
 

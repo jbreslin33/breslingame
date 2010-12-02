@@ -36,6 +36,10 @@ void Communication::diep(char *s)
         exit(1);
 }
 
+void Communication::send(Connection* conn, std::vector<std::string> message)
+{
+
+}
 
 void Communication::initializeVariables()
 {
@@ -79,11 +83,11 @@ void Communication::processRequests()
 
 	printf("listener: packet contains \"%s\"\n", buf);
 
-    	if (mGame->getMessageHandler() != NULL)
+    	if (mGame->getCommunication() != NULL)
     	{
-        	printf("We have a MessageHandler\n");
+        //	printf("We have a MessageHandler\n");
 		//sending ip and port info from client....
-		mGame->getMessageHandler()->translateMessage( buf, inet_ntoa(si_other.sin_addr)) );
+		//mGame->getMessageHandler()->translateMessage( buf, inet_ntoa(si_other.sin_addr)) );
  	}
     	else
     	{

@@ -4,9 +4,9 @@ Filename:    Game.cpp
 */
 
 #include "Game.h"
-#include "listenserver/ListenServer.h"
-#include "messagehandler/MessageHandler.h"
-#include "client/Client.h"
+#include "communication/Communication.h"
+#include "connection/ClientConnection.h"
+
 
 #include <iostream>
 
@@ -18,10 +18,7 @@ Game::Game()
 Game::~Game(void)
 {
 	mLogin          = NULL;
-	mListenServer   = NULL;
-	mTalker         = NULL;
-	mMessageHandler = NULL;
-	mListen         = NULL;
+	mCommunication  = NULL;
 }
 
 void Game::signUp(std::string username, std::string ip)
@@ -34,16 +31,16 @@ void Game::signUp(std::string username, std::string ip)
 
         //create a client so we can communicate without jumping thru hoops
         std::cout << "Create a client\n";
-        Client* client = new Client(username,ip);
-        clientVector.push_back(client);
+        ClientConnection* clientConnection = new ClientConnection(username,ip);
+        clientConnectionVector.push_back(clientConnection);
 
 
-	for (int i = 0; i < clientVector.size(); i++)
+	for (int i = 0; i < clientConnectionVector.size(); i++)
 	{
-		if (client == clientVector.at(i))
+		if (clientConnection == clientConnectionVector.at(i))
 			continue;	
 
-		if (clientVector.at(i)->getUserName().compare(username) == 0)
+		if (clientConnectionVector.at(i)->getUserName().compare(username) == 0)
 		{
 			nameTaken = true;
 		}		
@@ -53,20 +50,20 @@ void Game::signUp(std::string username, std::string ip)
 	{
 		//tell user to try again
 		std::cout << "tell user to try again....\n";
-		getMessageHandler()->translateMessage("toClient", "enterNewUserName", client->getIP());
+	//	getMessageHandler()->translateMessage("toClient", "enterNewUserName", client->getIP());
 	}
 	else
 	{
 		//create a client
-		std::cout << "Create a client\n";
-		Client* client = new Client(username);
-		clientVector.push_back(client);
+		//std::cout << "Create a client\n";
+		//ClientConnection* clientConnection = new ClientConnection(username);
+		//clientConnectionVector.push_back(clientConnection);
 
 	}
-*/
+
 }
 
 void Game::run()
 {
-	mListenServer->processRequests();
+	mCommunication->processRequests();
 }

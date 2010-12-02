@@ -20,13 +20,9 @@ Filename:    Game.h
 #include <string>
 #include <vector>
 
-class Client;
+class ClientConnection;
 class Login;
-class ListenServer;
-class Talker;
-class MessageHandler;
-
-class GameServer;
+class Communication;
 
 class Game
 {
@@ -40,23 +36,15 @@ public:
 	virtual char*  getServerIP           (                             )   { return mServerIP;                } 
 	
 	//Client
-	virtual void    addNewClient        (Client*         client        )  { clientVector.push_back(client);   }
+	virtual void    addNewClientConnection (ClientConnection* clientConnection)  { clientConnectionVector.push_back(clientConnection);   }
 
 	//Login
 	virtual void          setLogin        (Login* login                )  { mLogin = login;                   }
 	virtual Login*        getLogin        (                            )  { return mLogin;                    }
 
         //ListenServer
-        virtual void          setListenServer (ListenServer* listenServer  )  { mListenServer = listenServer;     }
-        virtual ListenServer* getListenServer (                            )  { return mListenServer;             }
-
-        //Talker
-        virtual void          setTalker       (Talker*       talker        ) { mTalker        = talker;           } 
-        virtual Talker*       getTalker       (                            ) { return mTalker;                    }
-
-        //MessageHandler
-        void            setMessageHandler   (MessageHandler* messageHandler)  { mMessageHandler = messageHandler; }
-        MessageHandler* getMessageHandler   (                              )  { return mMessageHandler;           }
+        virtual void           setCommunication (Communication* communication  )  { mCommunication = communication;   }
+        virtual Communication* getCommunication (                              )  { return mCommunication;            }
         
         //are we looping ListenServer??
         void setListen(bool b) { mListen = b; }
@@ -68,32 +56,24 @@ public:
         virtual  void   joinGame            (std::string userName, std::string ip, std::string port ) { }
         virtual  void   leaveGame           (std::string id                                   )       { }
 
-
 	virtual void run();
-protected:
 
+protected:
 
 	//ServerIP
 	char* mServerIP;	
 
         //Clients, server and clients could point to this? might as well right now.
-        std::vector<Client*> clientVector;
+        std::vector<ClientConnection*> clientConnectionVector;
 
 	//Login
 	Login* mLogin;
 
-	//ListenServer
-	ListenServer* mListenServer;
-
-	//Talker
-	Talker* mTalker; 
-
-	//MessageHandler 
-        MessageHandler* mMessageHandler;
+	//Communication 
+        Communication* mCommunication;
 
 	//Listen or not
 	bool mListen;
-
 	
 };
 

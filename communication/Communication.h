@@ -17,11 +17,15 @@ Filename:    Communication.h
 #include <netdb.h>
 #include <cstdlib>
 
+#include <vector>
+#include <string>
+
 #define MAXBUFLEN 100;
 #define BUFLEN 512
 #define NPACK 10
 
 class Game;
+class Connection;
 
 class Communication
 {
@@ -34,6 +38,8 @@ public:
         void  initializeVariables();
         bool  initializeListener ();
 	void  processRequests    ();
+
+	void  send(Connection* conn, std::vector<std::string> message);
 
 	void  setGame            (Game* game         )  { mGame = game; }
 	Game* getGame            (                   )  { return mGame; }
