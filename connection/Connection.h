@@ -10,8 +10,6 @@ Filename:    Connection.h
 #include <string>
 
 
-class Connection;
-
 class Connection
 {
 
