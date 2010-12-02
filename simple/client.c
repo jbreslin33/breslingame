@@ -13,9 +13,18 @@
 
 #define SRV_IP "10.42.43.1"
 
+<<<<<<< local
+      #define SRV_IP "71.23.229.73"
+      /* diep(), #includes and #defines like in the server */
+
+      void diep(char *s)
+      {
+        perror(s);
+=======
 void diep(char *s)
 {
 	perror(s);
+>>>>>>> other
         exit(1);
 }
     

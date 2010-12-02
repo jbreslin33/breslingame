@@ -118,7 +118,8 @@ void Login::signUp(char userName[100])
 	
 //	mGame->getMessageHandler()->translateMessage("toServer","signUp",userName);
 	//mGame->getMessageHandler()->sendMessage("toServer,signUp,%s",userName);
-
+//need a server connection then pass it in Connection* serverConnection = new ServerConnection(A
+	//mGame->getCommunication()->send(
 }
 
 void Login::promptLogin()
