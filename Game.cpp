@@ -65,5 +65,5 @@ void Game::signUp(std::string username, std::string ip)
 
 void Game::run()
 {
-	mCommunication->processRequests();
+//	mCommunication->processRequests();
 }

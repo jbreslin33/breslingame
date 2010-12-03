@@ -144,10 +144,18 @@ void Login::promptLogin()
 
 void Login::promptUserName()
 {
-	std::cout << "Enter UserName:\n";
+//	std::cout << "Enter UserName:\n";
         
 	//get user response save to string
-        std::cin.getline (mTempUserName,100);
+  //      std::cin.getline (mTempUserName,100);
+
+
+        //get user response save to string
+        std::string str;
+        getline (std::cin,str);
+
+
+
 
 }
 
