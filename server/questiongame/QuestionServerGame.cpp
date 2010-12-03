@@ -9,7 +9,7 @@ Filename:    QuestionServerGame.cpp
 //-------------------------------------------------------------------------------------
 QuestionServerGame::QuestionServerGame()
 {
-	mCommunication   = new Communication(this, 38387);
+	mCommunication   = new Communication(this, "38387");
 }
 //-------------------------------------------------------------------------------------
 QuestionServerGame::~QuestionServerGame(void)

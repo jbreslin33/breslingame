@@ -4,13 +4,13 @@ Filename:    Login.cpp
 */
 
 #include "Login.h"
-#include "../../Game.h"
-#include "../../messagehandler/MessageHandler.h"
-//#include "../../talker/Talker.h"
+#include "../../client/ClientGame.h"
+#include "../../connection/ServerConnection.h"
+#include "../../communication/Communication.h"
 #include <iostream>
 
 //-------------------------------------------------------------------------------------
-Login::Login(Game* game)
+Login::Login(ClientGame* game)
 {
 	mGame = game;
 	promptServerIP();
@@ -50,22 +50,29 @@ void Login::promptServerIP()
                 char ip[16];
                 std::cin.getline(ip,16);
                 mGame->setServerIP(ip);
+		ServerConnection* sconn = new ServerConnection(ip);
+		mGame->setServerConnection(sconn);
         }
         else if (two.compare(str) == 0)
         {
-                //std::string ip = "192.168.2.3";
                 char ip[16] = "192.168.2.3";
                 mGame->setServerIP(ip);
+		ServerConnection* sconn = new ServerConnection(ip);
+		mGame->setServerConnection(sconn);
         }
         else if (three.compare(str) == 0)
         {
                 char ip[16] = "10.42.43.1";
                 mGame->setServerIP(ip);
+		ServerConnection* sconn = new ServerConnection(ip);
+		mGame->setServerConnection(sconn);
         }
         else if (four.compare(str) == 0)
         {
                 char ip[16] = "71.23.229.73";
                 mGame->setServerIP(ip);
+		ServerConnection* sconn = new ServerConnection(ip);
+		mGame->setServerConnection(sconn);
         }
 	promptSignUpOrLogin();	
 }
@@ -109,7 +116,9 @@ void Login::promptSignUpOrLogin()
 
 void Login::promptSignUp()
 {
+	std::cout << "in promptSignUP going to call promptUserName";
 	promptUserName();
+	std::cout << "in promptSignUP dud";
 	signUp(mTempUserName);
 }
 
@@ -119,7 +128,12 @@ void Login::signUp(char userName[100])
 //	mGame->getMessageHandler()->translateMessage("toServer","signUp",userName);
 	//mGame->getMessageHandler()->sendMessage("toServer,signUp,%s",userName);
 //need a server connection then pass it in Connection* serverConnection = new ServerConnection(A
-	//mGame->getCommunication()->send(
+	std::cout << "in signUP function right now";
+	std::vector<std::string> message;
+	message.push_back("signUp");	
+	message.push_back(userName);
+
+	mGame->getCommunication()->send(mGame->getServerConnection(), message);
 }
 
 void Login::promptLogin()

@@ -22,6 +22,8 @@ Filename:    ClientGame.h
 
 #include "../Game.h"
 
+class ServerConnection;
+
 class ClientGame : public Game
 {
 
@@ -29,10 +31,12 @@ public:
 	ClientGame();
     	virtual ~ClientGame(void);
 
-
+	ServerConnection* getServerConnection() { return mServerConnection; }
+	void              setServerConnection(ServerConnection* conn) { mServerConnection = conn; }
 
 protected:
 
+ServerConnection* mServerConnection;
 
 };
 

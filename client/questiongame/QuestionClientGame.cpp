@@ -11,8 +11,8 @@ Filename:    QuestionClientGame.cpp
 //-------------------------------------------------------------------------------------
 QuestionClientGame::QuestionClientGame()
 {
-	mCommunication  = new Communication (this, 38388);
-	mLogin          = new Login         (this);
+	mCommunication    = new Communication (this, "38388");
+	mLogin            = new Login         (this);
 	mServerConnection = NULL; 
 }
 //-------------------------------------------------------------------------------------

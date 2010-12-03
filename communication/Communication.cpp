@@ -11,7 +11,7 @@ Filename:    Communication.cpp
 #include <iostream>
 
 //-------------------------------------------------------------------------------------
-Communication::Communication(Game* game, short unsigned int port)
+Communication::Communication(Game* game, const char* port)
 {
 	std::cout << "Communication Constructor\n";
 
@@ -24,6 +24,7 @@ Communication::Communication(Game* game, short unsigned int port)
     	
 	initializeVariables();
     	initializeListener();
+
 }
 //-------------------------------------------------------------------------------------
 Communication::~Communication(void)
@@ -57,7 +58,7 @@ bool Communication::initializeListener()
         //defining structure port etc....?
         memset((char *) &si_me, 0, sizeof(si_me));
         si_me.sin_family = AF_INET;
-        si_me.sin_port = htons((short unsigned int)mPort);
+        si_me.sin_port = htons(atoi(mPort));
         si_me.sin_addr.s_addr = htonl(INADDR_ANY);
 
 
@@ -73,7 +74,7 @@ bool Communication::initializeListener()
 void Communication::processRequests()
 {
 
-	if (recvfrom(s, buf, BUFLEN, 0, (struct sockaddr *)&si_other, (socklen_t *)&slen) == -1)
+	if (recvfrom(s, buf, MAXBUF, 0, (struct sockaddr *)&si_other, (socklen_t *)&slen) == -1)
         {
         	diep("recvfrom()");
         }
@@ -94,3 +95,57 @@ void Communication::processRequests()
         	printf("No MessageHandler, do nothing\n");
     	}
 }
+
+int Communication::send (char newMessageToServer[MAXBUF] )
+{
+        if (strlen(newMessageToServer) > MAXBUF)
+        {
+                perror("message too big!");
+        }
+
+        int sockfd;
+        struct addrinfo hints, *servinfo, *p;
+        int rv;
+        int numbytes;
+
+        memset(&hints, 0, sizeof hints);
+        hints.ai_family = AF_UNSPEC;
+        hints.ai_socktype = SOCK_DGRAM;
+
+	const char* thePort = "38387";
+
+        if ((rv = getaddrinfo(mGame->getServerIP(), thePort, &hints, &servinfo)) != 0) {
+                fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
+                return 1;
+        }
+
+        // loop through all the results and make a socket
+        for(p = servinfo; p != NULL; p = p->ai_next) {
+                if ((sockfd = socket(p->ai_family, p->ai_socktype,
+                                p->ai_protocol)) == -1) {
+                        perror("talker: socket");
+                        continue;
+                }
+
+                break;
+        }
+
+        if (p == NULL) {
+                fprintf(stderr, "talker: failed to bind socket\n");
+                return 2;
+        }
+
+        if ((numbytes = sendto(sockfd, newMessageToServer, strlen(newMessageToServer), 0,
+                         p->ai_addr, p->ai_addrlen)) == -1) {
+                perror("talker: sendto");
+                exit(1);
+        }
+
+        freeaddrinfo(servinfo);
+
+        printf("talker: sent %d bytes to %s\n", numbytes, mGame->getServerIP());
+        close(sockfd);
+
+        return 0;
+}
+

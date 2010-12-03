@@ -17,13 +17,13 @@ Filename:    Login.h
 #include <vector>
 #include <iostream>
 
-class Game;
+class ClientGame;
 
 class Login
 {
 
 public:
-	Login(Game* game);
+	Login(ClientGame* game);
     	virtual ~Login(void);
 
 	virtual void promptServerIP();
@@ -41,7 +41,7 @@ public:
 
 protected:
 
-Game* mGame;
+ClientGame* mGame;
 char  mTempUserName[100];
 char  mTempPassword[100];
 

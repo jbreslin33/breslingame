@@ -20,18 +20,17 @@ Filename:    Communication.h
 #include <vector>
 #include <string>
 
-#define MAXBUFLEN 100;
-#define BUFLEN 512
+#define MAXBUF 512
 #define NPACK 10
 
-class Game;
 class Connection;
+class Game;
 
 class Communication
 {
 
 public:
-    Communication(Game* game, short unsigned int port);
+    Communication(Game* game, const char* port);
     virtual ~Communication(void);
 
 	void  diep               (char* c);
@@ -44,12 +43,15 @@ public:
 	void  setGame            (Game* game         )  { mGame = game; }
 	Game* getGame            (                   )  { return mGame; }
 
+	char* getMessageReceived() { return mMessageReceived; }
+
+	int   send (char newMessageToServer[MAXBUF] );
 protected:
 	//Game
 	Game*       mGame;
 
 	//Communications
-        short unsigned int mPort;
+        const char*  mPort;
 
 	//Communications
         struct sockaddr_in si_me; //my (server) socket 
@@ -58,9 +60,10 @@ protected:
         int s;
         int i;
         int slen;
-        char buf[BUFLEN];
+        char buf[MAXBUF];
 
-
+	char* mMessageReceived;
+	
 };
 
 #endif
