@@ -15,7 +15,7 @@ class ServerConnection : public Connection
 {
 
 public:
-    ServerConnection(std::string ip);
+    ServerConnection(char* ip);
     virtual ~ServerConnection(void);
 
 

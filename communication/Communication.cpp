@@ -6,7 +6,7 @@ Filename:    Communication.cpp
 #include "Communication.h"
 #include "../Game.h"
 
-#include "../messagehandler/MessageHandler.h"
+#include "../connection/Connection.h"
 
 #include <iostream>
 
@@ -39,6 +39,7 @@ void Communication::diep(char *s)
 
 void Communication::send(Connection* conn, std::vector<std::string> message)
 {
+//if (conn
 
 }
 
@@ -73,6 +74,7 @@ bool Communication::initializeListener()
 
 void Communication::processRequests()
 {
+	printf("waiting at recvfrom on port:%s",mPort);
 
 	if (recvfrom(s, buf, MAXBUF, 0, (struct sockaddr *)&si_other, (socklen_t *)&slen) == -1)
         {
@@ -96,7 +98,7 @@ void Communication::processRequests()
     	}
 }
 
-int Communication::send (char newMessageToServer[MAXBUF] )
+int Communication::send (Connection* conn, char newMessageToServer[MAXBUF] )
 {
         if (strlen(newMessageToServer) > MAXBUF)
         {
@@ -114,7 +116,7 @@ int Communication::send (char newMessageToServer[MAXBUF] )
 
 	const char* thePort = "38387";
 
-        if ((rv = getaddrinfo(mGame->getServerIP(), thePort, &hints, &servinfo)) != 0) {
+        if ((rv = getaddrinfo(conn->getIP(), thePort, &hints, &servinfo)) != 0) {
                 fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
                 return 1;
         }
@@ -143,7 +145,7 @@ int Communication::send (char newMessageToServer[MAXBUF] )
 
         freeaddrinfo(servinfo);
 
-        printf("talker: sent %d bytes to %s\n", numbytes, mGame->getServerIP());
+        printf("talker: sent %d bytes to %s\n", numbytes, conn->getIP());
         close(sockfd);
 
         return 0;

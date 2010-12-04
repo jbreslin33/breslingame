@@ -7,7 +7,7 @@ Filename:    ClientConnection.cpp
 
 
 //-------------------------------------------------------------------------------------
-ClientConnection::ClientConnection(std::string userName, std::string ip) : Connection(ip)
+ClientConnection::ClientConnection(std::string userName, char* ip) : Connection(ip)
 {
 	mUserName = userName;
 }

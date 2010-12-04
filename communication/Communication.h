@@ -45,7 +45,7 @@ public:
 
 	char* getMessageReceived() { return mMessageReceived; }
 
-	int   send (char newMessageToServer[MAXBUF] );
+	int   send (Connection* conn, char newMessageToServer[MAXBUF] );
 protected:
 	//Game
 	Game*       mGame;

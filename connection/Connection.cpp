@@ -7,7 +7,7 @@ Filename:    Connection.cpp
 
 
 //-------------------------------------------------------------------------------------
-Connection::Connection(std::string ip)
+Connection::Connection(char* ip)
 {
 
 	mIP       = ip;

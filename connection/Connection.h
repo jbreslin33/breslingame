@@ -14,15 +14,15 @@ class Connection
 {
 
 public:
-    Connection(std::string ip);
+    Connection(char* ip);
     virtual ~Connection(void);
 
-	std::string getIP      (                    ) { return mIP;           }
+	char*       getIP      (                    ) { return mIP;           }
 	void        setIP      (char* IP            ) { mIP = IP;             }
 
 protected:
 
-std::string mIP;
+char* mIP;
 
 };
 

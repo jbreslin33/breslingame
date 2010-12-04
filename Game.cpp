@@ -21,7 +21,7 @@ Game::~Game(void)
 	mCommunication  = NULL;
 }
 
-void Game::signUp(std::string username, std::string ip)
+void Game::signUp(std::string username, char* ip)
 {
 	std::cout << "in signUp\n";
 
@@ -65,5 +65,5 @@ void Game::signUp(std::string username, std::string ip)
 
 void Game::run()
 {
-//	mCommunication->processRequests();
+	mCommunication->processRequests();
 }

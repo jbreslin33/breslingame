@@ -36,7 +36,6 @@ void Login::promptServerIP()
         std::cout << "3 = 10.42.43.1\n";
         std::string three = "3";
 
-
         std::cout << "4 = 71.23.229.73\n";
         std::string four = "4";
 
@@ -116,24 +115,21 @@ void Login::promptSignUpOrLogin()
 
 void Login::promptSignUp()
 {
-	std::cout << "in promptSignUP going to call promptUserName";
+	std::cout << "in promptSignUP going to call promptUserName\n";
 	promptUserName();
-	std::cout << "in promptSignUP dud";
+	std::cout << "in promptSignUP dud\n";
 	signUp(mTempUserName);
 }
 
 void Login::signUp(char userName[100])
 {
 	
-//	mGame->getMessageHandler()->translateMessage("toServer","signUp",userName);
-	//mGame->getMessageHandler()->sendMessage("toServer,signUp,%s",userName);
-//need a server connection then pass it in Connection* serverConnection = new ServerConnection(A
-	std::cout << "in signUP function right now";
+	std::cout << "in signUP function right now\n";
 	std::vector<std::string> message;
 	message.push_back("signUp");	
 	message.push_back(userName);
-
-	mGame->getCommunication()->send(mGame->getServerConnection(), message);
+        
+	mGame->getCommunication()->send(mGame->getServerConnection(), "signUp,jimbo" );
 }
 
 void Login::promptLogin()
@@ -144,19 +140,8 @@ void Login::promptLogin()
 
 void Login::promptUserName()
 {
-//	std::cout << "Enter UserName:\n";
-        
-	//get user response save to string
-  //      std::cin.getline (mTempUserName,100);
-
-
-        //get user response save to string
         std::string str;
         getline (std::cin,str);
-
-
-
-
 }
 
 void Login::promptPassword()
