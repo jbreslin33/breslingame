@@ -7,10 +7,10 @@ Filename:    Connection.cpp
 
 
 //-------------------------------------------------------------------------------------
-Connection::Connection(char* ip)
+Connection::Connection()
 {
 
-	mIP       = ip;
+	mIP       = NULL;
 }
 //-------------------------------------------------------------------------------------
 Connection::~Connection(void)

@@ -16,7 +16,7 @@ class ClientConnection : public Connection
 {
 
 public:
-    ClientConnection(std::string userName, char* ip);
+    ClientConnection(std::string userName);
     virtual ~ClientConnection(void);
 
 	//username

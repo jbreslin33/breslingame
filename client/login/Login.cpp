@@ -48,30 +48,22 @@ void Login::promptServerIP()
         	std::cout << "Enter IP Address of Server \n";
                 char ip[16];
                 std::cin.getline(ip,16);
-                mGame->setServerIP(ip);
-		ServerConnection* sconn = new ServerConnection(ip);
-		mGame->setServerConnection(sconn);
+		mGame->getServerConnection()->setIP(ip);
         }
         else if (two.compare(str) == 0)
         {
                 char ip[16] = "192.168.2.3";
-                mGame->setServerIP(ip);
-		ServerConnection* sconn = new ServerConnection(ip);
-		mGame->setServerConnection(sconn);
+		mGame->getServerConnection()->setIP(ip);
         }
         else if (three.compare(str) == 0)
         {
                 char ip[16] = "10.42.43.1";
-                mGame->setServerIP(ip);
-		ServerConnection* sconn = new ServerConnection(ip);
-		mGame->setServerConnection(sconn);
+		mGame->getServerConnection()->setIP(ip);
         }
         else if (four.compare(str) == 0)
         {
                 char ip[16] = "71.23.229.73";
-                mGame->setServerIP(ip);
-		ServerConnection* sconn = new ServerConnection(ip);
-		mGame->setServerConnection(sconn);
+		mGame->getServerConnection()->setIP(ip);
         }
 	promptSignUpOrLogin();	
 }
@@ -80,8 +72,6 @@ void Login::promptServerIP()
 
 void Login::promptSignUpOrLogin()
 {
-
-
 	std::cout << "Choose:\n";
 	
 	std::cout << "1 = Sign Up\n";
@@ -93,11 +83,9 @@ void Login::promptSignUpOrLogin()
 	std::cout << "3 = Quit\n";
 	std::string three = "3";
 
-	
         //get user response save to string
         std::string str;
         getline (std::cin,str);
-
 
 	if (one.compare(str) == 0)
 	{
@@ -121,15 +109,10 @@ void Login::promptSignUp()
 	signUp(mTempUserName);
 }
 
-void Login::signUp(char userName[100])
+void Login::signUp(char* userName)
 {
-	
 	std::cout << "in signUP function right now\n";
-	std::vector<std::string> message;
-	message.push_back("signUp");	
-	message.push_back(userName);
-        
-	mGame->getCommunication()->send(mGame->getServerConnection(), "signUp,jimbo" );
+	mGame->getCommunication()->send(mGame->getServerConnection(), "signUp", userName );
 }
 
 void Login::promptLogin()

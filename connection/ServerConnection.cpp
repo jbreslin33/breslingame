@@ -7,7 +7,7 @@ Filename:    ServerConnection.cpp
 
 
 //-------------------------------------------------------------------------------------
-ServerConnection::ServerConnection(char* ip) : Connection(ip)
+ServerConnection::ServerConnection() 
 {
 	
 }

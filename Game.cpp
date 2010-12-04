@@ -31,7 +31,7 @@ void Game::signUp(std::string username, char* ip)
 
         //create a client so we can communicate without jumping thru hoops
         std::cout << "Create a client\n";
-        ClientConnection* clientConnection = new ClientConnection(username,ip);
+        ClientConnection* clientConnection = new ClientConnection(username);
         clientConnectionVector.push_back(clientConnection);
 
 

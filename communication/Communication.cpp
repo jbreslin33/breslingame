@@ -37,10 +37,18 @@ void Communication::diep(char *s)
         exit(1);
 }
 
-void Communication::send(Connection* conn, std::vector<std::string> message)
+void Communication::send(Connection* conn, char* p1, char* p2)
 {
-//if (conn
 
+	printf("parsing message p1:%s\n",p1);
+	printf("parsing message p2:%s\n",p2);
+/*
+	char* total;
+        strcpy (total,"");
+        strcat (total,p2);
+        puts (total);
+        send(conn,total);
+*/
 }
 
 void Communication::initializeVariables()
@@ -98,7 +106,7 @@ void Communication::processRequests()
     	}
 }
 
-int Communication::send (Connection* conn, char newMessageToServer[MAXBUF] )
+int Communication::send (Connection* conn, char* newMessageToServer )
 {
         if (strlen(newMessageToServer) > MAXBUF)
         {

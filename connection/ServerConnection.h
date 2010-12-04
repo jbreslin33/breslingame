@@ -15,7 +15,7 @@ class ServerConnection : public Connection
 {
 
 public:
-    ServerConnection(char* ip);
+    ServerConnection();
     virtual ~ServerConnection(void);
 
 

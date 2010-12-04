@@ -31,7 +31,7 @@ public:
 	virtual void promptSignUpOrLogin();	
 	
 	virtual void promptSignUp();	
-	virtual void signUp(char userName[100]);
+	virtual void signUp(char* userName);
 
 	virtual void promptLogin();	
 	

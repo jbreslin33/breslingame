@@ -14,7 +14,7 @@ class Connection
 {
 
 public:
-    Connection(char* ip);
+    Connection();
     virtual ~Connection(void);
 
 	char*       getIP      (                    ) { return mIP;           }

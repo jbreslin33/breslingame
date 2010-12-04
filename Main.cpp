@@ -80,7 +80,8 @@ int main(int argc, char *argv[])
 	else if (two.compare(str) == 0)
         {
                 std::cout << "Launch QuestionClientGame\n";
-		
+                questionClientGame  = new QuestionClientGame();
+/*		
 		pthread_t listenServerThreadForClient;
                 long t = 2;
 
@@ -95,7 +96,7 @@ int main(int argc, char *argv[])
                 }
         
 		pthread_exit(NULL);
-
+*/
         }
 
         else
