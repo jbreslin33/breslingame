@@ -48,6 +48,7 @@ public:
 
 	char* getMessageReceived() { return mMessageReceived; }
 
+	void  translateMessage(char cstr[512], char* ip);
 	int   send (Connection* conn, char* newMessageToServer );
 protected:
 	//Game
@@ -66,7 +67,7 @@ protected:
         char buf[MAXBUF];
 
 	char* mMessageReceived;
-	
+	std::vector<std::string> functionVector;
 };
 
 #endif

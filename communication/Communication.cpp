@@ -1,4 +1,4 @@
-/*
+/*:
 -----------------------------------------------------------------------------
 Filename:    Communication.cpp
 */
@@ -100,12 +100,51 @@ void Communication::processRequests()
     	{
         //	printf("We have a MessageHandler\n");
 		//sending ip and port info from client....
-		//mGame->getMessageHandler()->translateMessage( buf, inet_ntoa(si_other.sin_addr)) );
+		translateMessage( buf, inet_ntoa(si_other.sin_addr)) ;
+		
  	}
     	else
     	{
         	printf("No MessageHandler, do nothing\n");
     	}
+}
+
+void Communication::translateMessage(char cstr[512], char* ip)
+{
+        // cstr now contains a c-string copy of str
+        char *p;
+
+        p=strtok (cstr,",");
+        while (p!=NULL)
+        {
+                std::cout << p << std::endl;
+                functionVector.push_back(p);
+                p=strtok(NULL,",");
+        }
+
+/**************check what function to call***************************/
+
+        if (functionVector.at(0).compare("signUp") == 0)
+        {
+                std::cout << "calling signUp(username)\n";
+                             //username           , ip                 , port
+                mGame->signUp(functionVector.at(1), ip);
+        }
+/*
+        if (functionVector.at(0).compare("joingame") == 0)
+        {
+                mGame->joinGame(functionVector.at(1),functionVector.at(2),functionVector.at(3));
+        }
+
+
+        //server to client
+        if (functionVector.at(0).compare("nameTaken") == 0)
+        {
+                //getGameServer()->joinGame(functionVector.at(1),functionVector.at(2),functionVector(3));               
+        }
+*/
+        functionVector.clear();
+
 }
 
 int Communication::send (Connection* conn, char* newMessageToServer )
