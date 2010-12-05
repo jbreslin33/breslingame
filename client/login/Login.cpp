@@ -123,8 +123,8 @@ void Login::promptLogin()
 
 void Login::promptUserName()
 {
-        std::string str;
-        getline (std::cin,str);
+	std::cout << "Enter your User Name: ";
+  	std::cin.getline (mTempUserName,30);
 }
 
 void Login::promptPassword()

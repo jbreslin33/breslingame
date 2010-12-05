@@ -42,13 +42,15 @@ void Communication::send(Connection* conn, char* p1, char* p2)
 
 	printf("parsing message p1:%s\n",p1);
 	printf("parsing message p2:%s\n",p2);
-/*
-	char* total;
+
+	char total[512];
         strcpy (total,"");
-        strcat (total,p2);
+        strcat (total,p1);
+	strcat (total,",");
+	strcat (total,p2);
         puts (total);
         send(conn,total);
-*/
+
 }
 
 void Communication::initializeVariables()

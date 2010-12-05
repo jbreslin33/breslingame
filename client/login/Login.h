@@ -42,8 +42,8 @@ public:
 protected:
 
 ClientGame* mGame;
-char  mTempUserName[100];
-char  mTempPassword[100];
+char  mTempUserName[30];
+char  mTempPassword[30];
 
 };
 
