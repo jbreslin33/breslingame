@@ -23,10 +23,13 @@ public:
 	void        setUserName(std::string userName) { mUserName = userName; }
     	std::string getUserName(                    ) { return mUserName;     }
 
+	void        setID(int id) { mID = id; }
+	int         getID() { return mID; }
 
 protected:
 
 std::string mUserName;
+int mID;
 
 };
 

@@ -19,6 +19,7 @@ Game::~Game(void)
 {
 	mLogin          = NULL;
 	mCommunication  = NULL;
+	clientIDCounter = 0;
 }
 
 void Game::signUp(std::string username, char* ip)
@@ -34,6 +35,8 @@ void Game::signUp(std::string username, char* ip)
         ClientConnection* clientConnection = new ClientConnection(username);
 	clientConnection->setIP(ip);
 	clientConnection->setPort("38388");
+	clientIDCounter++;
+	clientConnection->setID(clientIDCounter);
         clientConnectionVector.push_back(clientConnection);
 
 

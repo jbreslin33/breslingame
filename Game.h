@@ -74,7 +74,8 @@ protected:
 
 	//Listen or not
 	bool mListen;
-	
+
+	int clientIDCounter;	
 };
 
 #endif

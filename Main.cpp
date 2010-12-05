@@ -1,11 +1,7 @@
-/******************************************************************************
-* FILE: hello.c
-* DESCRIPTION:
-*   A "hello world" Pthreads program.  Demonstrates thread creation and
-*   termination.
-* AUTHOR: Blaise Barney
-* LAST REVISED: 01/29/09
-******************************************************************************/
+/*
+Start either the Server or Client Version of Game. Then fire off a thread
+that will handle receiving messages so as not to interupt main thread.
+*/
 
 #include "Game.h"
 #include <iostream>
@@ -19,7 +15,6 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
-#define NUM_THREADS     5
 
 QuestionServerGame* questionServerGame;
 QuestionClientGame* questionClientGame;
@@ -62,7 +57,7 @@ int main(int argc, char *argv[])
                 std::cout << "Launch A QuestionServerGame\n";
                
 		pthread_t listenServerThreadForServer;
-                long t = 2;
+                long t = 1;
 
                 questionServerGame  = new QuestionServerGame();
                 
