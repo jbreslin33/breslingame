@@ -39,10 +39,6 @@ void Communication::diep(char *s)
 
 void Communication::send(Connection* conn, char* p1, char* p2)
 {
-
-	printf("parsing message p1:%s\n",p1);
-	printf("parsing message p2:%s\n",p2);
-
 	char total[512];
         strcpy (total,"");
         strcat (total,p1);
@@ -50,8 +46,8 @@ void Communication::send(Connection* conn, char* p1, char* p2)
 	strcat (total,p2);
         puts (total);
         send(conn,total);
-
 }
+
 
 void Communication::initializeVariables()
 {
@@ -127,8 +123,13 @@ void Communication::translateMessage(char cstr[512], char* ip)
         if (functionVector.at(0).compare("signUp") == 0)
         {
                 std::cout << "calling signUp(username)\n";
-                             //username           , ip                 , port
                 mGame->signUp(functionVector.at(1), ip);
+        }
+
+        if (functionVector.at(0).compare("welcome") == 0)
+        {
+                std::cout << "Welcome to the Game!\n";
+                //mGame->signUp(functionVector.at(1), ip);
         }
 /*
         if (functionVector.at(0).compare("joingame") == 0)
@@ -163,9 +164,9 @@ int Communication::send (Connection* conn, char* newMessageToServer )
         hints.ai_family = AF_UNSPEC;
         hints.ai_socktype = SOCK_DGRAM;
 
-	const char* thePort = "38387";
+	//const char* thePort = "38387";
 
-        if ((rv = getaddrinfo(conn->getIP(), thePort, &hints, &servinfo)) != 0) {
+        if ((rv = getaddrinfo(conn->getIP(), mPort , &hints, &servinfo)) != 0) {
                 fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
                 return 1;
         }

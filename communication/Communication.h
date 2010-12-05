@@ -41,7 +41,7 @@ public:
 	//liberal send functions to handle any amount of paramaters and destinations
 	void  send(Connection* conn, std::vector<std::string> message);
         void  send(Connection* conn, char* p1, char* p2);
-	
+	int  send(Connection* conn, char* p1);
 	//Game
 	void  setGame            (Game* game         )  { mGame = game; }
 	Game* getGame            (                   )  { return mGame; }
@@ -49,7 +49,6 @@ public:
 	char* getMessageReceived() { return mMessageReceived; }
 
 	void  translateMessage(char cstr[512], char* ip);
-	int   send (Connection* conn, char* newMessageToServer );
 protected:
 	//Game
 	Game*       mGame;
