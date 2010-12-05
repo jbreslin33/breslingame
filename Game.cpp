@@ -17,53 +17,54 @@ Game::Game()
 //-------------------------------------------------------------------------------------
 Game::~Game(void)
 {
-	mLogin          = NULL;
-	mCommunication  = NULL;
-	clientIDCounter = 0;
+        mLogin          = NULL;
+        mCommunication  = NULL;
+        clientIDCounter = 0;
 }
 
 void Game::signUp(std::string username, char* ip)
 {
-	std::cout << "in signUp\n";
+        std::cout << "in signUp\n";
 
-	//printf("clientVectorSize:%d",clientVector.size());
+        //printf("clientVectorSize:%d",clientVector.size());
 
-	bool nameTaken = false;
+        bool nameTaken = false;
 
         //create a client so we can communicate without jumping thru hoops
         std::cout << "Create a client\n";
         ClientConnection* clientConnection = new ClientConnection(username);
-	clientConnection->setIP(ip);
-	clientConnection->setPort("38388");
-	clientIDCounter++;
-	clientConnection->setID(clientIDCounter);
+        clientConnection->setIP(ip);
+        clientConnection->setPort("38388");
+        clientIDCounter++;
+        clientConnection->setID(clientIDCounter);
         clientConnectionVector.push_back(clientConnection);
 
 
-	for (int i = 0; i < clientConnectionVector.size(); i++)
-	{
-		if (clientConnection == clientConnectionVector.at(i))
-			continue;	
+        for (int i = 0; i < clientConnectionVector.size(); i++)
+        {
+                if (clientConnection == clientConnectionVector.at(i))
+                        continue;       
 
-		if (clientConnectionVector.at(i)->getUserName().compare(username) == 0)
-		{
-			nameTaken = true;
-		}		
-	}
+                if (clientConnectionVector.at(i)->getUserName().compare(username) == 0)
+                {
+                        nameTaken = true;
+                }               
+        }
 
-	if (nameTaken)
-	{
-		//tell user to try again
-		std::cout << "tell user to try again....\n";
-	}
-	else
-	{
-		getCommunication()->send(clientConnection,"welcome");
-	}
+        if (nameTaken)
+        {
+                //tell user to try again
+                std::cout << "tell user to try again....\n";
+        }
+        else
+        {
+                getCommunication()->send(clientConnection,"welcome");
+        }
 
 }
 
 void Game::run()
 {
-	mCommunication->processRequests();
+        mCommunication->processRequests();
 }
+

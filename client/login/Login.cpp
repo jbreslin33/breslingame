@@ -115,6 +115,12 @@ void Login::signUp(char* userName)
 	mGame->getCommunication()->send(mGame->getServerConnection(), "signUp", userName );
 }
 
+void Login::changeUserName(char* userName)
+{
+	std::cout << "in changeUserName\n";
+	mGame->getCommunication()->send(mGame->getServerConnection(), "changeUserName", userName );
+}
+
 void Login::promptLogin()
 {
 	promptUserName();
@@ -136,4 +142,8 @@ void Login::promptPassword()
 
 }
 
-
+void Login::userNameTakenTryAgain()
+{
+	promptUserName();
+	changeUserName(mTempUserName);	
+}

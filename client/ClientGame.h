@@ -37,7 +37,7 @@ public:
 protected:
 
 ServerConnection* mServerConnection;
-
+int mClientConnectionID;
 };
 
 #endif

@@ -33,30 +33,30 @@ public:
     Communication(Game* game, const char* port);
     virtual ~Communication(void);
 
-	void  diep               (char* c);
+        void  diep               (char* c);
         void  initializeVariables();
         bool  initializeListener ();
-	void  processRequests    ();
-	
-	//liberal send functions to handle any amount of paramaters and destinations
-	void  send(Connection* conn, std::vector<std::string> message);
+        void  processRequests    ();
+        
+        //liberal send functions to handle any amount of paramaters and destinations
+        void  send(Connection* conn, std::vector<std::string> message);
         void  send(Connection* conn, char* p1, char* p2);
-	int  send(Connection* conn, char* p1);
-	//Game
-	void  setGame            (Game* game         )  { mGame = game; }
-	Game* getGame            (                   )  { return mGame; }
+        int  send(Connection* conn, char* p1);
+        //Game
+        void  setGame            (Game* game         )  { mGame = game; }
+        Game* getGame            (                   )  { return mGame; }
 
-	char* getMessageReceived() { return mMessageReceived; }
+        char* getMessageReceived() { return mMessageReceived; }
 
-	void  translateMessage(char cstr[512], char* ip);
+        void  translateMessage(char cstr[512], char* ip);
 protected:
-	//Game
-	Game*       mGame;
+        //Game
+        Game*       mGame;
 
-	//Communications
+        //Communications
         const char*  mPort;
 
-	//Communications
+        //Communications
         struct sockaddr_in si_me; //my (server) socket 
         struct sockaddr_in si_other; //other (client) socket
 
@@ -65,10 +65,8 @@ protected:
         int slen;
         char buf[MAXBUF];
 
-	char* mMessageReceived;
-	std::vector<std::string> functionVector;
+        char* mMessageReceived;
+        std::vector<std::string> functionVector;
 };
 
 #endif
-
-

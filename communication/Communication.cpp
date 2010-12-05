@@ -13,17 +13,17 @@ Filename:    Communication.cpp
 //-------------------------------------------------------------------------------------
 Communication::Communication(Game* game, const char* port)
 {
-	std::cout << "Communication Constructor\n";
+        std::cout << "Communication Constructor\n";
 
-	//Game	
-	mGame = game;	
+        //Game  
+        mGame = game;   
 
-	//Communications
+        //Communications
         slen = sizeof(si_other);
-   	mPort = port;
-    	
-	initializeVariables();
-    	initializeListener();
+        mPort = port;
+        
+        initializeVariables();
+        initializeListener();
 
 }
 //-------------------------------------------------------------------------------------
@@ -39,11 +39,11 @@ void Communication::diep(char *s)
 
 void Communication::send(Connection* conn, char* p1, char* p2)
 {
-	char total[512];
+        char total[512];
         strcpy (total,"");
         strcat (total,p1);
-	strcat (total,",");
-	strcat (total,p2);
+        strcat (total,",");
+        strcat (total,p2);
         puts (total);
         send(conn,total);
 }
@@ -80,29 +80,29 @@ bool Communication::initializeListener()
 
 void Communication::processRequests()
 {
-	printf("waiting at recvfrom on port:%s",mPort);
+        printf("waiting at recvfrom on port:%s",mPort);
 
-	if (recvfrom(s, buf, MAXBUF, 0, (struct sockaddr *)&si_other, (socklen_t *)&slen) == -1)
+        if (recvfrom(s, buf, MAXBUF, 0, (struct sockaddr *)&si_other, (socklen_t *)&slen) == -1)
         {
-        	diep("recvfrom()");
+                diep("recvfrom()");
         }
         printf("Received packet from %s:%d\nData: %s\n\n",
         inet_ntoa(si_other.sin_addr), ntohs(si_other.sin_port), buf);
 
 
-	printf("listener: packet contains \"%s\"\n", buf);
+        printf("listener: packet contains \"%s\"\n", buf);
 
-    	if (mGame->getCommunication() != NULL)
-    	{
-        //	printf("We have a MessageHandler\n");
-		//sending ip and port info from client....
-		translateMessage( buf, inet_ntoa(si_other.sin_addr)) ;
-		
- 	}
-    	else
-    	{
-        	printf("No MessageHandler, do nothing\n");
-    	}
+        if (mGame->getCommunication() != NULL)
+        {
+        //      printf("We have a MessageHandler\n");
+                //sending ip and port info from client....
+                translateMessage( buf, inet_ntoa(si_other.sin_addr)) ;
+                
+        }
+        else
+        {
+                printf("No MessageHandler, do nothing\n");
+        }
 }
 
 void Communication::translateMessage(char cstr[512], char* ip)
@@ -164,7 +164,7 @@ int Communication::send (Connection* conn, char* newMessageToServer )
         hints.ai_family = AF_UNSPEC;
         hints.ai_socktype = SOCK_DGRAM;
 
-	//const char* thePort = "38387";
+        //const char* thePort = "38387";
 
         if ((rv = getaddrinfo(conn->getIP(), conn->getPort() , &hints, &servinfo)) != 0) {
                 fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));

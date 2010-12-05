@@ -28,19 +28,19 @@ class Game
 {
 
 public:
-	Game();
-    	virtual ~Game(void);
+        Game();
+        virtual ~Game(void);
 
-	//ServerIP
-	virtual void   setServerIP           (char* ip                     )   { mServerIP = ip;                  }
-	virtual char*  getServerIP           (                             )   { return mServerIP;                } 
-	
-	//Client
-	virtual void    addNewClientConnection (ClientConnection* clientConnection)  { clientConnectionVector.push_back(clientConnection);   }
+        //ServerIP
+        virtual void   setServerIP           (char* ip                     )   { mServerIP = ip;                  }
+        virtual char*  getServerIP           (                             )   { return mServerIP;                } 
+        
+        //Client
+        virtual void    addNewClientConnection (ClientConnection* clientConnection)  { clientConnectionVector.push_back(clientConnection);   }
 
-	//Login
-	virtual void          setLogin        (Login* login                )  { mLogin = login;                   }
-	virtual Login*        getLogin        (                            )  { return mLogin;                    }
+        //Login
+        virtual void          setLogin        (Login* login                )  { mLogin = login;                   }
+        virtual Login*        getLogin        (                            )  { return mLogin;                    }
 
         //ListenServer
         virtual void           setCommunication (Communication* communication  )  { mCommunication = communication;   }
@@ -50,32 +50,33 @@ public:
         void setListen(bool b) { mListen = b; }
         bool getListen() { return mListen; }
 
-	virtual void    signUp(std::string username, char* ip);
-	
-	//generic leaving and joining
+        virtual void    signUp(std::string username, char* ip);
+        
+        //generic leaving and joining
         virtual  void   joinGame            (std::string userName, std::string ip, std::string port ) { }
         virtual  void   leaveGame           (std::string id                                   )       { }
 
-	virtual void run();
+        virtual void run();
 
 protected:
 
-	//ServerIP
-	char* mServerIP;	
+        //ServerIP
+        char* mServerIP;        
 
         //Clients, server and clients could point to this? might as well right now.
         std::vector<ClientConnection*> clientConnectionVector;
 
-	//Login
-	Login* mLogin;
+        //Login
+        Login* mLogin;
 
-	//Communication 
+        //Communication 
         Communication* mCommunication;
 
-	//Listen or not
-	bool mListen;
+        //Listen or not
+        bool mListen;
 
-	int clientIDCounter;	
+        int clientIDCounter;    
 };
 
 #endif
+
