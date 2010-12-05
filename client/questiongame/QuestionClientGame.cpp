@@ -11,7 +11,8 @@ Filename:    QuestionClientGame.cpp
 //-------------------------------------------------------------------------------------
 QuestionClientGame::QuestionClientGame()
 {
-	mServerConnection = new ServerConnection(); 
+	mServerConnection = new ServerConnection();
+	mServerConnection->setPort("38387"); 
 	mCommunication    = new Communication   (this, "38388");
 	mLogin            = new Login           (this);
 }

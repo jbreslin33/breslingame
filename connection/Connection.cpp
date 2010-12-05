@@ -11,6 +11,7 @@ Connection::Connection()
 {
 
 	mIP       = NULL;
+	mPort     = NULL;
 }
 //-------------------------------------------------------------------------------------
 Connection::~Connection(void)

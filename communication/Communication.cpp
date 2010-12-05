@@ -166,7 +166,7 @@ int Communication::send (Connection* conn, char* newMessageToServer )
 
 	//const char* thePort = "38387";
 
-        if ((rv = getaddrinfo(conn->getIP(), mPort , &hints, &servinfo)) != 0) {
+        if ((rv = getaddrinfo(conn->getIP(), conn->getPort() , &hints, &servinfo)) != 0) {
                 fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
                 return 1;
         }

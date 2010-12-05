@@ -33,6 +33,7 @@ void Game::signUp(std::string username, char* ip)
         std::cout << "Create a client\n";
         ClientConnection* clientConnection = new ClientConnection(username);
 	clientConnection->setIP(ip);
+	clientConnection->setPort("38388");
         clientConnectionVector.push_back(clientConnection);
 
 
@@ -51,15 +52,9 @@ void Game::signUp(std::string username, char* ip)
 	{
 		//tell user to try again
 		std::cout << "tell user to try again....\n";
-	//	getMessageHandler()->translateMessage("toClient", "enterNewUserName", client->getIP());
 	}
 	else
 	{
-//		getCommunication()->send(clientConnection,"promptForChangeUserName",
-		//create a client
-		//std::cout << "Create a client\n";
-		//ClientConnection* clientConnection = new ClientConnection(username);
-		//clientConnectionVector.push_back(clientConnection);
 		getCommunication()->send(clientConnection,"welcome");
 	}
 

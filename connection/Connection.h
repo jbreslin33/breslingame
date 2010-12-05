@@ -20,10 +20,14 @@ public:
 	char*       getIP      (                    ) { return mIP;           }
 	void        setIP      (char* IP            ) { mIP = IP;             }
 
+	const char*       getPort    (                    ) { return mPort;           }
+	void        setPort    (const char* port          ) { mPort = port;             }
+
+
 protected:
 
 char* mIP;
-
+const char* mPort;
 };
 
 #endif
