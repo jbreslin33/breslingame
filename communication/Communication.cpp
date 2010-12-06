@@ -119,18 +119,29 @@ void Communication::translateMessage(char cstr[512], char* ip)
         }
 
 /**************check what function to call***************************/
-
-        if (functionVector.at(0).compare("signUp") == 0)
-        {
+//(strcmp (szKey,szInput) != 0)
+       // if (functionVector.at(0).compare("signUp") == 0)
+        if (strcmp (functionVector.at(0),"signUp") == 0)
+	{
                 std::cout << "calling signUp(username)\n";
                 mGame->signUp(functionVector.at(1), ip);
         }
 
-        if (functionVector.at(0).compare("welcome") == 0)
+        if (strcmp (functionVector.at(0),"welcome") == 0)
+        //if (functionVector.at(0).compare("welcome") == 0)
         {
                 std::cout << "Welcome to the Game!\n";
                 //mGame->signUp(functionVector.at(1), ip);
         }
+
+        if (strcmp (functionVector.at(0),"changeUserName") == 0)
+        //if (functionVector.at(0).compare("changeUserName") == 0)
+        {
+                std::cout << "changeUserName(functionVector.at(1), functionVector.at(2))\n";
+                mGame->changeUserName(functionVector.at(1), functionVector.at(2));
+        }
+
+	
 /*
         if (functionVector.at(0).compare("joingame") == 0)
         {

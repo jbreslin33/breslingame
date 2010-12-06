@@ -16,19 +16,19 @@ class ClientConnection : public Connection
 {
 
 public:
-    ClientConnection(std::string userName);
+    ClientConnection(char* userName);
     virtual ~ClientConnection(void);
 
 	//username
-	void        setUserName(std::string userName) { mUserName = userName; }
-    	std::string getUserName(                    ) { return mUserName;     }
+	void        setUserName(char* userName) { mUserName = userName; }
+    	char* getUserName(                    ) { return mUserName;     }
 
 	void        setID(int id) { mID = id; }
 	int         getID() { return mID; }
 
 protected:
 
-std::string mUserName;
+char* mUserName;
 int mID;
 
 };

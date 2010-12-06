@@ -7,7 +7,7 @@ Filename:    ClientConnection.cpp
 
 
 //-------------------------------------------------------------------------------------
-ClientConnection::ClientConnection(std::string userName)
+ClientConnection::ClientConnection(char* userName)
 {
 	mUserName = userName;
 	mID = NULL;

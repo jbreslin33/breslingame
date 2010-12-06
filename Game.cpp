@@ -22,7 +22,49 @@ Game::~Game(void)
         clientIDCounter = 0;
 }
 
-void Game::signUp(std::string username, char* ip)
+
+void Game::changeUserName(char* username, char* clientConnectionID)
+{
+	int id = atoi(clientConnectionID);
+     	bool nameTaken = false;
+	
+	ClientConnection* clientConnection;
+
+        for (int i = 0; i < clientConnectionVector.size(); i++)
+	{
+		if (clientConnectionVector.at(i)->getID() == id)
+		{
+			std::cout << "found client in vector";
+			clientConnection = clientConnectionVector.at(i);
+		} 
+	}
+
+        for (int i = 0; i < clientConnectionVector.size(); i++)
+        {
+                if (clientConnection == clientConnectionVector.at(i))
+                        continue;
+
+                if (strcmp(clientConnectionVector.at(i)->getUserName(),username) == 0)
+                {
+                        nameTaken = true;
+                }
+        }
+
+        if (nameTaken)
+        {
+                //tell user to try again
+                std::cout << "tell user to try again....\n";
+        }
+        else
+        {
+		clientConnection->setUserName(username);
+                getCommunication()->send(clientConnection,"welcome");
+        }
+	
+		
+}
+
+void Game::signUp(char* username, char* ip)
 {
         std::cout << "in signUp\n";
 
@@ -45,7 +87,7 @@ void Game::signUp(std::string username, char* ip)
                 if (clientConnection == clientConnectionVector.at(i))
                         continue;       
 
-                if (clientConnectionVector.at(i)->getUserName().compare(username) == 0)
+                if (strcmp(clientConnectionVector.at(i)->getUserName(),username) == 0)
                 {
                         nameTaken = true;
                 }               

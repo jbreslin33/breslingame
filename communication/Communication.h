@@ -66,7 +66,7 @@ protected:
         char buf[MAXBUF];
 
         char* mMessageReceived;
-        std::vector<std::string> functionVector;
+        std::vector<char*> functionVector;
 };
 
 #endif
