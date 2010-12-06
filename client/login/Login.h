@@ -33,7 +33,7 @@ public:
 	virtual void promptSignUp();	
 	virtual void signUp(char* userName);
 
-	void         userNameTakenTryAgain();
+	void         enterNewUserName();
 	void         changeUserName(char* userName);
 	virtual void promptLogin();	
 	

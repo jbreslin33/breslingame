@@ -9,7 +9,8 @@ Filename:    Game.cpp
 
 
 #include <iostream>
-
+#include <stdio.h>
+#include <stdlib.h>
 //-------------------------------------------------------------------------------------
 Game::Game()
 {
@@ -97,10 +98,14 @@ void Game::signUp(char* username, char* ip)
         {
                 //tell user to try again
                 std::cout << "tell user to try again....\n";
+		//getCommunication()->send(clientConnection,"enterNewUserName");
         }
         else
         {
-                getCommunication()->send(clientConnection,"welcome");
+		char* buffer;
+		 std::itoa (clientConnection()->getID(),buffer,10)
+                getCommunication()->send(clientConnection,"welcome",buffer);
+                //getCommunication()->send(clientConnection,"welcome",(char*)clientConnection->getID());
         }
 
 }

@@ -142,7 +142,7 @@ void Login::promptPassword()
 
 }
 
-void Login::userNameTakenTryAgain()
+void Login::enterNewUserName()
 {
 	promptUserName();
 	changeUserName(mTempUserName);	
