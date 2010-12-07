@@ -130,7 +130,9 @@ void Communication::translateMessage(char cstr[512], char* ip)
         if (strcmp (functionVector.at(0),"welcome") == 0)
         //if (functionVector.at(0).compare("welcome") == 0)
         {
-                std::cout << "Welcome to the Game!\n";
+                printf("Welcome to the Game I will set %s your ClientConnectionID!\n,",functionVector.at(1));
+		int id = atoi(functionVector.at(1));
+		mGame->setClientConnectionID(id);
                 //mGame->signUp(functionVector.at(1), ip);
         }
 

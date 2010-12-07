@@ -9,7 +9,6 @@ Filename:    ClientGame.cpp
 //-------------------------------------------------------------------------------------
 ClientGame::ClientGame()
 {
-	mClientConnectionID = NULL;
 }
 //-------------------------------------------------------------------------------------
 ClientGame::~ClientGame(void)

@@ -22,6 +22,7 @@ Game::~Game(void)
         mLogin          = NULL;
         mCommunication  = NULL;
         clientIDCounter = 0;
+	mClientConnectionID = NULL; 
 }
 
 
@@ -103,9 +104,7 @@ void Game::signUp(char* username, char* ip)
         }
         else
         {
-		int idInt = clientConnection->getID();
-		char* idChar = convertIntToCharStar(idInt);	
-                getCommunication()->send(clientConnection,"welcome",idChar);
+                getCommunication()->send(clientConnection,"welcome", convertIntToCharStar(clientConnection->getID()));
         }
 
 }

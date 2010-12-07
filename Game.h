@@ -60,7 +60,10 @@ public:
         virtual  void   joinGame            (std::string userName, std::string ip, std::string port ) { }
         virtual  void   leaveGame           (std::string id                                   )       { }
 
-        virtual void run();
+	int  getClientConnectionID() { return mClientConnectionID; }
+	void setClientConnectionID(int id) { mClientConnectionID = id; }
+        
+	virtual void run();
 
 protected:
 
@@ -79,7 +82,9 @@ protected:
         //Listen or not
         bool mListen;
 
-        int clientIDCounter;    
+        int clientIDCounter;   
+	
+	int mClientConnectionID; 
 };
 
 #endif

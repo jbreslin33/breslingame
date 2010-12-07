@@ -34,10 +34,11 @@ public:
 	ServerConnection* getServerConnection() { return mServerConnection; }
 	void              setServerConnection(ServerConnection* conn) { mServerConnection = conn; }
 
+
+
 protected:
 
 ServerConnection* mServerConnection;
-int mClientConnectionID;
 };
 
 #endif
