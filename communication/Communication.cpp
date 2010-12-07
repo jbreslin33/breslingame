@@ -37,7 +37,7 @@ void Communication::diep(char *s)
         exit(1);
 }
 
-void Communication::send(Connection* conn, char* p1, char* p2)
+void Communication::send(Connection* conn, char* p1, char*  p2)
 {
         char total[512];
         strcpy (total,"");

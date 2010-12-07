@@ -11,6 +11,7 @@ Filename:    Game.cpp
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <sstream>
 //-------------------------------------------------------------------------------------
 Game::Game()
 {
@@ -102,14 +103,23 @@ void Game::signUp(char* username, char* ip)
         }
         else
         {
-		char* buffer;
-		 std::itoa (clientConnection()->getID(),buffer,10)
-                getCommunication()->send(clientConnection,"welcome",buffer);
-                //getCommunication()->send(clientConnection,"welcome",(char*)clientConnection->getID());
+		int idInt = clientConnection->getID();
+		char* idChar = convertIntToCharStar(idInt);	
+                getCommunication()->send(clientConnection,"welcome",idChar);
         }
 
 }
 
+char* Game::convertIntToCharStar(int number)
+{
+	std::stringstream ss;//create a stringstream
+   	ss << number;//add number to the stream
+   	std::string tempString = ss.str();//return a string with the contents of the stream
+	char* cstr;   
+ 	cstr = new char [tempString.size()+1];
+  	strcpy (cstr, tempString.c_str());
+	return cstr;
+}
 void Game::run()
 {
         mCommunication->processRequests();

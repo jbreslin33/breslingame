@@ -30,8 +30,11 @@ class Game
 public:
         Game();
         virtual ~Game(void);
-
-        //ServerIP
+	
+	//misc
+	char* convertIntToCharStar(int number);
+        
+	//ServerIP
         virtual void   setServerIP           (char* ip                     )   { mServerIP = ip;                  }
         virtual char*  getServerIP           (                             )   { return mServerIP;                } 
         
