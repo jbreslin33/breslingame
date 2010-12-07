@@ -7,6 +7,7 @@ Filename:    Communication.cpp
 #include "../Game.h"
 
 #include "../connection/Connection.h"
+#include "../client/login/Login.h"
 
 #include <iostream>
 
@@ -47,6 +48,20 @@ void Communication::send(Connection* conn, char* p1, char*  p2)
         puts (total);
         send(conn,total);
 }
+
+void Communication::send(Connection* conn, char* p1, char*  p2, char* p3)
+{
+        char total[512];
+        strcpy (total,"");
+        strcat (total,p1);
+        strcat (total,",");
+        strcat (total,p2);
+	strcat (total,",");
+	strcat (total,p3);
+        puts   (total);
+        send   (conn,total);
+}
+
 
 
 void Communication::initializeVariables()
@@ -133,6 +148,16 @@ void Communication::translateMessage(char cstr[512], char* ip)
                 printf("Welcome to the Game I will set %s your ClientConnectionID!\n,",functionVector.at(1));
 		int id = atoi(functionVector.at(1));
 		mGame->setClientConnectionID(id);
+                //mGame->signUp(functionVector.at(1), ip);
+        }
+
+        if (strcmp (functionVector.at(0),"enterDifferentUserName") == 0)
+        //if (functionVector.at(0).compare("welcome") == 0)
+        {
+                printf("Welcome I created a client for you I will set %s your ClientConnectionID, but I need you to enter a new username as the one you entered was taken already!\n,",functionVector.at(1));
+		int id = atoi(functionVector.at(1));
+		mGame->setClientConnectionID(id);
+		mGame->getLogin()->enterNewUserName();
                 //mGame->signUp(functionVector.at(1), ip);
         }
 

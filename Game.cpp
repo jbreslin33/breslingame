@@ -57,6 +57,7 @@ void Game::changeUserName(char* username, char* clientConnectionID)
         {
                 //tell user to try again
                 std::cout << "tell user to try again....\n";
+	//	getCommunication()->send(clientConnection,"enterNewUserName"
         }
         else
         {
@@ -100,7 +101,7 @@ void Game::signUp(char* username, char* ip)
         {
                 //tell user to try again
                 std::cout << "tell user to try again....\n";
-		//getCommunication()->send(clientConnection,"enterNewUserName");
+                getCommunication()->send(clientConnection,"enterDifferentUserName", convertIntToCharStar(clientConnection->getID()));
         }
         else
         {

@@ -118,7 +118,7 @@ void Login::signUp(char* userName)
 void Login::changeUserName(char* userName)
 {
 	std::cout << "in changeUserName\n";
-	mGame->getCommunication()->send(mGame->getServerConnection(), "changeUserName", userName );
+	mGame->getCommunication()->send(mGame->getServerConnection(), "changeUserName", userName, mGame->convertIntToCharStar(mGame->getClientConnectionID() ));
 }
 
 void Login::promptLogin()
