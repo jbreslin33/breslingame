@@ -95,39 +95,50 @@ bool Communication::initializeListener()
 
 void Communication::processRequests()
 {
-        printf("waiting at recvfrom on port:%s",mPort);
+	char buffer[512];
+        printf("waiting at recvfrom on port:%s\n",mPort);
 
-        if (recvfrom(s, buf, MAXBUF, 0, (struct sockaddr *)&si_other, (socklen_t *)&slen) == -1)
+	printf("buffer:%s\n",buffer);
+int totalBytes = 0;
+        if (totalBytes = recvfrom(s, buffer, MAXBUF, 0, (struct sockaddr *)&si_other, (socklen_t *)&slen) == -1)
         {
                 diep("recvfrom()");
         }
         printf("Received packet from %s:%d\nData: %s\n\n",
-        inet_ntoa(si_other.sin_addr), ntohs(si_other.sin_port), buf);
+        inet_ntoa(si_other.sin_addr), ntohs(si_other.sin_port), buffer);
 
 
-        printf("listener: packet contains \"%s\"\n", buf);
+        printf("listener: packet contains \"%s\"\n", buffer);
 
         if (mGame->getCommunication() != NULL)
         {
         //      printf("We have a MessageHandler\n");
                 //sending ip and port info from client....
-                translateMessage( buf, inet_ntoa(si_other.sin_addr)) ;
+		//char tb[totalBytes];
+		//tb = buffer;
+                translateMessage( buffer, inet_ntoa(si_other.sin_addr),totalBytes) ;
                 
         }
         else
         {
                 printf("No MessageHandler, do nothing\n");
         }
+	for (int i = 0; i < 512; i++)
+		buffer[i] = NULL;
 }
 
-void Communication::translateMessage(char cstr[512], char* ip)
+void Communication::translateMessage(char cstr[512], char* ip, int messageByteSize)
 {
         // cstr now contains a c-string copy of str
         char *p;
 
+	functionVector.clear();
+
         p=strtok (cstr,",");
         while (p!=NULL)
+//	for (int i = 0; i < messageByteSize; i++)
         {
+		
                 std::cout << p << std::endl;
                 functionVector.push_back(p);
                 p=strtok(NULL,",");
@@ -188,7 +199,8 @@ void Communication::translateMessage(char cstr[512], char* ip)
 
 int Communication::send (Connection* conn, char* newMessageToServer )
 {
-        if (strlen(newMessageToServer) > MAXBUF)
+        printf("newMessageToServer:%s\n",newMessageToServer);
+	if (strlen(newMessageToServer) > MAXBUF)
         {
                 perror("message too big!");
         }

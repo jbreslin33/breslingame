@@ -49,7 +49,7 @@ public:
 
         char* getMessageReceived() { return mMessageReceived; }
 
-        void  translateMessage(char cstr[512], char* ip);
+        void  translateMessage(char cstr[512], char* ip, int numberOfBytes);
 protected:
         //Game
         Game*       mGame;

@@ -129,6 +129,8 @@ void Login::promptLogin()
 
 void Login::promptUserName()
 {
+	for (int i = 0; i < 30; i++)
+		mTempUserName[i] = NULL;
 	std::cout << "Enter your User Name: ";
   	std::cin.getline (mTempUserName,30);
 }

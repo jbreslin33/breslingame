@@ -28,6 +28,7 @@ Game::~Game(void)
 
 void Game::changeUserName(char* username, char* clientConnectionID)
 {
+/*
 	int id = atoi(clientConnectionID);
      	bool nameTaken = false;
 	
@@ -64,15 +65,12 @@ void Game::changeUserName(char* username, char* clientConnectionID)
 		clientConnection->setUserName(username);
                 getCommunication()->send(clientConnection,"welcome");
         }
-	
+*/	
 		
 }
 
 void Game::signUp(char* username, char* ip)
 {
-        std::cout << "in signUp\n";
-
-        //printf("clientVectorSize:%d",clientVector.size());
 
         bool nameTaken = false;
 
@@ -81,19 +79,20 @@ void Game::signUp(char* username, char* ip)
         ClientConnection* clientConnection = new ClientConnection(username);
         clientConnection->setIP(ip);
         clientConnection->setPort("38388");
-        clientIDCounter++;
         clientConnection->setID(clientIDCounter);
-        clientConnectionVector.push_back(clientConnection);
-
+        clientIDCounter++;
+	clientConnectionVector.push_back(clientConnection);
 
         for (int i = 0; i < clientConnectionVector.size(); i++)
         {
-                if (clientConnection == clientConnectionVector.at(i))
-                        continue;       
-
-                if (strcmp(clientConnectionVector.at(i)->getUserName(),username) == 0)
-                {
-                        nameTaken = true;
+                if (clientConnection->getID() == clientConnectionVector.at(i)->getID())
+		{
+                 	//printf("continue\n");
+	        	//continue;       
+		}
+		else if (strcmp(clientConnectionVector.at(i)->getUserName(),username) != 0)
+               	{
+                       	nameTaken = true;
                 }               
         }
 
