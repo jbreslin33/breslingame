@@ -34,6 +34,12 @@ This source file is part of the
 #include <SdkTrays.h>
 #include <SdkCameraMan.h>
 
+#include "MySdkTrayManager.h"
+
+class MySdkTrayManager;
+class Label;
+class Button;
+
 class BaseApplication : public Ogre::FrameListener, public Ogre::WindowEventListener, public OIS::KeyListener, public OIS::MouseListener, OgreBites::SdkTrayListener
 {
 public:
@@ -72,6 +78,10 @@ protected:
     //Unattach OIS before window shutdown (very important under Linux)
     virtual void windowClosed(Ogre::RenderWindow* rw);
 
+    //void labelHit(Label* label);
+//	void buttonHit(Button* button);
+
+
     Ogre::Root *mRoot;
     Ogre::Camera* mCamera;
     Ogre::SceneManager* mSceneMgr;
@@ -80,7 +90,7 @@ protected:
     Ogre::String mPluginsCfg;
 
     // OgreBites
-    OgreBites::SdkTrayManager* mTrayMgr;
+    OgreBites::MySdkTrayManager* mTrayMgr;
     OgreBites::SdkCameraMan* mCameraMan;       // basic camera controller
     OgreBites::ParamsPanel* mDetailsPanel;     // sample details panel
     bool mCursorWasVisible;                    // was cursor visible before dialog appeared
@@ -90,6 +100,9 @@ protected:
     OIS::InputManager* mInputManager;
     OIS::Mouse*    mMouse;
     OIS::Keyboard* mKeyboard;
+
+OgreBites::Button* mSignUpButton;
+
 };
 
 #endif // #ifndef __BaseApplication_h_

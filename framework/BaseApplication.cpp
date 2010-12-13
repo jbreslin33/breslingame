@@ -115,7 +115,7 @@ void BaseApplication::createFrameListener(void)
     mTrayMgr = new OgreBites::SdkTrayManager("InterfaceName", mWindow, mMouse, this);
     mTrayMgr->showFrameStats(OgreBites::TL_BOTTOMLEFT);
     mTrayMgr->showLogo(OgreBites::TL_BOTTOMRIGHT);
-    mTrayMgr->hideCursor();
+    //mTrayMgr->hideCursor();
 
     // create a params panel for displaying sample details
     Ogre::StringVector items;
@@ -136,6 +136,11 @@ void BaseApplication::createFrameListener(void)
     mDetailsPanel->setParamValue(10, "Solid");
     mDetailsPanel->hide();
 
+	//breslin
+	mSignUpButton = mTrayMgr->createButton(OgreBites::TL_CENTER,"USERNAME","UserName",0);
+	mSignUpButton->show();
+
+Button* b = mTrayMgr->createButton(TL_TOPLEFT, "MyButton", "Click Me!");
     mRoot->addFrameListener(this);
 }
 //-------------------------------------------------------------------------------------
@@ -418,3 +423,14 @@ void BaseApplication::windowClosed(Ogre::RenderWindow* rw)
         }
     }
 }
+/*
+void BaseApplication::labelHit(Label* label)
+{
+
+}
+
+void BaseApplication::buttonHit(Button* button)
+{
+	//button->setCaption("got ya bitch");
+}
+*/

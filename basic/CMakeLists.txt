@@ -86,15 +86,27 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 endif()
 
 set(HDRS
-	./BaseApplication.h
-	./TutorialApplication.h
-	./MySdkTrayManager.h
+#./AppState.hpp
+#./GameState.hpp
+#./MenuState.hpp
+#./rapidxml.hpp
+#./AdvancedOgreFramework.hpp
+#./DotSceneLoader.hpp
+#./AppStateManager.hpp
+#./DemoApp.hpp
+#./PauseState.hpp
 )
 
 set(SRCS
-	./BaseApplication.cpp
-	./TutorialApplication.cpp
-	./MySdkTrayManager.cpp
+
+#./AdvancedOgreFramework.cpp
+#./DotSceneLoader.cpp
+#./AppStateManager.cpp
+#./DemoApp.cpp
+./main.cpp
+#./PauseState.cpp
+#./GameState.cpp
+#./MenuState.cpp
 )
 
 include_directories( ${OIS_INCLUDE_DIRS}
@@ -106,7 +118,9 @@ add_executable(OgreApp WIN32 ${HDRS} ${SRCS})
 
 set_target_properties(OgreApp PROPERTIES DEBUG_POSTFIX _d)
 
-target_link_libraries(OgreApp ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
+target_link_libraries(OgreApp ${OGRE_LIBRARIES} ${OIS_LIBRARIES} ${OGRE_Terrain_LIBRARIES} ${OGRE_Paging_LIBRARIES})
+
+
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/bin)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/media)
@@ -161,3 +175,6 @@ if(WIN32)
 		CONFIGURATIONS Debug
 	)
 endif(WIN32)
+
+
+
