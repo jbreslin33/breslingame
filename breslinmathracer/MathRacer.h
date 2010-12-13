@@ -46,7 +46,6 @@ public:
     //get objects
     AdditionFactory* getAdditionFactory() { return mAdditionFactory; }
 
-
 protected:
     virtual void createScene(void);
 
@@ -64,6 +63,8 @@ protected:
     bool mGameStarted;
 
     OgreBites::ParamsPanel* mScoreDetailsPanel;     // sample details panel
+    OgreBites::TextBox* mUserNameTextBox;
+
 
     AdditionFactory*        mAdditionFactory;
 

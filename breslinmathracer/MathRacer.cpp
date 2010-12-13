@@ -51,6 +51,16 @@ void MathRacer::createFrameListener(void)
     mScoreDetailsPanel = mTrayMgr->createParamsPanel(OgreBites::TL_TOPLEFT, "ScoreDetailsPanel", 200, scoreItems);
     mTrayMgr->moveWidgetToTray(mScoreDetailsPanel, OgreBites::TL_TOPLEFT, 0);
     mScoreDetailsPanel->show();
+/*
+	
+
+    Ogre::StringVector scoreItems;
+    scoreItems.push_back("UserName:");
+
+    mScoreDetailsPanel = mTrayMgr->createParamsPanel(OgreBites::TL_TOPLEFT, "ScoreDetailsPanel", 200, scoreItems);
+    mTrayMgr->moveWidgetToTray(mScoreDetailsPanel, OgreBites::TL_TOPLEFT, 0);
+    mScoreDetailsPanel->show();
+*/	
 
 }
 //-------------------------------------------------------------------------------------
@@ -102,8 +112,7 @@ bool MathRacer::frameRenderingQueued(const FrameEvent& evt)
 }
 
 bool MathRacer::keyPressed(const OIS::KeyEvent& evt)
-{
-	// relay input events to character controller
+{	// relay input events to character controller
 	if (!mTrayMgr->isDialogVisible())
 	{
         //mChara->injectKeyDown(evt);
@@ -148,6 +157,7 @@ void MathRacer::keyNumberHit(std::string number)
 
 void MathRacer::processAnswer()
 {
+
     if (mAdditionFactory->checkAnswer())
     {
         getScoreDetailsPanel()->setParamValue(3, "YES");
@@ -162,6 +172,7 @@ void MathRacer::processAnswer()
     getScoreDetailsPanel()->setParamValue(1, "");
     getScoreDetailsPanel()->setParamValue(2, "");
     mScoreDetailsPanel->setParamValue(1, mAdditionFactory->getQuestion());
+
 }
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
