@@ -93,7 +93,7 @@ set(HDRS
 #./AdvancedOgreFramework.hpp
 #./DotSceneLoader.hpp
 #./AppStateManager.hpp
-#./DemoApp.hpp
+./DemoApp.hpp
 #./PauseState.hpp
 )
 
@@ -102,7 +102,7 @@ set(SRCS
 #./AdvancedOgreFramework.cpp
 #./DotSceneLoader.cpp
 #./AppStateManager.cpp
-#./DemoApp.cpp
+./DemoApp.cpp
 ./main.cpp
 #./PauseState.cpp
 #./GameState.cpp

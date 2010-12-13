@@ -5,11 +5,11 @@
 
 //|||||||||||||||||||||||||||||||||||||||||||||||
 
-#include "AdvancedOgreFramework.hpp"
-#include "AppStateManager.hpp"
+//#include "AdvancedOgreFramework.hpp"
+//#include "AppStateManager.hpp"
 
-#include "MenuState.hpp"
-#include "GameState.hpp"
+//#include "MenuState.hpp"
+//#include "GameState.hpp"
 
 //|||||||||||||||||||||||||||||||||||||||||||||||
 
@@ -22,7 +22,7 @@ public:
 	void startDemo();
 
 private:
-	AppStateManager*	m_pAppStateManager;
+//	AppStateManager*	m_pAppStateManager;
 	bool				m_bShutdown;
 };
 
