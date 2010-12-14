@@ -14,8 +14,8 @@ This source file is part of the
       http://www.ogre3d.org/tikiwiki/
 -----------------------------------------------------------------------------
 */
-#ifndef __MATHRACER_h_
-#define __MATHRACER_h_
+#ifndef __BASEGAMEAPPLICATION
+#define __BASEGAMEAPPLICATION_h_
 
 #include "Ogre.h"
 
@@ -27,11 +27,11 @@ class MathInput;
 class AdditionFactory;
 class Character;
 
-class MathRacer : public BaseApplication
+class BaseGameApplication : public BaseApplication
 {
 public:
-	MathRacer(void);
-    	virtual ~MathRacer(void);
+	BaseGameApplication(void);
+    	virtual ~BaseGameApplication(void);
 
     	void createFrameListener(void);
 

@@ -10,7 +10,10 @@
 
 DemoApp::DemoApp()
 {
+	std::cout << "DemoApp Constructer\n";
 	m_pAppStateManager = 0;
+	std::cout << "Exiting DemoApp Constructor\n";
+
 }
 
 //|||||||||||||||||||||||||||||||||||||||||||||||
@@ -25,7 +28,9 @@ DemoApp::~DemoApp()
 
 void DemoApp::startDemo()
 {
+
 	new OgreFramework();
+
 	if(!OgreFramework::getSingletonPtr()->initOgre("AdvancedOgreFramework", 0, 0))
 		return;
 
@@ -38,6 +43,8 @@ void DemoApp::startDemo()
     PauseState::create(m_pAppStateManager, "PauseState");
 
 	m_pAppStateManager->start(m_pAppStateManager->findByName("MenuState"));
+
 }
+
 
 //|||||||||||||||||||||||||||||||||||||||||||||||

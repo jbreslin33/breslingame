@@ -3,19 +3,19 @@
 
 #include "OIS.h"
 
-class MathRacer;
+class BaseGameApplication;
 
 class MathInput
 {
 public:
-	MathInput(MathRacer* mathRacer);
+	MathInput(BaseGameApplication* mathRacer);
 	~MathInput();
 
 	void injectKeyDown(const OIS::KeyEvent& evt);
     void keyNumberHit (const OIS::KeyEvent &arg);
 
 protected:
-    MathRacer* mMathRacer;
+    BaseGameApplication* mBaseGameApplication;
 
 };
 

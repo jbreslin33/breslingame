@@ -96,7 +96,7 @@ void AppStateManager::start(AppState* state)
 		}
 		else
 		{
-			Sleep(1000);
+			sleep(1000);
 		}
 	}
 

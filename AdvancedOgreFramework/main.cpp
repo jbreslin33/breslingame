@@ -15,11 +15,12 @@ INT WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT)
 int main(int argc, char **argv)
 #endif
 {
-//	DemoApp demo;
+	DemoApp demo;
 	try	
 	{
-		std::cout << "starting Demo...";
-//		demo.startDemo();
+		std::cout << "starting Demo...\n";
+		demo.startDemo();
+		
 	}
 	catch(std::exception& e)
     {
