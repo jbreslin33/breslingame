@@ -64,8 +64,11 @@ protected:
     	bool mGameStarted;
 
     	OgreBites::ParamsPanel* mScoreDetailsPanel;     // sample details panel
-    	OgreBites::Button*     mButton;
-
+    	
+	OgreBites::Button*      mSignUpButton;
+    	OgreBites::Button*      mSignInButton;
+    	OgreBites::Button*      mQuitButton;
+	
 	
 
     	AdditionFactory* mAdditionFactory;

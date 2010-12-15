@@ -37,7 +37,18 @@ BaseGameApplication::~BaseGameApplication(void)
 }
 void BaseGameApplication::buttonHit(OgreBites::Button* b)
 {
-mTrayMgr->moveWidgetToTray(mButton,OgreBites::TL_RIGHT,0);
+	if (b->getName() == "SignUp")
+	{
+
+	}
+	else if (b->getName() == "SignIn")
+	{
+
+	}
+	else if (b->getName() == "Quit")
+	{
+		mRoot->queueEndRendering();
+	}
 }
 //-------------------------------------------------------------------------------------
 void BaseGameApplication::createFrameListener(void)
@@ -57,9 +68,19 @@ void BaseGameApplication::createFrameListener(void)
     mTrayMgr->moveWidgetToTray(mScoreDetailsPanel, OgreBites::TL_TOPLEFT, 0);
     mScoreDetailsPanel->show();
 
-	mButton = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButton","mButton",200);
-	mTrayMgr->moveWidgetToTray(mButton,OgreBites::TL_CENTER,0);
-	mButton->show();
+	//Main Menu
+	mSignUpButton = mTrayMgr->createButton(OgreBites::TL_CENTER, "SignUp","SignUp",200);
+	mTrayMgr->moveWidgetToTray(mSignUpButton,OgreBites::TL_CENTER,0);
+	mSignUpButton->show();
+
+	mSignInButton = mTrayMgr->createButton(OgreBites::TL_CENTER, "SignIn","SignIn",200);
+	mTrayMgr->moveWidgetToTray(mSignInButton,OgreBites::TL_CENTER,0);
+	mSignInButton->show();
+
+	mQuitButton = mTrayMgr->createButton(OgreBites::TL_CENTER, "Quit","Quit",200);
+	mTrayMgr->moveWidgetToTray(mQuitButton,OgreBites::TL_CENTER,0);
+	mQuitButton->show();
+
 /*
 	
 
@@ -100,17 +121,22 @@ void BaseGameApplication::createScene(void)
     jay       = new Character(mSceneMgr, "jay"      , "Sinbad.mesh", "RunBase",  0,  0, -20);
     silentbob = new Character(mSceneMgr, "silentbob", "Sinbad.mesh", "Dance"  , 10, 10,   0);
 */
+//mButton->setCaption("hellow");
 
 }
 
 bool BaseGameApplication::frameRenderingQueued(const FrameEvent& evt)
 {
+	mSignUpButton->setCaption("SignUp");
+	mSignInButton->setCaption("SignIn");
+	mQuitButton->setCaption("Quit");
 
-    if (mGameStarted)
-    {
-        //update score time
-        mScoreDetailsPanel->setParamValue(0, Ogre::StringConverter::toString(time(NULL)));
-    }
+	
+    	if (mGameStarted)
+    	{
+        	//update score time
+       	 	mScoreDetailsPanel->setParamValue(0, Ogre::StringConverter::toString(time(NULL)));
+    	}
 
 	// let character update animations and camera
         //jay->addTime(evt.timeSinceLastFrame);
