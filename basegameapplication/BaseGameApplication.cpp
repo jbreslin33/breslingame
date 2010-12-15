@@ -35,7 +35,10 @@ BaseGameApplication::BaseGameApplication(void)
 BaseGameApplication::~BaseGameApplication(void)
 {
 }
-
+void BaseGameApplication::buttonHit(OgreBites::Button* b)
+{
+mTrayMgr->moveWidgetToTray(mButton,OgreBites::TL_RIGHT,0);
+}
 //-------------------------------------------------------------------------------------
 void BaseGameApplication::createFrameListener(void)
 {
@@ -53,6 +56,10 @@ void BaseGameApplication::createFrameListener(void)
     mScoreDetailsPanel = mTrayMgr->createParamsPanel(OgreBites::TL_TOPLEFT, "ScoreDetailsPanel", 200, scoreItems);
     mTrayMgr->moveWidgetToTray(mScoreDetailsPanel, OgreBites::TL_TOPLEFT, 0);
     mScoreDetailsPanel->show();
+
+	mButton = mTrayMgr->createButton(OgreBites::TL_CENTER, "mButton","mButton",200);
+	mTrayMgr->moveWidgetToTray(mButton,OgreBites::TL_CENTER,0);
+	mButton->show();
 /*
 	
 

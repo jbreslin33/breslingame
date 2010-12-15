@@ -59,11 +59,14 @@ protected:
     	// OIS::MouseListener
     	virtual bool mouseMoved  (const OIS::MouseEvent &arg );
     	virtual bool mousePressed(const OIS::MouseEvent &arg, OIS::MouseButtonID id );
+	virtual void buttonHit(OgreBites::Button* b);
 
     	bool mGameStarted;
 
     	OgreBites::ParamsPanel* mScoreDetailsPanel;     // sample details panel
-    	OgreBites::TextBox*     mUserNameTextBox;
+    	OgreBites::Button*     mButton;
+
+	
 
     	AdditionFactory* mAdditionFactory;
     	MathInput*       mMathInput;
