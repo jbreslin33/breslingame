@@ -63,14 +63,17 @@ protected:
 
     	bool mGameStarted;
 
+
+	OgreBites::SdkTrayManager* mMainMenuTrayMgr;
+	OgreBites::SdkTrayManager* mLoginTrayMgr;
+
     	OgreBites::ParamsPanel* mScoreDetailsPanel;     // sample details panel
+	OgreBites::ParamsPanel* mSignUpParamsPanel;
     	
 	OgreBites::Button*      mSignUpButton;
     	OgreBites::Button*      mSignInButton;
     	OgreBites::Button*      mQuitButton;
 	
-	
-
     	AdditionFactory* mAdditionFactory;
     	MathInput*       mMathInput;
 

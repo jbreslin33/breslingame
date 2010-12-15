@@ -39,7 +39,14 @@ void BaseGameApplication::buttonHit(OgreBites::Button* b)
 {
 	if (b->getName() == "SignUp")
 	{
-
+	//	mTrayMgr->removeWidgetFromTray("mSignUpButton");
+	//	mTrayMgr->removeWidgetFromTray("mSignInButton");
+	//	mTrayMgr->removeWidgetFromTray("mQuitButton");
+//	mSignInButton->hide();	
+	
+//mTrayMgr->destroyAllWidgets();
+//	mTrayMgr->moveWidgetToTray(mUserNameTextBox,OgreBites::TL_CENTER);
+//		mUserNameTextBox->show();
 	}
 	else if (b->getName() == "SignIn")
 	{
@@ -53,6 +60,9 @@ void BaseGameApplication::buttonHit(OgreBites::Button* b)
 //-------------------------------------------------------------------------------------
 void BaseGameApplication::createFrameListener(void)
 {
+	 mMainMenuTrayMgr = new OgreBites::SdkTrayManager("InterfaceName", mWindow, mMouse, this);
+	 mLoginTrayMgr = new OgreBites::SdkTrayManager("InterfaceName", mWindow, mMouse, this);
+
     BaseApplication::createFrameListener();
 
     mGameStarted = false;
@@ -69,17 +79,25 @@ void BaseGameApplication::createFrameListener(void)
     mScoreDetailsPanel->show();
 
 	//Main Menu
-	mSignUpButton = mTrayMgr->createButton(OgreBites::TL_CENTER, "SignUp","SignUp",200);
-	mTrayMgr->moveWidgetToTray(mSignUpButton,OgreBites::TL_CENTER,0);
+	mSignUpButton = mMainMenuTrayMgr->createButton(OgreBites::TL_CENTER, "SignUp","SignUp",200);
+	mMainMenuTrayMgr->moveWidgetToTray(mSignUpButton,OgreBites::TL_CENTER,0);
 	mSignUpButton->show();
 
-	mSignInButton = mTrayMgr->createButton(OgreBites::TL_CENTER, "SignIn","SignIn",200);
-	mTrayMgr->moveWidgetToTray(mSignInButton,OgreBites::TL_CENTER,0);
+	mSignInButton = mMainMenuTrayMgr->createButton(OgreBites::TL_CENTER, "SignIn","SignIn",200);
+	mMainMenuTrayMgr->moveWidgetToTray(mSignInButton,OgreBites::TL_CENTER,0);
 	mSignInButton->show();
 
-	mQuitButton = mTrayMgr->createButton(OgreBites::TL_CENTER, "Quit","Quit",200);
-	mTrayMgr->moveWidgetToTray(mQuitButton,OgreBites::TL_CENTER,0);
+	mQuitButton = mMainMenuTrayMgr->createButton(OgreBites::TL_CENTER, "Quit","Quit",200);
+	mMainMenuTrayMgr->moveWidgetToTray(mQuitButton,OgreBites::TL_CENTER,0);
 	mQuitButton->show();
+
+    	Ogre::StringVector mSignUpParamsPanelItems;
+    	mSignUpParamsPanelItems.push_back("UserName");
+	
+	mSignUpParamsPanel = mLoginTrayMgr->createParamsPanel(OgreBites::TL_CENTER,"SignUpParamsPanel",200,mSignUpParamsPanelItems);
+//	mTrayMgr->moveWidgetToTray(mSignUpParamsPanel,OgreBites::TL_CENTER,0);
+	
+
 
 /*
 	
@@ -130,7 +148,6 @@ bool BaseGameApplication::frameRenderingQueued(const FrameEvent& evt)
 	mSignUpButton->setCaption("SignUp");
 	mSignInButton->setCaption("SignIn");
 	mQuitButton->setCaption("Quit");
-
 	
     	if (mGameStarted)
     	{
