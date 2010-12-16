@@ -30,57 +30,56 @@ class Character;
 class BaseGameApplication : public BaseApplication
 {
 public:
-	BaseGameApplication(void);
-    	virtual ~BaseGameApplication(void);
+        BaseGameApplication(void);
+        virtual ~BaseGameApplication(void);
 
-    	void createFrameListener(void);
+        void createFrameListener(void);
 
-    	OgreBites::ParamsPanel* getScoreDetailsPanel() { return mScoreDetailsPanel; }
+        OgreBites::ParamsPanel* getScoreDetailsPanel() { return mScoreDetailsPanel; }
 
-    	bool getGameStarted() { return mGameStarted; }
-    	void startGame    ();
-    	void processAnswer();
+        bool getGameStarted() { return mGameStarted; }
+        void startGame    ();
+        void processAnswer();
 
-    	void keyNumberHit (std::string number);
+        void keyNumberHit (std::string number);
 
-    	//get objects
-    	AdditionFactory* getAdditionFactory() { return mAdditionFactory; }
+        //get objects
+        AdditionFactory* getAdditionFactory() { return mAdditionFactory; }
+
+	void breslinHideAllWidgets(void);
 
 protected:
-    	virtual void createScene(void);
+        virtual void createScene(void);
 
-    	// Ogre::FrameListener
-    	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+        // Ogre::FrameListener
+        virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 
-    	// OIS::KeyListener
-    	virtual bool keyPressed  (const OIS::KeyEvent &arg );
-    	virtual bool keyReleased (const OIS::KeyEvent &arg );
+        // OIS::KeyListener
+        virtual bool keyPressed  (const OIS::KeyEvent &arg );
+        virtual bool keyReleased (const OIS::KeyEvent &arg );
 
-    	// OIS::MouseListener
-    	virtual bool mouseMoved  (const OIS::MouseEvent &arg );
-    	virtual bool mousePressed(const OIS::MouseEvent &arg, OIS::MouseButtonID id );
-	virtual void buttonHit(OgreBites::Button* b);
+        // OIS::MouseListener
+        virtual bool mouseMoved  (const OIS::MouseEvent &arg );
+        virtual bool mousePressed(const OIS::MouseEvent &arg, OIS::MouseButtonID id );
+        virtual void buttonHit(OgreBites::Button* b);
 
-    	bool mGameStarted;
+        bool mGameStarted;
 
+        OgreBites::ParamsPanel* mScoreDetailsPanel;     // sample details panel
+        OgreBites::ParamsPanel* mSignUpParamsPanel;
+        
+        OgreBites::Button*      mSignUpButton;
+        OgreBites::Button*      mSignInButton;
+        OgreBites::Button*      mQuitButton;
+        
+        AdditionFactory* mAdditionFactory;
+        MathInput*       mMathInput;
 
-	OgreBites::SdkTrayManager* mMainMenuTrayMgr;
-	OgreBites::SdkTrayManager* mLoginTrayMgr;
-
-    	OgreBites::ParamsPanel* mScoreDetailsPanel;     // sample details panel
-	OgreBites::ParamsPanel* mSignUpParamsPanel;
-    	
-	OgreBites::Button*      mSignUpButton;
-    	OgreBites::Button*      mSignInButton;
-    	OgreBites::Button*      mQuitButton;
-	
-    	AdditionFactory* mAdditionFactory;
-    	MathInput*       mMathInput;
-
-    	Character*    jay;
-    	Character*    silentbob;
+        Character*    jay;
+        Character*    silentbob;
 
 };
 
 #endif // #ifndef __TutorialApplication_h_
+
 
