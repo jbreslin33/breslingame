@@ -92,6 +92,9 @@ set(HDRS
 	../charactercontrollers/Character.h
 	../questionfactory/QuestionFactory.h
 	../questionfactory/AdditionFactory.h
+	../dreamsock/dreamSock.h
+	../dreamsock/dreamSockLog.h
+
 )
 
 set(SRCS
@@ -101,6 +104,11 @@ set(SRCS
 	../charactercontrollers/Character.cpp
 	../questionfactory/QuestionFactory.cpp
 	../questionfactory/AdditionFactory.cpp
+	../dreamsock/dreamLinuxSock.cpp
+	../dreamsock/dreamSockGlobal.cpp
+	../dreamsock/dreamSockLog.cpp
+	#../dreamsock/dreamWinSock.cpp //uncomment for windows
+
 )
 
 include_directories( ${OIS_INCLUDE_DIRS}
