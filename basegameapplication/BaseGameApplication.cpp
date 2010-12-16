@@ -41,10 +41,12 @@ void BaseGameApplication::buttonHit(OgreBites::Button* b)
         {      
 		breslinHideAllWidgets();
 
-		//let's pop in the SignUp gui
+		//let's pop in the SignUp username gui
 		mTrayMgr->moveWidgetToTray(mSignUpParamsPanel,TL_CENTER);
 		mSignUpParamsPanel->show();
 
+		mTrayMgr->moveWidgetToTray(mSignUpUserNameButton,TL_CENTER);
+		mSignUpUserNameButton->show();
 
         }
         else if (b->getName() == "SignIn")
@@ -63,13 +65,19 @@ void BaseGameApplication::breslinHideAllWidgets(void)
         mTrayMgr->moveWidgetToTray(mSignUpButton,TL_NONE);
         mTrayMgr->moveWidgetToTray(mSignInButton,TL_NONE);
         mTrayMgr->moveWidgetToTray(mQuitButton,TL_NONE);
+
         mSignInButton->hide();
         mSignUpButton->hide();
         mQuitButton->hide();
 
-	//UserName
+
+	//SignUp UserName
 	mTrayMgr->moveWidgetToTray(mSignUpParamsPanel,TL_NONE);
 	mSignUpParamsPanel->hide();
+	
+	mTrayMgr->moveWidgetToTray(mSignUpUserNameButton,TL_NONE);
+	mSignUpUserNameButton->hide();
+
 
 	//Scoring
 	mTrayMgr->moveWidgetToTray(mScoreDetailsPanel,TL_NONE);
@@ -81,20 +89,21 @@ void BaseGameApplication::breslinHideAllWidgets(void)
 void BaseGameApplication::createFrameListener(void)
 {
 
-    BaseApplication::createFrameListener();
+	BaseApplication::createFrameListener();
 
-    mGameStarted = false;
+    	mGameStarted = false;
 
-    Ogre::StringVector scoreItems;
-    scoreItems.push_back("Time");
-    scoreItems.push_back("Question");
-    scoreItems.push_back("Answer");
-    scoreItems.push_back("Correct Answer");
-    scoreItems.push_back("Speed");
+	//Score Hud
+    	Ogre::StringVector scoreItems;
+    	scoreItems.push_back("Time");
+    	scoreItems.push_back("Question");
+    	scoreItems.push_back("Answer");
+    	scoreItems.push_back("Correct Answer");
+    	scoreItems.push_back("Speed");
 
-    mScoreDetailsPanel = mTrayMgr->createParamsPanel(OgreBites::TL_TOPLEFT, "ScoreDetailsPanel", 200, scoreItems);
-    mTrayMgr->moveWidgetToTray(mScoreDetailsPanel, OgreBites::TL_TOPLEFT, 0);
-    mScoreDetailsPanel->show();
+    	mScoreDetailsPanel = mTrayMgr->createParamsPanel(OgreBites::TL_TOPLEFT, "ScoreDetailsPanel", 200, scoreItems);
+    	mTrayMgr->moveWidgetToTray(mScoreDetailsPanel, OgreBites::TL_TOPLEFT, 0);
+    	mScoreDetailsPanel->show();
 
         //Main Menu
         mSignUpButton = mTrayMgr->createButton(OgreBites::TL_CENTER, "SignUp","SignUp",200);
@@ -109,11 +118,18 @@ void BaseGameApplication::createFrameListener(void)
         mTrayMgr->moveWidgetToTray(mQuitButton,OgreBites::TL_CENTER,0);
         mQuitButton->show();
 
+
+	//SignUp
         Ogre::StringVector mSignUpParamsPanelItems;
         mSignUpParamsPanelItems.push_back("UserName");
         
         mSignUpParamsPanel = mTrayMgr->createParamsPanel(OgreBites::TL_NONE,"SignUpParamsPanel",200,mSignUpParamsPanelItems);
 	mSignUpParamsPanel->hide();
+
+        mSignUpUserNameButton = mTrayMgr->createButton(OgreBites::TL_NONE, "SignUpUserName","SignUpUserName",200);
+        mTrayMgr->moveWidgetToTray(mSignUpUserNameButton,OgreBites::TL_NONE,0);
+        mSignUpUserNameButton->hide();
+
 
 }
 /*

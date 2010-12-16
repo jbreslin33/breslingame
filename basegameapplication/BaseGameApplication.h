@@ -65,13 +65,22 @@ protected:
 
         bool mGameStarted;
 
+	//Scoring hud
         OgreBites::ParamsPanel* mScoreDetailsPanel;     // sample details panel
-        OgreBites::ParamsPanel* mSignUpParamsPanel;
         
+	//Main Menu
         OgreBites::Button*      mSignUpButton;
         OgreBites::Button*      mSignInButton;
         OgreBites::Button*      mQuitButton;
         
+	//SignUp UserName
+        OgreBites::ParamsPanel* mSignUpParamsPanel;
+	OgreBites::Button*      mSignUpUserNameButton;
+	
+	
+
+
+
         AdditionFactory* mAdditionFactory;
         MathInput*       mMathInput;
 
