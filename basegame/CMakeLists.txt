@@ -84,16 +84,66 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 	add_definitions(-DBOOST_ALL_NO_LIB)
 	set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
 endif()
- 
+
+# SOURCE WINDOWS
+
+if(WIN32)
+
 set(HDRS
+	#Basic Game 
 	../baseapplication/BaseApplication.h
 	./BaseGame.h
+	
+	#DreamSock
+	../dreamsock/dreamSock.h
+	../dreamsock/dreamSockLog.h
 )
  
 set(SRCS
+	#Basic Game
 	../baseapplication/BaseApplication.cpp
 	./BaseGame.cpp
+	
+	#DreamSock
+	../dreamsock/dreamSock.cpp
+	../dreamsock/dreamSockGlobal.cpp
+	../dreamsock/dreamSockLog.cpp
+	../dreamsock/dreamWinSock.cpp
 )
+
+endif(WIN32)
+
+
+# SOURCE UNIX
+
+if(UNIX)
+
+set(HDRS
+	#Basic Game 
+	../baseapplication/BaseApplication.h
+	./BaseGame.h
+	
+	#DreamSock
+	../dreamsock/dreamSock.h
+	../dreamsock/dreamSockLog.h
+)
+ 
+set(SRCS
+	#Basic Game
+	../baseapplication/BaseApplication.cpp
+	./BaseGame.cpp
+	
+	#DreamSock
+	../dreamsock/dreamSock.cpp
+	../dreamsock/dreamSockGlobal.cpp
+	../dreamsock/dreamSockLog.cpp
+	../dreamsock/dreamLinuxSock.cpp
+)
+
+endif(UNIX)
+
+ 
+
  
 include_directories( ${OIS_INCLUDE_DIRS}
 	${OGRE_INCLUDE_DIRS}

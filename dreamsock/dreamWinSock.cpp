@@ -9,7 +9,7 @@
 
 #include <stdio.h>
 #include <windows.h>
-
+#include <time.h>
 #include <assert.h>
 
 //-----------------------------------------------------------------------------
@@ -105,11 +105,13 @@ int dreamSock_Win_GetCurrentSystemTime(void)
 
 	if(!initialized)
 	{
-		base = timeGetTime() & 0xffff0000;
+
+		//base = timeGetTime() & 0xffff0000;
+		base = time(NULL) * 1000;
 		initialized = true;
 	}
 
-	curtime = timeGetTime() - base;
+	curtime = time(NULL) * 1000 - base;
 
 	return curtime;
 }
