@@ -20,16 +20,16 @@ project(OgreApp)
  
 if(WIN32)
 	set(CMAKE_MODULE_PATH "$ENV{OGRE_HOME}/CMake/;${CMAKE_MODULE_PATH}")
-	set(OGRE_SAMPLES_INCLUDEPATH
-		$ENV{OGRE_HOME}/Samples/include
-	)
+	#set(OGRE_SAMPLES_INCLUDEPATH
+	#	$ENV{OGRE_HOME}/Samples/include
+	#)
 endif(WIN32)
  
 if(UNIX)
-	set(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
-	set(OGRE_SAMPLES_INCLUDEPATH
-		/usr/local/share/OGRE/samples/Common/include/
-	)
+	#set(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
+	#set(OGRE_SAMPLES_INCLUDEPATH
+	#	/usr/local/share/OGRE/samples/Common/include/
+	#)
 endif(UNIX)
  
 if (CMAKE_BUILD_TYPE STREQUAL "")
@@ -44,15 +44,15 @@ set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/dist")
  
 find_package(OGRE REQUIRED)
  
-if(NOT "${OGRE_VERSION_NAME}" STREQUAL "Cthugha")
-  message(SEND_ERROR "You need Ogre 1.7 Cthugha to build this.")
-endif()
+#if(NOT "${OGRE_VERSION_NAME}" STREQUAL "Cthugha")
+#  message(SEND_ERROR "You need Ogre 1.7 Cthugha to build this.")
+#endif()
  
-find_package(OIS REQUIRED)
+#find_package(OIS REQUIRED)
  
-if(NOT OIS_FOUND)
-	message(SEND_ERROR "Failed to find OIS.")
-endif()
+#if(NOT OIS_FOUND)
+#	message(SEND_ERROR "Failed to find OIS.")
+#endif()
  
 # Find Boost
 if (NOT OGRE_BUILD_PLATFORM_IPHONE)
@@ -167,15 +167,15 @@ add_executable(OgreApp WIN32 ${HDRS} ${SRCS})
  
 set_target_properties(OgreApp PROPERTIES DEBUG_POSTFIX _d)
  
-target_link_libraries(OgreApp ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
+#target_link_libraries(OgreApp ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
  
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/bin)
-file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/media)
+#file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/media)
  
 # post-build copy for win32
 if(WIN32 AND NOT MINGW)
 	add_custom_command( TARGET OgreApp PRE_BUILD
-		COMMAND if not exist .\\dist\\bin mkdir .\\dist\\bin )
+		COMMAND if not exist .\\dist\\bin mkdir )
 	add_custom_command( TARGET OgreApp POST_BUILD
 		COMMAND copy \"$(TargetPath)\" .\\dist\\bin )
 endif(WIN32 AND NOT MINGW)
@@ -189,40 +189,40 @@ if(WIN32)
 		RUNTIME DESTINATION bin
 		CONFIGURATIONS All)
  
-	install(DIRECTORY ${CMAKE_SOURCE_DIR}/dist/Media
-		DESTINATION ./
-		CONFIGURATIONS Release RelWithDebInfo Debug
-	)
+	#install(DIRECTORY ${CMAKE_SOURCE_DIR}/dist/Media
+	#	DESTINATION ./
+	#	CONFIGURATIONS Release RelWithDebInfo Debug
+	#)
  
-	install(FILES ${CMAKE_SOURCE_DIR}/dist/bin/plugins.cfg
-		${CMAKE_SOURCE_DIR}/dist/bin/resources.cfg
-		DESTINATION bin
-		CONFIGURATIONS Release RelWithDebInfo
-	)
+	#install(FILES ${CMAKE_SOURCE_DIR}/dist/bin/plugins.cfg
+	#	${CMAKE_SOURCE_DIR}/dist/bin/resources.cfg
+	#	DESTINATION bin
+	#	CONFIGURATIONS Release RelWithDebInfo
+	#)
  
-	install(FILES ${CMAKE_SOURCE_DIR}/dist/bin/plugins_d.cfg
-		${CMAKE_SOURCE_DIR}/dist/bin/resources_d.cfg
-		DESTINATION bin
-		CONFIGURATIONS Debug
-	)
+	#install(FILES ${CMAKE_SOURCE_DIR}/dist/bin/plugins_d.cfg
+	#	${CMAKE_SOURCE_DIR}/dist/bin/resources_d.cfg
+	#	DESTINATION bin
+	#	CONFIGURATIONS Debug
+	#)
  
         # NOTE: for the 1.7.1 sdk the OIS dll is called OIS.dll instead of libOIS.dll
         # so you'll have to change that to make it work with 1.7.1
-	install(FILES ${OGRE_PLUGIN_DIR_REL}/OgreMain.dll
-		${OGRE_PLUGIN_DIR_REL}/RenderSystem_Direct3D9.dll
-		${OGRE_PLUGIN_DIR_REL}/RenderSystem_GL.dll
-		${OGRE_PLUGIN_DIR_REL}/libOIS.dll
-		DESTINATION bin
-		CONFIGURATIONS Release RelWithDebInfo
-	)
+	#install(FILES ${OGRE_PLUGIN_DIR_REL}/OgreMain.dll
+	#	${OGRE_PLUGIN_DIR_REL}/RenderSystem_Direct3D9.dll
+	#	${OGRE_PLUGIN_DIR_REL}/RenderSystem_GL.dll
+	#	${OGRE_PLUGIN_DIR_REL}/libOIS.dll
+	#	DESTINATION bin
+	#	CONFIGURATIONS Release RelWithDebInfo
+	#)
  
-	install(FILES ${OGRE_PLUGIN_DIR_DBG}/OgreMain_d.dll
-		${OGRE_PLUGIN_DIR_DBG}/RenderSystem_Direct3D9_d.dll
-		${OGRE_PLUGIN_DIR_DBG}/RenderSystem_GL_d.dll
-		${OGRE_PLUGIN_DIR_DBG}/libOIS_d.dll
-		DESTINATION bin
-		CONFIGURATIONS Debug
-	)
+	#install(FILES ${OGRE_PLUGIN_DIR_DBG}/OgreMain_d.dll
+	#	${OGRE_PLUGIN_DIR_DBG}/RenderSystem_Direct3D9_d.dll
+	#	${OGRE_PLUGIN_DIR_DBG}/RenderSystem_GL_d.dll
+	#	${OGRE_PLUGIN_DIR_DBG}/libOIS_d.dll
+	#	DESTINATION bin
+	#	CONFIGURATIONS Debug
+	#)
  
    # as of sdk 1.7.2 we need to copy the boost dll's as well
    # because they're not linked statically (it worked with 1.7.1 though)
