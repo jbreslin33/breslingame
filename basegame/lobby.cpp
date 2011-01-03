@@ -37,14 +37,14 @@ CLobby::~CLobby()
 //-----------------------------------------------------------------------------
 void CLobby::RefreshPlayerList(void)
 {
-	SendMessage(GetDlgItem(hWnd_LobbyDialog, IDC_PLAYERLIST), LB_RESETCONTENT, 0, 0);
+	//SendMessage(GetDlgItem(hWnd_LobbyDialog, IDC_PLAYERLIST), LB_RESETCONTENT, 0, 0);
 
 	clientLoginData *list = clientList;
 
 	for( ; list != NULL; list = list->next)
 	{
-		SendMessage(GetDlgItem(hWnd_LobbyDialog, IDC_PLAYERLIST), LB_ADDSTRING, 0, 
-			(LPARAM) list->nickname);
+		//SendMessage(GetDlgItem(hWnd_LobbyDialog, IDC_PLAYERLIST), LB_ADDSTRING, 0, 
+		//	(LPARAM) list->nickname);
 	}
 }
 
@@ -56,7 +56,7 @@ void CLobby::RefreshGameList(void)
 {
 	char temp[128];
 
-	SendMessage(GetDlgItem(hWnd_LobbyDialog, IDC_GAMELIST), LB_RESETCONTENT, 0, 0);
+	//SendMessage(GetDlgItem(hWnd_LobbyDialog, IDC_GAMELIST), LB_RESETCONTENT, 0, 0);
 
 	CArmyWar *list = gameList;
 
@@ -69,8 +69,8 @@ void CLobby::RefreshGameList(void)
 			strcat(temp, " (in progress)");
 		}
 
-		SendMessage(GetDlgItem(hWnd_LobbyDialog, IDC_GAMELIST), LB_ADDSTRING, 0, 
-			(LPARAM) temp);
+	//	SendMessage(GetDlgItem(hWnd_LobbyDialog, IDC_GAMELIST), LB_ADDSTRING, 0, 
+	//		(LPARAM) temp);
 	}
 }
 
@@ -83,23 +83,23 @@ void CLobby::RefreshJoinedPlayersList(void)
 	if(localGame == NULL)
 		return;
 
-	SendMessage(GetDlgItem(hWnd_CreateViewPlayersDialog,
-		IDC_PLAYERSINGAME), LB_RESETCONTENT, 0, 0);
+	//SendMessage(GetDlgItem(hWnd_CreateViewPlayersDialog,
+	//	IDC_PLAYERSINGAME), LB_RESETCONTENT, 0, 0);
 
-	SendMessage(GetDlgItem(hWnd_JoinGameDialog,
-		IDC_JOINPLAYERSINGAME), LB_RESETCONTENT, 0, 0);
+	//SendMessage(GetDlgItem(hWnd_JoinGameDialog,
+	///	IDC_JOINPLAYERSINGAME), LB_RESETCONTENT, 0, 0);
 
 	clientData *list = localGame->GetClientList();
 
 	for( ; list != NULL; list = list->next)
 	{
-		SendMessage(GetDlgItem(hWnd_CreateViewPlayersDialog,
-			IDC_PLAYERSINGAME), LB_ADDSTRING, 0,
-			(LPARAM) list->nickname);
+	//	SendMessage(GetDlgItem(hWnd_CreateViewPlayersDialog,
+	//		IDC_PLAYERSINGAME), LB_ADDSTRING, 0,
+	//		(LPARAM) list->nickname);
 
-		SendMessage(GetDlgItem(hWnd_JoinGameDialog,
-			IDC_JOINPLAYERSINGAME), LB_ADDSTRING, 0,
-			(LPARAM) list->nickname);
+	//	SendMessage(GetDlgItem(hWnd_JoinGameDialog,
+	//		IDC_JOINPLAYERSINGAME), LB_ADDSTRING, 0,
+	//		(LPARAM) list->nickname);
 	}
 }
 
@@ -148,7 +148,7 @@ void CLobby::ReadPackets(void)
 			break;
 
 		case USER_MES_SERVEREXIT:
-			MessageBox(NULL, "Server disconnected", "Info", MB_OK);
+	//		MessageBox(NULL, "Server disconnected", "Info", MB_OK);
 			Disconnect();
 			break;
 
@@ -163,17 +163,17 @@ void CLobby::ReadPackets(void)
 
 			if(ret != LOBBYLOGIN_RESULT_ACCEPTED)
 			{
-				MessageBox(NULL, "Nickname or password is not valid", "Error", MB_OK);
+	//			MessageBox(NULL, "Nickname or password is not valid", "Error", MB_OK);
 
 				Disconnect();
 
 				return;
 			}
 
-			SetWindowText(hWnd_Application, "ARMY WAR Online 2.0 - connected");
+	//		SetWindowText(hWnd_Application, "ARMY WAR Online 2.0 - connected");
 			timeConnecting = -1;
 
-			ShowWindow(hWnd_LobbyDialog, SW_SHOW);
+	//		ShowWindow(hWnd_LobbyDialog, SW_SHOW);
 
 			break;
 
@@ -182,8 +182,8 @@ void CLobby::ReadPackets(void)
 			mes.ReadShort();
 			mes.ReadShort();
 
-			SendMessage(GetDlgItem(hWnd_LobbyDialog, IDC_CHATLIST), LB_ADDSTRING, 0, 
-				(LPARAM) mes.ReadString());
+	//		SendMessage(GetDlgItem(hWnd_LobbyDialog, IDC_CHATLIST), LB_ADDSTRING, 0, 
+	//			(LPARAM) mes.ReadString());
 
 			break;
 
@@ -465,7 +465,7 @@ void CLobby::RemoveGame(char *name)
 	// If our game is removed, update local game pointer
 	if(list == Lobby.GetLocalGame())
 	{
-		DestroyWindow(hWnd_JoinGameDialog);
+	//	DestroyWindow(hWnd_JoinGameDialog);
 
 		Lobby.SetLocalGame(NULL);
 	}
@@ -644,7 +644,7 @@ void CLobby::Connect(char *name, char *password)
 	LogString("CLobby::Connect");
 
 	timeConnecting = 0;
-	SetWindowText(hWnd_Application, "ARMY WAR Online 2.0 - connecting ...");
+	//SetWindowText(hWnd_Application, "ARMY WAR Online 2.0 - connecting ...");
 
 	networkClient->SendConnect(name);
 
@@ -669,7 +669,7 @@ void CLobby::Disconnect(void)
 	LogString("CLobby::Disconnect");
 
 	timeConnecting = -1;
-	SetWindowText(hWnd_Application, "ARMY WAR Online 2.0");
+	//SetWindowText(hWnd_Application, "ARMY WAR Online 2.0");
 
 	localClient = NULL;
 	localGame	= NULL;
@@ -705,12 +705,12 @@ void CLobby::RunNetwork(int msec)
 
 	if(timeConnecting > 3000)
 	{
-		SetWindowText(hWnd_Application, "ARMY WAR Online 2.0");
+	//	SetWindowText(hWnd_Application, "ARMY WAR Online 2.0");
 
-		MessageBox(NULL, "Could not connect", "Connection error", MB_OK);
+	//	MessageBox(NULL, "Could not connect", "Connection error", MB_OK);
 		timeConnecting = -1;
 
-		ShowWindow(hWnd_LoginDialog, SW_SHOW);
+	//	ShowWindow(hWnd_LoginDialog, SW_SHOW);
 	}
 
 	// framerate is too high

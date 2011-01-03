@@ -1,10 +1,11 @@
-#include <dreamSock.h>
+#include "../dreamsock/dreamSock.h"
+/*
 #include <windows.h>
 #include <gl/gl.h>
 #include <gl/glu.h>
 #include <gl/glaux.h>
 #include <2dlib.h>
-
+*/
 #include "engine.h"
 //#include "main.h"
 //#include "network.h"
@@ -13,6 +14,7 @@
 //#include "..\tutGameServer\netcommon.h"
 
 // Graphic Declarations
+/*
 GFX_IMAGE2D grass;				// variable to hold 'cdrom' graphic
 GFX_IMAGE2D redman;				// variable to hold 'cdrom' graphic
 GFX_IMAGE2D blueman;			// variable to hold 'cdrom' graphic
@@ -22,7 +24,7 @@ GFX_IMAGE2D bluetarget;			// variable to hold 'cdrom' graphic
 GFX_IMAGE2D flag;				// variable to hold 'cdrom' graphic
 GFX_IMAGE2D rednumbers[10];		// variable to hold 'cdrom' graphic
 GFX_IMAGE2D bluenumbers[10];	// variable to hold 'cdrom' graphic
-
+*/
 float target_rotation = 0.0;	// variable to rotate the target images
 
 // Define the map
@@ -302,10 +304,11 @@ void ENGINE_AddPlayer(int team)
 void ENGINE_Init(void)
 {
 	// Init the Graphics Engine
-	GFX_Init("Army War Engine v1.0", 640, 480, 16, 0, NULL);
+//	GFX_Init("Army War Engine v1.0", 640, 480, 16, 0, NULL);
 //	GFX_Init("Army War Engine v1.0", 640, 480, 16, 0, ApplicationProc);
 
 	// Load Required Graphics
+/*
 	GFX_LoadBitmap(&grass,      "gfx\\grass.bmp");	
 	GFX_LoadBitmap(&redman,     "gfx\\redman.bmp");	
 	GFX_LoadBitmap(&blueman,    "gfx\\blueman.bmp");
@@ -335,7 +338,7 @@ void ENGINE_Init(void)
 	GFX_LoadBitmap(&bluenumbers[7], "gfx\\blue7.bmp");
 	GFX_LoadBitmap(&bluenumbers[8], "gfx\\blue8.bmp");
 	GFX_LoadBitmap(&bluenumbers[9], "gfx\\blue9.bmp");
-	
+*/	
 	// Create the map...
 //	if(localPlayerGameIndex == 0)
 	{
@@ -363,7 +366,7 @@ void ENGINE_Init(void)
 
 		// Add blue players
 		place_pos_x = 46;
-		half_players = Game[selectedGame].players / 2;
+//		half_players = Game[selectedGame].players / 2;
 		for(i=0;i<half_players;i++)
 		{
 			ENGINE_AddPlayer(BLUE_TEAM);
@@ -371,14 +374,14 @@ void ENGINE_Init(void)
 	
 		// Add red players
 		place_pos_x = 46;
-		half_players = Game[selectedGame].players - half_players;
+//		half_players = Game[selectedGame].players - half_players;
 		for(i=0;i<half_players;i++)
 		{
 			ENGINE_AddPlayer(RED_TEAM);
 		}
 
-	local_x = players[localPlayerGameIndex].start_x;
-	local_y = players[localPlayerGameIndex].start_y;
+//	local_x = players[localPlayerGameIndex].start_x;
+	//local_y = players[localPlayerGameIndex].start_y;
 
 	southeast = 0;
 	southwest = 0;
@@ -392,14 +395,14 @@ void ENGINE_Init(void)
 
 	// Set the scroll positions
 	scroll_x = 40*32;
-	if(players[localPlayerGameIndex].team == RED_TEAM)
-	{
-		scroll_y = 90*32;
-	}
-	else
-	{
-		scroll_y = 0;
-	}
+//	if(players[localPlayerGameIndex].team == RED_TEAM)
+	//{
+	//	scroll_y = 90*32;
+	//}
+	//else
+	//{
+	//	scroll_y = 0;
+	//}
 
 	// Set the flag position
 	flag_x = 49*32;
@@ -416,6 +419,7 @@ void ENGINE_Init(void)
 
 void ENGINE_ProcessInput(void)
 {
+	/*
 	TUT_MSG_PLAYERDIRECTION_DATA Msg;
 	Msg.type		= TUT_MSG_PLAYERDIRECTION;
 	Msg.toId		= NETID_ALL;
@@ -702,10 +706,12 @@ void ENGINE_ProcessInput(void)
 			west = 0;
 		}
 	}
+	*/
 }
 
 void ENGINE_UpdatePlayers(void)
 {
+	/*
 	// Loop through all the players
 	for(int i = 0; i < ingame_players; i++)
 	{
@@ -847,10 +853,12 @@ void ENGINE_UpdatePlayers(void)
 	// Fire Delay
 	if(players[localPlayerGameIndex].fire_delay > 0)
 		players[localPlayerGameIndex].fire_delay--;
+		*/
 }
 
 void ENGINE_Render(void)
 {
+	/*
 	if(engine_inited == 1)
 	{
 		GFX_Begin();
@@ -865,11 +873,13 @@ void ENGINE_Render(void)
 		ENGINE_CheckBulletCollisions();
 		ENGINE_CheckFlagCollisions();
 	}
+	*/
 }
 
 
 void ENGINE_GenerateRandomMap(void)
 {
+	/*
 	// Make all land passable
 	for(int i=0;i<100;i++)
 	{
@@ -884,10 +894,12 @@ void ENGINE_GenerateRandomMap(void)
 	{
 		mapdata[rand()%100][(rand()%80)+10] = 1;
 	}
+	*/
 }
 
 void ENGINE_DrawMap(void)
 {
+	/*
 	 // Work out how many tiles have been scrolled
    	tile_scroll_x = scroll_x/32;
    	tile_scroll_y = scroll_y/32;
@@ -965,10 +977,12 @@ void ENGINE_DrawMap(void)
 		target_rotation += 1;
 	else
 		target_rotation -= target_rotation;
+		*/
 }
 
 void ENGINE_Shutdown(void)
 {
+	/*
 	if(engine_inited)
 	{
 		// Make sure all the keys are up
@@ -983,4 +997,5 @@ void ENGINE_Shutdown(void)
 		GFX_Shutdown();
 		engine_inited = 0;
 	}
+	*/
 }

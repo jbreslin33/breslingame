@@ -1,11 +1,11 @@
 #ifndef CLIENT_H
 #define CLIENT_H
-
+/*
 #include <gl/gl.h>
 #include <gl/glu.h>
 #include <gl/glaux.h>
 #include <2dlib.h>
-
+*/
 #include "network.h"
 
 #define NORTH		0
@@ -112,6 +112,7 @@ private:
 	clientData inputClient;			// Handles all keyboard input
 
 	// Graphic Declarations
+/*
 	GFX_IMAGE2D grass;				// variable to hold 'cdrom' graphic
 	GFX_IMAGE2D redman;				// variable to hold 'cdrom' graphic
 	GFX_IMAGE2D blueman;			// variable to hold 'cdrom' graphic
@@ -121,7 +122,7 @@ private:
 	GFX_IMAGE2D flag;				// variable to hold 'cdrom' graphic
 	GFX_IMAGE2D rednumbers[10];		// variable to hold 'cdrom' graphic
 	GFX_IMAGE2D bluenumbers[10];	// variable to hold 'cdrom' graphic
-
+*/
 	float frametime;
 
 	char gamename[32];

@@ -68,7 +68,7 @@ void CSignin::ReadPackets(void)
 			break;
 
 		case USER_MES_SERVEREXIT:
-			MessageBox(NULL, "Server disconnected", "Info", MB_OK);
+			//MessageBox(NULL, "Server disconnected", "Info", MB_OK);
 			Disconnect();
 			break;
 
@@ -83,13 +83,13 @@ void CSignin::ReadPackets(void)
 
 			if(ret != SIGNIN_RESULT_ACCEPTED)
 			{
-				MessageBox(hWnd_LoginDialog,
-					"Sign in did not succeed. Try again.", "Error", MB_OK);
+			//	MessageBox(hWnd_LoginDialog,
+			//		"Sign in did not succeed. Try again.", "Error", MB_OK);
 			}
 			else
 			{
-				MessageBox(hWnd_LoginDialog,
-					"Sign in successfull. You can now login.", "Info", MB_OK);
+			//	MessageBox(hWnd_LoginDialog,
+			//		"Sign in successfull. You can now login.", "Info", MB_OK);
 			}
 
 			Disconnect();

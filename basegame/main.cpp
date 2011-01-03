@@ -14,7 +14,7 @@ CLobby Lobby;
 CSignin Signin;
 
 char serverIP[32];
-
+/*
 HINSTANCE hInst;
 HWND hWnd_Application;
 HWND hWnd_CreateAccountDialog;
@@ -25,10 +25,10 @@ HWND hWnd_CreateGameDialog;
 HWND hWnd_JoinGameDialog;
 
 HWND hWnd_CreateViewPlayersDialog;
-
+*/
 //-----------------------------------------------------------------------------
 // Name: empty()
-// Desc: 
+// Desc:
 //-----------------------------------------------------------------------------
 float VectorLength(VECTOR2D *vec)
 {
@@ -37,7 +37,7 @@ float VectorLength(VECTOR2D *vec)
 
 //-----------------------------------------------------------------------------
 // Name: empty()
-// Desc: 
+// Desc:
 //-----------------------------------------------------------------------------
 VECTOR2D VectorSubstract(VECTOR2D *vec1, VECTOR2D *vec2)
 {
@@ -51,8 +51,9 @@ VECTOR2D VectorSubstract(VECTOR2D *vec1, VECTOR2D *vec2)
 
 //-----------------------------------------------------------------------------
 // Name: empty()
-// Desc: 
+// Desc:
 //-----------------------------------------------------------------------------
+/*
 LRESULT CALLBACK ApplicationProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
@@ -88,15 +89,16 @@ LRESULT CALLBACK ApplicationProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 			}
 			break;
 	}
-	
+
 	// Pass All Unhandled Messages To DefWindowProc
 	return DefWindowProc(hWnd,uMsg,wParam,lParam);
 }
-
+*/
 //-----------------------------------------------------------------------------
 // Name: empty()
-// Desc: 
+// Desc:
 //-----------------------------------------------------------------------------
+/*
 LRESULT CALLBACK CreateViewPlayersDialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
@@ -126,11 +128,12 @@ LRESULT CALLBACK CreateViewPlayersDialogProc(HWND hWnd, UINT uMsg, WPARAM wParam
 
 	return 0;
 }
-
+*/
 //-----------------------------------------------------------------------------
 // Name: empty()
-// Desc: 
+// Desc:
 //-----------------------------------------------------------------------------
+/*
 LRESULT CALLBACK CreateGameDialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	char gamename[32];
@@ -178,14 +181,15 @@ LRESULT CALLBACK CreateGameDialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARA
 
 		break;
 	}
-	
+
 	return 0;
 }
-
+*/
 //-----------------------------------------------------------------------------
 // Name: empty()
-// Desc: 
+// Desc:
 //-----------------------------------------------------------------------------
+/*
 LRESULT CALLBACK JoinGameDialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	switch (uMsg)
@@ -205,14 +209,15 @@ LRESULT CALLBACK JoinGameDialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
 
 		break;
 	}
-	
+
 	return 0;
 }
-
+*/
 //-----------------------------------------------------------------------------
 // Name: empty()
-// Desc: 
+// Desc:
 //-----------------------------------------------------------------------------
+/*
 LRESULT CALLBACK CreateAccountDialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	char nickname[30];
@@ -251,7 +256,7 @@ LRESULT CALLBACK CreateAccountDialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 					GetDlgItemText(hWnd_CreateAccountDialog, IDC_CREATEACCOUNT_PASSWORD1, password, 50);
 					GetDlgItemText(hWnd_CreateAccountDialog, IDC_CREATEACCOUNT_PASSWORD2, password2, 50);
 					GetDlgItemText(hWnd_CreateAccountDialog, IDC_CREATEACCOUNT_EMAIL, email, 150);
-	
+
 					// -> Check all the fields have been filled in
 					if(!strcmp(nickname,"") || !strcmp(firstname,"") || !strcmp(surname,"") || !strcmp(gender,"") || !strcmp(password,"") || !strcmp(email,"") || age < 1)
 					{
@@ -297,14 +302,15 @@ LRESULT CALLBACK CreateAccountDialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 		case WM_DESTROY:
 			break;
 	}
-	
+
 	return 0;
 }
-
+*/
 //-----------------------------------------------------------------------------
 // Name: empty()
-// Desc: 
+// Desc:
 //-----------------------------------------------------------------------------
+/*
 LRESULT CALLBACK LoginDialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	char nickname[30];
@@ -366,14 +372,15 @@ LRESULT CALLBACK LoginDialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 			break;
 		}
 	}
-	
+
 	return 0;
 }
-
+*/
 //-----------------------------------------------------------------------------
 // Name: empty()
-// Desc: 
+// Desc:
 //-----------------------------------------------------------------------------
+/*
 LRESULT CALLBACK LobbyDialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 	char chatMessage[256];
@@ -404,7 +411,7 @@ LRESULT CALLBACK LobbyDialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 			strcat(chatMessage, temp);
 
 			Lobby.SendChat(chatMessage);
-			
+
 			SetWindowText(GetDlgItem(hWnd_LobbyDialog, IDC_CHATMESSAGE), "");
 			break;
 
@@ -476,14 +483,15 @@ LRESULT CALLBACK LobbyDialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 		PostQuitMessage(0);
 		break;
 	}
-	
+
 	return 0;
 }
-
+*/
 //-----------------------------------------------------------------------------
 // Name: empty()
-// Desc: 
+// Desc:
 //-----------------------------------------------------------------------------
+/*
 int PASCAL WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 				   TCHAR *pCmdLine, int nCmdShow)
 {
@@ -612,3 +620,4 @@ int PASCAL WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	return msg.wParam;
 }
+*/

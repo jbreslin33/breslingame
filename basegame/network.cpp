@@ -120,7 +120,7 @@ void CArmyWar::ReadPackets(void)
 			mes.ReadShort();
 			mes.ReadShort();
 
-			DestroyWindow(hWnd_JoinGameDialog);
+//			DestroyWindow(hWnd_JoinGameDialog);
 
 			InitialiseEngine();
 

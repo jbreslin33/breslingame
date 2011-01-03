@@ -97,6 +97,16 @@ set(HDRS
 	#DreamSock
 	../dreamsock/dreamSock.h
 	../dreamsock/dreamSockLog.h
+	
+	#tutgame
+	./main.h
+	./client.h
+	./common.h
+	./engine.h
+	./lobby.h
+	./network.h
+	./RESOURCE.h
+	./signin.h
 )
  
 set(SRCS
@@ -109,6 +119,14 @@ set(SRCS
 	../dreamsock/dreamSockGlobal.cpp
 	../dreamsock/dreamSockLog.cpp
 	../dreamsock/dreamWinSock.cpp
+	
+	#tutGame
+	./main.cpp
+	./client.cpp
+	./engine.cpp
+	./lobby.cpp
+	./network.cpp
+	./signin.cpp
 )
 
 endif(WIN32)
@@ -126,6 +144,16 @@ set(HDRS
 	#DreamSock
 	../dreamsock/dreamSock.h
 	../dreamsock/dreamSockLog.h
+	
+	#tutgame
+	./main.h
+	./client.h
+	./common.h
+	./engine.h
+	./lobby.h
+	./network.h
+	./RESOURCE.h
+	./signin.h
 )
  
 set(SRCS
@@ -138,6 +166,14 @@ set(SRCS
 	../dreamsock/dreamSockGlobal.cpp
 	../dreamsock/dreamSockLog.cpp
 	../dreamsock/dreamLinuxSock.cpp
+	
+	#tutGame
+	./main.cpp
+	./client.cpp
+	./engine.cpp
+	./lobby.cpp
+	./network.cpp
+	./signin.cpp
 )
 
 endif(UNIX)

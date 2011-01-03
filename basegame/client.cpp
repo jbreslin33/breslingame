@@ -60,6 +60,7 @@ CArmyWar::~CArmyWar()
 void CArmyWar::InitialiseEngine(void)
 {
 	// Init the Graphics Engine
+/*
 	GFX_Init("Army War Engine v2.0", 640, 480, 16, 0, ApplicationProc);
 
 	// Load Required Graphics
@@ -92,7 +93,7 @@ void CArmyWar::InitialiseEngine(void)
 	GFX_LoadBitmap(&bluenumbers[7], "gfx\\blue7.bmp");
 	GFX_LoadBitmap(&bluenumbers[8], "gfx\\blue8.bmp");
 	GFX_LoadBitmap(&bluenumbers[9], "gfx\\blue9.bmp");
-
+*/
 	// Set the scroll positions
 	scrollX = 40*32;
 
@@ -128,33 +129,33 @@ void CArmyWar::DrawMap(void)
    	{
    		for(int j = (tileScrollY)+15; j > (tileScrollY)-2; j--)
    		{
- 			GFX_Blit(&grass, (32*i)-(scrollX),(32*j)-(scrollY), 32, 32, 0);
+ 			//GFX_Blit(&grass, (32*i)-(scrollX),(32*j)-(scrollY), 32, 32, 0);
 
 			// Draw a tree if required
 			if(mapdata[i][j] == true)
 			{
-				GFX_Blit(&tree, (32*i+16)-(scrollX),(32*j+16)-(scrollY), 32, 32, 0);
+			//	GFX_Blit(&tree, (32*i+16)-(scrollX),(32*j+16)-(scrollY), 32, 32, 0);
 			}
 			
 			// Draw the static targets
 			if(i==49 && j==3)
 			{
 				// draw the blue target
-				GFX_Blit(&bluetarget, (32*i)-(scrollX),(32*j)-(scrollY),
-					32, 32, targetRotation);
+			//	GFX_Blit(&bluetarget, (32*i)-(scrollX),(32*j)-(scrollY),
+			//		32, 32, targetRotation);
 			}
 
 			if(i==49 && j==97)
 			{
 				// draw the blue target
-				GFX_Blit(&redtarget, (32*i)-(scrollX),(32*j)-(scrollY),
-					32, 32, targetRotation);
+			//	GFX_Blit(&redtarget, (32*i)-(scrollX),(32*j)-(scrollY),
+			//		32, 32, targetRotation);
 			}
 		}
 	}
 
 	// Render the flag
-	GFX_Blit(&flag, ((int) flagX)-(scrollX), ((int) flagY)-(scrollY), 32, 32, 0);
+	//GFX_Blit(&flag, ((int) flagX)-(scrollX), ((int) flagY)-(scrollY), 32, 32, 0);
 
 	// Render players
 	clientData *list = clientList;
@@ -163,16 +164,16 @@ void CArmyWar::DrawMap(void)
 	{
 		if(list->team == RED_TEAM)
 		{
-			GFX_Blit(&redman, ((int) list->command.origin.x)-(scrollX),
-				((int) list->command.origin.y)-(scrollY),
-				32, 32, (float) list->command.heading);
+	//		GFX_Blit(&redman, ((int) list->command.origin.x)-(scrollX),
+	//			((int) list->command.origin.y)-(scrollY),
+	//			32, 32, (float) list->command.heading);
 		}
 
 		if(list->team == BLUE_TEAM)
 		{
-			GFX_Blit(&blueman, ((int) list->command.origin.x)-(scrollX),
-				((int) list->command.origin.y)-(scrollY),
-				32, 32, (float) list->command.heading);
+	//		GFX_Blit(&blueman, ((int) list->command.origin.x)-(scrollX),
+	//			((int) list->command.origin.y)-(scrollY),
+	//			32, 32, (float) list->command.heading);
 		}
 
 		// Render bullets
@@ -180,25 +181,25 @@ void CArmyWar::DrawMap(void)
 		{
 			if(list->team == RED_TEAM)
 			{
-				GFX_RectFill(((int) list->command.bullet.origin.x-2)-(scrollX),
-					((int) list->command.bullet.origin.y-2)-(scrollY),
-					((int) list->command.bullet.origin.x+2)-(scrollX),
-					((int) list->command.bullet.origin.y+2)-(scrollY), 200, 0, 0);
+	//			GFX_RectFill(((int) list->command.bullet.origin.x-2)-(scrollX),
+	//				((int) list->command.bullet.origin.y-2)-(scrollY),
+	//				((int) list->command.bullet.origin.x+2)-(scrollX),
+	//				((int) list->command.bullet.origin.y+2)-(scrollY), 200, 0, 0);
 			}
 
 			if(list->team == BLUE_TEAM)
 			{
-				GFX_RectFill(((int) list->command.bullet.origin.x-2)-(scrollX),
-					((int) list->command.bullet.origin.y-2)-(scrollY),
-					((int) list->command.bullet.origin.x+2)-(scrollX),
-					((int) list->command.bullet.origin.y+2)-(scrollY), 0, 0, 200);
+	//			GFX_RectFill(((int) list->command.bullet.origin.x-2)-(scrollX),
+	//				((int) list->command.bullet.origin.y-2)-(scrollY),
+	//				((int) list->command.bullet.origin.x+2)-(scrollX),
+	//				((int) list->command.bullet.origin.y+2)-(scrollY), 0, 0, 200);
 			}
 		}
 	}
 
 	// Finally, Render the Team Scores
-	GFX_Blit(&rednumbers[redScore], 5, 410, 64, 64, 0);
-	GFX_Blit(&bluenumbers[blueScore], 570, 410, 64, 64, 0);
+	//GFX_Blit(&rednumbers[redScore], 5, 410, 64, 64, 0);
+	//GFX_Blit(&bluenumbers[blueScore], 570, 410, 64, 64, 0);
 }
 
 //-----------------------------------------------------------------------------
@@ -249,11 +250,13 @@ void CArmyWar::Frame(void)
 		targetRotation -= targetRotation;
 
 	// Draw map
+	/*
 	GFX_Begin();
 	{
 		DrawMap();
 	}
 	GFX_End();
+	*/
 }
 
 //-----------------------------------------------------------------------------
@@ -263,10 +266,11 @@ void CArmyWar::Frame(void)
 void CArmyWar::Shutdown(void)
 {
 	Disconnect();
-
+/*
 	GFX_Begin();
 	GFX_Shutdown();
 	GFX_End();
+*/
 }
 
 //-----------------------------------------------------------------------------
@@ -283,11 +287,11 @@ void CArmyWar::CheckVictory(void)
 	{
 		if(localClient->team == RED_TEAM)
 		{
-			MessageBox(NULL, "Your team (RED) won!", "Victory", MB_OK);
+			//MessageBox(NULL, "Your team (RED) won!", "Victory", MB_OK);
 		}
 		else
 		{
-			MessageBox(NULL, "The other team (RED) won", "Failure", MB_OK);
+			//MessageBox(NULL, "The other team (RED) won", "Failure", MB_OK);
 		}
 
 		Shutdown();
@@ -296,11 +300,11 @@ void CArmyWar::CheckVictory(void)
 	{
 		if(localClient->team == BLUE_TEAM)
 		{
-			MessageBox(NULL, "Your team (BLUE) won!", "Victory", MB_OK);
+			//MessageBox(NULL, "Your team (BLUE) won!", "Victory", MB_OK);
 		}
 		else
 		{
-			MessageBox(NULL, "The other team (BLUE) won", "Failure", MB_OK);
+			//MessageBox(NULL, "The other team (BLUE) won", "Failure", MB_OK);
 		}
 
 		Shutdown();
@@ -346,7 +350,7 @@ clientData *CArmyWar::GetClientPointer(int index)
 void CArmyWar::CheckKeys(void)
 {
 	inputClient.command.key = 0;
-
+/*
 	if(keys[VK_ESCAPE])
 	{
 		Shutdown();
@@ -378,7 +382,7 @@ void CArmyWar::CheckKeys(void)
 	{
 		inputClient.command.key |= KEY_WEAPON;
 	}
-
+*/
 	inputClient.command.msec = (int) (frametime * 1000);
 }
 
