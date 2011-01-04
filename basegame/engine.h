@@ -22,28 +22,6 @@ extern int scroll_x, scroll_y;
 
 extern int final_winning_team;
 
-// Player Data
-struct player_t
-{
-	int playerIndex;
-	int x,y;
-	int dx,dy;
-	int start_x,start_y; // for re-spawning
-	int dir;
-	int team;
-	int fire_delay;
-};
-
-// Bullet Data
-struct bullet_t
-{
-	int x,y;
-	int dir;
-	int life_remaining;
-	int team;
-};
-#define MAX_BULLETS 500
-
 extern struct player_t players[16];	// limit of 16 players
 
 void ENGINE_Init(void);

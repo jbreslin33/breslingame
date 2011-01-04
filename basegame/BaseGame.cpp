@@ -48,6 +48,13 @@ extern "C" {
     int main(int argc, char *argv[])
 #endif
     {
+
+		int time, oldTime, newTime;
+	MSG msg;
+	BOOL bMsg = FALSE;
+	PeekMessage(&msg, NULL, 0, 0, PM_NOREMOVE);
+
+//	oldTime = dreamSock_GetCurrentSystemTime();
         // Create application object
         BaseGame app;
 

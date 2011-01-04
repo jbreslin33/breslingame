@@ -95,18 +95,25 @@ set(HDRS
 	./BaseGame.h
 	
 	#DreamSock
+	../dreamsock/dreamClient.h
+	../dreamsock/dreamConsole.h
+	../dreamsock/dreamMessage.h
+	../dreamsock/dreamServer.h
 	../dreamsock/dreamSock.h
-	../dreamsock/dreamSockLog.h
+	
+	../dreamsock/dreamWinSock.h
+	
 	
 	#tutgame
-	./main.h
-	./client.h
-	./common.h
+	./bullet_t.h
+	./CArmyWar.h
+	./CLobby.h
+	./CSignin.h
 	./engine.h
-	./lobby.h
-	./network.h
-	./RESOURCE.h
-	./signin.h
+	./main.h
+	./clientLoginData.h
+	./player_t.h
+	./RESOURCE.H
 )
  
 set(SRCS
@@ -115,18 +122,24 @@ set(SRCS
 	./BaseGame.cpp
 	
 	#DreamSock
+	../dreamsock/dreamClient.cpp
+	../dreamsock/dreamConsole.cpp
+	../dreamsock/dreamMessage.cpp
+	../dreamsock/dreamServer.cpp
 	../dreamsock/dreamSock.cpp
-	../dreamsock/dreamSockGlobal.cpp
-	../dreamsock/dreamSockLog.cpp
+	
 	../dreamsock/dreamWinSock.cpp
 	
-	#tutGame
-	./main.cpp
-	./client.cpp
+	#tutgame
+	./bullet_t.cpp
+	./CArmyWar.cpp
+	./CLobby.cpp
+	./CSignin.cpp
 	./engine.cpp
-	./lobby.cpp
-	./network.cpp
-	./signin.cpp
+	./main.cpp
+	./clientLoginData.cpp
+	./player_t.cpp
+	
 )
 
 endif(WIN32)
@@ -142,18 +155,25 @@ set(HDRS
 	./BaseGame.h
 	
 	#DreamSock
+	../dreamsock/dreamClient.h
+	../dreamsock/dreamConsole.h
+	../dreamsock/dreamMessage.h
+	../dreamsock/dreamServer.h
 	../dreamsock/dreamSock.h
-	../dreamsock/dreamSockLog.h
+	
+	../dreamsock/dreamLinuxSock.h
+	
 	
 	#tutgame
-	./main.h
-	./client.h
-	./common.h
+	./bullet_t.h
+	./CArmyWar.h
+	./CLobby.h
+	./CSignin.h
 	./engine.h
-	./lobby.h
-	./network.h
-	./RESOURCE.h
-	./signin.h
+	./main.h
+	./clientLoginData.h
+	./player_t.h
+	./RESOURCE.H
 )
  
 set(SRCS
@@ -162,18 +182,24 @@ set(SRCS
 	./BaseGame.cpp
 	
 	#DreamSock
+	../dreamsock/dreamClient.cpp
+	../dreamsock/dreamConsole.cpp
+	../dreamsock/dreamMessage.cpp
+	../dreamsock/dreamServer.cpp
 	../dreamsock/dreamSock.cpp
-	../dreamsock/dreamSockGlobal.cpp
-	../dreamsock/dreamSockLog.cpp
+	
 	../dreamsock/dreamLinuxSock.cpp
 	
-	#tutGame
-	./main.cpp
-	./client.cpp
+	#tutgame
+	./bullet_t.cpp
+	./CArmyWar.cpp
+	./CLobby.cpp
+	./CSignin.cpp
 	./engine.cpp
-	./lobby.cpp
-	./network.cpp
-	./signin.cpp
+	./main.cpp
+	./clientLoginData.cpp
+	./player_t.cpp
+	
 )
 
 endif(UNIX)
