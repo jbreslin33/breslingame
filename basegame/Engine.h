@@ -27,6 +27,72 @@ extern int final_winning_team;
 
 extern struct Player_t players[16];	// limit of 16 players
 
+//#include "main.h"
+//#include "network.h"
+//#include "lobby.h"
+
+//#include "..\tutGameServer\netcommon.h"
+
+// Graphic Declarations
+/*
+GFX_IMAGE2D grass;				// variable to hold 'cdrom' graphic
+GFX_IMAGE2D redman;				// variable to hold 'cdrom' graphic
+GFX_IMAGE2D blueman;			// variable to hold 'cdrom' graphic
+GFX_IMAGE2D tree;				// variable to hold 'cdrom' graphic
+GFX_IMAGE2D redtarget;			// variable to hold 'cdrom' graphic
+GFX_IMAGE2D bluetarget;			// variable to hold 'cdrom' graphic
+GFX_IMAGE2D flag;				// variable to hold 'cdrom' graphic
+GFX_IMAGE2D rednumbers[10];		// variable to hold 'cdrom' graphic
+GFX_IMAGE2D bluenumbers[10];	// variable to hold 'cdrom' graphic
+*/
+float target_rotation = 0.0;	// variable to rotate the target images
+
+// Define the map
+bool mapdata[100][100];
+
+// Tile scroll positions
+int scroll_x, scroll_y;
+int tile_scroll_x = 0;
+int tile_scroll_y = 0;
+
+// Flag Data
+int flag_x;
+int flag_y;
+
+int local_x;		// Reference coordinate
+int local_y;		// Reference coordinate
+bool southeast;		// Direction flag
+bool southwest;		// Direction flag
+bool northeast;		// Direction flag
+bool northwest;		// Direction flag
+bool south;			// Direction flag
+bool north;			// Direction flag
+bool east;			// Direction flag
+bool west;			// Direction flag
+bool stopped;		// Direction flag
+
+struct Player_t players[16];	// limit of 16 players
+int ingame_players;				// the number of players in the game
+int half_players;				// half the amount of players in the game
+int place_pos_x;
+int player_with_flag_id;
+
+struct Bullet_t bullets[MAX_BULLETS]; // limit of 500 bullets (at once)
+
+int red_score;
+int blue_score;
+
+int final_winning_team;
+
+int engine_inited;
+
+
+class Engine
+{
+
+Engine();
+~Engine();
+
 void ENGINE_Init(void);
 void ENGINE_Render(void);
 void ENGINE_ProcessInput(void);
@@ -36,5 +102,6 @@ void ENGINE_Shutdown(void);
 void ENGINE_AddPlayer(int team);
 void ENGINE_AddBullet(int x,int y,int dir,int team);
 void ENGINE_UpdateBullets(void);
+};
 
 #endif
