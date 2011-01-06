@@ -61,6 +61,6 @@ public:
 	CArmyWar	*GetLocalGame(void)				{ return localGame; }
 };
 
-extern CLobby Lobby;
+//extern CLobby Lobby;
 
 #endif

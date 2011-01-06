@@ -49,6 +49,8 @@ private:
 	int				CheckForTimeout(char *data, struct sockaddr *from);
 
 	DreamClient		*clientList;
+	
+
 
 	int				port;					// Port
 	SOCKET			socket;					// Socket
@@ -56,9 +58,13 @@ private:
 
 	bool			init;
 
+	
+
 public:
 					DreamServer();
 					~DreamServer();
+
+
 
 	int				Initialise(char *localIP, int serverPort);
 	void			Uninitialise(void);
@@ -70,6 +76,9 @@ public:
 	DreamClient		*GetClientList(void)	{ return clientList; }
 
 	int				GetPort(void)			{ return port; }
+
+	DreamSock*      dreamSock;
+
 };
 
 #endif

@@ -67,11 +67,13 @@
 
 
 
-//class DreamSock
-//{
+class DreamSock
+{
+public:
+
 // Function prototypes
-int	DreamSock_Initialize(void);
-int	DreamSock_InitializeWinSock(void);
+//int	DreamSock_Initialize(void);
+//int	DreamSock_InitializeWinSock(void);
 void DreamSock_Shutdown(void);
 
 SOCKET DreamSock_Socket(int protocol);
@@ -88,10 +90,10 @@ void DreamSock_Broadcast(SOCKET sock, int length, char *data, int port);
 #ifndef WIN32
 int DreamSock_Linux_GetCurrentSystemTime(void);
 #else
-int DreamSock_Win_GetCurrentSystemTime(void);
+//int DreamSock_Win_GetCurrentSystemTime(void);
 #endif
 
 int DreamSock_GetCurrentSystemTime(void);
 
-//};
+};
 #endif

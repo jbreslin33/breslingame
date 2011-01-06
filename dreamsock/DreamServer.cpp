@@ -37,6 +37,8 @@
 //-----------------------------------------------------------------------------
 DreamServer::DreamServer()
 {
+
+	dreamSock = new DreamSock();
 	init			= false;
 
 	port			= 0;
@@ -68,7 +70,7 @@ DreamServer::~DreamServer()
 
 	clientList = NULL;
 
-	DreamSock_CloseSocket(socket);
+	dreamSock->DreamSock_CloseSocket(socket);
 }
 
 //-----------------------------------------------------------------------------
@@ -78,13 +80,13 @@ DreamServer::~DreamServer()
 int DreamServer::Initialise(char *localIP, int serverPort)
 {
 	// Initialise DreamSock if it is not already initialised
-	DreamSock_Initialize();
+	//dreamSock->DreamSock_Initialize();
 
 	// Store the server IP and port for later use
 	port = serverPort;
 
 	// Create server socket
-	socket = DreamSock_OpenUDPSocket(localIP, port);
+	socket = dreamSock->DreamSock_OpenUDPSocket(localIP, port);
 
 	if(socket == DreamSock_INVALID_SOCKET)
 	{
@@ -102,7 +104,7 @@ int DreamServer::Initialise(char *localIP, int serverPort)
 //-----------------------------------------------------------------------------
 void DreamServer::Uninitialise(void)
 {
-	DreamSock_CloseSocket(socket);
+	dreamSock->DreamSock_CloseSocket(socket);
 
 	init = false;
 }
@@ -357,7 +359,7 @@ void DreamServer::ParsePacket(DreamMessage *mes, struct sockaddr *address)
 
 		if(clList != NULL)
 		{
-			clList->SetLastMessageTime(DreamSock_GetCurrentSystemTime());
+			clList->SetLastMessageTime(dreamSock->DreamSock_GetCurrentSystemTime());
 
 			// Check if the type is a positive number
 			// -> is the packet sequenced
@@ -403,7 +405,7 @@ void DreamServer::ParsePacket(DreamMessage *mes, struct sockaddr *address)
 		break;
 
 	case DreamSock_MES_PING:
-		clList->SetPing(DreamSock_GetCurrentSystemTime() - clList->GetPingSent());
+		clList->SetPing(dreamSock->DreamSock_GetCurrentSystemTime() - clList->GetPingSent());
 		break;
 	}
 }
@@ -414,7 +416,7 @@ void DreamServer::ParsePacket(DreamMessage *mes, struct sockaddr *address)
 //-----------------------------------------------------------------------------
 int DreamServer::CheckForTimeout(char *data, struct sockaddr *from)
 {
-	int currentTime = DreamSock_GetCurrentSystemTime();
+	int currentTime = dreamSock->DreamSock_GetCurrentSystemTime();
 
 	DreamClient *clList = clientList;
 	DreamClient *next;
@@ -496,7 +498,7 @@ int DreamServer::GetPacket(char *data, struct sockaddr *from)
 	DreamMessage mes;
 	mes.Init(data, sizeof(data));
 
-	ret = DreamSock_GetPacket(socket, mes.data, from);
+	ret = dreamSock->DreamSock_GetPacket(socket, mes.data, from);
 
 	if(ret <= 0)
 		return 0;

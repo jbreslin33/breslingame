@@ -236,7 +236,7 @@ void CArmyWar::Frame(void)
 
 void CArmyWar::Shutdown(void)
 {
-	Disconnect();
+	//Disconnect();
 /*
 	GFX_Begin();
 	GFX_Shutdown();

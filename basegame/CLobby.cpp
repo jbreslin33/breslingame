@@ -353,7 +353,7 @@ void CLobby::AddGame(char *name, int ind, bool inProgress)
 		{
 			LogString("Joining game %d (we are host)", gameAmount);
 
-			gameList->StartConnection(gameAmount);
+			//gameList->StartConnection(gameAmount);
 			localGame = gameList;
 		}
 	}
@@ -380,7 +380,7 @@ void CLobby::AddGame(char *name, int ind, bool inProgress)
 		{
 			LogString("Joining game %d (we are host)", gameAmount);
 
-			list->StartConnection(gameAmount);
+			//list->StartConnection(gameAmount);
 			localGame = list;
 		}
 
@@ -394,6 +394,7 @@ void CLobby::AddGame(char *name, int ind, bool inProgress)
 
 void CLobby::RemoveGame(char *name)
 {
+	/*
 	CArmyWar *list = gameList;
 	CArmyWar *prev = NULL;
 	CArmyWar *next = NULL;
@@ -446,6 +447,7 @@ void CLobby::RemoveGame(char *name)
 	gameAmount--;
 
 	RefreshGameList();
+	*/
 }
 
 void CLobby::RemoveGames(void)

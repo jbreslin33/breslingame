@@ -41,7 +41,7 @@
 #endif
 
 // Introduce classes
-
+class DreamSock;
 
 class DreamClient
 {
@@ -121,6 +121,7 @@ public:
 
 	DreamMessage	message;
 	DreamClient		*next;
+	DreamSock*      dreamSock;
 };
 
 #endif
