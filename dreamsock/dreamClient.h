@@ -2,6 +2,8 @@
 #define __DREAMCLIENT_H
 
 #include "dreamConsole.h"
+#include "dreamMessage.h"
+
 
 #ifdef WIN32
 	#pragma comment (lib,"ws2_32.lib")
@@ -39,7 +41,7 @@
 #endif
 
 // Introduce classes
-class dreamMessage;
+
 
 class dreamClient
 {

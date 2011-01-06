@@ -1,7 +1,6 @@
 #ifndef __CLOBBY_H__
 #define __CLOBBY_H__
 
-#include "network.h"
 #include "main.h"
 
 #define LOBBYLOGIN_RESULT_ACCEPTED			200

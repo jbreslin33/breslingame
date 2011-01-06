@@ -1,4 +1,6 @@
 #include "../dreamsock/dreamSock.h"
+#include "player_t.h"
+#include "bullet_t.h"
 /*
 #include <windows.h>
 #include <gl/gl.h>

@@ -1,7 +1,6 @@
 #ifndef __CSIGNIN_H__
 #define __CSIGNIN_H__
 
-#include "network.h"
 #include "main.h"
 
 #define SIGNIN_RESULT_ACCEPTED			200

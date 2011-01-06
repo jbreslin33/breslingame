@@ -1,3 +1,6 @@
+#ifndef ENGINE_H
+#define ENGINE_H
+
 // Define the map
 extern bool mapdata[100][100];
 
@@ -33,3 +36,5 @@ void ENGINE_Shutdown(void);
 void ENGINE_AddPlayer(int team);
 void ENGINE_AddBullet(int x,int y,int dir,int team);
 void ENGINE_UpdateBullets(void);
+
+#endif

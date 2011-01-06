@@ -1,17 +1,8 @@
-/******************************************/
-/* MMOG programmer's guide                */
-/* Tutorial game client                   */
-/* Programming:						      */
-/* Teijo Hakala						      */
-/******************************************/
-
-#include "common.h"
+#include "CLobby.h"
+#include "../dreamsock/dreamClient.h"
+#include "../dreamsock/dreamSock.h"
 #include "resource.h"
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 CLobby::CLobby()
 {
 	networkClient	= new dreamClient;
@@ -22,19 +13,11 @@ CLobby::CLobby()
 	timeConnecting	= 0;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 CLobby::~CLobby()
 {
 	delete networkClient;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CLobby::RefreshPlayerList(void)
 {
 	//SendMessage(GetDlgItem(hWnd_LobbyDialog, IDC_PLAYERLIST), LB_RESETCONTENT, 0, 0);
@@ -48,10 +31,6 @@ void CLobby::RefreshPlayerList(void)
 	}
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CLobby::RefreshGameList(void)
 {
 	char temp[128];
@@ -74,10 +53,6 @@ void CLobby::RefreshGameList(void)
 	}
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CLobby::RefreshJoinedPlayersList(void)
 {
 	if(localGame == NULL)
@@ -103,10 +78,6 @@ void CLobby::RefreshJoinedPlayersList(void)
 	}
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CLobby::ReadPackets(void)
 {
 	char data[1400];
@@ -233,10 +204,6 @@ void CLobby::ReadPackets(void)
 	}
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CLobby::AddClient(int local, int ind, char *name)
 {
 	// First get a pointer to the beginning of client list
@@ -300,10 +267,6 @@ void CLobby::AddClient(int local, int ind, char *name)
 		RequestGameData();
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CLobby::RemoveClient(int ind)
 {
 	clientLoginData *list = clientList;
@@ -350,10 +313,6 @@ void CLobby::RemoveClient(int ind)
 	RefreshPlayerList();
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CLobby::RemoveClients(void)
 {
 	clientLoginData *list = clientList;
@@ -373,10 +332,6 @@ void CLobby::RemoveClients(void)
 	clientList = NULL;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CLobby::AddGame(char *name, int ind, bool inProgress)
 {
 	// First get a pointer to the beginning of client list
@@ -437,10 +392,6 @@ void CLobby::AddGame(char *name, int ind, bool inProgress)
 	RefreshGameList();
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CLobby::RemoveGame(char *name)
 {
 	CArmyWar *list = gameList;
@@ -497,10 +448,6 @@ void CLobby::RemoveGame(char *name)
 	RefreshGameList();
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CLobby::RemoveGames(void)
 {
 	CArmyWar *list = gameList;
@@ -520,10 +467,6 @@ void CLobby::RemoveGames(void)
 	gameList = NULL;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 CArmyWar *CLobby::GetGamePointer(int ind)
 {
 	for(CArmyWar *gList = gameList; gList != NULL; gList = gList->next)
@@ -535,10 +478,6 @@ CArmyWar *CLobby::GetGamePointer(int ind)
 	return NULL;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CLobby::RequestGameData(void)
 {
 	char data[1400];
@@ -551,10 +490,6 @@ void CLobby::RequestGameData(void)
 	networkClient->SendPacket(&message);
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CLobby::SendChat(char *text)
 {
 	char data[1400];
@@ -568,10 +503,6 @@ void CLobby::SendChat(char *text)
 	networkClient->SendPacket(&message);
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CLobby::SendCreateGame(char *gamename)
 {
 	char data[1400];
@@ -585,10 +516,6 @@ void CLobby::SendCreateGame(char *gamename)
 	networkClient->SendPacket(&message);
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CLobby::SendRemoveGame(char *gamename)
 {
 	char data[1400];
@@ -602,10 +529,6 @@ void CLobby::SendRemoveGame(char *gamename)
 	networkClient->SendPacket(&message);
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CLobby::SendStartGame(int ind)
 {
 	char data[1400];
@@ -619,10 +542,6 @@ void CLobby::SendStartGame(int ind)
 	networkClient->SendPacket(&message);
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CLobby::SendKeepAlive(void)
 {
 	char data[1400];
@@ -635,10 +554,6 @@ void CLobby::SendKeepAlive(void)
 	networkClient->SendPacket(&message);
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CLobby::Connect(char *name, char *password)
 {
 	LogString("CLobby::Connect");
@@ -660,10 +575,6 @@ void CLobby::Connect(char *name, char *password)
 	networkClient->SendPacket(&message);
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CLobby::Disconnect(void)
 {
 	LogString("CLobby::Disconnect");
@@ -679,10 +590,6 @@ void CLobby::Disconnect(void)
 	networkClient->SendDisconnect();
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CLobby::RunNetwork(int msec)
 {
 	if(networkClient->GetConnectionState() == DREAMSOCK_DISCONNECTED)

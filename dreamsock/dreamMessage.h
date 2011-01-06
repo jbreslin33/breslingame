@@ -1,7 +1,7 @@
-#ifndef __DREAMSOCK_H
-#define __DREAMSOCK_H
+#ifndef __DREAMMESSAGE_H
+#define __DREAMMESSAGE_H
 
-#include "dreamSockLog.h"
+#include "../dreamsock/dreamConsole.h"
 
 #ifdef WIN32
 	#pragma comment (lib,"ws2_32.lib")

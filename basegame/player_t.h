@@ -1,3 +1,6 @@
+#ifndef PLAYER_T_H
+#define PLAYER_T_H
+
 // Player Data
 struct player_t
 {
@@ -10,5 +13,4 @@ struct player_t
 	int fire_delay;
 };
 
-
-
+#endif

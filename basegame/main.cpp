@@ -5,13 +5,13 @@
 /* Teijo Hakala						      */
 /******************************************/
 
-#include "common.h"
 #include "resource.h"
 #include <math.h>
+#include "CArmyWar.h"
 
 // Some global stuff
-CLobby Lobby;
-CSignin Signin;
+//CLobby Lobby;
+//CSignin Signin;
 
 char serverIP[32];
 /*

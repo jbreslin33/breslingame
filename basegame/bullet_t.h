@@ -1,3 +1,6 @@
+#ifndef BULLET_T_H
+#define BULLET_T_H
+
 #define MAX_BULLETS 500
 
 // Bullet Data
@@ -9,4 +12,5 @@ struct bullet_t
 	int team;
 };
 
+#endif
 

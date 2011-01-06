@@ -1,16 +1,6 @@
-/******************************************/
-/* MMOG programmer's guide                */
-/* Tutorial game client                   */
-/* Programming:						      */
-/* Teijo Hakala						      */
-/******************************************/
+#include "CArmyWar.h"
+#include "../dreamsock/dreamClient.h"
 
-#include "common.h"
-
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 CArmyWar::CArmyWar()
 {
 	networkClient	= new dreamClient;
@@ -44,19 +34,12 @@ CArmyWar::CArmyWar()
 	next			= NULL;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
+
 CArmyWar::~CArmyWar()
 {
 	delete networkClient;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CArmyWar::InitialiseEngine(void)
 {
 	// Init the Graphics Engine
@@ -113,10 +96,6 @@ void CArmyWar::InitialiseEngine(void)
 	blueScore	= 0;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CArmyWar::DrawMap(void)
 {
 	int heading = 0;
@@ -202,10 +181,6 @@ void CArmyWar::DrawMap(void)
 	//GFX_Blit(&bluenumbers[blueScore], 570, 410, 64, 64, 0);
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CArmyWar::Frame(void)
 {
 	if(!localClient)
@@ -259,10 +234,6 @@ void CArmyWar::Frame(void)
 	*/
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CArmyWar::Shutdown(void)
 {
 	Disconnect();
@@ -273,10 +244,6 @@ void CArmyWar::Shutdown(void)
 */
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CArmyWar::CheckVictory(void)
 {
 	if(localClient == NULL)
@@ -311,10 +278,6 @@ void CArmyWar::CheckVictory(void)
 	}
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CArmyWar::KillPlayer(int index)
 {
 	LogString("Player %d died", index);
@@ -328,10 +291,6 @@ void CArmyWar::KillPlayer(int index)
 	client->command.origin.y = client->startPos.y;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 clientData *CArmyWar::GetClientPointer(int index)
 {
 	for(clientData *clList = clientList; clList != NULL; clList = clList->next)
@@ -343,10 +302,6 @@ clientData *CArmyWar::GetClientPointer(int index)
 	return NULL;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CArmyWar::CheckKeys(void)
 {
 	inputClient.command.key = 0;
@@ -386,10 +341,6 @@ void CArmyWar::CheckKeys(void)
 	inputClient.command.msec = (int) (frametime * 1000);
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CArmyWar::CheckPredictionError(int a)
 {
 	if(a < 0 && a > COMMAND_HISTORY_SIZE)
@@ -415,10 +366,6 @@ void CArmyWar::CheckPredictionError(int a)
 	}
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CArmyWar::CheckBulletPredictionError(int a)
 {
 	if(a < 0 && a > COMMAND_HISTORY_SIZE)
@@ -441,10 +388,6 @@ void CArmyWar::CheckBulletPredictionError(int a)
 	}
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CArmyWar::CalculateVelocity(command_t *command, float frametime)
 {
 	int checkX;
@@ -492,10 +435,6 @@ void CArmyWar::CalculateVelocity(command_t *command, float frametime)
 	}
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CArmyWar::CalculateHeading(command_t *command)
 {
 	// Left
@@ -555,10 +494,6 @@ void CArmyWar::CalculateHeading(command_t *command)
 	}
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CArmyWar::CalculateBulletVelocity(command_t *command)
 {
 	command->bullet.shot = true;
@@ -606,10 +541,6 @@ void CArmyWar::CalculateBulletVelocity(command_t *command)
 	}
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CArmyWar::PredictMovement(int prevFrame, int curFrame)
 {
 	if(!localClient)
@@ -697,10 +628,6 @@ void CArmyWar::PredictMovement(int prevFrame, int curFrame)
 	localClient->command.bullet.vel.y				= localClient->frame[curFrame].bullet.vel.y;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CArmyWar::MoveObjects(void)
 {
 	if(!localClient)

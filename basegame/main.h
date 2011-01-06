@@ -1,5 +1,7 @@
 #ifndef __TUTMAIN_H__
 #define __TUTMAIN_H__
+
+#include "CArmyWar.h"
 /*
 LRESULT CALLBACK ApplicationProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 */

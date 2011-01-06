@@ -1,35 +1,19 @@
-/******************************************/
-/* MMOG programmer's guide                */
-/* Tutorial game client                   */
-/* Programming:						      */
-/* Teijo Hakala						      */
-/******************************************/
+#include "CSignin.h"
+#include "../dreamsock/dreamClient.h"
+#include "../dreamsock/dreamServer.h"
+#include "../dreamsock/dreamSock.h"
 
-#include "common.h"
-
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 CSignin::CSignin()
 {
-	networkClient = new dreamClient;
+	networkClient = new dreamClient();
 	clientList	= NULL;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 CSignin::~CSignin()
 {
 	delete networkClient;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
 void CSignin::ReadPackets(void)
 {
 	char data[1400];

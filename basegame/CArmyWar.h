@@ -7,6 +7,7 @@
 #include <2dlib.h>
 */
 #include "clientLoginData.h"
+#include <string.h>
 
 #define NORTH		0
 #define NORTHEAST	45
@@ -19,6 +20,9 @@
 
 #define BLUE_TEAM	0
 #define RED_TEAM	1
+
+class dreamMessage;
+class dreamClient;
 
 typedef struct
 {

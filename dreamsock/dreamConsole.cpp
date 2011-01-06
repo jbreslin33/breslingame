@@ -8,7 +8,7 @@
 #include <stdarg.h>
 #include <time.h>
 
-#include "dreamSockLog.h"
+#include "dreamConsole.h"
 
 FILE *LogFile;
 
