@@ -8,12 +8,12 @@
 #include <stdarg.h>
 #include <time.h>
 
-#include "dreamConsole.h"
+#include "DreamConsole.h"
 
 FILE *LogFile;
 
 #ifdef WIN32
-dreamConsole *console = NULL;
+DreamConsole *console = NULL;
 #endif
 
 //-----------------------------------------------------------------------------
@@ -24,14 +24,14 @@ void StartLog(void)
 {
 	time_t current = time(NULL);
 
-	if((LogFile = fopen("dreamSock.log", "w")) != NULL)
+	if((LogFile = fopen("DreamSock.log", "w")) != NULL)
 	{
 		fprintf(LogFile, "Log file started %s", ctime(&current));
 		
 		fclose(LogFile);
 	}
 
-	if((LogFile = fopen("dreamSock.log", "a")) != NULL)
+	if((LogFile = fopen("DreamSock.log", "a")) != NULL)
 	{
 	}
 }
@@ -39,7 +39,7 @@ void StartLog(void)
 #ifdef WIN32
 void StartLogConsole(void)
 {
-	console = new dreamConsole("dreamSock application");
+	console = new DreamConsole("DreamSock application");
 }
 #endif
 
@@ -101,18 +101,18 @@ void LogString(char *string, ...)
 
 #ifdef WIN32
 
-dreamConsole::dreamConsole(char *title)
+DreamConsole::DreamConsole(char *title)
 {
 	AllocConsole();
 	SetConsoleTitle(title);
 }
 
-dreamConsole::~dreamConsole()
+DreamConsole::~DreamConsole()
 {
 	FreeConsole();
 }
 
-void dreamConsole::println(char *string, int type, ...)
+void DreamConsole::println(char *string, int type, ...)
 {
 	char buf[1024];
 	char buf2[1024];

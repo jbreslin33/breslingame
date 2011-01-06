@@ -1,4 +1,4 @@
-#include "dreamSock.h"
+#include "DreamSock.h"
 
 #ifdef WIN32
 // Windows specific headers
@@ -27,14 +27,14 @@
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-SOCKET dreamSock_Socket(int protocol)
+SOCKET DreamSock_Socket(int protocol)
 {
 	int type;
 	int proto;
 	SOCKET sock;
 
 	// Check which protocol to use
-	if(protocol == DREAMSOCK_TCP)
+	if(protocol == DreamSock_TCP)
 	{
 		type = SOCK_STREAM;
 		proto = IPPROTO_TCP;
@@ -48,7 +48,7 @@ SOCKET dreamSock_Socket(int protocol)
 	// Create the socket
 	if((sock = socket(AF_INET, type, proto)) == -1)
 	{
-		LogString("dreamSock_Socket - socket() failed");
+		LogString("DreamSock_Socket - socket() failed");
 
 #ifdef WIN32
 		errno = WSAGetLastError();
@@ -57,7 +57,7 @@ SOCKET dreamSock_Socket(int protocol)
 		LogString("Error: socket() : %s", strerror(errno));
 #endif
 
-		return DREAMSOCK_INVALID_SOCKET;
+		return DreamSock_INVALID_SOCKET;
 	}
 
 	return sock;
@@ -67,7 +67,7 @@ SOCKET dreamSock_Socket(int protocol)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-int dreamSock_SetNonBlocking(SOCKET sock, u_long setMode)
+int DreamSock_SetNonBlocking(SOCKET sock, u_long setMode)
 {
 	u_long set = setMode;
 
@@ -83,7 +83,7 @@ int dreamSock_SetNonBlocking(SOCKET sock, u_long setMode)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-int dreamSock_SetBroadcasting(SOCKET sock, int mode)
+int DreamSock_SetBroadcasting(SOCKET sock, int mode)
 {
 	// make it broadcast capable
 	if(setsockopt(sock, SOL_SOCKET, SO_BROADCAST, (char *) &mode, sizeof(int)) == -1)
@@ -97,7 +97,7 @@ int dreamSock_SetBroadcasting(SOCKET sock, int mode)
 		LogString("Error code %d: setsockopt() : %s", errno, strerror(errno));
 #endif
 
-		return DREAMSOCK_INVALID_SOCKET;
+		return DreamSock_INVALID_SOCKET;
 	}
 
 	return 0;
@@ -107,7 +107,7 @@ int dreamSock_SetBroadcasting(SOCKET sock, int mode)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-int dreamSock_StringToSockaddr(char *addressString, struct sockaddr *sadr)
+int DreamSock_StringToSockaddr(char *addressString, struct sockaddr *sadr)
 {
 	char copy[128];
 
@@ -133,19 +133,19 @@ int dreamSock_StringToSockaddr(char *addressString, struct sockaddr *sadr)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-SOCKET dreamSock_OpenUDPSocket(char *netInterface, int port)
+SOCKET DreamSock_OpenUDPSocket(char *netInterface, int port)
 {
 	SOCKET sock;
 
 	struct sockaddr_in address;
 
-	sock = dreamSock_Socket(DREAMSOCK_UDP);
+	sock = DreamSock_Socket(DreamSock_UDP);
 
-	if(sock == DREAMSOCK_INVALID_SOCKET)
+	if(sock == DreamSock_INVALID_SOCKET)
 		return sock;
 
-	dreamSock_SetNonBlocking(sock, 1);
-	dreamSock_SetBroadcasting(sock, 1);
+	DreamSock_SetNonBlocking(sock, 1);
+	DreamSock_SetBroadcasting(sock, 1);
 
 	// If no address string provided, use any interface available
 	if(!netInterface || !netInterface[0] || !strcmp(netInterface, "localhost"))
@@ -156,7 +156,7 @@ SOCKET dreamSock_OpenUDPSocket(char *netInterface, int port)
 	else
 	{
 		LogString("Using net interface = '%s'", netInterface);
-		dreamSock_StringToSockaddr(netInterface, (struct sockaddr *) &address);
+		DreamSock_StringToSockaddr(netInterface, (struct sockaddr *) &address);
 	}
 
 	// If no port number provided, use any port number available
@@ -182,7 +182,7 @@ SOCKET dreamSock_OpenUDPSocket(char *netInterface, int port)
 		LogString("Error code %d: bind() : %s", errno, strerror(errno));
 #endif
 
-		return DREAMSOCK_INVALID_SOCKET;
+		return DreamSock_INVALID_SOCKET;
 	}
 
 	// Get the port number (if we did not define one, we get the assigned port number here)
@@ -198,7 +198,7 @@ SOCKET dreamSock_OpenUDPSocket(char *netInterface, int port)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void dreamSock_CloseSocket(SOCKET sock)
+void DreamSock_CloseSocket(SOCKET sock)
 {
 #ifdef WIN32
 		closesocket(sock);
@@ -211,7 +211,7 @@ void dreamSock_CloseSocket(SOCKET sock)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-int dreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *from)
+int DreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *from)
 {
 	int ret;
 	struct sockaddr tempFrom;
@@ -260,7 +260,7 @@ int dreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *from)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void dreamSock_SendPacket(SOCKET sock, int length, char *data, struct sockaddr addr)
+void DreamSock_SendPacket(SOCKET sock, int length, char *data, struct sockaddr addr)
 {
 	int	ret;
 
@@ -290,7 +290,7 @@ void dreamSock_SendPacket(SOCKET sock, int length, char *data, struct sockaddr a
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void dreamSock_Broadcast(SOCKET sock, int length, char *data, int port)
+void DreamSock_Broadcast(SOCKET sock, int length, char *data, int port)
 {
 	struct sockaddr_in servaddr;
 	socklen_t len;
@@ -333,11 +333,11 @@ void dreamSock_Broadcast(SOCKET sock, int length, char *data, int port)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-int dreamSock_GetCurrentSystemTime(void)
+int DreamSock_GetCurrentSystemTime(void)
 {
 #ifndef WIN32
-	return dreamSock_Linux_GetCurrentSystemTime();
+	return DreamSock_Linux_GetCurrentSystemTime();
 #else
-	return dreamSock_Win_GetCurrentSystemTime();
+	return DreamSock_Win_GetCurrentSystemTime();
 #endif
 }

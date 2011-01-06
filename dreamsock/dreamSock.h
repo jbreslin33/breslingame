@@ -1,7 +1,7 @@
-#ifndef __DREAMSOCK_H
-#define __DREAMSOCK_H
+#ifndef __DreamSock_H
+#define __DreamSock_H
 
-#include "dreamConsole.h"
+#include "DreamConsole.h"
 
 #ifdef WIN32
 	#pragma comment (lib,"ws2_32.lib")
@@ -36,69 +36,62 @@
 #define DREAMCLIENT						0
 
 // Connection protocols
-#define DREAMSOCK_TCP					0
-#define DREAMSOCK_UDP					1
+#define DreamSock_TCP					0
+#define DreamSock_UDP					1
 
 // Connection states
-#define DREAMSOCK_CONNECTING			0
-#define DREAMSOCK_CONNECTED				1
-#define DREAMSOCK_DISCONNECTING			2
-#define DREAMSOCK_DISCONNECTED			4
+#define DreamSock_CONNECTING			0
+#define DreamSock_CONNECTED				1
+#define DreamSock_DISCONNECTING			2
+#define DreamSock_DISCONNECTED			4
 
 // Error codes
-#define DREAMSOCK_SERVER_ERROR			1
-#define DREAMSOCK_CLIENT_ERROR			2
+#define DreamSock_SERVER_ERROR			1
+#define DreamSock_CLIENT_ERROR			2
 
 #ifdef WIN32
-	#define DREAMSOCK_INVALID_SOCKET	INVALID_SOCKET
+	#define DreamSock_INVALID_SOCKET	INVALID_SOCKET
 #else
-	#define DREAMSOCK_INVALID_SOCKET	-1
+	#define DreamSock_INVALID_SOCKET	-1
 #endif
 
 // System messages
 // Note (for all messages - system and user):
 // positive = sequenced message
 // negative = un-sequenced message
-#define DREAMSOCK_MES_CONNECT		-101
-#define DREAMSOCK_MES_DISCONNECT	-102
-#define DREAMSOCK_MES_ADDCLIENT		-103
-#define DREAMSOCK_MES_REMOVECLIENT	-104
-#define DREAMSOCK_MES_PING			-105
-
-// Introduce classes
-class dreamMessage;
-class dreamClient;
-class dreamServer;
+#define DreamSock_MES_CONNECT		-101
+#define DreamSock_MES_DISCONNECT	-102
+#define DreamSock_MES_ADDCLIENT		-103
+#define DreamSock_MES_REMOVECLIENT	-104
+#define DreamSock_MES_PING			-105
 
 
-/***************************************
 
-  dreamSock global functions
-
-***************************************/
-
+//class DreamSock
+//{
 // Function prototypes
-int	dreamSock_Initialize(void);
-int	dreamSock_InitializeWinSock(void);
-void dreamSock_Shutdown(void);
+int	DreamSock_Initialize(void);
+int	DreamSock_InitializeWinSock(void);
+void DreamSock_Shutdown(void);
 
-SOCKET dreamSock_Socket(int protocol);
-int dreamSock_SetNonBlocking(SOCKET sock, u_long setMode);
-int dreamSock_SetBroadcasting(SOCKET sock, int mode);
-int dreamSock_StringToSockaddr(char *addressString, struct sockaddr *sadr);
-SOCKET dreamSock_OpenUDPSocket(char netInterface[32], int port);
-void dreamSock_CloseSocket(SOCKET sock);
+SOCKET DreamSock_Socket(int protocol);
+int DreamSock_SetNonBlocking(SOCKET sock, u_long setMode);
+int DreamSock_SetBroadcasting(SOCKET sock, int mode);
+int DreamSock_StringToSockaddr(char *addressString, struct sockaddr *sadr);
+SOCKET DreamSock_OpenUDPSocket(char netInterface[32], int port);
+void DreamSock_CloseSocket(SOCKET sock);
 
-int dreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *from);
-void dreamSock_SendPacket(SOCKET sock, int length, char *data, struct sockaddr addr);
-void dreamSock_Broadcast(SOCKET sock, int length, char *data, int port);
+int DreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *from);
+void DreamSock_SendPacket(SOCKET sock, int length, char *data, struct sockaddr addr);
+void DreamSock_Broadcast(SOCKET sock, int length, char *data, int port);
 
 #ifndef WIN32
-int dreamSock_Linux_GetCurrentSystemTime(void);
+int DreamSock_Linux_GetCurrentSystemTime(void);
 #else
-int dreamSock_Win_GetCurrentSystemTime(void);
+int DreamSock_Win_GetCurrentSystemTime(void);
 #endif
 
-int dreamSock_GetCurrentSystemTime(void);
+int DreamSock_GetCurrentSystemTime(void);
 
+//};
 #endif

@@ -274,7 +274,7 @@ LRESULT CALLBACK CreateAccountDialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 
 					ret = Signin.GetNetworkClient()->Initialise("", serverIP, 30002);
 
-					if(ret == DREAMSOCK_CLIENT_ERROR)
+					if(ret == DreamSock_CLIENT_ERROR)
 					{
 						char text[64];
 						sprintf(text, "Could not open client socket");
@@ -349,7 +349,7 @@ LRESULT CALLBACK LoginDialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 
 					ret = Lobby.GetNetworkClient()->Initialise("", serverIP, 30003);
 
-					if(ret == DREAMSOCK_CLIENT_ERROR)
+					if(ret == DreamSock_CLIENT_ERROR)
 					{
 						char text[64];
 						sprintf(text, "Could not open client socket");
@@ -534,7 +534,7 @@ int PASCAL WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		);
 
 	// Initialize the Network Library
-	if(dreamSock_Initialize() != 0)
+	if(DreamSock_Initialize() != 0)
 	{
 		MessageBox(NULL, "Error initialising Communication Library!",
 			"Fatal Error", MB_OK);
@@ -561,7 +561,7 @@ int PASCAL WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 	PeekMessage(&msg, NULL, 0, 0, PM_NOREMOVE);
 
-	oldTime = dreamSock_GetCurrentSystemTime();
+	oldTime = DreamSock_GetCurrentSystemTime();
 
 	bool done = false;
 
@@ -584,7 +584,7 @@ int PASCAL WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 			do
 			{
-				newTime = dreamSock_GetCurrentSystemTime();
+				newTime = DreamSock_GetCurrentSystemTime();
 				time = newTime - oldTime;
 			} while (time < 1);
 

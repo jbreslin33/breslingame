@@ -1,8 +1,8 @@
 #ifndef __DREAMCLIENT_H
 #define __DREAMCLIENT_H
 
-#include "dreamConsole.h"
-#include "dreamMessage.h"
+#include "DreamConsole.h"
+#include "DreamMessage.h"
 
 
 #ifdef WIN32
@@ -35,19 +35,19 @@
 
 
 #ifdef WIN32
-	#define DREAMSOCK_INVALID_SOCKET	INVALID_SOCKET
+	#define DreamSock_INVALID_SOCKET	INVALID_SOCKET
 #else
-	#define DREAMSOCK_INVALID_SOCKET	-1
+	#define DreamSock_INVALID_SOCKET	-1
 #endif
 
 // Introduce classes
 
 
-class dreamClient
+class DreamClient
 {
 private:
 	void			DumpBuffer(void);
-	void			ParsePacket(dreamMessage *mes);
+	void			ParsePacket(DreamMessage *mes);
 
 	int				connectionState;		// Connecting, connected, disconnecting, disconnected
 
@@ -72,8 +72,8 @@ private:
 	bool			init;
 
 public:
-					dreamClient();
-					~dreamClient();
+					DreamClient();
+					~DreamClient();
 
 	int				Initialise(char *localIP, char *remoteIP, int port);
 	void			Uninitialise(void);
@@ -87,7 +87,7 @@ public:
 
 	int				GetPacket(char *data, struct sockaddr *from);
 	void			SendPacket(void);
-	void			SendPacket(dreamMessage *message);
+	void			SendPacket(DreamMessage *message);
 
 	unsigned short	GetOutgoingSequence(void)				{ return outgoingSequence; }
 	void			SetOutgoingSequence(unsigned short seq)	{ outgoingSequence = seq; }
@@ -119,8 +119,8 @@ public:
 	int				GetLastMessageTime(void) { return lastMessageTime; }
 	void			SetLastMessageTime(int t) { lastMessageTime = t; }
 
-	dreamMessage	message;
-	dreamClient		*next;
+	DreamMessage	message;
+	DreamClient		*next;
 };
 
 #endif

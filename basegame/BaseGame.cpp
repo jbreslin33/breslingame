@@ -54,7 +54,7 @@ extern "C" {
 	BOOL bMsg = FALSE;
 	PeekMessage(&msg, NULL, 0, 0, PM_NOREMOVE);
 
-//	oldTime = dreamSock_GetCurrentSystemTime();
+//	oldTime = DreamSock_GetCurrentSystemTime();
         // Create application object
         BaseGame app;
 

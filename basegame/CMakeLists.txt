@@ -95,24 +95,24 @@ set(HDRS
 	./BaseGame.h
 	
 	#DreamSock
-	../dreamsock/dreamClient.h
-	../dreamsock/dreamConsole.h
-	../dreamsock/dreamMessage.h
-	../dreamsock/dreamServer.h
-	../dreamsock/dreamSock.h
+	../DreamSock/DreamClient.h
+	../DreamSock/DreamConsole.h
+	../DreamSock/DreamMessage.h
+	../DreamSock/DreamServer.h
+	../DreamSock/DreamSock.h
 	
-	../dreamsock/dreamWinSock.h
+	../DreamSock/DreamWinSock.h
 	
 	
 	#tutgame
-	./bullet_t.h
+	./Bullet_t.h
 	./CArmyWar.h
 	./CLobby.h
 	./CSignin.h
 	./engine.h
 	./main.h
-	./clientLoginData.h
-	./player_t.h
+	./ClientLoginData.h
+	./Player_t.h
 	./RESOURCE.H
 )
  
@@ -122,23 +122,23 @@ set(SRCS
 	./BaseGame.cpp
 	
 	#DreamSock
-	../dreamsock/dreamClient.cpp
-	../dreamsock/dreamConsole.cpp
-	../dreamsock/dreamMessage.cpp
-	../dreamsock/dreamServer.cpp
-	../dreamsock/dreamSock.cpp
+	../DreamSock/DreamClient.cpp
+	../DreamSock/DreamConsole.cpp
+	../DreamSock/DreamMessage.cpp
+	../DreamSock/DreamServer.cpp
+	../DreamSock/DreamSock.cpp
 	
-	../dreamsock/dreamWinSock.cpp
+	../DreamSock/DreamWinSock.cpp
 	
 	#tutgame
-	./bullet_t.cpp
+	./Bullet_t.cpp
 	./CArmyWar.cpp
 	./CLobby.cpp
 	./CSignin.cpp
 	./engine.cpp
 	./main.cpp
-	./clientLoginData.cpp
-	./player_t.cpp
+	./ClientLoginData.cpp
+	./Player_t.cpp
 	
 )
 
@@ -155,24 +155,24 @@ set(HDRS
 	./BaseGame.h
 	
 	#DreamSock
-	../dreamsock/dreamClient.h
-	../dreamsock/dreamConsole.h
-	../dreamsock/dreamMessage.h
-	../dreamsock/dreamServer.h
-	../dreamsock/dreamSock.h
+	../DreamSock/DreamClient.h
+	../DreamSock/DreamConsole.h
+	../DreamSock/DreamMessage.h
+	../DreamSock/DreamServer.h
+	../DreamSock/DreamSock.h
 	
-	../dreamsock/dreamLinuxSock.h
+	../DreamSock/dreamLinuxSock.h
 	
 	
 	#tutgame
-	./bullet_t.h
+	./Bullet_t.h
 	./CArmyWar.h
 	./CLobby.h
 	./CSignin.h
 	./engine.h
 	./main.h
-	./clientLoginData.h
-	./player_t.h
+	./ClientLoginData.h
+	./Player_t.h
 	./RESOURCE.H
 )
  
@@ -182,23 +182,23 @@ set(SRCS
 	./BaseGame.cpp
 	
 	#DreamSock
-	../dreamsock/dreamClient.cpp
-	../dreamsock/dreamConsole.cpp
-	../dreamsock/dreamMessage.cpp
-	../dreamsock/dreamServer.cpp
-	../dreamsock/dreamSock.cpp
+	../DreamSock/DreamClient.cpp
+	../DreamSock/DreamConsole.cpp
+	../DreamSock/DreamMessage.cpp
+	../DreamSock/DreamServer.cpp
+	../DreamSock/DreamSock.cpp
 	
-	../dreamsock/dreamLinuxSock.cpp
+	../DreamSock/dreamLinuxSock.cpp
 	
 	#tutgame
-	./bullet_t.cpp
+	./Bullet_t.cpp
 	./CArmyWar.cpp
 	./CLobby.cpp
 	./CSignin.cpp
 	./engine.cpp
 	./main.cpp
-	./clientLoginData.cpp
-	./player_t.cpp
+	./ClientLoginData.cpp
+	./Player_t.cpp
 	
 )
 

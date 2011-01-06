@@ -1,7 +1,7 @@
 #ifndef __DREAMMESSAGE_H
 #define __DREAMMESSAGE_H
 
-#include "../dreamsock/dreamConsole.h"
+#include "../DreamSock/DreamConsole.h"
 
 #ifdef WIN32
 	#pragma comment (lib,"ws2_32.lib")
@@ -32,14 +32,14 @@
 #endif
 
 #ifdef WIN32
-	#define DREAMSOCK_INVALID_SOCKET	INVALID_SOCKET
+	#define DreamSock_INVALID_SOCKET	INVALID_SOCKET
 #else
-	#define DREAMSOCK_INVALID_SOCKET	-1
+	#define DreamSock_INVALID_SOCKET	-1
 #endif
 
-class dreamClient;
+class DreamClient;
 
-class dreamMessage
+class DreamMessage
 {
 private:
 	bool			overFlow;
@@ -53,7 +53,7 @@ public:
 	void			Init(char *d, int length);
 	void			Clear(void);
 	void			Write(void *d, int length);
-	void			AddSequences(dreamClient *client);
+	void			AddSequences(DreamClient *client);
 
 	void			WriteByte(char c);
 	void			WriteShort(short c);

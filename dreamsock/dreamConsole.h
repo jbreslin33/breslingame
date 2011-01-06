@@ -3,11 +3,11 @@
 
 #ifdef WIN32
 
-class dreamConsole
+class DreamConsole
 {
 	public:
-		dreamConsole(char *title);
-		~dreamConsole();
+		DreamConsole(char *title);
+		~DreamConsole();
 		void println(char *string, int type, ...);
 };
 

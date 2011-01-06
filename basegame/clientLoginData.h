@@ -29,11 +29,11 @@
 #define USER_MES_MAPDATA		11
 #define USER_MES_KEEPALIVE		12
 
-typedef struct clientLoginData
+typedef struct ClientLoginData
 {
 	int					index;
 	char				nickname[30];
-	clientLoginData	*next;
-} clientLoginData;
+	ClientLoginData	*next;
+} ClientLoginData;
 
 #endif

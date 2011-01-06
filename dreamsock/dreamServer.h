@@ -1,7 +1,7 @@
 #ifndef __DREAMSERVER_H
 #define __DREAMSERVER_H
 
-#include "dreamConsole.h"
+#include "DreamConsole.h"
 
 #ifdef WIN32
 	#pragma comment (lib,"ws2_32.lib")
@@ -31,24 +31,24 @@
 	#endif
 #endif
 
-#define DREAMSOCK_MES_PING			-105
+#define DreamSock_MES_PING			-105
 
 // Introduce classes
-class dreamClient;
-class dreamSock;
-class dreamMessage;
+class DreamClient;
+class DreamSock;
+class DreamMessage;
 
-class dreamServer
+class DreamServer
 {
 private:
-	void			SendAddClient(dreamClient *newClient);
-	void			SendRemoveClient(dreamClient *client);
+	void			SendAddClient(DreamClient *newClient);
+	void			SendRemoveClient(DreamClient *client);
 	void			AddClient(struct sockaddr *address, char *name);
-	void			RemoveClient(dreamClient *client);
-	void			ParsePacket(dreamMessage *mes, struct sockaddr *address);
+	void			RemoveClient(DreamClient *client);
+	void			ParsePacket(DreamMessage *mes, struct sockaddr *address);
 	int				CheckForTimeout(char *data, struct sockaddr *from);
 
-	dreamClient		*clientList;
+	DreamClient		*clientList;
 
 	int				port;					// Port
 	SOCKET			socket;					// Socket
@@ -57,8 +57,8 @@ private:
 	bool			init;
 
 public:
-					dreamServer();
-					~dreamServer();
+					DreamServer();
+					~DreamServer();
 
 	int				Initialise(char *localIP, int serverPort);
 	void			Uninitialise(void);
@@ -67,7 +67,7 @@ public:
 	void			SendPackets(void);
 
 	bool			GetInit(void)			{ return init; }
-	dreamClient		*GetClientList(void)	{ return clientList; }
+	DreamClient		*GetClientList(void)	{ return clientList; }
 
 	int				GetPort(void)			{ return port; }
 };

@@ -1,11 +1,11 @@
 #include "CSignin.h"
-#include "../dreamsock/dreamClient.h"
-#include "../dreamsock/dreamServer.h"
-#include "../dreamsock/dreamSock.h"
+#include "../DreamSock/DreamClient.h"
+#include "../DreamSock/DreamServer.h"
+#include "../DreamSock/DreamSock.h"
 
 CSignin::CSignin()
 {
-	networkClient = new dreamClient();
+	networkClient = new DreamClient();
 	clientList	= NULL;
 }
 
@@ -25,7 +25,7 @@ void CSignin::ReadPackets(void)
 	int ret;
 	char name[30];
 
-	dreamMessage mes;
+	DreamMessage mes;
 	mes.Init(data, sizeof(data));
 
 	while(ret = networkClient->GetPacket(mes.data, &address))
@@ -37,7 +37,7 @@ void CSignin::ReadPackets(void)
 
 		switch(type)
 		{
-		case DREAMSOCK_MES_ADDCLIENT:
+		case DreamSock_MES_ADDCLIENT:
 			local	= mes.ReadByte();
 			ind		= mes.ReadByte();
 			strcpy(name, mes.ReadString());
@@ -45,7 +45,7 @@ void CSignin::ReadPackets(void)
 			AddClient(local, ind, name);
 			break;
 
-		case DREAMSOCK_MES_REMOVECLIENT:
+		case DreamSock_MES_REMOVECLIENT:
 			ind = mes.ReadByte();
 
 			RemoveClient(ind);
@@ -89,8 +89,8 @@ void CSignin::ReadPackets(void)
 void CSignin::AddClient(int local, int ind, char *name)
 {
 	// First get a pointer to the beginning of client list
-	clientLoginData *list = clientList;
-	clientLoginData *prev;
+	ClientLoginData *list = clientList;
+	ClientLoginData *prev;
 
 	LogString("App: Client: Adding client with index %d", ind);
 
@@ -99,7 +99,7 @@ void CSignin::AddClient(int local, int ind, char *name)
 	{
 		LogString("App: Client: Adding first client");
 
-		clientList = (clientLoginData *) calloc(1, sizeof(clientLoginData));
+		clientList = (ClientLoginData *) calloc(1, sizeof(ClientLoginData));
 
 		if(local)
 		{
@@ -125,7 +125,7 @@ void CSignin::AddClient(int local, int ind, char *name)
 			list = list->next;
 		}
 
-		list = (clientLoginData *) calloc(1, sizeof(clientLoginData));
+		list = (ClientLoginData *) calloc(1, sizeof(ClientLoginData));
 
 		if(local)
 		{
@@ -148,9 +148,9 @@ void CSignin::AddClient(int local, int ind, char *name)
 //-----------------------------------------------------------------------------
 void CSignin::RemoveClient(int ind)
 {
-	clientLoginData *list = clientList;
-	clientLoginData *prev = NULL;
-	clientLoginData *next = NULL;
+	ClientLoginData *list = clientList;
+	ClientLoginData *prev = NULL;
+	ClientLoginData *next = NULL;
 
 	for( ; list != NULL; list = list->next)
 	{
@@ -196,8 +196,8 @@ void CSignin::RemoveClient(int ind)
 //-----------------------------------------------------------------------------
 void CSignin::RemoveClients(void)
 {
-	clientLoginData *list = clientList;
-	clientLoginData *next;
+	ClientLoginData *list = clientList;
+	ClientLoginData *next;
 
 	while(list != NULL)
 	{
@@ -221,7 +221,7 @@ void CSignin::SendSignIn(char *nickname, char *firstname,
 						char *surname, int age, char *gender, char *password, char *email)
 {
 	char data[1400];
-	dreamMessage message;
+	DreamMessage message;
 	message.Init(data, sizeof(data));
 
 	message.WriteByte(USER_MES_SIGNIN);
@@ -244,7 +244,7 @@ void CSignin::SendSignIn(char *nickname, char *firstname,
 void CSignin::SendKeepAlive(void)
 {
 	char data[1400];
-	dreamMessage message;
+	DreamMessage message;
 	message.Init(data, sizeof(data));
 
 	message.WriteByte(USER_MES_KEEPALIVE);
@@ -284,7 +284,7 @@ void CSignin::Disconnect(void)
 //-----------------------------------------------------------------------------
 void CSignin::RunNetwork(int msec)
 {
-	if(networkClient->GetConnectionState() == DREAMSOCK_DISCONNECTED)
+	if(networkClient->GetConnectionState() == DreamSock_DISCONNECTED)
 		return;
 
 	static int keepalive = 0;

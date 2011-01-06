@@ -25,7 +25,7 @@ extern int scroll_x, scroll_y;
 
 extern int final_winning_team;
 
-extern struct player_t players[16];	// limit of 16 players
+extern struct Player_t players[16];	// limit of 16 players
 
 void ENGINE_Init(void);
 void ENGINE_Render(void);

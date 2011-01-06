@@ -2,7 +2,7 @@
 #define PLAYER_T_H
 
 // Player Data
-struct player_t
+struct Player_t
 {
 	int playerIndex;
 	int x,y;

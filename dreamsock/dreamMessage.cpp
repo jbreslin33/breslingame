@@ -1,5 +1,5 @@
-#include "dreamMessage.h"
-#include "dreamClient.h"
+#include "DreamMessage.h"
+#include "DreamClient.h"
 /*
 #ifdef WIN32
 // Windows specific headers
@@ -25,15 +25,15 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <time.h>
-#include "dreamSock.h"
-#include "dreamConsole.h"
+#include "DreamSock.h"
+#include "DreamConsole.h"
 
 
 //-----------------------------------------------------------------------------
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void dreamMessage::Init(char *d, int length)
+void DreamMessage::Init(char *d, int length)
 {
 	data		= d;
 	maxSize		= length;
@@ -46,7 +46,7 @@ void dreamMessage::Init(char *d, int length)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void dreamMessage::Clear(void)
+void DreamMessage::Clear(void)
 {
 	size		= 0;
 	readCount	= 0;
@@ -57,7 +57,7 @@ void dreamMessage::Clear(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-char *dreamMessage::GetNewPoint(int length)
+char *DreamMessage::GetNewPoint(int length)
 {
 	char *tempData;
 
@@ -78,7 +78,7 @@ char *dreamMessage::GetNewPoint(int length)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void dreamMessage::AddSequences(dreamClient *client)
+void DreamMessage::AddSequences(DreamClient *client)
 {
 	WriteShort(client->GetOutgoingSequence());
 	WriteShort(client->GetIncomingSequence());
@@ -88,7 +88,7 @@ void dreamMessage::AddSequences(dreamClient *client)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void dreamMessage::Write(void *d, int length)
+void DreamMessage::Write(void *d, int length)
 {
 	memcpy(GetNewPoint(length), d, length);		
 }
@@ -97,7 +97,7 @@ void dreamMessage::Write(void *d, int length)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void dreamMessage::WriteByte(char c)
+void DreamMessage::WriteByte(char c)
 {
 	char *buf;
 
@@ -110,7 +110,7 @@ void dreamMessage::WriteByte(char c)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void dreamMessage::WriteShort(short c)
+void DreamMessage::WriteShort(short c)
 {
 	char *buf;
 
@@ -123,7 +123,7 @@ void dreamMessage::WriteShort(short c)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void dreamMessage::WriteLong(long c)
+void DreamMessage::WriteLong(long c)
 {
 	char *buf;
 	
@@ -136,7 +136,7 @@ void dreamMessage::WriteLong(long c)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void dreamMessage::WriteFloat(float c)
+void DreamMessage::WriteFloat(float c)
 {
 	char *buf;
 	
@@ -149,7 +149,7 @@ void dreamMessage::WriteFloat(float c)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void dreamMessage::WriteString(char *s)
+void DreamMessage::WriteString(char *s)
 {
 	if(!s)
 	{
@@ -163,7 +163,7 @@ void dreamMessage::WriteString(char *s)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void dreamMessage::BeginReading(void)
+void DreamMessage::BeginReading(void)
 {
 	readCount = 0;
 }
@@ -172,7 +172,7 @@ void dreamMessage::BeginReading(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void dreamMessage::BeginReading(int s)
+void DreamMessage::BeginReading(int s)
 {
 	size = s;
 	readCount = 0;
@@ -182,7 +182,7 @@ void dreamMessage::BeginReading(int s)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-char *dreamMessage::Read(int s)
+char *DreamMessage::Read(int s)
 {
 	static char c[2048];
 
@@ -200,7 +200,7 @@ char *dreamMessage::Read(int s)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-char dreamMessage::ReadByte(void)
+char DreamMessage::ReadByte(void)
 {
 	char c;
 
@@ -218,7 +218,7 @@ char dreamMessage::ReadByte(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-short dreamMessage::ReadShort(void)
+short DreamMessage::ReadShort(void)
 {
 	short c;
 
@@ -236,7 +236,7 @@ short dreamMessage::ReadShort(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-long dreamMessage::ReadLong(void)
+long DreamMessage::ReadLong(void)
 {
 	long c;
 
@@ -254,7 +254,7 @@ long dreamMessage::ReadLong(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-float dreamMessage::ReadFloat(void)
+float DreamMessage::ReadFloat(void)
 {
 	float c;
 
@@ -272,7 +272,7 @@ float dreamMessage::ReadFloat(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-char *dreamMessage::ReadString(void)
+char *DreamMessage::ReadString(void)
 {
 	static char string[2048];
 	int	l, c;

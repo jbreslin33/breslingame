@@ -11,9 +11,9 @@
 class CLobby
 {
 private:
-	dreamClient		*networkClient;
-	clientLoginData	*clientList;
-	clientLoginData	*localClient;		// Pointer to the local client in the client list
+	DreamClient		*networkClient;
+	ClientLoginData	*clientList;
+	ClientLoginData	*localClient;		// Pointer to the local client in the client list
 
 	CArmyWar		*gameList;
 	CArmyWar		*localGame;
@@ -25,8 +25,8 @@ public:
 	CLobby();
 	~CLobby();
 
-	dreamClient		*GetNetworkClient(void)	{ return networkClient; }
-	clientLoginData	*GetLocalClient(void)	{ return localClient; }
+	DreamClient		*GetNetworkClient(void)	{ return networkClient; }
+	ClientLoginData	*GetLocalClient(void)	{ return localClient; }
 
 	void		RefreshPlayerList(void);
 	void		RefreshGameList(void);

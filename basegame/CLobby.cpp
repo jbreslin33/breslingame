@@ -1,11 +1,11 @@
 #include "CLobby.h"
-#include "../dreamsock/dreamClient.h"
-#include "../dreamsock/dreamSock.h"
+#include "../DreamSock/DreamClient.h"
+#include "../DreamSock/DreamSock.h"
 #include "resource.h"
 
 CLobby::CLobby()
 {
-	networkClient	= new dreamClient;
+	networkClient	= new DreamClient;
 	clientList		= NULL;
 	gameList		= NULL;
 	localGame		= NULL;
@@ -22,7 +22,7 @@ void CLobby::RefreshPlayerList(void)
 {
 	//SendMessage(GetDlgItem(hWnd_LobbyDialog, IDC_PLAYERLIST), LB_RESETCONTENT, 0, 0);
 
-	clientLoginData *list = clientList;
+	ClientLoginData *list = clientList;
 
 	for( ; list != NULL; list = list->next)
 	{
@@ -90,7 +90,7 @@ void CLobby::ReadPackets(void)
 	int ret;
 	char name[30];
 
-	dreamMessage mes;
+	DreamMessage mes;
 	mes.Init(data, sizeof(data));
 
 	while(ret = networkClient->GetPacket(mes.data, &address))
@@ -102,7 +102,7 @@ void CLobby::ReadPackets(void)
 
 		switch(type)
 		{
-		case DREAMSOCK_MES_ADDCLIENT:
+		case DreamSock_MES_ADDCLIENT:
 			local	= mes.ReadByte();
 			ind		= mes.ReadByte();
 			strcpy(name, mes.ReadString());
@@ -110,7 +110,7 @@ void CLobby::ReadPackets(void)
 			AddClient(local, ind, name);
 			break;
 
-		case DREAMSOCK_MES_REMOVECLIENT:
+		case DreamSock_MES_REMOVECLIENT:
 			ind = mes.ReadByte();
 
 			LogString("Got removeclient %d message", ind);
@@ -207,8 +207,8 @@ void CLobby::ReadPackets(void)
 void CLobby::AddClient(int local, int ind, char *name)
 {
 	// First get a pointer to the beginning of client list
-	clientLoginData *list = clientList;
-	clientLoginData *prev;
+	ClientLoginData *list = clientList;
+	ClientLoginData *prev;
 
 	LogString("App: Client: Adding client with index %d", ind);
 
@@ -217,7 +217,7 @@ void CLobby::AddClient(int local, int ind, char *name)
 	{
 		LogString("App: Client: Adding first client");
 
-		clientList = (clientLoginData *) calloc(1, sizeof(clientLoginData));
+		clientList = (ClientLoginData *) calloc(1, sizeof(ClientLoginData));
 
 		if(local)
 		{
@@ -244,7 +244,7 @@ void CLobby::AddClient(int local, int ind, char *name)
 			list = list->next;
 		}
 
-		list = (clientLoginData *) calloc(1, sizeof(clientLoginData));
+		list = (ClientLoginData *) calloc(1, sizeof(ClientLoginData));
 
 		if(local)
 		{
@@ -269,9 +269,9 @@ void CLobby::AddClient(int local, int ind, char *name)
 
 void CLobby::RemoveClient(int ind)
 {
-	clientLoginData *list = clientList;
-	clientLoginData *prev = NULL;
-	clientLoginData *next = NULL;
+	ClientLoginData *list = clientList;
+	ClientLoginData *prev = NULL;
+	ClientLoginData *next = NULL;
 
 	for( ; list != NULL; list = list->next)
 	{
@@ -315,8 +315,8 @@ void CLobby::RemoveClient(int ind)
 
 void CLobby::RemoveClients(void)
 {
-	clientLoginData *list = clientList;
-	clientLoginData *next;
+	ClientLoginData *list = clientList;
+	ClientLoginData *next;
 
 	while(list != NULL)
 	{
@@ -481,7 +481,7 @@ CArmyWar *CLobby::GetGamePointer(int ind)
 void CLobby::RequestGameData(void)
 {
 	char data[1400];
-	dreamMessage message;
+	DreamMessage message;
 	message.Init(data, sizeof(data));
 
 	message.WriteByte(USER_MES_GAMEDATA);
@@ -493,7 +493,7 @@ void CLobby::RequestGameData(void)
 void CLobby::SendChat(char *text)
 {
 	char data[1400];
-	dreamMessage message;
+	DreamMessage message;
 	message.Init(data, sizeof(data));
 
 	message.WriteByte(USER_MES_CHAT);
@@ -506,7 +506,7 @@ void CLobby::SendChat(char *text)
 void CLobby::SendCreateGame(char *gamename)
 {
 	char data[1400];
-	dreamMessage message;
+	DreamMessage message;
 	message.Init(data, sizeof(data));
 
 	message.WriteByte(USER_MES_CREATEGAME);
@@ -519,7 +519,7 @@ void CLobby::SendCreateGame(char *gamename)
 void CLobby::SendRemoveGame(char *gamename)
 {
 	char data[1400];
-	dreamMessage message;
+	DreamMessage message;
 	message.Init(data, sizeof(data));
 
 	message.WriteByte(USER_MES_REMOVEGAME);
@@ -532,7 +532,7 @@ void CLobby::SendRemoveGame(char *gamename)
 void CLobby::SendStartGame(int ind)
 {
 	char data[1400];
-	dreamMessage message;
+	DreamMessage message;
 	message.Init(data, sizeof(data));
 
 	message.WriteByte(USER_MES_STARTGAME);
@@ -545,7 +545,7 @@ void CLobby::SendStartGame(int ind)
 void CLobby::SendKeepAlive(void)
 {
 	char data[1400];
-	dreamMessage message;
+	DreamMessage message;
 	message.Init(data, sizeof(data));
 
 	message.WriteByte(USER_MES_KEEPALIVE);
@@ -563,7 +563,7 @@ void CLobby::Connect(char *name, char *password)
 
 	networkClient->SendConnect(name);
 
-	dreamMessage message;
+	DreamMessage message;
 	char data[1400];
 
 	message.Init(data, sizeof(data));
@@ -592,7 +592,7 @@ void CLobby::Disconnect(void)
 
 void CLobby::RunNetwork(int msec)
 {
-	if(networkClient->GetConnectionState() == DREAMSOCK_DISCONNECTED)
+	if(networkClient->GetConnectionState() == DreamSock_DISCONNECTED)
 		return;
 
 	static int time = 0;

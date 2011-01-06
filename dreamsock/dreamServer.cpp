@@ -1,5 +1,5 @@
-#include "dreamServer.h"
-#include "dreamClient.h"
+#include "DreamServer.h"
+#include "DreamClient.h"
 
 #define WIN32
 
@@ -27,15 +27,15 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <time.h>
-#include "dreamSock.h"
-#include "dreamConsole.h"
+#include "DreamSock.h"
+#include "DreamConsole.h"
 
 
 //-----------------------------------------------------------------------------
 // Name: Constructor()
 // Desc: 
 //-----------------------------------------------------------------------------
-dreamServer::dreamServer()
+DreamServer::DreamServer()
 {
 	init			= false;
 
@@ -49,10 +49,10 @@ dreamServer::dreamServer()
 // Name: Deconstructor()
 // Desc: 
 //-----------------------------------------------------------------------------
-dreamServer::~dreamServer()
+DreamServer::~DreamServer()
 {
-	dreamClient *list = clientList;
-	dreamClient *next;
+	DreamClient *list = clientList;
+	DreamClient *next;
 
 	while(list != NULL)
 	{
@@ -68,27 +68,27 @@ dreamServer::~dreamServer()
 
 	clientList = NULL;
 
-	dreamSock_CloseSocket(socket);
+	DreamSock_CloseSocket(socket);
 }
 
 //-----------------------------------------------------------------------------
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-int dreamServer::Initialise(char *localIP, int serverPort)
+int DreamServer::Initialise(char *localIP, int serverPort)
 {
-	// Initialise dreamSock if it is not already initialised
-	dreamSock_Initialize();
+	// Initialise DreamSock if it is not already initialised
+	DreamSock_Initialize();
 
 	// Store the server IP and port for later use
 	port = serverPort;
 
 	// Create server socket
-	socket = dreamSock_OpenUDPSocket(localIP, port);
+	socket = DreamSock_OpenUDPSocket(localIP, port);
 
-	if(socket == DREAMSOCK_INVALID_SOCKET)
+	if(socket == DreamSock_INVALID_SOCKET)
 	{
-		return DREAMSOCK_SERVER_ERROR;
+		return DreamSock_SERVER_ERROR;
 	}
 
 	init = true;
@@ -100,9 +100,9 @@ int dreamServer::Initialise(char *localIP, int serverPort)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void dreamServer::Uninitialise(void)
+void DreamServer::Uninitialise(void)
 {
-	dreamSock_CloseSocket(socket);
+	DreamSock_CloseSocket(socket);
 
 	init = false;
 }
@@ -111,17 +111,17 @@ void dreamServer::Uninitialise(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void dreamServer::SendAddClient(dreamClient *newClient)
+void DreamServer::SendAddClient(DreamClient *newClient)
 {
 	// Send connection confirmation
 	newClient->message.Init(newClient->message.outgoingData,
 		sizeof(newClient->message.outgoingData));
 
-	newClient->message.WriteByte(DREAMSOCK_MES_CONNECT);	// type
+	newClient->message.WriteByte(DreamSock_MES_CONNECT);	// type
 	newClient->SendPacket();
 
 	// Send 'Add client' message to every client
-	dreamClient *client = clientList;
+	DreamClient *client = clientList;
 
 	// First inform the new client of the other clients
 	for( ; client != NULL; client = client->next)
@@ -129,7 +129,7 @@ void dreamServer::SendAddClient(dreamClient *newClient)
 		newClient->message.Init(newClient->message.outgoingData,
 			sizeof(newClient->message.outgoingData));
 
-		newClient->message.WriteByte(DREAMSOCK_MES_ADDCLIENT); // type
+		newClient->message.WriteByte(DreamSock_MES_ADDCLIENT); // type
 
 		if(client == newClient)
 		{
@@ -156,7 +156,7 @@ void dreamServer::SendAddClient(dreamClient *newClient)
 		client->message.Init(client->message.outgoingData,
 			sizeof(client->message.outgoingData));
 
-		client->message.WriteByte(DREAMSOCK_MES_ADDCLIENT); // type
+		client->message.WriteByte(DreamSock_MES_ADDCLIENT); // type
 
 		client->message.WriteByte(0);
 		client->message.WriteByte(newClient->GetIndex());
@@ -170,19 +170,19 @@ void dreamServer::SendAddClient(dreamClient *newClient)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void dreamServer::SendRemoveClient(dreamClient *client)
+void DreamServer::SendRemoveClient(DreamClient *client)
 {
 	int index = client->GetIndex();
 
 	// Send 'Remove client' message to every client
-	dreamClient *list = clientList;
+	DreamClient *list = clientList;
 
 	for( ; list != NULL; list = list->next)
 	{
 		list->message.Init(list->message.outgoingData,
 			sizeof(list->message.outgoingData));
 
-		list->message.WriteByte(DREAMSOCK_MES_REMOVECLIENT);	// type
+		list->message.WriteByte(DreamSock_MES_REMOVECLIENT);	// type
 		list->message.WriteByte(index);							// index
 	}
 
@@ -192,7 +192,7 @@ void dreamServer::SendRemoveClient(dreamClient *client)
 	client->message.Init(client->message.outgoingData,
 		sizeof(client->message.outgoingData));
 
-	client->message.WriteByte(DREAMSOCK_MES_DISCONNECT);
+	client->message.WriteByte(DreamSock_MES_DISCONNECT);
 	client->SendPacket();
 }
 
@@ -200,10 +200,10 @@ void dreamServer::SendRemoveClient(dreamClient *client)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void dreamServer::SendPing(void)
+void DreamServer::SendPing(void)
 {
 	// Send ping message to every client
-	dreamClient *list = clientList;
+	DreamClient *list = clientList;
 
 	for( ; list != NULL; list = list->next)
 	{
@@ -215,12 +215,12 @@ void dreamServer::SendPing(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void dreamServer::AddClient(struct sockaddr *address, char *name)
+void DreamServer::AddClient(struct sockaddr *address, char *name)
 {
 	// First get a pointer to the beginning of client list
-	dreamClient *list = clientList;
-	dreamClient *prev;
-	dreamClient *newClient;
+	DreamClient *list = clientList;
+	DreamClient *prev;
+	DreamClient *newClient;
 
 	LogString("LIB: Adding client, index %d", runningIndex);
 
@@ -229,12 +229,12 @@ void dreamServer::AddClient(struct sockaddr *address, char *name)
 	{
 		LogString("LIB: Server: Adding first client");
 
-		clientList = (dreamClient *) calloc(1, sizeof(dreamClient));
+		clientList = (DreamClient *) calloc(1, sizeof(DreamClient));
 
 		clientList->SetSocket(socket);
 		clientList->SetSocketAddress(address);
 
-		clientList->SetConnectionState(DREAMSOCK_CONNECTING);
+		clientList->SetConnectionState(DreamSock_CONNECTING);
 		clientList->SetOutgoingSequence(1);
 		clientList->SetIncomingSequence(0);
 		clientList->SetIncomingAcknowledged(0);
@@ -257,12 +257,12 @@ void dreamServer::AddClient(struct sockaddr *address, char *name)
 			list = list->next;
 		}
 
-		list = (dreamClient *) calloc(1, sizeof(dreamClient));
+		list = (DreamClient *) calloc(1, sizeof(DreamClient));
 
 		list->SetSocket(socket);
 		list->SetSocketAddress(address);
 
-		list->SetConnectionState(DREAMSOCK_CONNECTING);
+		list->SetConnectionState(DreamSock_CONNECTING);
 		list->SetOutgoingSequence(1);
 		list->SetIncomingSequence(0);
 		list->SetIncomingAcknowledged(0);
@@ -284,11 +284,11 @@ void dreamServer::AddClient(struct sockaddr *address, char *name)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void dreamServer::RemoveClient(dreamClient *client)
+void DreamServer::RemoveClient(DreamClient *client)
 {
-	dreamClient *list = NULL;
-	dreamClient *prev = NULL;
-	dreamClient *next = NULL;
+	DreamClient *list = NULL;
+	DreamClient *prev = NULL;
+	DreamClient *next = NULL;
 
 	int index = client->GetIndex();
 
@@ -336,13 +336,13 @@ void dreamServer::RemoveClient(dreamClient *client)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void dreamServer::ParsePacket(dreamMessage *mes, struct sockaddr *address)
+void DreamServer::ParsePacket(DreamMessage *mes, struct sockaddr *address)
 {
 	mes->BeginReading();
 	int type = mes->ReadByte();
 
 	// Find the correct client by comparing addresses
-	dreamClient *clList = clientList;
+	DreamClient *clList = clientList;
 
 	// If we do not have clients yet, skip to message type checking
 	if(clList != NULL )
@@ -357,7 +357,7 @@ void dreamServer::ParsePacket(dreamMessage *mes, struct sockaddr *address)
 
 		if(clList != NULL)
 		{
-			clList->SetLastMessageTime(dreamSock_GetCurrentSystemTime());
+			clList->SetLastMessageTime(DreamSock_GetCurrentSystemTime());
 
 			// Check if the type is a positive number
 			// -> is the packet sequenced
@@ -379,21 +379,21 @@ void dreamServer::ParsePacket(dreamMessage *mes, struct sockaddr *address)
 			}
 
 			// Wait for one message before setting state to connected
-			if(clList->GetConnectionState() == DREAMSOCK_CONNECTING)
-				clList->SetConnectionState(DREAMSOCK_CONNECTED);
+			if(clList->GetConnectionState() == DreamSock_CONNECTING)
+				clList->SetConnectionState(DreamSock_CONNECTED);
 		}
 	}
 
 	// Parse through the system messages
 	switch(type)
 	{
-	case DREAMSOCK_MES_CONNECT:
+	case DreamSock_MES_CONNECT:
 		AddClient(address, mes->ReadString());
 
 		LogString("LIBRARY: Server: a client connected succesfully");
 		break;
 
-	case DREAMSOCK_MES_DISCONNECT:
+	case DreamSock_MES_DISCONNECT:
 		if(clList == NULL)
 			break;
 
@@ -402,8 +402,8 @@ void dreamServer::ParsePacket(dreamMessage *mes, struct sockaddr *address)
 		LogString("LIBRARY: Server: a client disconnected");
 		break;
 
-	case DREAMSOCK_MES_PING:
-		clList->SetPing(dreamSock_GetCurrentSystemTime() - clList->GetPingSent());
+	case DreamSock_MES_PING:
+		clList->SetPing(DreamSock_GetCurrentSystemTime() - clList->GetPingSent());
 		break;
 	}
 }
@@ -412,19 +412,19 @@ void dreamServer::ParsePacket(dreamMessage *mes, struct sockaddr *address)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-int dreamServer::CheckForTimeout(char *data, struct sockaddr *from)
+int DreamServer::CheckForTimeout(char *data, struct sockaddr *from)
 {
-	int currentTime = dreamSock_GetCurrentSystemTime();
+	int currentTime = DreamSock_GetCurrentSystemTime();
 
-	dreamClient *clList = clientList;
-	dreamClient *next;
+	DreamClient *clList = clientList;
+	DreamClient *next;
 
 	for( ; clList != NULL;)
 	{
 		next = clList->next;
 
 		// Don't timeout when connecting
-		if(clList->GetConnectionState() == DREAMSOCK_CONNECTING)
+		if(clList->GetConnectionState() == DreamSock_CONNECTING)
 		{
 			clList = next;
 			continue;
@@ -439,9 +439,9 @@ int dreamServer::CheckForTimeout(char *data, struct sockaddr *from)
 
 			// Build a 'fake' message so the application will also
 			// receive notification of a client disconnecting
-			dreamMessage mes;
+			DreamMessage mes;
 			mes.Init(data, sizeof(data));
-			mes.WriteByte(DREAMSOCK_MES_DISCONNECT);
+			mes.WriteByte(DreamSock_MES_DISCONNECT);
 
 			*(struct sockaddr *) from = *clList->GetSocketAddress();
 
@@ -460,7 +460,7 @@ int dreamServer::CheckForTimeout(char *data, struct sockaddr *from)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-int dreamServer::GetPacket(char *data, struct sockaddr *from)
+int DreamServer::GetPacket(char *data, struct sockaddr *from)
 {
 	// Check if the server is set up
 	if(!socket)
@@ -493,10 +493,10 @@ int dreamServer::GetPacket(char *data, struct sockaddr *from)
 	// Read data of the socket
 	int ret = 0;
 
-	dreamMessage mes;
+	DreamMessage mes;
 	mes.Init(data, sizeof(data));
 
-	ret = dreamSock_GetPacket(socket, mes.data, from);
+	ret = DreamSock_GetPacket(socket, mes.data, from);
 
 	if(ret <= 0)
 		return 0;
@@ -513,13 +513,13 @@ int dreamServer::GetPacket(char *data, struct sockaddr *from)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void dreamServer::SendPackets(void)
+void DreamServer::SendPackets(void)
 {
 	// Check if the server is set up
 	if(!socket)
 		return;
 
-	dreamClient *clList = clientList;
+	DreamClient *clList = clientList;
 
 	for( ; clList != NULL; clList = clList->next)
 	{

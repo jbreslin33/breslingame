@@ -1,9 +1,9 @@
 #include "CArmyWar.h"
-#include "../dreamsock/dreamClient.h"
+#include "../DreamSock/DreamClient.h"
 
 CArmyWar::CArmyWar()
 {
-	networkClient	= new dreamClient;
+	networkClient	= new DreamClient;
 	clientList		= NULL;
 	localClient		= NULL;
 	clients			= 0;

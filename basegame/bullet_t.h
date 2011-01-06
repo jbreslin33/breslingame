@@ -4,7 +4,7 @@
 #define MAX_BULLETS 500
 
 // Bullet Data
-struct bullet_t
+struct Bullet_t
 {
 	int x,y;
 	int dir;

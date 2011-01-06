@@ -5,7 +5,7 @@
 // Windows code only
 //#ifdef WIN32
 
-#include "dreamSock.h"
+#include "DreamSock.h"
 
 #include <stdio.h>
 #include <windows.h>
@@ -16,7 +16,7 @@
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-int dreamSock_InitializeWinSock(void)
+int DreamSock_InitializeWinSock(void)
 {
 	WORD versionRequested;
 	WSADATA wsaData;
@@ -97,7 +97,7 @@ int dreamSock_InitializeWinSock(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-int dreamSock_Win_GetCurrentSystemTime(void)
+int DreamSock_Win_GetCurrentSystemTime(void)
 {
 	int curtime;
 	static int base;

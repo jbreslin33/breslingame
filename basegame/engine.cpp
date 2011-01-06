@@ -1,6 +1,6 @@
-#include "../dreamsock/dreamSock.h"
-#include "player_t.h"
-#include "bullet_t.h"
+#include "../DreamSock/DreamSock.h"
+#include "Player_t.h"
+#include "Bullet_t.h"
 /*
 #include <windows.h>
 #include <gl/gl.h>
@@ -53,13 +53,13 @@ bool east;			// Direction flag
 bool west;			// Direction flag
 bool stopped;		// Direction flag
 
-struct player_t players[16];	// limit of 16 players
+struct Player_t players[16];	// limit of 16 players
 int ingame_players;				// the number of players in the game
 int half_players;				// half the amount of players in the game
 int place_pos_x;
 int player_with_flag_id;
 
-struct bullet_t bullets[MAX_BULLETS]; // limit of 500 bullets (at once)
+struct Bullet_t bullets[MAX_BULLETS]; // limit of 500 bullets (at once)
 
 int red_score;
 int blue_score;

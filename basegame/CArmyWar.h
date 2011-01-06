@@ -6,7 +6,7 @@
 #include <gl/glaux.h>
 #include <2dlib.h>
 */
-#include "clientLoginData.h"
+#include "ClientLoginData.h"
 #include <string.h>
 
 #define NORTH		0
@@ -21,8 +21,8 @@
 #define BLUE_TEAM	0
 #define RED_TEAM	1
 
-class dreamMessage;
-class dreamClient;
+class DreamMessage;
+class DreamClient;
 
 typedef struct
 {
@@ -30,7 +30,7 @@ typedef struct
 	float y;
 } VECTOR2D;
 
-typedef struct bullet_t
+typedef struct Bullet_t
 {
 	VECTOR2D	vel;
 	VECTOR2D	origin;
@@ -38,7 +38,7 @@ typedef struct bullet_t
 
 	bool		shot;
 	int			lifetime;
-} bullet_t;
+} Bullet_t;
 
 typedef struct
 {
@@ -49,7 +49,7 @@ typedef struct
 	VECTOR2D	origin;
 	VECTOR2D	predictedOrigin;
 
-	bullet_t	bullet;
+	Bullet_t	bullet;
 
 	int			msec;
 } command_t;
@@ -99,15 +99,15 @@ private:
 	void	ReadPackets(void);
 	void	SendCommand(void);
 	void	SendRequestNonDeltaFrame(void);
-	void	ReadMoveCommand(dreamMessage *mes, clientData *client);
-	void	ReadDeltaMoveCommand(dreamMessage *mes, clientData *client);
-	void	BuildDeltaMoveCommand(dreamMessage *mes, clientData *theClient);
+	void	ReadMoveCommand(DreamMessage *mes, clientData *client);
+	void	ReadDeltaMoveCommand(DreamMessage *mes, clientData *client);
+	void	BuildDeltaMoveCommand(DreamMessage *mes, clientData *theClient);
 
 
 	// Variables
 
 	// Network variables
-	dreamClient *networkClient;
+	DreamClient *networkClient;
 
 	clientData *clientList;			// Client list
 	clientData *localClient;		// Pointer to the local client in the client list
