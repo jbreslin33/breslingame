@@ -40,7 +40,7 @@ DreamClient::~DreamClient()
 int DreamClient::Initialise(char *localIP, char *remoteIP, int port)
 {
 	// Initialise DreamSock if it is not already initialised
-	//dreamSock->DreamSock_Initialize();
+	dreamSock->DreamSock_Initialize();
 
 	// Save server's address information for later use
 	serverPort = port;
@@ -56,12 +56,12 @@ int DreamClient::Initialise(char *localIP, char *remoteIP, int port)
 
 	if(inetAddr == INADDR_NONE)
 	{
-		return DreamSock_CLIENT_ERROR;
+		return DREAMSOCK_CLIENT_ERROR;
 	}
 
 	if(socket == DreamSock_INVALID_SOCKET)
 	{
-		return DreamSock_CLIENT_ERROR;
+		return DREAMSOCK_CLIENT_ERROR;
 	}
 
 	init = true;

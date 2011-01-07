@@ -669,9 +669,10 @@ void CArmyWar::StartConnection(int ind)
 //	LogString("StartConnection");
 
 	//gameIndex = ind;
+char serverIP[32] = "127.0.0.1";
 
-	int ret = networkClient->Initialise("", "127.0.0.1", 30004);
-/*
+	int ret = networkClient->Initialise("", serverIP, 30004);
+
 	if(ret == DREAMSOCK_CLIENT_ERROR)
 	{
 		char text[64];
@@ -681,7 +682,7 @@ void CArmyWar::StartConnection(int ind)
 	}
 
 	Connect();
-*/
+
 }
 
 void CArmyWar::Connect(void)

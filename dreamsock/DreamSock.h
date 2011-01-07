@@ -47,7 +47,7 @@
 
 // Error codes
 #define DreamSock_SERVER_ERROR			1
-#define DreamSock_CLIENT_ERROR			2
+#define DREAMSOCK_CLIENT_ERROR			2
 
 #ifdef WIN32
 	#define DreamSock_INVALID_SOCKET	INVALID_SOCKET

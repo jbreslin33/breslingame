@@ -59,6 +59,7 @@ void StopLog(void)
 //-----------------------------------------------------------------------------
 void LogString(char *string, ...)
 {
+	/*
 	char buf[1024];
 	va_list ap;
 	va_start(ap, string);
@@ -91,6 +92,7 @@ void LogString(char *string, ...)
 	// Linux outputs to screen and to the open file when running as daemon
 	printf("%s: %s\n", timedate, buf);
 #endif
+	*/
 }
 
 /***************

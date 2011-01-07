@@ -274,7 +274,7 @@ LRESULT CALLBACK CreateAccountDialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LP
 
 					ret = Signin.GetNetworkClient()->Initialise("", serverIP, 30002);
 
-					if(ret == DreamSock_CLIENT_ERROR)
+					if(ret == DREAMSOCK_CLIENT_ERROR)
 					{
 						char text[64];
 						sprintf(text, "Could not open client socket");
@@ -349,7 +349,7 @@ LRESULT CALLBACK LoginDialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPa
 
 					ret = Lobby.GetNetworkClient()->Initialise("", serverIP, 30003);
 
-					if(ret == DreamSock_CLIENT_ERROR)
+					if(ret == DREAMSOCK_CLIENT_ERROR)
 					{
 						char text[64];
 						sprintf(text, "Could not open client socket");

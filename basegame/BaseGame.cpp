@@ -24,9 +24,10 @@ BaseGame::BaseGame(void)
 {
         // Create application object
         game = new CArmyWar;
-
+    //Ogre::LogManager::getSingletonPtr()->logMessage("*HELLO ***");
 		//game = new CArmyWar;
 	    game->StartConnection(1);// doesn't matter what you pass in cause it ain't used.
+			//LogManager::getSingleton().logMessage("*-*-* OGRE Initialising");
 }
 //-------------------------------------------------------------------------------------
 BaseGame::~BaseGame(void)
