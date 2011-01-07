@@ -1,9 +1,11 @@
 #include "CArmyWar.h"
-#include "../DreamSock/DreamClient.h"
+#include "../dreamsock/DreamClient.h"
+#include "../dreamsock/DreamSock.h"
 
 CArmyWar::CArmyWar()
 {
-	networkClient	= new DreamClient;
+	//serverIP = "127.0.0.1";
+	networkClient	= new DreamClient();
 	clientList		= NULL;
 	localClient		= NULL;
 	clients			= 0;
@@ -662,3 +664,37 @@ void CArmyWar::MoveObjects(void)
 	}
 }
 
+void CArmyWar::StartConnection(int ind)
+{
+//	LogString("StartConnection");
+
+	//gameIndex = ind;
+
+	int ret = networkClient->Initialise("", "127.0.0.1", 30004);
+/*
+	if(ret == DREAMSOCK_CLIENT_ERROR)
+	{
+		char text[64];
+		sprintf(text, "Could not open client socket");
+
+		MessageBox(NULL, text, "Error", MB_OK);
+	}
+
+	Connect();
+*/
+}
+
+void CArmyWar::Connect(void)
+{
+	if(init)
+	{
+		LogString("ArmyWar already initialised");
+		return;
+	}
+
+	LogString("CArmyWar::Connect");
+
+	init = true;
+
+	networkClient->SendConnect("myname");
+}

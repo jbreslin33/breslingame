@@ -103,7 +103,6 @@ set(HDRS
 	
 	../DreamSock/DreamWinSock.h
 	
-	
 	#tutgame
 	./Bullet_t.h
 	./CArmyWar.h
@@ -114,6 +113,9 @@ set(HDRS
 	./ClientLoginData.h
 	./Player_t.h
 	./RESOURCE.H
+	
+	#Characters
+	../charactercontrollers/Character.h
 )
  
 set(SRCS
@@ -139,6 +141,9 @@ set(SRCS
 	./main.cpp
 	./ClientLoginData.cpp
 	./Player_t.cpp
+	
+	#Characters
+	../charactercontrollers/Character.cpp
 	
 )
 
@@ -174,6 +179,9 @@ set(HDRS
 	./ClientLoginData.h
 	./Player_t.h
 	./RESOURCE.H
+	
+	#Characters
+	../charactercontrollers/Character.h
 )
  
 set(SRCS
@@ -199,6 +207,9 @@ set(SRCS
 	./main.cpp
 	./ClientLoginData.cpp
 	./Player_t.cpp
+
+	#Characters
+	../charactercontrollers/Character.cpp
 	
 )
 

@@ -15,10 +15,18 @@ This source file is part of the
 -----------------------------------------------------------------------------
 */
 #include "BaseGame.h"
+#include "../charactercontrollers/Character.h"
+#include "CArmyWar.h"
+
 
 //-------------------------------------------------------------------------------------
 BaseGame::BaseGame(void)
 {
+        // Create application object
+        game = new CArmyWar;
+
+		//game = new CArmyWar;
+	    game->StartConnection(1);// doesn't matter what you pass in cause it ain't used.
 }
 //-------------------------------------------------------------------------------------
 BaseGame::~BaseGame(void)
@@ -28,7 +36,27 @@ BaseGame::~BaseGame(void)
 //-------------------------------------------------------------------------------------
 void BaseGame::createScene(void)
 {
-    // create your scene here :)
+
+	mSceneMgr->setAmbientLight(ColourValue(0.3, 0.3, 0.3));
+
+    // add a bright light above the scene
+	Light* light = mSceneMgr->createLight();
+	light->setType(Light::LT_POINT);
+	light->setPosition(-10, 40, 20);
+	light->setSpecularColour(ColourValue::White);
+
+	// create a floor mesh resource
+	MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+	Plane(Vector3::UNIT_Y, 0), 200, 200, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
+
+	// create a floor entity, give it a material, and place it at the origin
+    Entity* floor = mSceneMgr->createEntity("Floor", "floor");
+    floor->setMaterialName("Examples/Rockwall");
+    floor->setCastShadows(false);
+    mSceneMgr->getRootSceneNode()->attachObject(floor);
+
+	//add a character
+    jay       = new Character(mSceneMgr, "jay"      , "Sinbad.mesh", "RunBase",  0,  5, 0);
 }
 
 
@@ -48,14 +76,6 @@ extern "C" {
     int main(int argc, char *argv[])
 #endif
     {
-
-		int time, oldTime, newTime;
-	MSG msg;
-	BOOL bMsg = FALSE;
-	PeekMessage(&msg, NULL, 0, 0, PM_NOREMOVE);
-
-//	oldTime = DreamSock_GetCurrentSystemTime();
-        // Create application object
         BaseGame app;
 
         try {

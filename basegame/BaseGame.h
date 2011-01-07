@@ -19,14 +19,23 @@ This source file is part of the
 
 #include "../baseapplication/BaseApplication.h"
 
+
+class CArmyWar;
+class Character;
+
 class BaseGame : public BaseApplication
 {
 public:
     BaseGame(void);
     virtual ~BaseGame(void);
 
+	CArmyWar* game;
+	bool keys[256];
+    Character*    jay;
+
 protected:
     virtual void createScene(void);
+
 };
 
 #endif // #ifndef __BaseGame_h_

@@ -179,6 +179,8 @@ public:
 	bool	GetInProgress(void)		{ return inProgress; }
 
 	CArmyWar *next;
+	//char* serverIP;
+
 };
 
 #endif
