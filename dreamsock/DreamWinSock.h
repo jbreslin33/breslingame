@@ -1,6 +1,6 @@
 class DreamWinSock
 {
-
+public:
 	DreamWinSock();
 	~DreamWinSock();
 

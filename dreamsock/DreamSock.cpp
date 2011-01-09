@@ -7,6 +7,7 @@
 	#endif
 	#include <windows.h>
 	#include <winsock2.h>
+	#include "DreamWinSock.h"
 #else
 // UNIX specific headers
 	#include <memory.h>
@@ -23,10 +24,50 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
+
+DreamSock::DreamSock()
+{
+	dreamSock_init = false;
+}
+
+DreamSock::~DreamSock()
+{
+
+}
+
+int DreamSock::DreamSock_Initialize(void)
+{
+	if(dreamSock_init == true)
+		return 0;
+
+	dreamSock_init = true;
+
+	StartLog();
+
+#ifdef WIN32
+	dreamWinSock = new DreamWinSock();
+	return dreamWinSock->DreamSock_InitializeWinSock();
+#else
+	return 0;
+#endif
+}
+
+void DreamSock::DreamSock_Shutdown(void)
+{
+	if(dreamSock_init == false)
+		return;
+
+	LogString("Shutting down dreamSock");
+
+	dreamSock_init = false;
+
+	StopLog();
+
+#ifdef WIN32
+	WSACleanup();
+#endif
+}
+
 SOCKET DreamSock::DreamSock_Socket(int protocol)
 {
 	int type;
@@ -63,10 +104,6 @@ SOCKET DreamSock::DreamSock_Socket(int protocol)
 	return sock;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
 int DreamSock::DreamSock_SetNonBlocking(SOCKET sock, u_long setMode)
 {
 	u_long set = setMode;
@@ -103,10 +140,6 @@ int DreamSock::DreamSock_SetBroadcasting(SOCKET sock, int mode)
 	return 0;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
 int DreamSock::DreamSock_StringToSockaddr(char *addressString, struct sockaddr *sadr)
 {
 	char copy[128];
@@ -129,10 +162,7 @@ int DreamSock::DreamSock_StringToSockaddr(char *addressString, struct sockaddr *
 	else return 1;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
+
 SOCKET DreamSock::DreamSock_OpenUDPSocket(char *netInterface, int port)
 {
 	SOCKET sock;
@@ -194,10 +224,6 @@ SOCKET DreamSock::DreamSock_OpenUDPSocket(char *netInterface, int port)
 	return sock;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
 void DreamSock::DreamSock_CloseSocket(SOCKET sock)
 {
 #ifdef WIN32
@@ -207,10 +233,6 @@ void DreamSock::DreamSock_CloseSocket(SOCKET sock)
 #endif
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
 int DreamSock::DreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *from)
 {
 	int ret;
@@ -256,10 +278,6 @@ int DreamSock::DreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *fro
 	return ret;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
 void DreamSock::DreamSock_SendPacket(SOCKET sock, int length, char *data, struct sockaddr addr)
 {
 	int	ret;
@@ -286,10 +304,6 @@ void DreamSock::DreamSock_SendPacket(SOCKET sock, int length, char *data, struct
 	}
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
 void DreamSock::DreamSock_Broadcast(SOCKET sock, int length, char *data, int port)
 {
 	struct sockaddr_in servaddr;
@@ -329,10 +343,6 @@ void DreamSock::DreamSock_Broadcast(SOCKET sock, int length, char *data, int por
 	}
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
 int DreamSock::DreamSock_GetCurrentSystemTime(void)
 {
 #ifndef WIN32

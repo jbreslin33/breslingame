@@ -65,15 +65,18 @@
 #define DreamSock_MES_REMOVECLIENT	-104
 #define DreamSock_MES_PING			-105
 
-
+class DreamWinSock;
 
 class DreamSock
 {
 public:
 
+	DreamSock();
+	~DreamSock();
+
+
 // Function prototypes
-//int	DreamSock_Initialize(void);
-//int	DreamSock_InitializeWinSock(void);
+int	DreamSock_Initialize(void);
 void DreamSock_Shutdown(void);
 
 SOCKET DreamSock_Socket(int protocol);
@@ -86,6 +89,9 @@ void DreamSock_CloseSocket(SOCKET sock);
 int DreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *from);
 void DreamSock_SendPacket(SOCKET sock, int length, char *data, struct sockaddr addr);
 void DreamSock_Broadcast(SOCKET sock, int length, char *data, int port);
+
+bool dreamSock_init;
+DreamWinSock* dreamWinSock;
 
 #ifndef WIN32
 int DreamSock_Linux_GetCurrentSystemTime(void);
