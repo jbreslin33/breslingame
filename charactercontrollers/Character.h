@@ -1,12 +1,10 @@
 #ifndef Character_H
 #define Character_H
 
-
 #include "Ogre.h"
 #include "OIS.h"
 
 using namespace Ogre;
-//using namespace OgreBites;
 
 class Character
 {
@@ -20,26 +18,23 @@ public:
     void updateAnimations(Real deltaTime);
     void updateCamera    (Real deltaTime);
 
-
 protected:
 
 	void setupModel();
 	void cleanupContent();
 
-
-
     //objects
     Ogre::SceneManager* mSceneManager;
-	SceneNode* mModelNodes;
+	SceneNode*          mSceneNode;
 
     //Animation
-	AnimationState* mAnimStates;
-	Real mAnimSpeeds;
+	AnimationState* mAnimationState;
+	Real            mAnimationSpeed;
 
     //stats
-    std::string mName;
-    std::string mMesh;
-    std::string mAnimation;
+    std::string mPlayerName;
+    std::string mMeshName;
+    std::string mAnimationName;
     int xPos;
     int yPos;
     int zPos;
