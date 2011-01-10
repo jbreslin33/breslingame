@@ -23,10 +23,10 @@ This source file is part of the
 BaseGame::BaseGame(void)
 {
         // Create application object
-        game = new CArmyWar;
+        mGame = new CArmyWar;
     //Ogre::LogManager::getSingletonPtr()->logMessage("*HELLO ***");
 		//game = new CArmyWar;
-	    game->StartConnection(1);// doesn't matter what you pass in cause it ain't used.
+	    mGame->StartConnection(1);// doesn't matter what you pass in cause it ain't used.
 			//LogManager::getSingleton().logMessage("*-*-* OGRE Initialising");
 }
 //-------------------------------------------------------------------------------------
@@ -60,6 +60,61 @@ void BaseGame::createScene(void)
     jay       = new Character(mSceneMgr, "jay"      , "Sinbad.mesh", "RunBase",  0,  5, 0);
 }
 
+bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
+{
+ 
+    if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
+    {
+		mGame->keys[VK_UP] = TRUE;
+    }
+	else
+	{
+        mGame->keys[VK_UP] = FALSE;
+	}
+    if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
+    {
+		mGame->keys[VK_DOWN] = TRUE;
+    }
+	else
+	{
+        mGame->keys[VK_DOWN] = FALSE;
+	}
+
+    if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
+    {
+		mGame->keys[VK_LEFT] = TRUE;
+    }
+	else
+	{
+        mGame->keys[VK_LEFT] = FALSE;
+	}
+    if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
+    {
+		mGame->keys[VK_RIGHT] = TRUE;
+    }
+	else
+	{
+        mGame->keys[VK_RIGHT] = FALSE;
+	}
+         
+    return true;
+}
+//-------------------------------------------------------------------------------------
+bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
+{
+    bool ret = BaseApplication::frameRenderingQueued(evt);
+ 
+    if(!processUnbufferedInput(evt)) return false;
+
+	if(mGame != NULL)
+	{
+		mGame->RunNetwork(evt.timeSinceLastFrame * 1000);
+		mGame->CheckKeys();
+		mGame->Frame();
+	}
+ 
+    return ret;
+}
 
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32

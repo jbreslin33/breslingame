@@ -18,6 +18,8 @@ public:
     void updateAnimations(Real deltaTime);
     void updateCamera    (Real deltaTime);
 
+	SceneNode* getSceneNode() { return mSceneNode; }
+
 protected:
 
 	void setupModel();

@@ -37,7 +37,7 @@ void CSignin::ReadPackets(void)
 
 		switch(type)
 		{
-		case DreamSock_MES_ADDCLIENT:
+		case DREAMSOCK_MES_ADDCLIENT:
 			local	= mes.ReadByte();
 			ind		= mes.ReadByte();
 			strcpy(name, mes.ReadString());
@@ -45,7 +45,7 @@ void CSignin::ReadPackets(void)
 			AddClient(local, ind, name);
 			break;
 
-		case DreamSock_MES_REMOVECLIENT:
+		case DREAMSOCK_MES_REMOVECLIENT:
 			ind = mes.ReadByte();
 
 			RemoveClient(ind);
@@ -284,7 +284,7 @@ void CSignin::Disconnect(void)
 //-----------------------------------------------------------------------------
 void CSignin::RunNetwork(int msec)
 {
-	if(networkClient->GetConnectionState() == DreamSock_DISCONNECTED)
+	if(networkClient->GetConnectionState() == DREAMSOCK_DISCONNECTED)
 		return;
 
 	static int keepalive = 0;

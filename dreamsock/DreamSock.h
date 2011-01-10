@@ -36,21 +36,21 @@
 #define DREAMCLIENT						0
 
 // Connection protocols
-#define DreamSock_TCP					0
-#define DreamSock_UDP					1
+#define DREAMSOCK_TCP					0
+#define DREAMSOCK_UDP					1
 
 // Connection states
-#define DreamSock_CONNECTING			0
-#define DreamSock_CONNECTED				1
-#define DreamSock_DISCONNECTING			2
-#define DreamSock_DISCONNECTED			4
+#define DREAMSOCK_CONNECTING			0
+#define DREAMSOCK_CONNECTED				1
+#define DREAMSOCK_DISCONNECTING			2
+#define DREAMSOCK_DISCONNECTED			4
 
 // Error codes
-#define DreamSock_SERVER_ERROR			1
+#define DREAMSOCK_SERVER_ERROR			1
 #define DREAMSOCK_CLIENT_ERROR			2
 
 #ifdef WIN32
-	#define DreamSock_INVALID_SOCKET	INVALID_SOCKET
+	#define DREAMSOCK_INVALID_SOCKET	INVALID_SOCKET
 #else
 	#define DreamSock_INVALID_SOCKET	-1
 #endif
@@ -59,11 +59,11 @@
 // Note (for all messages - system and user):
 // positive = sequenced message
 // negative = un-sequenced message
-#define DreamSock_MES_CONNECT		-101
-#define DreamSock_MES_DISCONNECT	-102
-#define DreamSock_MES_ADDCLIENT		-103
-#define DreamSock_MES_REMOVECLIENT	-104
-#define DreamSock_MES_PING			-105
+#define DREAMSOCK_MES_CONNECT		-101
+#define DREAMSOCK_MES_DISCONNECT	-102
+#define DREAMSOCK_MES_ADDCLIENT		-103
+#define DREAMSOCK_MES_REMOVECLIENT	-104
+#define DREAMSOCK_MES_PING			-105
 
 class DreamWinSock;
 

@@ -102,7 +102,7 @@ void CLobby::ReadPackets(void)
 
 		switch(type)
 		{
-		case DreamSock_MES_ADDCLIENT:
+		case DREAMSOCK_MES_ADDCLIENT:
 			local	= mes.ReadByte();
 			ind		= mes.ReadByte();
 			strcpy(name, mes.ReadString());
@@ -110,7 +110,7 @@ void CLobby::ReadPackets(void)
 			AddClient(local, ind, name);
 			break;
 
-		case DreamSock_MES_REMOVECLIENT:
+		case DREAMSOCK_MES_REMOVECLIENT:
 			ind = mes.ReadByte();
 
 			LogString("Got removeclient %d message", ind);
@@ -594,7 +594,7 @@ void CLobby::Disconnect(void)
 
 void CLobby::RunNetwork(int msec)
 {
-	if(networkClient->GetConnectionState() == DreamSock_DISCONNECTED)
+	if(networkClient->GetConnectionState() == DREAMSOCK_DISCONNECTED)
 		return;
 
 	static int time = 0;

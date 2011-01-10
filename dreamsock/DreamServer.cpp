@@ -90,7 +90,7 @@ int DreamServer::Initialise(char *localIP, int serverPort)
 
 	if(socket == DreamSock_INVALID_SOCKET)
 	{
-		return DreamSock_SERVER_ERROR;
+		return DREAMSOCK_SERVER_ERROR;
 	}
 
 	init = true;
@@ -119,7 +119,7 @@ void DreamServer::SendAddClient(DreamClient *newClient)
 	newClient->message.Init(newClient->message.outgoingData,
 		sizeof(newClient->message.outgoingData));
 
-	newClient->message.WriteByte(DreamSock_MES_CONNECT);	// type
+	newClient->message.WriteByte(DREAMSOCK_MES_CONNECT);	// type
 	newClient->SendPacket();
 
 	// Send 'Add client' message to every client
@@ -131,7 +131,7 @@ void DreamServer::SendAddClient(DreamClient *newClient)
 		newClient->message.Init(newClient->message.outgoingData,
 			sizeof(newClient->message.outgoingData));
 
-		newClient->message.WriteByte(DreamSock_MES_ADDCLIENT); // type
+		newClient->message.WriteByte(DREAMSOCK_MES_ADDCLIENT); // type
 
 		if(client == newClient)
 		{
@@ -158,7 +158,7 @@ void DreamServer::SendAddClient(DreamClient *newClient)
 		client->message.Init(client->message.outgoingData,
 			sizeof(client->message.outgoingData));
 
-		client->message.WriteByte(DreamSock_MES_ADDCLIENT); // type
+		client->message.WriteByte(DREAMSOCK_MES_ADDCLIENT); // type
 
 		client->message.WriteByte(0);
 		client->message.WriteByte(newClient->GetIndex());
@@ -184,7 +184,7 @@ void DreamServer::SendRemoveClient(DreamClient *client)
 		list->message.Init(list->message.outgoingData,
 			sizeof(list->message.outgoingData));
 
-		list->message.WriteByte(DreamSock_MES_REMOVECLIENT);	// type
+		list->message.WriteByte(DREAMSOCK_MES_REMOVECLIENT);	// type
 		list->message.WriteByte(index);							// index
 	}
 
@@ -194,7 +194,7 @@ void DreamServer::SendRemoveClient(DreamClient *client)
 	client->message.Init(client->message.outgoingData,
 		sizeof(client->message.outgoingData));
 
-	client->message.WriteByte(DreamSock_MES_DISCONNECT);
+	client->message.WriteByte(DREAMSOCK_MES_DISCONNECT);
 	client->SendPacket();
 }
 
@@ -236,7 +236,7 @@ void DreamServer::AddClient(struct sockaddr *address, char *name)
 		clientList->SetSocket(socket);
 		clientList->SetSocketAddress(address);
 
-		clientList->SetConnectionState(DreamSock_CONNECTING);
+		clientList->SetConnectionState(DREAMSOCK_CONNECTING);
 		clientList->SetOutgoingSequence(1);
 		clientList->SetIncomingSequence(0);
 		clientList->SetIncomingAcknowledged(0);
@@ -264,7 +264,7 @@ void DreamServer::AddClient(struct sockaddr *address, char *name)
 		list->SetSocket(socket);
 		list->SetSocketAddress(address);
 
-		list->SetConnectionState(DreamSock_CONNECTING);
+		list->SetConnectionState(DREAMSOCK_CONNECTING);
 		list->SetOutgoingSequence(1);
 		list->SetIncomingSequence(0);
 		list->SetIncomingAcknowledged(0);
@@ -381,21 +381,21 @@ void DreamServer::ParsePacket(DreamMessage *mes, struct sockaddr *address)
 			}
 
 			// Wait for one message before setting state to connected
-			if(clList->GetConnectionState() == DreamSock_CONNECTING)
-				clList->SetConnectionState(DreamSock_CONNECTED);
+			if(clList->GetConnectionState() == DREAMSOCK_CONNECTING)
+				clList->SetConnectionState(DREAMSOCK_CONNECTED);
 		}
 	}
 
 	// Parse through the system messages
 	switch(type)
 	{
-	case DreamSock_MES_CONNECT:
+	case DREAMSOCK_MES_CONNECT:
 		AddClient(address, mes->ReadString());
 
 		LogString("LIBRARY: Server: a client connected succesfully");
 		break;
 
-	case DreamSock_MES_DISCONNECT:
+	case DREAMSOCK_MES_DISCONNECT:
 		if(clList == NULL)
 			break;
 
@@ -426,7 +426,7 @@ int DreamServer::CheckForTimeout(char *data, struct sockaddr *from)
 		next = clList->next;
 
 		// Don't timeout when connecting
-		if(clList->GetConnectionState() == DreamSock_CONNECTING)
+		if(clList->GetConnectionState() == DREAMSOCK_CONNECTING)
 		{
 			clList = next;
 			continue;
@@ -443,7 +443,7 @@ int DreamServer::CheckForTimeout(char *data, struct sockaddr *from)
 			// receive notification of a client disconnecting
 			DreamMessage mes;
 			mes.Init(data, sizeof(data));
-			mes.WriteByte(DreamSock_MES_DISCONNECT);
+			mes.WriteByte(DREAMSOCK_MES_DISCONNECT);
 
 			*(struct sockaddr *) from = *clList->GetSocketAddress();
 

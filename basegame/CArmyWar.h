@@ -21,6 +21,8 @@
 #define BLUE_TEAM	0
 #define RED_TEAM	1
 
+
+
 class DreamMessage;
 class DreamClient;
 
@@ -104,6 +106,8 @@ private:
 	void	BuildDeltaMoveCommand(DreamMessage *mes, clientData *theClient);
 
 
+
+
 	// Variables
 
 	// Network variables
@@ -179,6 +183,8 @@ public:
 	bool	GetInProgress(void)		{ return inProgress; }
 
 	CArmyWar *next;
+
+    bool keys[256];
 	//char* serverIP;
 
 };

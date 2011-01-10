@@ -29,9 +29,11 @@ public:
     BaseGame(void);
     virtual ~BaseGame(void);
 
-	CArmyWar* game;
-	bool keys[256];
-    Character*    jay;
+bool processUnbufferedInput(const Ogre::FrameEvent& evt);
+bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+
+	CArmyWar*   mGame;
+    Character*  jay;
 
 protected:
     virtual void createScene(void);

@@ -5,7 +5,7 @@ DreamClient::DreamClient()
 {
 	dreamSock = new DreamSock();
 
-	connectionState	= DreamSock_DISCONNECTED;
+	connectionState	= DREAMSOCK_DISCONNECTED;
 
 	outgoingSequence		= 1;
 	incomingSequence		= 0;
@@ -88,7 +88,7 @@ void DreamClient::Uninitialise(void)
 //-----------------------------------------------------------------------------
 void DreamClient::Reset(void)
 {
-	connectionState = DreamSock_DISCONNECTED;
+	connectionState = DREAMSOCK_DISCONNECTED;
 
 	outgoingSequence		= 1;
 	incomingSequence		= 0;
@@ -126,10 +126,10 @@ void DreamClient::SendConnect(char *name)
 	// Dump buffer so there won't be any old packets to process
 	DumpBuffer();
 
-	connectionState = DreamSock_CONNECTING;
+	connectionState = DREAMSOCK_CONNECTING;
 
 	message.Init(message.outgoingData, sizeof(message.outgoingData));
-	message.WriteByte(DreamSock_MES_CONNECT);
+	message.WriteByte(DREAMSOCK_MES_CONNECT);
 	message.WriteString(name);
 
 	SendPacket(&message);
@@ -142,12 +142,12 @@ void DreamClient::SendConnect(char *name)
 void DreamClient::SendDisconnect(void)
 {
 	message.Init(message.outgoingData, sizeof(message.outgoingData));
-	message.WriteByte(DreamSock_MES_DISCONNECT);
+	message.WriteByte(DREAMSOCK_MES_DISCONNECT);
 
 	SendPacket(&message);
 	Reset();
 
-	connectionState = DreamSock_DISCONNECTING;
+	connectionState = DREAMSOCK_DISCONNECTING;
 }
 
 //-----------------------------------------------------------------------------
@@ -159,7 +159,7 @@ void DreamClient::SendPing(void)
 	pingSent = dreamSock->DreamSock_GetCurrentSystemTime();
 
 	message.Init(message.outgoingData, sizeof(message.outgoingData));
-	message.WriteByte(DreamSock_MES_PING);
+	message.WriteByte(DREAMSOCK_MES_PING);
 
 	SendPacket(&message);
 }
@@ -197,27 +197,27 @@ void DreamClient::ParsePacket(DreamMessage *mes)
 	// Parse trough the system messages
 	switch(type)
 	{
-	case DreamSock_MES_CONNECT:
-		connectionState = DreamSock_CONNECTED;
+	case DREAMSOCK_MES_CONNECT:
+		connectionState = DREAMSOCK_CONNECTED;
 
 		LogString("LIBRARY: Client: got connect confirmation");
 		break;
 
-	case DreamSock_MES_DISCONNECT:
-		connectionState = DreamSock_DISCONNECTED;
+	case DREAMSOCK_MES_DISCONNECT:
+		connectionState = DREAMSOCK_DISCONNECTED;
 
 		LogString("LIBRARY: Client: got disconnect confirmation");
 		break;
 
-	case DreamSock_MES_ADDCLIENT:
+	case DREAMSOCK_MES_ADDCLIENT:
 		LogString("LIBRARY: Client: adding a client");
 		break;
 
-	case DreamSock_MES_REMOVECLIENT:
+	case DREAMSOCK_MES_REMOVECLIENT:
 		LogString("LIBRARY: Client: removing a client");
 		break;
 
-	case DreamSock_MES_PING:
+	case DREAMSOCK_MES_PING:
 		SendPing();
 		break;
 	}
@@ -258,7 +258,7 @@ int DreamClient::GetPacket(char *data, struct sockaddr *from)
 void DreamClient::SendPacket(void)
 {
 	// Check that everything is set up
-	if(!socket || connectionState == DreamSock_DISCONNECTED)
+	if(!socket || connectionState == DREAMSOCK_DISCONNECTED)
 	{
 		LogString("SendPacket error: Could not send because the client is disconnected");
 		return;
@@ -308,7 +308,7 @@ void DreamClient::SendPacket(void)
 void DreamClient::SendPacket(DreamMessage *theMes)
 {
 	// Check that everything is set up
-	if(!socket || connectionState == DreamSock_DISCONNECTED)
+	if(!socket || connectionState == DREAMSOCK_DISCONNECTED)
 	{
 		LogString("SendPacket error: Could not send because the client is disconnected");
 		return;

@@ -75,7 +75,7 @@ SOCKET DreamSock::DreamSock_Socket(int protocol)
 	SOCKET sock;
 
 	// Check which protocol to use
-	if(protocol == DreamSock_TCP)
+	if(protocol == DREAMSOCK_TCP)
 	{
 		type = SOCK_STREAM;
 		proto = IPPROTO_TCP;
@@ -98,7 +98,7 @@ SOCKET DreamSock::DreamSock_Socket(int protocol)
 		LogString("Error: socket() : %s", strerror(errno));
 #endif
 
-		return DreamSock_INVALID_SOCKET;
+		return DREAMSOCK_INVALID_SOCKET;
 	}
 
 	return sock;
@@ -134,7 +134,7 @@ int DreamSock::DreamSock_SetBroadcasting(SOCKET sock, int mode)
 		LogString("Error code %d: setsockopt() : %s", errno, strerror(errno));
 #endif
 
-		return DreamSock_INVALID_SOCKET;
+		return DREAMSOCK_INVALID_SOCKET;
 	}
 
 	return 0;
@@ -169,9 +169,9 @@ SOCKET DreamSock::DreamSock_OpenUDPSocket(char *netInterface, int port)
 
 	struct sockaddr_in address;
 
-	sock = DreamSock_Socket(DreamSock_UDP);
+	sock = DreamSock_Socket(DREAMSOCK_UDP);
 
-	if(sock == DreamSock_INVALID_SOCKET)
+	if(sock == DREAMSOCK_INVALID_SOCKET)
 		return sock;
 
 	DreamSock_SetNonBlocking(sock, 1);
@@ -212,7 +212,7 @@ SOCKET DreamSock::DreamSock_OpenUDPSocket(char *netInterface, int port)
 		LogString("Error code %d: bind() : %s", errno, strerror(errno));
 #endif
 
-		return DreamSock_INVALID_SOCKET;
+		return DREAMSOCK_INVALID_SOCKET;
 	}
 
 	// Get the port number (if we did not define one, we get the assigned port number here)
