@@ -2,6 +2,11 @@
 #include "../dreamsock/DreamClient.h"
 #include "../dreamsock/DreamSock.h"
 
+#include "../charactercontrollers/Character.h"
+
+#include "Ogre.h"
+using namespace Ogre;
+
 CArmyWar::CArmyWar()
 {
 	//serverIP = "127.0.0.1";
@@ -34,6 +39,8 @@ CArmyWar::CArmyWar()
 	playerWithFlag	= NULL;
 
 	next			= NULL;
+
+	myCharacter = NULL;
 }
 
 
@@ -839,8 +846,15 @@ void CArmyWar::MoveObjects(void)
 		// Local player
 		else
 		{
+			Ogre::Vector3 transVector = Ogre::Vector3::ZERO;
+			
 			client->command.origin.x = client->command.predictedOrigin.x;
 			client->command.origin.y = client->command.predictedOrigin.y;
+
+			transVector.x = client->command.origin.x;
+            transVector.y = client->command.origin.y;
+			
+			myCharacter->getSceneNode()->setPosition(transVector);
 
 			client->command.bullet.origin.x = client->command.bullet.predictedOrigin.x;
 			client->command.bullet.origin.y = client->command.bullet.predictedOrigin.y;

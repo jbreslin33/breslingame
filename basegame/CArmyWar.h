@@ -25,6 +25,7 @@
 
 class DreamMessage;
 class DreamClient;
+class Character;
 
 typedef struct
 {
@@ -75,7 +76,7 @@ typedef struct clientData
 // The main application class interface
 class CArmyWar
 {
-private:
+public:
 	// Methods
 
 	// Client.cpp
@@ -105,9 +106,6 @@ private:
 	void	ReadDeltaMoveCommand(DreamMessage *mes, clientData *client);
 	void	BuildDeltaMoveCommand(DreamMessage *mes, clientData *theClient);
 
-
-
-
 	// Variables
 
 	// Network variables
@@ -131,6 +129,9 @@ private:
 	GFX_IMAGE2D rednumbers[10];		// variable to hold 'cdrom' graphic
 	GFX_IMAGE2D bluenumbers[10];	// variable to hold 'cdrom' graphic
 */
+
+	Character* myCharacter;
+
 	float frametime;
 
 	char gamename[32];
@@ -160,9 +161,9 @@ public:
 	~CArmyWar();
 
 	// Client.cpp
-	void	Shutdown(void);
-	void	CheckKeys(void);
-	void	Frame(void);
+	void	Shutdown  (void);
+	void	CheckKeys (void);
+	void	Frame     (void);
 	void	RunNetwork(int msec);
 	
 	// Network.cpp

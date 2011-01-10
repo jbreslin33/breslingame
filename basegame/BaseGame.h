@@ -19,7 +19,6 @@ This source file is part of the
 
 #include "../baseapplication/BaseApplication.h"
 
-
 class CArmyWar;
 class Character;
 
