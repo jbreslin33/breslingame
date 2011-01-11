@@ -3,12 +3,14 @@
 #include "../dreamsock/DreamSock.h"
 
 #include "../charactercontrollers/Character.h"
-
+#include "BaseGame.h"
 #include "Ogre.h"
 using namespace Ogre;
 
-CArmyWar::CArmyWar()
+CArmyWar::CArmyWar(BaseGame* baseGame)
 {
+	mBaseGame = baseGame;
+
 	//serverIP = "127.0.0.1";
 	networkClient	= new DreamClient();
 	clientList		= NULL;
@@ -40,7 +42,8 @@ CArmyWar::CArmyWar()
 
 	next			= NULL;
 
-	myCharacter = NULL;
+	//myCharacter = NULL;
+	//Character* jaywad = new Character(mBaseGame->getSceneManager(), "jaydd", "Sinbad.mesh", "RunBase",  0,  5, 0);
 }
 
 
@@ -161,6 +164,7 @@ void CArmyWar::ReadPackets(void)
 }
 void CArmyWar::AddClient(int local, int ind, char *name)
 {
+//Character* jaybird = new Character(mBaseGame->getSceneManager(), "jayman", "Sinbad.mesh", "RunBase",  0,  5, 0);
 	// First get a pointer to the beginning of client list
 	clientData *list = clientList;
 	clientData *prev;
@@ -181,6 +185,7 @@ void CArmyWar::AddClient(int local, int ind, char *name)
 		}
 
 		clientList->index = ind;
+		clientList->character = new Character(mBaseGame->getSceneManager(), "jay", "Sinbad.mesh", "RunBase",  0,  5, 0);
 		strcpy(clientList->nickname, name);
 
 		if(clients % 2 == 0)
@@ -222,6 +227,9 @@ void CArmyWar::AddClient(int local, int ind, char *name)
 		list->next = NULL;
 		prev->next = list;
 	}
+
+
+	
 
 	clients++;
 
@@ -854,7 +862,8 @@ void CArmyWar::MoveObjects(void)
 			transVector.x = client->command.origin.x;
             transVector.y = client->command.origin.y;
 			
-			myCharacter->getSceneNode()->setPosition(transVector);
+			//myCharacter->getSceneNode()->setPosition(transVector);
+			client->character->getSceneNode()->setPosition(transVector);
 
 			client->command.bullet.origin.x = client->command.bullet.predictedOrigin.x;
 			client->command.bullet.origin.y = client->command.bullet.predictedOrigin.y;

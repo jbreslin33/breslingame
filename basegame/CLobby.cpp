@@ -334,6 +334,7 @@ void CLobby::RemoveClients(void)
 
 void CLobby::AddGame(char *name, int ind, bool inProgress)
 {
+	/*
 	// First get a pointer to the beginning of client list
 	CArmyWar *list = gameList;
 	CArmyWar *prev;
@@ -341,7 +342,7 @@ void CLobby::AddGame(char *name, int ind, bool inProgress)
 	// No clients yet, adding the first one
 	if(gameList == NULL)
 	{
-		gameList = new CArmyWar;
+		gameList = new CArmyWar(this);
 
 		gameList->SetName(name);
 		gameList->SetGameIndex(ind);
@@ -368,7 +369,7 @@ void CLobby::AddGame(char *name, int ind, bool inProgress)
 			list = list->next;
 		}
 
-		list = new CArmyWar;
+		list = new CArmyWar(;
 
 		list->SetName(name);
 		list->SetGameIndex(ind);
@@ -390,6 +391,7 @@ void CLobby::AddGame(char *name, int ind, bool inProgress)
 	gameAmount++;
 
 	RefreshGameList();
+	*/
 }
 
 void CLobby::RemoveGame(char *name)

@@ -31,8 +31,13 @@ public:
 bool processUnbufferedInput(const Ogre::FrameEvent& evt);
 bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 
+Ogre::SceneManager* getSceneManager()
+{
+	return mSceneMgr;
+}
+
 	CArmyWar*   mGame;
-    Character*  jay;
+   // Character*  jay;
 
 protected:
     virtual void createScene(void);

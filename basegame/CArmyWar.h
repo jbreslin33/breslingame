@@ -8,6 +8,7 @@
 */
 #include "ClientLoginData.h"
 #include <string.h>
+//#include <vector>
 
 #define NORTH		0
 #define NORTHEAST	45
@@ -26,6 +27,7 @@
 class DreamMessage;
 class DreamClient;
 class Character;
+class BaseGame;
 
 typedef struct
 {
@@ -69,6 +71,8 @@ typedef struct clientData
 	bool		team;
 	char		nickname[30];
 	char		password[30];
+
+    Character* character;
 
 	clientData	*next;
 } clientData;
@@ -130,7 +134,7 @@ public:
 	GFX_IMAGE2D bluenumbers[10];	// variable to hold 'cdrom' graphic
 */
 
-	Character* myCharacter;
+	//Character* myCharacter;
 
 	float frametime;
 
@@ -156,8 +160,10 @@ public:
 	float flagY;
 	clientData *playerWithFlag;
 
+
+
 public:
-	CArmyWar();
+	CArmyWar(BaseGame* baseGame);
 	~CArmyWar();
 
 	// Client.cpp
@@ -187,7 +193,9 @@ public:
 
     bool keys[256];
 	//char* serverIP;
+	//std::vector<Character>* characterVector;
 
+	BaseGame* mBaseGame;
 };
 
 #endif

@@ -22,14 +22,7 @@ This source file is part of the
 //-------------------------------------------------------------------------------------
 BaseGame::BaseGame(void)
 {
-	// Create application object
-    mGame = new CArmyWar;
-    //Ogre::LogManager::getSingletonPtr()->logMessage("*HELLO ***");
-	//game = new CArmyWar;
-	mGame->StartConnection(1);// doesn't matter what you pass in cause it ain't used.
 
-
-	//LogManager::getSingleton().logMessage("*-*-* OGRE Initialising");
 
 }
 //-------------------------------------------------------------------------------------
@@ -60,11 +53,22 @@ void BaseGame::createScene(void)
     mSceneMgr->getRootSceneNode()->attachObject(floor);
 
 	//add a character
-    jay       = new Character(mSceneMgr, "jay"      , "Sinbad.mesh", "RunBase",  0,  5, 0);
+    //jay       = new Character(mSceneMgr, "jay"      , "Sinbad.mesh", "RunBase",  0,  5, 0);
 
-	mGame->myCharacter = jay;
+	//mGame->myCharacter = jay;
+
+
+	// Create application object
+    mGame = new CArmyWar(this);
+    //Ogre::LogManager::getSingletonPtr()->logMessage("*HELLO ***");
+	//game = new CArmyWar;
+	mGame->StartConnection(1);// doesn't matter what you pass in cause it ain't used.
+
+
+	//LogManager::getSingleton().logMessage("*-*-* OGRE Initialising");
 
 }
+
 
 bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 {
