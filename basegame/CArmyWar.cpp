@@ -217,7 +217,7 @@ void CArmyWar::AddClient(int local, int ind, char *name)
 		}
 
 		list->index = ind;
-clientList->character = new Character(mBaseGame->getSceneManager(), "jay" + ind, "Sinbad.mesh", "RunBase",  0,  5, 0);
+		clientList->character = new Character(mBaseGame->getSceneManager(), "jay" + ind, "Sinbad.mesh", "RunBase",  0,  5, 0);
 		strcpy(list->nickname, name);
 
 		if(clients % 2 == 0)
@@ -861,7 +861,7 @@ void CArmyWar::MoveObjects(void)
             transVector.y = client->command.origin.y;
 			
 			//myCharacter->getSceneNode()->setPosition(transVector);
-			client->character->getSceneNode()->setPosition(transVector);
+			//client->character->getSceneNode()->setPosition(transVector);
 
 			client->command.bullet.origin.x = client->command.bullet.predictedOrigin.x;
 			client->command.bullet.origin.y = client->command.bullet.predictedOrigin.y;
