@@ -80,7 +80,7 @@ DreamServer::~DreamServer()
 int DreamServer::Initialise(char *localIP, int serverPort)
 {
 	// Initialise DreamSock if it is not already initialised
-	//dreamSock->DreamSock_Initialize();
+	dreamSock->DreamSock_Initialize();
 
 	// Store the server IP and port for later use
 	port = serverPort;

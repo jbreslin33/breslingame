@@ -5,15 +5,13 @@
 /* Teijo Hakala						      */
 /******************************************/
 
-#include "lobby.h"
-#include "signin.h"
-#include "../dreamsock/DreamSock.h"
-#include <iostream>
-
 #ifdef WIN32
 #ifndef _WINSOCKAPI_
 #define _WINSOCKAPI_
 #endif
+
+#include "CArmyWarServer.h"
+#include "../dreamsock/DreamServer.h"
 
 #include <windows.h>
 
@@ -34,7 +32,6 @@
 #include <fcntl.h>
 #endif
 
-
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -47,8 +44,7 @@
 int runningDaemon;
 #endif
 
-CLobbyServer Lobby;
-CSigninServer Signin;
+CArmyWarServer* game;
 
 #ifdef WIN32
 
@@ -81,7 +77,6 @@ LRESULT CALLBACK WindowProc(HWND WindowhWnd, UINT Message, WPARAM wParam, LPARAM
 //-----------------------------------------------------------------------------
 int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	
 	WNDCLASS WinClass;
 
 	WinClass.style			= 0;
@@ -112,17 +107,13 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	ShowWindow(hwnd, SW_HIDE);
 
 	StartLogConsole();
-	//LogString("hello");
-	//std::cout << "started log console";
 
-	if(Lobby.InitNetwork() == 1)
-	{
-		PostQuitMessage(0);
-	}
 
-	if(Signin.InitNetwork() == 1)
+	game = new CArmyWarServer;
+
+	if(game->InitNetwork() != 0)
 	{
-		PostQuitMessage(0);
+		LogString("Could not create game server");
 	}
 
 	MSG WinMsg;
@@ -131,8 +122,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 	// first peek the message without removing it
 	PeekMessage(&WinMsg, hwnd, 0, 0, PM_NOREMOVE);
-    DreamSock* dreamSock = new DreamSock();
-	oldTime = dreamSock->DreamSock_GetCurrentSystemTime();
+
+	oldTime = game->networkServer->dreamSock->DreamSock_GetCurrentSystemTime();
 
 	try
 	{
@@ -142,9 +133,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 			{
 				if(!GetMessage(&WinMsg, NULL, 0, 0))
 				{
-					Lobby.ShutdownNetwork();
-					Signin.ShutdownNetwork();
-					dreamSock->DreamSock_Shutdown();
+					game->networkServer->dreamSock->DreamSock_Shutdown();
 
 					done = true;
 				}
@@ -155,19 +144,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 			do
 			{
-				newTime = dreamSock->DreamSock_GetCurrentSystemTime();
+				newTime = game->networkServer->dreamSock->DreamSock_GetCurrentSystemTime();
 				time = newTime - oldTime;
 			} while (time < 1);
-
-			Lobby.Frame(time);
-			Signin.Frame(time);
-
-			CArmyWarServer *list = Lobby.GetGameList();
-
-			for( ; list != NULL; list = list->next)
-			{
-				list->Frame(time);
-			}
+			
+			game->Frame(time);
+			
 
 			oldTime = newTime;
 		}
@@ -176,9 +158,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	{
 		LogString("Unknown Exception caught in main loop");
 
-		Lobby.ShutdownNetwork();
-		Signin.ShutdownNetwork();
-		dreamSock->DreamSock_Shutdown();
+		game->networkServer->dreamSock->DreamSock_Shutdown();
 
 		MessageBox(NULL, "Unknown Exception caught in main loop", "Error", MB_OK | MB_TASKMODAL);
 
