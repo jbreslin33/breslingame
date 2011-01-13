@@ -109,7 +109,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	StartLogConsole();
 
 
-	game = new CArmyWarServer;
+	game = new CArmyWarServer();
 
 	if(game->InitNetwork() != 0)
 	{
