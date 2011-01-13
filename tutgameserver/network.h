@@ -1,7 +1,7 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
-#include "dreamSock.h"
+#include "../dreamsock/DreamClient.h"
 
 #define COMMAND_HISTORY_SIZE		64
 
@@ -30,10 +30,12 @@
 #define USER_MES_STARTGAME			10
 #define USER_MES_MAPDATA			11
 
+class DreamClient;
+
 typedef struct clientLoginData
 {
 	struct sockaddr		address;
-	dreamClient			*netClient;
+	DreamClient			*netClient;
 	clientLoginData		*next;
 } clientLoginData;
 

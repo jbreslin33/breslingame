@@ -5,11 +5,15 @@
 /* Teijo Hakala						      */
 /******************************************/
 
-#include "common.h"
+
 #include <fstream>
 #include <math.h>
 #include <malloc.h>
 #include <stdlib.h>
+
+#include "server.h"
+#include "../dreamsock/DreamServer.h"
+#include "../dreamsock/DreamSock.h"
 
 //-----------------------------------------------------------------------------
 // Name: empty()
@@ -40,7 +44,7 @@ VECTOR2D VectorSubstract(VECTOR2D *vec1, VECTOR2D *vec2)
 //-----------------------------------------------------------------------------
 CArmyWarServer::CArmyWarServer()
 {
-	networkServer = new dreamServer;
+	networkServer = new DreamServer();
 
 	clientList	= NULL;
 	clients		= 0;
@@ -79,7 +83,7 @@ CArmyWarServer::~CArmyWarServer()
 //-----------------------------------------------------------------------------
 int CArmyWarServer::InitNetwork(int gameAmount)
 {
-	if(dreamSock_Initialize() != 0)
+	if(networkServer->dreamSock->DreamSock_Initialize() != 0)
 	{
 		LogString("Error initialising Communication Library!");
 		return 1;
@@ -489,7 +493,7 @@ void CArmyWarServer::AddClient(void)
 	// First get a pointer to the beginning of client list
 	clientData *list = clientList;
 	clientData *prev;
-	dreamClient *netList = networkServer->GetClientList();
+	DreamClient *netList = networkServer->GetClientList();
 
 	// No clients yet, adding the first one
 	if(clientList == NULL)

@@ -5,6 +5,10 @@
 /* Teijo Hakala						      */
 /******************************************/
 
+#include "lobby.h"
+#include "signin.h"
+#include "../dreamsock/DreamSock.h"
+
 #ifdef WIN32
 #ifndef _WINSOCKAPI_
 #define _WINSOCKAPI_
@@ -29,7 +33,6 @@
 #include <fcntl.h>
 #endif
 
-#include "common.h"
 
 #include <string.h>
 #include <stdlib.h>
@@ -107,7 +110,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	ShowWindow(hwnd, SW_HIDE);
 
 	StartLogConsole();
-
+/*
 	if(Lobby.InitNetwork() == 1)
 	{
 		PostQuitMessage(0);
@@ -117,15 +120,15 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	{
 		PostQuitMessage(0);
 	}
-
+*/
 	MSG WinMsg;
 	bool done = false;
 	int time, oldTime, newTime;
 
 	// first peek the message without removing it
 	PeekMessage(&WinMsg, hwnd, 0, 0, PM_NOREMOVE);
-
-	oldTime = dreamSock_GetCurrentSystemTime();
+    DreamSock* dreamSock = new DreamSock();
+	oldTime = dreamSock->DreamSock_GetCurrentSystemTime();
 
 	try
 	{
@@ -135,9 +138,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 			{
 				if(!GetMessage(&WinMsg, NULL, 0, 0))
 				{
-					Lobby.ShutdownNetwork();
-					Signin.ShutdownNetwork();
-					dreamSock_Shutdown();
+					//Lobby.ShutdownNetwork();
+					//Signin.ShutdownNetwork();
+					dreamSock->DreamSock_Shutdown();
 
 					done = true;
 				}
@@ -148,12 +151,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 			do
 			{
-				newTime = dreamSock_GetCurrentSystemTime();
+				newTime = dreamSock->DreamSock_GetCurrentSystemTime();
 				time = newTime - oldTime;
 			} while (time < 1);
 
-			Lobby.Frame(time);
-			Signin.Frame(time);
+			//Lobby.Frame(time);
+			//Signin.Frame(time);
 
 			CArmyWarServer *list = Lobby.GetGameList();
 
@@ -169,9 +172,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	{
 		LogString("Unknown Exception caught in main loop");
 
-		Lobby.ShutdownNetwork();
-		Signin.ShutdownNetwork();
-		dreamSock_Shutdown();
+		//Lobby.ShutdownNetwork();
+		//Signin.ShutdownNetwork();
+		dreamSock->DreamSock_Shutdown();
 
 		MessageBox(NULL, "Unknown Exception caught in main loop", "Error", MB_OK | MB_TASKMODAL);
 

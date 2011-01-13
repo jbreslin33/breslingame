@@ -2,6 +2,7 @@
 #define SERVER_H
 
 #include <string.h>
+#include "network.h"
 
 #define NORTH		0
 #define NORTHEAST	45
@@ -52,7 +53,7 @@ typedef struct clientData
 	long processedFrame;
 
 	struct sockaddr address;
-	dreamClient *netClient;
+	DreamClient *netClient;
 
 	VECTOR2D startPos;
 	bool team;
@@ -61,11 +62,13 @@ typedef struct clientData
 	clientData *next;
 } clientData;
 
+class DreamServer;
+class DreamMessage;
 
 class CArmyWarServer
 {
 private:
-	dreamServer	*networkServer;
+	DreamServer	*networkServer;
 
 	clientData	*clientList;		// Client list
 	int		clients;				// Number of clients
@@ -99,9 +102,9 @@ public:
 	void	ReadPackets(void);
 	void	SendCommand(void);
 	void	SendExitNotification(void);
-	void	ReadDeltaMoveCommand(dreamMessage *mes, clientData *client);
-	void	BuildMoveCommand(dreamMessage *mes, clientData *client);
-	void	BuildDeltaMoveCommand(dreamMessage *mes, clientData *client);
+	void	ReadDeltaMoveCommand(DreamMessage *mes, clientData *client);
+	void	BuildMoveCommand(DreamMessage *mes, clientData *client);
+	void	BuildDeltaMoveCommand(DreamMessage *mes, clientData *client);
 
 	// Server.cpp
 	int		InitNetwork(int gameAmount);

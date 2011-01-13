@@ -8,10 +8,12 @@
 #define SIGNIN_RESULT_PASSWORDBAD	202
 #define SIGNIN_RESULT_MYSQLERROR	203
 
+class DreamServer;
+
 class CSigninServer
 {
 private:
-	dreamServer			*networkServer;
+	DreamServer			*networkServer;
 	clientLoginData		*clientList;
 
 public:

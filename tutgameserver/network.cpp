@@ -4,8 +4,11 @@
 /* Programming:						      */
 /* Teijo Hakala						      */
 /******************************************/
+#include "server.h"
+#include "../dreamsock/DreamServer.h"
+#include "../dreamsock/DreamSock.h"
+#include "../dreamsock/DreamMessage.h"
 
-#include "common.h"
 #include <math.h>
 
 #ifdef WIN32
@@ -29,7 +32,7 @@ void CArmyWarServer::ReadPackets(void)
 
 	clientData *clList;
 
-	dreamMessage mes;
+	DreamMessage mes;
 	mes.Init(data, sizeof(data));
 
 	// Get the packet from the socket
@@ -214,7 +217,7 @@ void CArmyWarServer::SendExitNotification(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWarServer::ReadDeltaMoveCommand(dreamMessage *mes, clientData *client)
+void CArmyWarServer::ReadDeltaMoveCommand(DreamMessage *mes, clientData *client)
 {
 	int flags = 0;
 
@@ -237,7 +240,7 @@ void CArmyWarServer::ReadDeltaMoveCommand(dreamMessage *mes, clientData *client)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWarServer::BuildMoveCommand(dreamMessage *mes, clientData *client)
+void CArmyWarServer::BuildMoveCommand(DreamMessage *mes, clientData *client)
 {
 	// Add to the message
 	// Key
@@ -278,7 +281,7 @@ void CArmyWarServer::BuildMoveCommand(dreamMessage *mes, clientData *client)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWarServer::BuildDeltaMoveCommand(dreamMessage *mes, clientData *client)
+void CArmyWarServer::BuildDeltaMoveCommand(DreamMessage *mes, clientData *client)
 {
 	int flags = 0;
 

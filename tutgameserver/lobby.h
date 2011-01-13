@@ -1,15 +1,23 @@
 #ifndef __LOBBY_H__
 #define __LOBBY_H__
 
+#include "network.h"
+#include "server.h"
+
 #define LOBBY_RESULT_ACCEPTED		200
 #define LOBBY_RESULT_USERNAMEBAD	201
 #define LOBBY_RESULT_PASSWORDBAD	202
 #define LOBBY_RESULT_MYSQLERROR		203
 
+
+
+class DreamServer;
+
+
 class CLobbyServer
 {
 private:
-	dreamServer		*networkServer;
+	DreamServer		*networkServer;
 
 	clientLoginData	*clientList;
 	CArmyWarServer	*gameList;

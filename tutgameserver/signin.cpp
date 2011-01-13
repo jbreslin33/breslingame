@@ -5,9 +5,13 @@
 /* Teijo Hakala						      */
 /******************************************/
 
-#include "common.h"
+#include "signin.h"
 #include <malloc.h>
 //#include <mysql++>
+#include "../dreamsock/DreamClient.h"
+#include "../dreamsock/DreamServer.h"
+#include "../dreamsock/DreamSock.h"
+#include "../dreamsock/DreamMessage.h"
 
 //-----------------------------------------------------------------------------
 // Name: empty()
@@ -15,7 +19,7 @@
 //-----------------------------------------------------------------------------
 CSigninServer::CSigninServer()
 {
-	networkServer = new dreamServer;
+	networkServer = new DreamServer();
 	clientList	= NULL;
 }
 
@@ -35,7 +39,7 @@ CSigninServer::~CSigninServer()
 int CSigninServer::InitNetwork(void)
 {
 	// Initialize dreamSock and the server
-	if(dreamSock_Initialize() != 0)
+	if(networkServer->dreamSock->DreamSock_Initialize() != 0)
 	{
 		LogString("Error initialising Communication Library!");
 		return 1;
@@ -97,7 +101,7 @@ void CSigninServer::ReadPackets(void)
 
 	clientLoginData *clList;
 
-	dreamMessage mes;
+	DreamMessage mes;
 	mes.Init(data, sizeof(data));
 
 	// Get the packet from the socket
@@ -235,7 +239,7 @@ void CSigninServer::AddClient(void)
 	// First get a pointer to the beginning of client list
 	clientLoginData *list = clientList;
 	clientLoginData *prev;
-	dreamClient *netList = networkServer->GetClientList();
+	DreamClient *netList = networkServer->GetClientList();
 
 	// No clients yet, adding the first one
 	if(clientList == NULL)

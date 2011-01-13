@@ -89,9 +89,6 @@ endif()
 if(WIN32)
 set(HDRS
 	#tutGameServer
-	./common.h
-	./dreamSock.h
-	./dreamSockLog.h
 	./lobby.h
 	./main.h
 	./network.h
@@ -99,8 +96,14 @@ set(HDRS
 	./signin.h
 	
 	#dreamSock
-	../dreamsock/dreamSock.h
-	../dreamsock/dreamSockLog.h
+	../dreamsock/DreamClient.h
+	../dreamsock/DreamConsole.h
+	../dreamsock/DreamMessage.h
+	../dreamsock/DreamServer.h
+	../dreamsock/DreamSock.h
+	
+	../dreamsock/DreamWinSock.h
+	
 	
 )
  
@@ -113,10 +116,13 @@ set(SRCS
 	./signin.cpp
 	
 	#dreamSock
-	../dreamsock/dreamSock.cpp
-	../dreamsock/dreamSockGlobal.cpp
-	../dreamsock/dreamSockLog.cpp
-	../dreamsock/dreamWinSock.cpp
+	../dreamsock/DreamClient.cpp
+	../dreamsock/DreamConsole.cpp
+	../dreamsock/DreamMessage.cpp
+	../dreamsock/DreamServer.cpp
+	../dreamsock/DreamSock.cpp
+	
+	../dreamsock/DreamWinSock.cpp
 	
 )
 endif(WIN32)
@@ -124,9 +130,6 @@ endif(WIN32)
 if(UNIX)
 set(HDRS
 	#tutGameServer
-	./common.h
-	./dreamSock.h
-	./dreamSockLog.h
 	./lobby.h
 	./main.h
 	./network.h
@@ -134,8 +137,13 @@ set(HDRS
 	./signin.h
 	
 	#dreamSock
-	../dreamsock/dreamSock.h
-	../dreamsock/dreamSockLog.h
+	../dreamsock/DreamClient.h
+	../dreamsock/DreamConsole.h
+	../dreamsock/DreamMessage.h
+	../dreamsock/DreamServer.h
+	../dreamsock/DreamSock.h
+	
+	../dreamsock/DreamLinuxSock.h
 	
 )
  
@@ -148,10 +156,13 @@ set(SRCS
 	./signin.cpp
 	
 	#dreamSock
-	../dreamsock/dreamSock.cpp
-	../dreamsock/dreamSockGlobal.cpp
-	../dreamsock/dreamSockLog.cpp
-	../dreamsock/dreamLinuxSock.cpp
+	../dreamsock/DreamClient.cpp
+	../dreamsock/DreamConsole.cpp
+	../dreamsock/DreamMessage.cpp
+	../dreamsock/DreamServer.cpp
+	../dreamsock/DreamSock.cpp
+	
+	../dreamsock/DreamLinuxSock.cpp
 	
 )
 endif(UNIX)
