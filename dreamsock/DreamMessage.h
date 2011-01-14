@@ -1,9 +1,9 @@
 #ifndef __DREAMMESSAGE_H
 #define __DREAMMESSAGE_H
 
-#include "../DreamSock/DreamConsole.h"
 
 #ifdef WIN32
+#include "../DreamSock/DreamConsole.h"
 	#pragma comment (lib,"ws2_32.lib")
 	#pragma message ("Auto linking WinSock2 library")
 

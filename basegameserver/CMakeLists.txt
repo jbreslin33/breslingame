@@ -42,7 +42,7 @@ set(CMAKE_DEBUG_POSTFIX "_d")
  
 set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/dist")
  
-find_package(OGRE REQUIRED)
+#find_package(OGRE REQUIRED)
  
 #if(NOT "${OGRE_VERSION_NAME}" STREQUAL "Cthugha")
 #  message(SEND_ERROR "You need Ogre 1.7 Cthugha to build this.")
@@ -131,7 +131,7 @@ set(HDRS
 	
 	#dreamSock
 	../dreamsock/DreamClient.h
-	../dreamsock/DreamConsole.h
+	#../dreamsock/DreamConsole.h
 	../dreamsock/DreamMessage.h
 	../dreamsock/DreamServer.h
 	../dreamsock/DreamSock.h
@@ -147,7 +147,7 @@ set(SRCS
 	
 	#dreamSock
 	../dreamsock/DreamClient.cpp
-	../dreamsock/DreamConsole.cpp
+	#../dreamsock/DreamConsole.cpp
 	../dreamsock/DreamMessage.cpp
 	../dreamsock/DreamServer.cpp
 	../dreamsock/DreamSock.cpp
