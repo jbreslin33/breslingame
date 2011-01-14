@@ -348,7 +348,7 @@ int DreamSock::DreamSock_GetCurrentSystemTime(void)
 #ifndef WIN32
 	return DreamSock::DreamSock_Linux_GetCurrentSystemTime();
 #else
-	//return DreamSock_Win_GetCurrentSystemTime();
-	return 1;
+	return dreamWinSock->DreamSock_Win_GetCurrentSystemTime();
+	//return 1;
 #endif
 }
