@@ -18,19 +18,19 @@ cmake_minimum_required(VERSION 2.6)
  
 project(OgreApp)
  
-if(WIN32)
-	set(CMAKE_MODULE_PATH "$ENV{OGRE_HOME}/CMake/;${CMAKE_MODULE_PATH}")
+#if(WIN32)
+#	set(CMAKE_MODULE_PATH "$ENV{OGRE_HOME}/CMake/;${CMAKE_MODULE_PATH}")
 	#set(OGRE_SAMPLES_INCLUDEPATH
 	#	$ENV{OGRE_HOME}/Samples/include
 	#)
-endif(WIN32)
+#endif(WIN32)
  
-if(UNIX)
+#if(UNIX)
 	#set(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
 	#set(OGRE_SAMPLES_INCLUDEPATH
 	#	/usr/local/share/OGRE/samples/Common/include/
 	#)
-endif(UNIX)
+#endif(UNIX)
  
 if (CMAKE_BUILD_TYPE STREQUAL "")
   # CMake defaults to leaving CMAKE_BUILD_TYPE empty. This screws up
