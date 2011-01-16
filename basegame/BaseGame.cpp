@@ -73,43 +73,43 @@ void BaseGame::createScene(void)
 bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 {
  
-#ifdef WIN32 
+//#ifdef WIN32 
    if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
     {
-		mGame->keys[VK_UP] = TRUE;
+		mGame->keys[VK_UP] = true;
 		
     }
 	else
 	{
-        mGame->keys[VK_UP] = FALSE;
+        mGame->keys[VK_UP] = false;
 	}
     if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
     {
-		mGame->keys[VK_DOWN] = TRUE;
+		mGame->keys[VK_DOWN] = true;
     }
 	else
 	{
-        mGame->keys[VK_DOWN] = FALSE;
+        mGame->keys[VK_DOWN] = false;
 	}
 
     if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
     {
-		mGame->keys[VK_LEFT] = TRUE;
+		mGame->keys[VK_LEFT] = true;
     }
 	else
 	{
-        mGame->keys[VK_LEFT] = FALSE;
+        mGame->keys[VK_LEFT] = false;
 	}
     if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
     {
-		mGame->keys[VK_RIGHT] = TRUE;
+		mGame->keys[VK_RIGHT] = true;
     }
 	else
 	{
-        mGame->keys[VK_RIGHT] = FALSE;
+        mGame->keys[VK_RIGHT] = false;
 	}
          
-#endif
+//#endif
     return true;
 }
 //-------------------------------------------------------------------------------------

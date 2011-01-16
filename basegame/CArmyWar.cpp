@@ -503,7 +503,16 @@ clientData *CArmyWar::GetClientPointer(int index)
 
 void CArmyWar::CheckKeys(void)
 {
-#ifdef WIN32	
+
+/*
+	inputClient.command.key = 0;
+	if (mBaseGame->mKeyboard->isKeyDown(OIS::KC_J))
+	{
+		inputClient.command.key |= KEY_LEFT;	
+	} 
+
+*/
+//#ifdef WIN32	
 	inputClient.command.key = 0;
 
 	if(keys[VK_ESCAPE])
@@ -539,7 +548,8 @@ void CArmyWar::CheckKeys(void)
 	}
 
 	inputClient.command.msec = (int) (frametime * 1000);
-#endif
+//#endif
+
 }
 
 void CArmyWar::CheckPredictionError(int a)
