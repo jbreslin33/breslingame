@@ -262,7 +262,11 @@ int main(int argc, char **argv)
 	//}
 
 	game = new CArmyWarServer();	
-	LogString("Init successful");
+//	LogString("Init successful");
+       if(game->InitNetwork() != 0)
+        {
+                LogString("Could not create game server");
+        }
 
 	int time, oldTime, newTime;
 
@@ -273,7 +277,8 @@ int main(int argc, char **argv)
 	{
 		if(runningDaemon)
 		{
-			// Keep server alive
+LogString("runningDaemon is true");			
+// Keep server alive
 			while(1)
 			{
 				do
@@ -284,6 +289,7 @@ int main(int argc, char **argv)
 
 				//Lobby.Frame(time);
 				//Signin.Frame(time);
+game->Frame(time);
 
 				//CArmyWarServer *list = Lobby.GetGameList();
 
@@ -308,6 +314,9 @@ int main(int argc, char **argv)
 
 				//Lobby.Frame(time);
 				//Signin.Frame(time);
+game->Frame(time);
+
+
 
 				//CArmyWarServer *list = Lobby.GetGameList();
 

@@ -342,7 +342,7 @@ void CArmyWarServer::RemoveClients(void)
 //-----------------------------------------------------------------------------
 void CArmyWarServer::Frame(int msec)
 {
-	LogString("f");
+	//LogString("f");
 	realtime += msec;
 	frametime = msec / 1000.0f;
 
@@ -377,7 +377,7 @@ void CArmyWarServer::Frame(int msec)
 //-----------------------------------------------------------------------------
 void CArmyWarServer::ReadPackets(void)
 {
-	LogString("h");
+	//LogString("h");
 	char data[1400];
 
 	int type;
