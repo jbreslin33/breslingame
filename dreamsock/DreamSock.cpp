@@ -8,6 +8,7 @@
 	#include <windows.h>
 	#include <winsock2.h>
 	#include "DreamWinSock.h"
+	#include "DreamClient.h"
 #else
 // UNIX specific headers
 	#include <memory.h>
