@@ -1,7 +1,7 @@
 #include "DreamServer.h"
 #include "DreamClient.h"
 
-#define WIN32
+//#define WIN32
 
 #ifdef WIN32
 // Windows specific headers
