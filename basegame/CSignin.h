@@ -1,7 +1,7 @@
 #ifndef __CSIGNIN_H__
 #define __CSIGNIN_H__
 
-#include "main.h"
+#include "Main.h"
 
 #define SIGNIN_RESULT_ACCEPTED			200
 #define SIGNIN_RESULT_USERNAMEBAD		201

@@ -10,12 +10,13 @@
 #define _WINSOCKAPI_
 #endif
 
-#include "CArmyWarServer.h"
-#include "../dreamsock/DreamServer.h"
 
 #include <windows.h>
 
 #endif
+
+#include "CArmyWarServer.h"
+#include "../dreamsock/DreamServer.h"
 
 #ifdef WIN32
 #include <shellapi.h>
@@ -250,21 +251,22 @@ int main(int argc, char **argv)
 	// pipe gets broken
 	signal(SIGPIPE, SIG_IGN);
 
-	if(Lobby.InitNetwork() == 1)
-	{
-		exit(0);
-	}
+	//if(Lobby.InitNetwork() == 1)
+	//{
+	//	exit(0);
+	//}
 
-	if(Signin.InitNetwork() == 1)
-	{
-		exit(0);
-	}
+	//if(Signin.InitNetwork() == 1)
+	//{
+	//	exit(0);
+	//}
 
+	game = new CArmyWarServer();	
 	LogString("Init successful");
 
 	int time, oldTime, newTime;
 
-	oldTime = dreamSock_GetCurrentSystemTime();
+	oldTime = game->networkServer->dreamSock->DreamSock_GetCurrentSystemTime();
 
 	// App main loop
 	try
@@ -276,19 +278,19 @@ int main(int argc, char **argv)
 			{
 				do
 				{
-					newTime = dreamSock_GetCurrentSystemTime();
+					newTime = game->networkServer->dreamSock->DreamSock_GetCurrentSystemTime();
 					time = newTime - oldTime;
 				} while (time < 1);
 
-				Lobby.Frame(time);
-				Signin.Frame(time);
+				//Lobby.Frame(time);
+				//Signin.Frame(time);
 
-				CArmyWarServer *list = Lobby.GetGameList();
+				//CArmyWarServer *list = Lobby.GetGameList();
 
-				for( ; list != NULL; list = list->next)
-				{
-					list->Frame(time);
-				}
+				//for( ; list != NULL; list = list->next)
+				//{
+				//	list->Frame(time);
+				//}
 
 				oldTime = newTime;
 			}
@@ -300,19 +302,19 @@ int main(int argc, char **argv)
 			{
 				do
 				{
-					newTime = dreamSock_GetCurrentSystemTime();
+					newTime = game->networkServer->dreamSock->DreamSock_GetCurrentSystemTime();
 					time = newTime - oldTime;
 				} while (time < 1);
 
-				Lobby.Frame(time);
-				Signin.Frame(time);
+				//Lobby.Frame(time);
+				//Signin.Frame(time);
 
-				CArmyWarServer *list = Lobby.GetGameList();
+				//CArmyWarServer *list = Lobby.GetGameList();
 
-				for( ; list != NULL; list = list->next)
-				{
-					list->Frame(time);
-				}
+				//for( ; list != NULL; list = list->next)
+				//{
+			//		list->Frame(time);
+			//	}
 
 				oldTime = newTime;
 			}
@@ -320,9 +322,9 @@ int main(int argc, char **argv)
 	}
 	catch(...)
 	{
-		Lobby.ShutdownNetwork();
-		Signin.ShutdownNetwork();
-		dreamSock_Shutdown();
+		//Lobby.ShutdownNetwork();
+		//Signin.ShutdownNetwork();
+		game->networkServer->dreamSock->DreamSock_Shutdown();
 
 		LogString("Unknown Exception caught in main loop");
 
@@ -331,9 +333,9 @@ int main(int argc, char **argv)
 
 	LogString("Shutting down everything");
 
-	Lobby.ShutdownNetwork();
-	Signin.ShutdownNetwork();
-	dreamSock_Shutdown();
+	//Lobby.ShutdownNetwork();
+	//Signin.ShutdownNetwork();
+	game->networkServer->dreamSock->DreamSock_Shutdown();
 
 	return 0;
 }

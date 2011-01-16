@@ -1,4 +1,4 @@
-#include "../DreamSock/DreamSock.h"
+#include "../dreamsock/DreamSock.h"
 #include "Player_t.h"
 #include "Bullet_t.h"
 

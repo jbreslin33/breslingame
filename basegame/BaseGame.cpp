@@ -73,9 +73,11 @@ void BaseGame::createScene(void)
 bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 {
  
-    if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
+#ifdef WIN32 
+   if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
     {
 		mGame->keys[VK_UP] = TRUE;
+		
     }
 	else
 	{
@@ -107,6 +109,7 @@ bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
         mGame->keys[VK_RIGHT] = FALSE;
 	}
          
+#endif
     return true;
 }
 //-------------------------------------------------------------------------------------

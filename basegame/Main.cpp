@@ -5,7 +5,7 @@
 /* Teijo Hakala						      */
 /******************************************/
 
-#include "resource.h"
+#include "RESOURCE.H"
 #include <math.h>
 #include "CArmyWar.h"
 

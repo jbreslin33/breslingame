@@ -1,7 +1,7 @@
 #include "CSignin.h"
-#include "../DreamSock/DreamClient.h"
-#include "../DreamSock/DreamServer.h"
-#include "../DreamSock/DreamSock.h"
+#include "../dreamsock/DreamClient.h"
+#include "../dreamsock/DreamServer.h"
+#include "../dreamsock/DreamSock.h"
 
 CSignin::CSignin()
 {
@@ -88,6 +88,7 @@ void CSignin::ReadPackets(void)
 //-----------------------------------------------------------------------------
 void CSignin::AddClient(int local, int ind, char *name)
 {
+/*
 	// First get a pointer to the beginning of client list
 	ClientLoginData *list = clientList;
 	ClientLoginData *prev;
@@ -140,6 +141,7 @@ void CSignin::AddClient(int local, int ind, char *name)
 
 		prev->next = list;
 	}
+*/
 }
 
 //-----------------------------------------------------------------------------
@@ -148,6 +150,7 @@ void CSignin::AddClient(int local, int ind, char *name)
 //-----------------------------------------------------------------------------
 void CSignin::RemoveClient(int ind)
 {
+/*
 	ClientLoginData *list = clientList;
 	ClientLoginData *prev = NULL;
 	ClientLoginData *next = NULL;
@@ -188,6 +191,7 @@ void CSignin::RemoveClient(int ind)
 
 		list = next;
 	}
+*/
 }
 
 //-----------------------------------------------------------------------------
@@ -196,6 +200,7 @@ void CSignin::RemoveClient(int ind)
 //-----------------------------------------------------------------------------
 void CSignin::RemoveClients(void)
 {
+/*
 	ClientLoginData *list = clientList;
 	ClientLoginData *next;
 
@@ -211,6 +216,7 @@ void CSignin::RemoveClients(void)
 	}
 
 	clientList = NULL;
+*/
 }
 
 //-----------------------------------------------------------------------------

@@ -131,7 +131,7 @@ set(HDRS
 	
 	#dreamSock
 	../dreamsock/DreamClient.h
-	#../dreamsock/DreamConsole.h
+	../dreamsock/DreamConsole.h
 	../dreamsock/DreamMessage.h
 	../dreamsock/DreamServer.h
 	../dreamsock/DreamSock.h
@@ -147,7 +147,7 @@ set(SRCS
 	
 	#dreamSock
 	../dreamsock/DreamClient.cpp
-	#../dreamsock/DreamConsole.cpp
+	../dreamsock/DreamConsole.cpp
 	../dreamsock/DreamMessage.cpp
 	../dreamsock/DreamServer.cpp
 	../dreamsock/DreamSock.cpp

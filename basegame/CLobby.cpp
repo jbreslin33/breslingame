@@ -1,7 +1,7 @@
 #include "CLobby.h"
-#include "../DreamSock/DreamClient.h"
-#include "../DreamSock/DreamSock.h"
-#include "resource.h"
+#include "../dreamsock/DreamClient.h"
+#include "../dreamsock/DreamSock.h"
+#include "RESOURCE.H"
 
 CLobby::CLobby()
 {
@@ -206,6 +206,7 @@ void CLobby::ReadPackets(void)
 
 void CLobby::AddClient(int local, int ind, char *name)
 {
+/*
 	// First get a pointer to the beginning of client list
 	ClientLoginData *list = clientList;
 	ClientLoginData *prev;
@@ -265,10 +266,12 @@ void CLobby::AddClient(int local, int ind, char *name)
 	// If we just joined the game, request all the game data
 	if(local)
 		RequestGameData();
+*/
 }
 
 void CLobby::RemoveClient(int ind)
 {
+/*
 	ClientLoginData *list = clientList;
 	ClientLoginData *prev = NULL;
 	ClientLoginData *next = NULL;
@@ -311,10 +314,12 @@ void CLobby::RemoveClient(int ind)
 	}
 
 	RefreshPlayerList();
+*/
 }
 
 void CLobby::RemoveClients(void)
 {
+/*
 	ClientLoginData *list = clientList;
 	ClientLoginData *next;
 
@@ -330,6 +335,7 @@ void CLobby::RemoveClients(void)
 	}
 
 	clientList = NULL;
+*/
 }
 
 void CLobby::AddGame(char *name, int ind, bool inProgress)

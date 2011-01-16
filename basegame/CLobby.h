@@ -1,7 +1,7 @@
 #ifndef __CLOBBY_H__
 #define __CLOBBY_H__
 
-#include "main.h"
+#include "Main.h"
 
 #define LOBBYLOGIN_RESULT_ACCEPTED			200
 #define LOBBYLOGIN_RESULT_USERNAMEBAD		201

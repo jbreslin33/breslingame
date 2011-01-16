@@ -1,6 +1,14 @@
 #include "DreamClient.h"
 #include "DreamSock.h"
 
+#ifdef WIN32
+
+#else
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#endif
+
 DreamClient::DreamClient()
 {
 	dreamSock = new DreamSock();

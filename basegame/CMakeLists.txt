@@ -166,7 +166,7 @@ set(HDRS
 	../dreamsock/DreamServer.h
 	../dreamsock/DreamSock.h
 	
-	#../dreamsock/dreamLinuxSock.h
+	../dreamsock/DreamLinuxSock.h
 	
 	
 	#tutgame
@@ -196,7 +196,7 @@ set(SRCS
 	../dreamsock/DreamServer.cpp
 	../dreamsock/DreamSock.cpp
 	
-	#../dreamsock/dreamLinuxSock.cpp
+	../dreamsock/DreamLinuxSock.cpp
 	
 	#tutgame
 	./Bullet_t.cpp

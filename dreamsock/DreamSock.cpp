@@ -25,6 +25,11 @@
 #include <stdio.h>
 
 
+
+#ifndef WIN32
+#include "DreamLinuxSock.h"
+#endif
+
 DreamSock::DreamSock()
 {
 	dreamSock_init = false;
@@ -98,7 +103,7 @@ SOCKET DreamSock::DreamSock_Socket(int protocol)
 		LogString("Error: socket() : %s", strerror(errno));
 #endif
 
-		return DREAMSOCK_INVALID_SOCKET;
+		return DreamSock_INVALID_SOCKET;
 	}
 
 	return sock;
@@ -134,7 +139,7 @@ int DreamSock::DreamSock_SetBroadcasting(SOCKET sock, int mode)
 		LogString("Error code %d: setsockopt() : %s", errno, strerror(errno));
 #endif
 
-		return DREAMSOCK_INVALID_SOCKET;
+		return DreamSock_INVALID_SOCKET;
 	}
 
 	return 0;
@@ -171,7 +176,7 @@ SOCKET DreamSock::DreamSock_OpenUDPSocket(char *netInterface, int port)
 
 	sock = DreamSock_Socket(DREAMSOCK_UDP);
 
-	if(sock == DREAMSOCK_INVALID_SOCKET)
+	if(sock == DreamSock_INVALID_SOCKET)
 		return sock;
 
 	DreamSock_SetNonBlocking(sock, 1);
@@ -212,7 +217,7 @@ SOCKET DreamSock::DreamSock_OpenUDPSocket(char *netInterface, int port)
 		LogString("Error code %d: bind() : %s", errno, strerror(errno));
 #endif
 
-		return DREAMSOCK_INVALID_SOCKET;
+		return DreamSock_INVALID_SOCKET;
 	}
 
 	// Get the port number (if we did not define one, we get the assigned port number here)
@@ -346,7 +351,7 @@ void DreamSock::DreamSock_Broadcast(SOCKET sock, int length, char *data, int por
 int DreamSock::DreamSock_GetCurrentSystemTime(void)
 {
 #ifndef WIN32
-	return DreamSock::DreamSock_Linux_GetCurrentSystemTime();
+	return dreamSock_Linux_GetCurrentSystemTime();
 #else
 	return dreamWinSock->DreamSock_Win_GetCurrentSystemTime();
 	//return 1;

@@ -129,7 +129,7 @@ void CArmyWar::ReadPackets(void)
 			break;
 
 		case USER_MES_SERVEREXIT:
-			MessageBox(NULL, "Server disconnected", "Info", MB_OK);
+			//MessageBox(NULL, "Server disconnected", "Info", MB_OK);
 			Disconnect();
 			break;
 
@@ -503,6 +503,7 @@ clientData *CArmyWar::GetClientPointer(int index)
 
 void CArmyWar::CheckKeys(void)
 {
+#ifdef WIN32	
 	inputClient.command.key = 0;
 
 	if(keys[VK_ESCAPE])
@@ -538,6 +539,7 @@ void CArmyWar::CheckKeys(void)
 	}
 
 	inputClient.command.msec = (int) (frametime * 1000);
+#endif
 }
 
 void CArmyWar::CheckPredictionError(int a)
@@ -884,7 +886,7 @@ char serverIP[32] = "127.0.0.1";
 		char text[64];
 		sprintf(text, "Could not open client socket");
 
-		MessageBox(NULL, text, "Error", MB_OK);
+		//MessageBox(NULL, text, "Error", MB_OK);
 	}
 
 	Connect();

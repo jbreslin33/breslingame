@@ -14,6 +14,8 @@
 #include "../dreamsock/DreamServer.h"
 #include "../dreamsock/DreamClient.h"
 
+
+#include "../dreamsock/DreamConsole.h"
 //-----------------------------------------------------------------------------
 // Name: empty()
 // Desc: 
