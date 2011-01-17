@@ -32,16 +32,16 @@
 #endif
 
 // Host types
-#define DREAMSERVER						-1
-#define DREAMCLIENT						0
+#define DREAMSERVER				-1
+#define DREAMCLIENT				0
 
 // Connection protocols
-#define DREAMSOCK_TCP					0
-#define DREAMSOCK_UDP					1
+#define DREAMSOCK_TCP				0
+#define DREAMSOCK_UDP				1
 
 // Connection states
 #define DREAMSOCK_CONNECTING			0
-#define DREAMSOCK_CONNECTED				1
+#define DREAMSOCK_CONNECTED			1
 #define DREAMSOCK_DISCONNECTING			2
 #define DREAMSOCK_DISCONNECTED			4
 
@@ -63,7 +63,7 @@
 #define DREAMSOCK_MES_DISCONNECT	-102
 #define DREAMSOCK_MES_ADDCLIENT		-103
 #define DREAMSOCK_MES_REMOVECLIENT	-104
-#define DREAMSOCK_MES_PING			-105
+#define DREAMSOCK_MES_PING		-105
 
 class DreamWinSock;
 
@@ -77,20 +77,20 @@ public:
 
 // Function prototypes
 int	DreamSock_Initialize(void);
-void DreamSock_Shutdown(void);
+void 	DreamSock_Shutdown(void);
 
 SOCKET DreamSock_Socket(int protocol);
-int DreamSock_SetNonBlocking(SOCKET sock, u_long setMode);
-int DreamSock_SetBroadcasting(SOCKET sock, int mode);
-int DreamSock_StringToSockaddr(char *addressString, struct sockaddr *sadr);
-SOCKET DreamSock_OpenUDPSocket(char netInterface[32], int port);
-void DreamSock_CloseSocket(SOCKET sock);
+int 	DreamSock_SetNonBlocking(SOCKET sock, u_long setMode);
+int 	DreamSock_SetBroadcasting(SOCKET sock, int mode);
+int 	DreamSock_StringToSockaddr(char *addressString, struct sockaddr *sadr);
+SOCKET 	DreamSock_OpenUDPSocket(char netInterface[32], int port);
+void 	DreamSock_CloseSocket(SOCKET sock);
 
-int DreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *from);
-void DreamSock_SendPacket(SOCKET sock, int length, char *data, struct sockaddr addr);
-void DreamSock_Broadcast(SOCKET sock, int length, char *data, int port);
+int 	DreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *from);
+void 	DreamSock_SendPacket(SOCKET sock, int length, char *data, struct sockaddr addr);
+void 	DreamSock_Broadcast(SOCKET sock, int length, char *data, int port);
 
-bool dreamSock_init;
+bool          dreamSock_init;
 DreamWinSock* dreamWinSock;
 
 #ifndef WIN32

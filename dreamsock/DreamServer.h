@@ -41,41 +41,35 @@ class DreamMessage;
 class DreamServer
 {
 private:
-	void			SendAddClient(DreamClient *newClient);
-	void			SendRemoveClient(DreamClient *client);
-	void			AddClient(struct sockaddr *address, char *name);
-	void			RemoveClient(DreamClient *client);
-	void			ParsePacket(DreamMessage *mes, struct sockaddr *address);
-	int				CheckForTimeout(char *data, struct sockaddr *from);
+	void	SendAddClient   (DreamClient *newClient);
+	void	SendRemoveClient(DreamClient *client);
+	void	AddClient       (struct sockaddr *address, char *name);
+	void	RemoveClient    (DreamClient *client);
+	void	ParsePacket     (DreamMessage *mes, struct sockaddr *address);
+	int	CheckForTimeout (char *data, struct sockaddr *from);
 
 	DreamClient		*clientList;
-	
 
-
-	int				port;					// Port
+	int			port;					// Port
 	SOCKET			socket;					// Socket
-	int				runningIndex;			// Running index numbers for new clients
+	int			runningIndex;			// Running index numbers for new clients
 
 	bool			init;
 
-	
-
 public:
-					DreamServer();
-					~DreamServer();
+	DreamServer();
+	~DreamServer();
 
+	int		Initialise    (char *localIP, int serverPort);
+	void		Uninitialise  (void);
+	void		SendPing      (void);
+	int		GetPacket     (char *data, struct sockaddr *from);
+	void		SendPackets   (void);
 
+	bool		GetInit       (void)		                	{ return init; }
+	DreamClient	*GetClientList(void)					{ return clientList; }
 
-	int				Initialise(char *localIP, int serverPort);
-	void			Uninitialise(void);
-	void			SendPing(void);
-	int				GetPacket(char *data, struct sockaddr *from);
-	void			SendPackets(void);
-
-	bool			GetInit(void)			{ return init; }
-	DreamClient		*GetClientList(void)	{ return clientList; }
-
-	int				GetPort(void)			{ return port; }
+	int		GetPort       (void)					{ return port; }
 
 	DreamSock*      dreamSock;
 

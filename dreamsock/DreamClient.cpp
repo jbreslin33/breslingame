@@ -11,25 +11,25 @@
 
 DreamClient::DreamClient()
 {
-	dreamSock = new DreamSock();
+	dreamSock  		= new DreamSock();
 
-	connectionState	= DREAMSOCK_DISCONNECTED;
+	connectionState		= DREAMSOCK_DISCONNECTED;
 
-	outgoingSequence		= 1;
-	incomingSequence		= 0;
+	outgoingSequence	= 1;
+	incomingSequence	= 0;
 	incomingAcknowledged	= 0;
-	droppedPackets			= 0;
+	droppedPackets		= 0;
 
-	init					= false;
+	init			= false;
 
-	serverPort				= 0;
+	serverPort		= 0;
 
-	pingSent				= 0;
-	ping					= 0;
+	pingSent		= 0;
+	ping			= 0;
 
-	lastMessageTime			= 0;
+	lastMessageTime		= 0;
 
-	next = NULL;
+	next 			= NULL;
 }
 
 //-----------------------------------------------------------------------------
@@ -98,17 +98,17 @@ void DreamClient::Reset(void)
 {
 	connectionState = DREAMSOCK_DISCONNECTED;
 
-	outgoingSequence		= 1;
-	incomingSequence		= 0;
+	outgoingSequence	= 1;
+	incomingSequence	= 0;
 	incomingAcknowledged	= 0;
-	droppedPackets			= 0;
+	droppedPackets		= 0;
 
-	pingSent				= 0;
-	ping					= 0;
+	pingSent		= 0;
+	ping			= 0;
 
-	lastMessageTime			= 0;
+	lastMessageTime		= 0;
 
-	next = NULL;
+	next 			= NULL;
 }
 
 //-----------------------------------------------------------------------------
