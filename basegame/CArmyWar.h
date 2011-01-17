@@ -23,6 +23,18 @@
 #define RED_TEAM	1
 
 
+#ifdef WIN32
+	//do nothing
+#else
+
+#define VK_ESCAPE 0	
+#define VK_DOWN 1
+#define VK_UP 2
+#define VK_LEFT 3
+#define VK_RIGHT 4
+#define VK_SPACE 5
+#endif
+
 
 class DreamMessage;
 class DreamClient;
@@ -191,24 +203,7 @@ public:
 
 	CArmyWar *next;
 
-    bool keys[256];
-
-#ifdef WIN32
-	//do nothing
-#else
-
-#define VK_ESCAPE 0	
-#define VK_DOWN 1
-#define VK_UP 2
-#define VK_LEFT 3
-#define VK_RIGHT 4
-#define VK_SPACE 5
-#endif
-
-
-
-	//char* serverIP;
-	//std::vector<Character>* characterVector;
+    	bool keys[256];
 
 	BaseGame* mBaseGame;
 };

@@ -11,7 +11,7 @@
 class CSignin
 {
 private:
-	DreamClient		*networkClient;
+	DreamClient	*networkClient;
 	ClientLoginData	*clientList;
 	ClientLoginData	*localClient;	// Pointer to the local client in the client list
 
@@ -19,7 +19,7 @@ public:
 	CSignin();
 	~CSignin();
 
-	DreamClient		*GetNetworkClient(void)	{ return networkClient; }
+	DreamClient	*GetNetworkClient(void)	{ return networkClient; }
 	ClientLoginData	*GetLocalClient(void)	{ return localClient; }
 
 	void	ReadPackets(void);

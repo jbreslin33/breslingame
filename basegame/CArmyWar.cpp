@@ -1,49 +1,46 @@
 #include "CArmyWar.h"
 #include "../dreamsock/DreamClient.h"
 #include "../dreamsock/DreamSock.h"
-
 #include "../charactercontrollers/Character.h"
 #include "BaseGame.h"
 #include "Ogre.h"
+
 using namespace Ogre;
 
 CArmyWar::CArmyWar(BaseGame* baseGame)
 {
-	mBaseGame = baseGame;
+	mBaseGame 	= baseGame;
 
-	//serverIP = "127.0.0.1";
 	networkClient	= new DreamClient();
-	clientList		= NULL;
-	localClient		= NULL;
-	clients			= 0;
+	clientList	= NULL;
+	localClient	= NULL;
+	clients		= 0;
 
-	memset(&inputClient, 0, sizeof(clientData));
-	memset(&mapdata, 0, sizeof(mapdata));
 
-	frametime		= 0.0f;
+	frametime	= 0.0f;
 
-	inProgress		= false;
-	init			= false;
+	inProgress	= false;
+	init		= false;
 
-	scrollX			= 0;
-	scrollY			= 0;
+	scrollX		= 0;
+	scrollY		= 0;
 
-	tileScrollX		= 0;
-	tileScrollY		= 0;
+	tileScrollX	= 0;
+	tileScrollY	= 0;
 
-	gameIndex		= 0;
+	gameIndex	= 0;
 
 	targetRotation	= 0.0f;
 
-	redScore		= 0;
-	blueScore		= 0;
+	redScore	= 0;
+	blueScore	= 0;
 
 	playerWithFlag	= NULL;
 
-	next			= NULL;
+	next		= NULL;
 
-	//myCharacter = NULL;
-	//Character* jaywad = new Character(mBaseGame->getSceneManager(), "jaydd", "Sinbad.mesh", "RunBase",  0,  5, 0);
+	memset(&inputClient, 0, sizeof(clientData));
+	memset(&mapdata, 0, sizeof(mapdata));
 }
 
 
@@ -164,7 +161,6 @@ void CArmyWar::ReadPackets(void)
 }
 void CArmyWar::AddClient(int local, int ind, char *name)
 {
-//Character* jaybird = new Character(mBaseGame->getSceneManager(), "jayman", "Sinbad.mesh", "RunBase",  0,  5, 0);
 	// First get a pointer to the beginning of client list
 	clientData *list = clientList;
 	clientData *prev;
@@ -870,7 +866,7 @@ void CArmyWar::MoveObjects(void)
 			client->command.origin.y = client->command.predictedOrigin.y;
 
 			transVector.x = client->command.origin.x;
-            transVector.y = client->command.origin.y;
+            		transVector.y = client->command.origin.y;
 			
 			//myCharacter->getSceneNode()->setPosition(transVector);
 			client->character->getSceneNode()->setPosition(transVector);
@@ -883,11 +879,11 @@ void CArmyWar::MoveObjects(void)
 
 void CArmyWar::StartConnection(int ind)
 {
-//	LogString("StartConnection");
+	//LogString("StartConnection");
 
 	//gameIndex = ind;
-char serverIP[32] = "127.0.0.1";
-//char serverIP[32] = "192.168.1.101";
+	char serverIP[32] = "127.0.0.1";
+	//char serverIP[32] = "192.168.1.101";
 
 	int ret = networkClient->Initialise("", serverIP, 30004);
 

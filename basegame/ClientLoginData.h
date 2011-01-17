@@ -17,7 +17,7 @@
 #define CMD_KILL				32
 
 #define USER_MES_FRAME			1
-#define USER_MES_NONDELTAFRAME	2
+#define USER_MES_NONDELTAFRAME		2
 #define USER_MES_SERVEREXIT		3
 #define USER_MES_LOGIN			4
 #define USER_MES_SIGNIN			5
@@ -31,8 +31,8 @@
 
 typedef struct ClientLoginData
 {
-	int					index;
-	char				nickname[30];
+	int		index;
+	char		nickname[30];
 	ClientLoginData	*next;
 } ClientLoginData;
 
