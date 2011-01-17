@@ -42,39 +42,39 @@ class DreamClient;
 class DreamMessage
 {
 private:
-	bool			overFlow;
-	int				maxSize;
-	int				size;
-	int				readCount;
+	bool	overFlow;
+	int	maxSize;
+	int	size;
+	int	readCount;
 
-	char			*GetNewPoint(int length);
+	char	*GetNewPoint(int length);
 
 public:
-	void			Init(char *d, int length);
-	void			Clear(void);
-	void			Write(void *d, int length);
-	void			AddSequences(DreamClient *client);
+	void    Init(char *d, int length);
+	void	Clear(void);
+	void	Write(void *d, int length);
+	void	AddSequences(DreamClient *client);
 
-	void			WriteByte(char c);
-	void			WriteShort(short c);
-	void			WriteLong(long c);
-	void			WriteFloat(float c);
-	void			WriteString(char *s);
-	void			BeginReading(void);
-	void			BeginReading(int s);
-	char			*Read(int s);
-	char			ReadByte(void);
-	short			ReadShort(void);
-	long			ReadLong(void);
-	float			ReadFloat(void);
-	char			*ReadString(void);
+	void    WriteByte(char c);
+	void	WriteShort(short c);
+	void	WriteLong(long c);
+	void    WriteFloat(float c);
+	void	WriteString(char *s);
+	void	BeginReading(void);
+	void	BeginReading(int s);
+	char	*Read(int s);
+	char    ReadByte(void);
+	short	ReadShort(void);
+	long	ReadLong(void);
+	float	ReadFloat(void);
+	char	*ReadString(void);
 
-	bool			GetOverFlow(void)	{ return overFlow; }
-	int				GetSize(void)		{ return size; }
-	void			SetSize(int s)		{ size = s; }
+	bool	GetOverFlow(void)	{ return overFlow; }
+	int	GetSize(void)		{ return size; }
+	void    SetSize(int s)		{ size = s; }
 
-	char			*data;
-	char			outgoingData[1400];
+	char	*data;
+	char	outgoingData[1400];
 };
 
 #endif

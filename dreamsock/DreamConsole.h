@@ -5,10 +5,10 @@
 
 class DreamConsole
 {
-	public:
-		DreamConsole(char *title);
-		~DreamConsole();
-		void println(char *string, int type, ...);
+public:
+	DreamConsole(char *title);
+	~DreamConsole();
+	void println(char *string, int type, ...);
 };
 
 #define CONSOLE_NOTIFY	0

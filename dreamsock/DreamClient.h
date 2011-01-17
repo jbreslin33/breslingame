@@ -46,81 +46,81 @@ class DreamSock;
 class DreamClient
 {
 private:
-	void			DumpBuffer(void);
-	void			ParsePacket(DreamMessage *mes);
+	void		DumpBuffer(void);
+	void		ParsePacket(DreamMessage *mes);
 
-	int				connectionState;		// Connecting, connected, disconnecting, disconnected
+	int		connectionState;		// Connecting, connected, disconnecting, disconnected
 
 	unsigned short	outgoingSequence;		// Outgoing packet sequence
 	unsigned short	incomingSequence;		// Incoming packet sequence
 	unsigned short	incomingAcknowledged;	// Last packet acknowledged by other end
 	unsigned short	droppedPackets;			// Dropped packets
 
-	int				serverPort;				// Port
-	char			serverIP[32];			// IP address
-	int				index;					// Client index (starts from 1, running number)
-	char			name[32];				// Client name
+	int		serverPort;				// Port
+	char		serverIP[32];			// IP address
+	int		index;					// Client index (starts from 1, running number)
+	char		name[32];				// Client name
 
-	SOCKET			socket;					// Socket
+	SOCKET		socket;					// Socket
 	struct sockaddr	myaddress;				// Socket address
 
-	int				pingSent;				// When did we send ping?
-	int				ping;					// Network latency
+	int		pingSent;				// When did we send ping?
+	int		ping;					// Network latency
 
-	int				lastMessageTime;
+	int		lastMessageTime;
 
-	bool			init;
+	bool		init;
 
 public:
-					DreamClient();
-					~DreamClient();
+	DreamClient();
+	~DreamClient();
 
-	int				Initialise(char *localIP, char *remoteIP, int port);
-	void			Uninitialise(void);
-	void			Reset(void);
-	void			SendConnect(char *name);
-	void			SendDisconnect(void);
-	void			SendPing(void);
+	int		Initialise(char *localIP, char *remoteIP, int port);
+	void		Uninitialise(void);
+	void		Reset(void);
+	void		SendConnect(char *name);
+	void		SendDisconnect(void);
+	void		SendPing(void);
 
-	void			SetConnectionState(int con)		{ connectionState = con; }
-	int				GetConnectionState(void)		{ return connectionState; }
+	void		SetConnectionState(int con)		{ connectionState = con; }
+	int		GetConnectionState(void)		{ return connectionState; }
 
-	int				GetPacket(char *data, struct sockaddr *from);
-	void			SendPacket(void);
-	void			SendPacket(DreamMessage *message);
+	int		GetPacket(char *data, struct sockaddr *from);
+	void		SendPacket(void);
+	void		SendPacket(DreamMessage *message);
 
 	unsigned short	GetOutgoingSequence(void)				{ return outgoingSequence; }
-	void			SetOutgoingSequence(unsigned short seq)	{ outgoingSequence = seq; }
-	void			IncreaseOutgoingSequence(void)			{ outgoingSequence++; }
+	void		SetOutgoingSequence(unsigned short seq)	{ outgoingSequence = seq; }
+	void		IncreaseOutgoingSequence(void)			{ outgoingSequence++; }
 	unsigned short	GetIncomingSequence(void)				{ return incomingSequence; }
-	void			SetIncomingSequence(unsigned short seq)	{ incomingSequence = seq; }
+	void		SetIncomingSequence(unsigned short seq)	{ incomingSequence = seq; }
 	unsigned short	GetIncomingAcknowledged(void)			{ return incomingAcknowledged; }
-	void			SetIncomingAcknowledged(unsigned short seq) { incomingAcknowledged = seq; }
+	void		SetIncomingAcknowledged(unsigned short seq) { incomingAcknowledged = seq; 
 	unsigned short	GetDroppedPackets(void)					{ return droppedPackets; }
-	void			SetDroppedPackets(unsigned short drop)	{ droppedPackets = drop; }
+	void		SetDroppedPackets(unsigned short drop)	{ droppedPackets = drop; }
 
-	bool			GetInit(void)			{ return init; }
+	bool		GetInit(void)			{ return init; }
 
-	int				GetIndex(void)			{ return index; }
-	void			SetIndex(int ind)		{ index = ind; }
+	int		GetIndex(void)			{ return index; }
+	void		SetIndex(int ind)		{ index = ind; }
 
-	char			*GetName(void)			{ return name; }
-	void			SetName(char *n)		{ strcpy(name, n); }
+	char		*GetName(void)			{ return name; }
+	void		SetName(char *n)		{ strcpy(name, n); }
 
-	SOCKET			GetSocket(void)			{ return socket; }
-	void			SetSocket(SOCKET sock)	{ socket = sock; }
+	SOCKET		GetSocket(void)			{ return socket; }
+	void		SetSocket(SOCKET sock)	{ socket = sock; }
 
 	struct sockaddr *GetSocketAddress(void) { return &myaddress; }
-	void			SetSocketAddress(struct sockaddr *address) { memcpy(&myaddress, address, sizeof(struct sockaddr)); }
+	void		SetSocketAddress(struct sockaddr *address) { memcpy(&myaddress, address, sizeof(struct sockaddr)); }
 
-	int				GetPingSent(void)		{ return pingSent; }
-	void			SetPing(int p)			{ ping = p; }
+	int		GetPingSent(void)		{ return pingSent; }
+	void		SetPing(int p)			{ ping = p; }
 
-	int				GetLastMessageTime(void) { return lastMessageTime; }
-	void			SetLastMessageTime(int t) { lastMessageTime = t; }
+	int		GetLastMessageTime(void) { return lastMessageTime; }
+	void		SetLastMessageTime(int t) { lastMessageTime = t; }
 
 	DreamMessage	message;
-	DreamClient		*next;
+	DreamClient	*next;
 	DreamSock*      dreamSock;
 };
 
