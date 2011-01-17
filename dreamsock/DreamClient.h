@@ -95,7 +95,7 @@ public:
 	unsigned short	GetIncomingSequence(void)				{ return incomingSequence; }
 	void		SetIncomingSequence(unsigned short seq)	{ incomingSequence = seq; }
 	unsigned short	GetIncomingAcknowledged(void)			{ return incomingAcknowledged; }
-	void		SetIncomingAcknowledged(unsigned short seq) { incomingAcknowledged = seq; 
+	void		SetIncomingAcknowledged(unsigned short seq) { incomingAcknowledged = seq; } 
 	unsigned short	GetDroppedPackets(void)					{ return droppedPackets; }
 	void		SetDroppedPackets(unsigned short drop)	{ droppedPackets = drop; }
 
