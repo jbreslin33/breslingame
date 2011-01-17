@@ -33,10 +33,10 @@ BaseGame::~BaseGame(void)
 //-------------------------------------------------------------------------------------
 void BaseGame::createScene(void)
 {
-
+	
 	mSceneMgr->setAmbientLight(ColourValue(0.3, 0.3, 0.3));
 
-    // add a bright light above the scene
+    	// add a bright light above the scene
 	Light* light = mSceneMgr->createLight();
 	light->setType(Light::LT_POINT);
 	light->setPosition(-10, 40, 20);
@@ -47,25 +47,14 @@ void BaseGame::createScene(void)
 	Plane(Vector3::UNIT_Y, 0), 200, 200, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
 
 	// create a floor entity, give it a material, and place it at the origin
-    Entity* floor = mSceneMgr->createEntity("Floor", "floor");
-    floor->setMaterialName("Examples/Rockwall");
-    floor->setCastShadows(false);
-    mSceneMgr->getRootSceneNode()->attachObject(floor);
-
-	//add a character
-    //jay       = new Character(mSceneMgr, "jay"      , "Sinbad.mesh", "RunBase",  0,  5, 0);
-
-	//mGame->myCharacter = jay;
-
+    	Entity* floor = mSceneMgr->createEntity("Floor", "floor");
+    	floor->setMaterialName("Examples/Rockwall");
+    	floor->setCastShadows(false);
+    	mSceneMgr->getRootSceneNode()->attachObject(floor);
 
 	// Create application object
-    mGame = new CArmyWar(this);
-    //Ogre::LogManager::getSingletonPtr()->logMessage("*HELLO ***");
-	//game = new CArmyWar;
+    	mGame = new CArmyWar(this);
 	mGame->StartConnection(1);// doesn't matter what you pass in cause it ain't used.
-
-
-	//LogManager::getSingleton().logMessage("*-*-* OGRE Initialising");
 
 }
 
@@ -73,51 +62,48 @@ void BaseGame::createScene(void)
 bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 {
  
-//#ifdef WIN32 
-   if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
-    {
+ 	if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
+    	{
 		mGame->keys[VK_UP] = true;
-		
-    }
+    	}
 	else
 	{
-        mGame->keys[VK_UP] = false;
+        	mGame->keys[VK_UP] = false;
 	}
-    if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
-    {
+    	if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
+    	{
 		mGame->keys[VK_DOWN] = true;
-    }
+    	}
 	else
 	{
-        mGame->keys[VK_DOWN] = false;
+        	mGame->keys[VK_DOWN] = false;
 	}
 
-    if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
-    {
+    	if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
+    	{
 		mGame->keys[VK_LEFT] = true;
-    }
+    	}
 	else
 	{
-        mGame->keys[VK_LEFT] = false;
+        	mGame->keys[VK_LEFT] = false;
 	}
-    if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
-    {
+    	if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
+    	{
 		mGame->keys[VK_RIGHT] = true;
-    }
+  	}
 	else
 	{
-        mGame->keys[VK_RIGHT] = false;
+        	mGame->keys[VK_RIGHT] = false;
 	}
          
-//#endif
-    return true;
+    	return true;
 }
 //-------------------------------------------------------------------------------------
 bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
-    bool ret = BaseApplication::frameRenderingQueued(evt);
+	 bool ret = BaseApplication::frameRenderingQueued(evt);
  
-    if(!processUnbufferedInput(evt)) return false;
+    	if(!processUnbufferedInput(evt)) return false;
 
 	if(mGame != NULL)
 	{
@@ -126,7 +112,7 @@ bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		mGame->Frame();
 	}
  
-    return ret;
+    	return ret;
 }
 
 
@@ -144,22 +130,25 @@ extern "C" {
 #else
     int main(int argc, char *argv[])
 #endif
-    {
-        BaseGame app;
+	{
+		BaseGame app;
 
-        try {
-            app.go();
-        } catch( Ogre::Exception& e ) {
+        	try
+ 		{
+            		app.go();
+        	}
+			catch( Ogre::Exception& e )
+		{
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-            MessageBox( NULL, e.getFullDescription().c_str(), "An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
+	MessageBox( NULL, e.getFullDescription().c_str(), "An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
 #else
-            std::cerr << "An exception has occured: " <<
-                e.getFullDescription().c_str() << std::endl;
+        std::cerr << "An exception has occured: " <<
+        e.getFullDescription().c_str() << std::endl;
 #endif
-        }
+        	}
 
         return 0;
-    }
+	}
 
 #ifdef __cplusplus
 }

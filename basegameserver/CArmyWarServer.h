@@ -54,14 +54,14 @@ public:
 
 	int		realtime;				// Real server up-time in ms
 	int		servertime;				// Server frame * 100 ms
-	float	frametime;				// Frame time in seconds
+	float		frametime;				// Frame time in seconds
 
-	char	gamename[32];
+	char		gamename[32];
 	int		index;
 
-	clientData *playerWithFlag;
+	clientData 	*playerWithFlag;
 
-	long	framenum;
+	long		framenum;
 
 public:
 	CArmyWarServer();
@@ -76,7 +76,7 @@ public:
 	void	BuildDeltaMoveCommand(DreamMessage *mes, clientData *client);
 
 	// Server.cpp
-	int		InitNetwork();
+	int	InitNetwork();
 	void	ShutdownNetwork(void);
 	void	CalculateVelocity(command_t *command, float frametime);
 	void	MovePlayers(void);
@@ -92,7 +92,7 @@ public:
 	char	*GetName(void)			{ return gamename; }
 
 	void	SetIndex(int ind)	{ index = ind; }
-	int		GetIndex(void)		{ return index; }
+	int	GetIndex(void)		{ return index; }
 
 	CArmyWarServer *next;
 };

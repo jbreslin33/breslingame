@@ -25,11 +25,11 @@ class Character;
 class BaseGame : public BaseApplication
 {
 public:
-    BaseGame(void);
-    virtual ~BaseGame(void);
+	BaseGame(void);
+    	virtual ~BaseGame(void);
 
 bool processUnbufferedInput(const Ogre::FrameEvent& evt);
-bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+bool frameRenderingQueued  (const Ogre::FrameEvent& evt);
 
 Ogre::SceneManager* getSceneManager()
 {
@@ -37,10 +37,9 @@ Ogre::SceneManager* getSceneManager()
 }
 
 	CArmyWar*   mGame;
-   // Character*  jay;
 
 protected:
-    virtual void createScene(void);
+	virtual void createScene(void);
 
 };
 

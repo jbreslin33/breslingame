@@ -277,7 +277,7 @@ int main(int argc, char **argv)
 	{
 		if(runningDaemon)
 		{
-LogString("runningDaemon is true");			
+			LogString("runningDaemon is true");			
 // Keep server alive
 			while(1)
 			{
@@ -289,7 +289,8 @@ LogString("runningDaemon is true");
 
 				//Lobby.Frame(time);
 				//Signin.Frame(time);
-game->Frame(time);
+				
+				game->Frame(time);
 
 				//CArmyWarServer *list = Lobby.GetGameList();
 
@@ -314,16 +315,14 @@ game->Frame(time);
 
 				//Lobby.Frame(time);
 				//Signin.Frame(time);
-game->Frame(time);
-
-
+				game->Frame(time);
 
 				//CArmyWarServer *list = Lobby.GetGameList();
 
 				//for( ; list != NULL; list = list->next)
 				//{
-			//		list->Frame(time);
-			//	}
+				//		list->Frame(time);
+				//	}
 
 				oldTime = newTime;
 			}
