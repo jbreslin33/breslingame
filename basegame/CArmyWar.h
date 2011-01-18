@@ -89,6 +89,8 @@ typedef struct clientData
 	clientData	*next;
 } clientData;
 
+
+
 // The main application class interface
 class CArmyWar
 {
