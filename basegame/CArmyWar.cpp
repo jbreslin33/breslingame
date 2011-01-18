@@ -858,7 +858,8 @@ void CArmyWar::MoveObjects(void)
 
 			transVector.x = client->command.origin.x;
             		transVector.z = client->command.origin.y;
-			
+			transVector.y = 5; //to keep player consistent y for now a hack
+ 
 			client->character->getSceneNode()->setPosition(transVector);
 			
 			client->command.bullet.origin.x += client->serverFrame.bullet.vel.x * frametime;
@@ -875,7 +876,8 @@ void CArmyWar::MoveObjects(void)
 
 			transVector.x = client->command.origin.x;
             		transVector.z = client->command.origin.y;
-			
+		        transVector.y = 5; //to keep player consistent y for now
+	
 			//myCharacter->getSceneNode()->setPosition(transVector);
 			client->character->getSceneNode()->setPosition(transVector);
 
