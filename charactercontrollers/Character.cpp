@@ -2,21 +2,21 @@
 
 	Character::Character(Ogre::SceneManager* sceneMgr, std::string playerName,std::string meshName, std::string animationName, int x, int y, int z)
 	{
-	    //character traits
-	    mPlayerName    = playerName;
-	    mMeshName      = meshName;
-	    mAnimationName = animationName;
+		//character traits
+	    	mPlayerName    = playerName;
+	    	mMeshName      = meshName;
+	    	mAnimationName = animationName;
 
-	    //starting position
-	    xPos = x;
-	    yPos = y;
-	    zPos = z;
+	    	//starting position
+	    	xPos = x;
+	    	yPos = y;
+	    	zPos = z;
 
-        //the all powerful SceneManager
-	    mSceneManager = sceneMgr;
+      		//the all powerful SceneManager
+	    	mSceneManager = sceneMgr;
 
-        //actually create and show the model on screen...assuming you put it somewhere visible etc.
-        setupModel();
+        	//actually create and show the model on screen...assuming you put it somewhere visible etc.
+        	setupModel();
 	}
 
     void Character::addTime(Real deltaTime)
@@ -37,13 +37,13 @@
 		mSceneNode->translate(xPos, yPos, zPos, Node::TS_LOCAL);
 
 		// create entity and attach mesh to it
-        entity = mSceneManager->createEntity(mPlayerName, mMeshName);
+	        entity = mSceneManager->createEntity(mPlayerName, mMeshName);
 		mSceneNode->attachObject(entity);
 
 		// enable the entity's sneaking animation at a random speed and loop it manually since translation is involved
 		mAnimationState = entity->getAnimationState(mAnimationName);
-        mAnimationState->setEnabled(true);
-        mAnimationState->setLoop(true);
+       		mAnimationState->setEnabled(true);
+        	mAnimationState->setLoop(true);
 		mAnimationSpeed = Math::RangeRandom(0.5, 1.5);
 	}
 

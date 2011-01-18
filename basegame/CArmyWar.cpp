@@ -857,7 +857,7 @@ void CArmyWar::MoveObjects(void)
 			client->command.origin.y += client->command.vel.y;
 
 			transVector.x = client->command.origin.x;
-            		transVector.y = client->command.origin.y;
+            		transVector.z = client->command.origin.y;
 			
 			client->character->getSceneNode()->setPosition(transVector);
 			
@@ -874,7 +874,7 @@ void CArmyWar::MoveObjects(void)
 			client->command.origin.y = client->command.predictedOrigin.y;
 
 			transVector.x = client->command.origin.x;
-            		transVector.y = client->command.origin.y;
+            		transVector.z = client->command.origin.y;
 			
 			//myCharacter->getSceneNode()->setPosition(transVector);
 			client->character->getSceneNode()->setPosition(transVector);
