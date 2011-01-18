@@ -223,7 +223,7 @@ void CArmyWar::AddClient(int local, int ind, char *name)
 		list->next = NULL;
 		prev->next = list;
 
-		clientList->character = new Character(mBaseGame->getSceneManager(), "jay" + ind, "Sinbad.mesh", "RunBase",  0,  5, 0);
+		list->character = new Character(mBaseGame->getSceneManager(), "jay" + ind, "Sinbad.mesh", "RunBase",  0,  5, 0);
 
 	}
 
@@ -884,8 +884,8 @@ void CArmyWar::StartConnection(int ind)
 	//LogString("StartConnection");
 
 	//gameIndex = ind;
-	char serverIP[32] = "127.0.0.1";
-	//char serverIP[32] = "192.168.1.101";
+	//char serverIP[32] = "127.0.0.1";
+	char serverIP[32] = "192.168.1.104";
 
 	int ret = networkClient->Initialise("", serverIP, 30004);
 
