@@ -849,12 +849,18 @@ void CArmyWar::MoveObjects(void)
 		// Remote players
 		if(client != localClient)
 		{
+			Ogre::Vector3 transVector = Ogre::Vector3::ZERO;
 			CalculateVelocity(&client->command, frametime);
 			CalculateHeading(&client->command);
 
 			client->command.origin.x += client->command.vel.x;
 			client->command.origin.y += client->command.vel.y;
 
+			transVector.x = client->command.origin.x;
+            		transVector.y = client->command.origin.y;
+			
+			client->character->getSceneNode()->setPosition(transVector);
+			
 			client->command.bullet.origin.x += client->serverFrame.bullet.vel.x * frametime;
 			client->command.bullet.origin.y += client->serverFrame.bullet.vel.y * frametime;
 		}
