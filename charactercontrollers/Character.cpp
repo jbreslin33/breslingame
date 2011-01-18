@@ -18,7 +18,9 @@
         	//actually create and show the model on screen...assuming you put it somewhere visible etc.
         	setupModel();
 	}
-
+Character::~Character()
+{
+}
     void Character::addTime(Real deltaTime)
     {
         mAnimationState->addTime(mAnimationSpeed * deltaTime);

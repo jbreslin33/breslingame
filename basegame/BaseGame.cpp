@@ -17,7 +17,10 @@ This source file is part of the
 #include "BaseGame.h"
 #include "../charactercontrollers/Character.h"
 #include "CArmyWar.h"
+#include "../../ogre/Samples/Common/include/SdkCameraMan.h"
 
+using namespace Ogre;
+using namespace OgreBites;
 
 //-------------------------------------------------------------------------------------
 BaseGame::BaseGame(void)
@@ -33,14 +36,29 @@ BaseGame::~BaseGame(void)
 //-------------------------------------------------------------------------------------
 void BaseGame::createScene(void)
 {
-	
-	mSceneMgr->setAmbientLight(ColourValue(0.3, 0.3, 0.3));
+/*
+	//set background and some fog	
+	//mViewport->setBackgroundColour(ColourValue(1.0f, 1.0f, 0.8f));
+	mSceneMgr->setFog(Ogre::FOG_LINEAR, ColourValue(1.0f, 1.0f, 0.8f), 0, 15, 100);
 
-    	// add a bright light above the scene
-	Light* light = mSceneMgr->createLight();
-	light->setType(Light::LT_POINT);
-	light->setPosition(-10, 40, 20);
-	light->setSpecularColour(ColourValue::White);
+        // set shadow properties
+        mSceneMgr->setShadowTechnique(SHADOWTYPE_TEXTURE_MODULATIVE);
+        mSceneMgr->setShadowColour(ColourValue(0.5, 0.5, 0.5));
+        mSceneMgr->setShadowTextureSize(1024);
+        mSceneMgr->setShadowTextureCount(1);
+*/
+        // disable default camera control so the character can do its own
+        mCameraMan->setStyle(CS_MANUAL);
+/*
+        // use a small amount of ambient lighting
+        mSceneMgr->setAmbientLight(ColourValue(0.3, 0.3, 0.3));
+
+        // add a bright light above the scene
+        Light* light = mSceneMgr->createLight();
+        light->setType(Light::LT_POINT);
+        light->setPosition(-10, 40, 20);
+        light->setSpecularColour(ColourValue::White);
+*/
 
 	// create a floor mesh resource
 	MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
