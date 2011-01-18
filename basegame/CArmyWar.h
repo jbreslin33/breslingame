@@ -38,7 +38,8 @@
 
 class DreamMessage;
 class DreamClient;
-class Character;
+//class CharacterController;
+class SinbadCharacterController;
 class BaseGame;
 
 typedef struct
@@ -84,7 +85,7 @@ typedef struct clientData
 	char		nickname[30];
 	char		password[30];
 
-    Character* character;
+    	SinbadCharacterController* character;
 
 	clientData	*next;
 } clientData;

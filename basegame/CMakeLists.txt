@@ -116,6 +116,7 @@ set(HDRS
 	
 	#Characters
 	../charactercontrollers/Character.h
+	../charactercontrollers/CharacterController.h
 )
  
 set(SRCS
@@ -144,6 +145,7 @@ set(SRCS
 	
 	#Characters
 	../charactercontrollers/Character.cpp
+	../charactercontrollers/CharacterController.cpp
 	
 )
 
@@ -182,6 +184,7 @@ set(HDRS
 	
 	#Characters
 	../charactercontrollers/Character.h
+	../charactercontrollers/CharacterController.h
 )
  
 set(SRCS
@@ -210,6 +213,7 @@ set(SRCS
 
 	#Characters
 	../charactercontrollers/Character.cpp
+	../charactercontrollers/CharacterController.cpp
 	
 )
 

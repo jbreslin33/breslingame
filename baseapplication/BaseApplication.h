@@ -42,6 +42,7 @@ public:
 
     virtual void go(void);
 
+Ogre::Camera* getCamera() { return mCamera; }
 protected:
     virtual bool setup();
     virtual bool configure(void);
@@ -71,6 +72,7 @@ protected:
     virtual void windowResized(Ogre::RenderWindow* rw);
     //Unattach OIS before window shutdown (very important under Linux)
     virtual void windowClosed(Ogre::RenderWindow* rw);
+
 
     Ogre::Root *mRoot;
     Ogre::Camera* mCamera;
