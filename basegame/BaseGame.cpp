@@ -16,6 +16,7 @@ This source file is part of the
 */
 #include "BaseGame.h"
 #include "../charactercontrollers/Character.h"
+#include "../charactercontrollers/SinbadCharacterController.h"
 #include "CArmyWar.h"
 #include "../../ogre/Samples/Common/include/SdkCameraMan.h"
 
@@ -36,44 +37,40 @@ BaseGame::~BaseGame(void)
 //-------------------------------------------------------------------------------------
 void BaseGame::createScene(void)
 {
-/*
-	//set background and some fog	
-	//mViewport->setBackgroundColour(ColourValue(1.0f, 1.0f, 0.8f));
-	mSceneMgr->setFog(Ogre::FOG_LINEAR, ColourValue(1.0f, 1.0f, 0.8f), 0, 15, 100);
 
-        // set shadow properties
-        mSceneMgr->setShadowTechnique(SHADOWTYPE_TEXTURE_MODULATIVE);
-        mSceneMgr->setShadowColour(ColourValue(0.5, 0.5, 0.5));
-        mSceneMgr->setShadowTextureSize(1024);
-        mSceneMgr->setShadowTextureCount(1);
-*/
-        // disable default camera control so the character can do its own
-        mCameraMan->setStyle(CS_MANUAL);
-/*
-        // use a small amount of ambient lighting
-        mSceneMgr->setAmbientLight(ColourValue(0.3, 0.3, 0.3));
 
-        // add a bright light above the scene
+      mSceneMgr->setAmbientLight(ColourValue(0.3, 0.3, 0.3));
+
+    // add a bright light above the scene
         Light* light = mSceneMgr->createLight();
         light->setType(Light::LT_POINT);
         light->setPosition(-10, 40, 20);
         light->setSpecularColour(ColourValue::White);
-*/
 
-	// create a floor mesh resource
-	MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-	Plane(Vector3::UNIT_Y, 0), 200, 200, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
+        // create a floor mesh resource
+        MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+        Plane(Vector3::UNIT_Y, 0), 200, 200, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
 
-	// create a floor entity, give it a material, and place it at the origin
-    	Entity* floor = mSceneMgr->createEntity("Floor", "floor");
-    	floor->setMaterialName("Examples/Rockwall");
-    	floor->setCastShadows(false);
-    	mSceneMgr->getRootSceneNode()->attachObject(floor);
+        // create a floor entity, give it a material, and place it at the origin
+    Entity* floor = mSceneMgr->createEntity("Floor", "floor");
+    floor->setMaterialName("Examples/Rockwall");
+    floor->setCastShadows(false);
+    mSceneMgr->getRootSceneNode()->attachObject(floor);
 
-	// Create application object
-    	mGame = new CArmyWar(this);
-	mGame->StartConnection(1);// doesn't matter what you pass in cause it ain't used.
+        //add a character
+    //jay       = new Character(mSceneMgr, "jay"      , "Sinbad.mesh", "RunBase",  0,  5, 0);
+    mChara = new SinbadCharacterController(getCamera());
+        //mGame->myCharacter = jay;
 
+
+        // Create application object
+    mGame = new CArmyWar(this);
+    //Ogre::LogManager::getSingletonPtr()->logMessage("*HELLO ***");
+        //game = new CArmyWar;
+        mGame->StartConnection(1);// doesn't matter what you pass in cause it ain't used.
+
+
+        //LogManager::getSingleton().logMessage("*-*-* OGRE Initialising");
 }
 
 
@@ -120,15 +117,20 @@ bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
 	 bool ret = BaseApplication::frameRenderingQueued(evt);
- 
+
+	mChara->addTime(evt.timeSinceLastFrame);
     	if(!processUnbufferedInput(evt)) return false;
 
 	if(mGame != NULL)
 	{
-		mGame->RunNetwork(evt.timeSinceLastFrame * 1000);
-		mGame->CheckKeys();
-		mGame->Frame();
-	}
+
+
+	mGame->RunNetwork(evt.timeSinceLastFrame * 1000);
+	mGame->CheckKeys();
+	mGame->Frame();
+	//if (mGame->clientList->character != NULL)	
+	//mGame->clientList->character->addTime(evt.timeSinceLastFrame);
+}
  
     	return ret;
 }

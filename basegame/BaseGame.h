@@ -20,8 +20,8 @@ This source file is part of the
 #include "../baseapplication/BaseApplication.h"
 
 class CArmyWar;
+class SinbadCharacterController;
 class Character;
-
 class BaseGame : public BaseApplication
 {
 public:
@@ -40,7 +40,7 @@ Ogre::SceneManager* getSceneManager()
 
 protected:
 	virtual void createScene(void);
-
+SinbadCharacterController* mChara;
 };
 
 #endif // #ifndef __BaseGame_h_
