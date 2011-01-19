@@ -185,7 +185,7 @@ void CArmyWar::AddClient(int local, int ind, char *name)
 		strcpy(clientList->nickname, name);
 
 		//clientList->character = new CharacterController(mBaseGame->getSceneManager(), mBaseGame->getCamera(), "jay" + ind, "Sinbad.mesh", "RunBase",  0,  5, 0);
-		clientList->character = new SinbadCharacterController(mBaseGame->getCamera());
+	//	clientList->character = new SinbadCharacterController(mBaseGame->getCamera());
 		if(clients % 2 == 0)
 			clientList->team = RED_TEAM;
 		else
@@ -226,7 +226,7 @@ void CArmyWar::AddClient(int local, int ind, char *name)
 		prev->next = list;
 
 		//list->character = new CharacterController(mBaseGame->getSceneManager(), mBaseGame->getCamera(), "jay" + ind, "Sinbad.mesh", "RunBase",  0,  5, 0);
-		list->character = new SinbadCharacterController(mBaseGame->getCamera());
+	//	list->character = new SinbadCharacterController(mBaseGame->getCamera());
 	}
 
 	clients++;
