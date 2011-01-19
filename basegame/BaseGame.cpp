@@ -56,7 +56,7 @@ void BaseGame::createScene(void)
     floor->setMaterialName("Examples/Rockwall");
     floor->setCastShadows(false);
     mSceneMgr->getRootSceneNode()->attachObject(floor);
-
+mCameraMan->setStyle(CS_MANUAL);
         //add a character
     //jay       = new Character(mSceneMgr, "jay"      , "Sinbad.mesh", "RunBase",  0,  5, 0);
     mChara = new SinbadCharacterController(getCamera());
@@ -130,10 +130,64 @@ bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	mGame->Frame();
 	//if (mGame->clientList->character != NULL)	
 	//mGame->clientList->character->addTime(evt.timeSinceLastFrame);
-}
+	}
  
     	return ret;
 }
+
+
+        bool BaseGame::keyPressed(const OIS::KeyEvent& evt)
+        {
+Base       
+         // relay input events to character controller
+                //if (!mTrayMgr->isDialogVisible()) 
+mChara->injectKeyDown(evt);
+               // return SdkSample::keyPressed(evt);
+        }
+
+        bool BaseGame::keyReleased(const OIS::KeyEvent& evt)
+        {
+                // relay input events to character controller
+                //if (!mTrayMgr->isDialogVisible()) 
+mChara->injectKeyUp(evt);
+                //return SdkSample::keyReleased(evt);
+        }
+
+#if OGRE_PLATFORM == OGRE_PLATFORM_IPHONE
+        bool BaseGame::touchPressed(const OIS::MultiTouchEvent& evt)
+        {
+                // relay input events to character controller
+                ///if (!mTrayMgr->isDialogVisible()) 
+mChara->injectMouseDown(evt);
+                //return SdkSample::touchPressed(evt);
+        }
+
+        bool BaseGame::touchMoved(const OIS::MultiTouchEvent& evt)
+        {
+                // relay input events to character controller
+                //if (!mTrayMgr->isDialogVisible())
+ mChara->injectMouseMove(evt);
+                //return SdkSample::touchMoved(evt);
+        }
+#else
+        bool BaseGame::mouseMoved(const OIS::MouseEvent& evt)
+        {
+                // relay input events to character controller
+//                if (!mTrayMgr->isDialogVisible()) 
+mChara->injectMouseMove(evt);
+ //               return SdkSample::mouseMoved(evt);
+        }
+
+        bool BaseGame::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID id)
+        {
+                // relay input events to character controller
+//                if (!mTrayMgr->isDialogVisible()) 
+mChara->injectMouseDown(evt, id);
+ //               return SdkSample::mousePressed(evt, id);
+        }
+#endif
+
+
 
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32

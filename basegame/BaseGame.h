@@ -30,6 +30,11 @@ public:
 
 bool processUnbufferedInput(const Ogre::FrameEvent& evt);
 bool frameRenderingQueued  (const Ogre::FrameEvent& evt);
+bool keyPressed(const OIS::KeyEvent&);
+bool keyReleased(const OIS::KeyEvent&);
+bool mouseMoved(const OIS::MouseEvent&);
+bool mousePressed(const OIS::MouseEvent&, OIS::MouseButtonID);
+
 
 Ogre::SceneManager* getSceneManager()
 {
