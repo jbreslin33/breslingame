@@ -37,11 +37,9 @@ BaseGame::~BaseGame(void)
 //-------------------------------------------------------------------------------------
 void BaseGame::createScene(void)
 {
+        mSceneMgr->setAmbientLight(ColourValue(0.3, 0.3, 0.3));
 
-
-      mSceneMgr->setAmbientLight(ColourValue(0.3, 0.3, 0.3));
-
-    // add a bright light above the scene
+	// add a bright light above the scene
         Light* light = mSceneMgr->createLight();
         light->setType(Light::LT_POINT);
         light->setPosition(-10, 40, 20);
@@ -52,25 +50,21 @@ void BaseGame::createScene(void)
         Plane(Vector3::UNIT_Y, 0), 200, 200, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
 
         // create a floor entity, give it a material, and place it at the origin
-    Entity* floor = mSceneMgr->createEntity("Floor", "floor");
-    floor->setMaterialName("Examples/Rockwall");
-    floor->setCastShadows(false);
-    mSceneMgr->getRootSceneNode()->attachObject(floor);
-mCameraMan->setStyle(CS_MANUAL);
+    	Entity* floor = mSceneMgr->createEntity("Floor", "floor");
+    	floor->setMaterialName("Examples/Rockwall");
+  	floor->setCastShadows(false);
+    	mSceneMgr->getRootSceneNode()->attachObject(floor);
+
+	mCameraMan->setStyle(CS_MANUAL);
+
         //add a character
-    //jay       = new Character(mSceneMgr, "jay"      , "Sinbad.mesh", "RunBase",  0,  5, 0);
-    mChara = new SinbadCharacterController(getCamera());
-        //mGame->myCharacter = jay;
+    	mChara = new SinbadCharacterController(getCamera());
 
 
         // Create application object
-    mGame = new CArmyWar(this);
-    //Ogre::LogManager::getSingletonPtr()->logMessage("*HELLO ***");
-        //game = new CArmyWar;
+    	mGame = new CArmyWar(this);
         mGame->StartConnection(1);// doesn't matter what you pass in cause it ain't used.
 
-
-        //LogManager::getSingleton().logMessage("*-*-* OGRE Initialising");
 }
 
 
