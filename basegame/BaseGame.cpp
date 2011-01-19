@@ -138,7 +138,7 @@ bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
         bool BaseGame::keyPressed(const OIS::KeyEvent& evt)
         {
-Base       
+BaseApplication::keyPressed(evt);       
          // relay input events to character controller
                 //if (!mTrayMgr->isDialogVisible()) 
 mChara->injectKeyDown(evt);
