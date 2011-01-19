@@ -59,7 +59,7 @@ void BaseGame::createScene(void)
 
         //add a character
     	mChara = new SinbadCharacterController(getCamera());
-
+	//getCamera()->setPosition(100,10,0);
 
         // Create application object
     	mGame = new CArmyWar(this);
