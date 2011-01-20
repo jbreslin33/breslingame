@@ -224,6 +224,7 @@ private:
 
 	void setupCamera(Camera* cam)
 	{
+		cam->setPosition(Vector3(0,0,10));	
 		// create a pivot at roughly the character's shoulder
 		mCameraPivot = cam->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 		// this is where the camera should be soon, and it spins around the pivot
