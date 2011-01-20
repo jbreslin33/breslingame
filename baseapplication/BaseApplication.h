@@ -41,6 +41,10 @@ public:
     virtual ~BaseApplication(void);
 
     virtual void go(void);
+    Ogre::Viewport* getViewport() { return vp; }
+
+
+
 
 Ogre::Camera* getCamera() { return mCamera; }
 protected:
@@ -92,6 +96,9 @@ protected:
     OIS::InputManager* mInputManager;
     OIS::Mouse*    mMouse;
     OIS::Keyboard* mKeyboard;
+
+    Ogre::Viewport* vp;
+
 };
 
 #endif // #ifndef __BaseApplication_h_
