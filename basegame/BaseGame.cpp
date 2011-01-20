@@ -37,7 +37,7 @@ BaseGame::~BaseGame(void)
 //-------------------------------------------------------------------------------------
 void BaseGame::createScene(void)
 {
-/*        mSceneMgr->setAmbientLight(ColourValue(0.3, 0.3, 0.3));
+        mSceneMgr->setAmbientLight(ColourValue(0.3, 0.3, 0.3));
 
 	// add a bright light above the scene
         Light* light = mSceneMgr->createLight();
@@ -55,7 +55,7 @@ void BaseGame::createScene(void)
   	floor->setCastShadows(false);
     	mSceneMgr->getRootSceneNode()->attachObject(floor);
 
-	//mCameraMan->setStyle(CS_MANUAL);
+	mCameraMan->setStyle(CS_MANUAL);
 
         //add a character
     	mChara = new SinbadCharacterController(getCamera());
@@ -64,47 +64,6 @@ void BaseGame::createScene(void)
         // Create application object
     	mGame = new CArmyWar(this);
         mGame->StartConnection(1);// doesn't matter what you pass in cause it ain't used.
-*/
-
-                // set background and some fog
-                getViewport()->setBackgroundColour(ColourValue(1.0f, 1.0f, 0.8f));
-                mSceneMgr->setFog(Ogre::FOG_LINEAR, ColourValue(1.0f, 1.0f, 0.8f), 0, 15, 100);
-
-                // set shadow properties
-                mSceneMgr->setShadowTechnique(SHADOWTYPE_TEXTURE_MODULATIVE);
-                mSceneMgr->setShadowColour(ColourValue(0.5, 0.5, 0.5));
-                mSceneMgr->setShadowTextureSize(1024);
-                mSceneMgr->setShadowTextureCount(1);
-
-                // disable default camera control so the character can do its own
-                mCameraMan->setStyle(CS_MANUAL);
-
-                // use a small amount of ambient lighting
-                mSceneMgr->setAmbientLight(ColourValue(0.3, 0.3, 0.3));
-
-                // add a bright light above the scene
-                Light* light = mSceneMgr->createLight();
-                light->setType(Light::LT_POINT);
-                light->setPosition(-10, 40, 20);
-                light->setSpecularColour(ColourValue::White);
-
-                // create a floor mesh resource
-                MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-                        Plane(Vector3::UNIT_Y, 0), 100, 100, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
-
-                // create a floor entity, give it a material, and place it at the origin
-        Entity* floor = mSceneMgr->createEntity("Floor", "floor");
-        floor->setMaterialName("Examples/Rockwall");
-                floor->setCastShadows(false);
-        mSceneMgr->getRootSceneNode()->attachObject(floor);
-
-                // create our character controller
-                mChara = new SinbadCharacterController(mCamera);
-
-        // Create application object
-        mGame = new CArmyWar(this);
-        mGame->StartConnection(1);// doesn't matter what you pass in cause it ain't used.
-
 
 }
 
