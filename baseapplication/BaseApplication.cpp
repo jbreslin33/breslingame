@@ -147,6 +147,19 @@ void BaseApplication::destroyScene(void)
 //-------------------------------------------------------------------------------------
 void BaseApplication::createViewports(void)
 {
+	// setup default viewport layout and camera
+        mCamera = mSceneMgr->createCamera("MainCamera");
+        mViewport = mWindow->addViewport(mCamera);
+        mCamera->setAspectRatio((Ogre::Real)mViewport->getActualWidth() / (Ogre::Real)mViewport->getActualHeight());
+        mCamera->setNearClipDistance(5);
+    //:q    mCameraMan = new SdkCameraMan(mCamera);   // create a default camera controller
+
+
+
+//begin original
+
+/*
+
     // Create one viewport, entire window
     Ogre::Viewport* vp = mWindow->addViewport(mCamera);
     vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
@@ -154,6 +167,8 @@ void BaseApplication::createViewports(void)
     // Alter the camera aspect ratio to match the viewport
     mCamera->setAspectRatio(
         Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
+*/
+
 }
 //-------------------------------------------------------------------------------------
 void BaseApplication::setupResources(void)
