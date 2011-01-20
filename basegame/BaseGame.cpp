@@ -136,7 +136,7 @@ BaseApplication::keyPressed(evt);
          // relay input events to character controller
                 //if (!mTrayMgr->isDialogVisible()) 
 mChara->injectKeyDown(evt);
-               // return SdkSample::keyPressed(evt);
+                return BaseApplication::keyPressed(evt);
         }
 
         bool BaseGame::keyReleased(const OIS::KeyEvent& evt)
@@ -144,7 +144,7 @@ mChara->injectKeyDown(evt);
                 // relay input events to character controller
                 //if (!mTrayMgr->isDialogVisible()) 
 mChara->injectKeyUp(evt);
-                //return SdkSample::keyReleased(evt);
+                return BaseApplication::keyReleased(evt);
         }
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_IPHONE
@@ -169,7 +169,7 @@ mChara->injectMouseDown(evt);
                 // relay input events to character controller
 //                if (!mTrayMgr->isDialogVisible()) 
 mChara->injectMouseMove(evt);
- //               return SdkSample::mouseMoved(evt);
+                return BaseApplication::mouseMoved(evt);
         }
 
         bool BaseGame::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID id)
@@ -177,7 +177,7 @@ mChara->injectMouseMove(evt);
                 // relay input events to character controller
 //                if (!mTrayMgr->isDialogVisible()) 
 mChara->injectMouseDown(evt, id);
- //               return SdkSample::mousePressed(evt, id);
+               return BaseApplication::mousePressed(evt, id);
         }
 #endif
 
