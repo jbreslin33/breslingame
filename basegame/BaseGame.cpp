@@ -58,7 +58,7 @@ void BaseGame::createScene(void)
 	mCameraMan->setStyle(CS_MANUAL);
 
         //add a character
-    	mChara = new SinbadCharacterController(getCamera(),1,1);
+    	//mChara = new SinbadCharacterController(getCamera(),1,1);
 	//getCamera()->setPosition(100,10,0);
 
         // Create application object
@@ -112,7 +112,7 @@ bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
 	 bool ret = BaseApplication::frameRenderingQueued(evt);
 
-	mChara->addTime(evt.timeSinceLastFrame);
+	//mChara->addTime(evt.timeSinceLastFrame);
     	if(!processUnbufferedInput(evt)) return false;
 
 	if(mGame != NULL)
@@ -135,7 +135,7 @@ bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 BaseApplication::keyPressed(evt);       
          // relay input events to character controller
                 //if (!mTrayMgr->isDialogVisible()) 
-mChara->injectKeyDown(evt);
+//mChara->injectKeyDown(evt);
                // return SdkSample::keyPressed(evt);
         }
 
@@ -143,7 +143,7 @@ mChara->injectKeyDown(evt);
         {
                 // relay input events to character controller
                 //if (!mTrayMgr->isDialogVisible()) 
-mChara->injectKeyUp(evt);
+//mChara->injectKeyUp(evt);
                 //return SdkSample::keyReleased(evt);
         }
 
@@ -152,7 +152,7 @@ mChara->injectKeyUp(evt);
         {
                 // relay input events to character controller
                 ///if (!mTrayMgr->isDialogVisible()) 
-mChara->injectMouseDown(evt);
+//mChara->injectMouseDown(evt);
                 //return SdkSample::touchPressed(evt);
         }
 
@@ -160,7 +160,7 @@ mChara->injectMouseDown(evt);
         {
                 // relay input events to character controller
                 //if (!mTrayMgr->isDialogVisible())
- mChara->injectMouseMove(evt);
+ //mChara->injectMouseMove(evt);
                 //return SdkSample::touchMoved(evt);
         }
 #else
@@ -168,7 +168,7 @@ mChara->injectMouseDown(evt);
         {
                 // relay input events to character controller
 //                if (!mTrayMgr->isDialogVisible()) 
-mChara->injectMouseMove(evt);
+//mChara->injectMouseMove(evt);
  //               return SdkSample::mouseMoved(evt);
         }
 
@@ -176,7 +176,7 @@ mChara->injectMouseMove(evt);
         {
                 // relay input events to character controller
 //                if (!mTrayMgr->isDialogVisible()) 
-mChara->injectMouseDown(evt, id);
+//mChara->injectMouseDown(evt, id);
  //               return SdkSample::mousePressed(evt, id);
         }
 #endif
