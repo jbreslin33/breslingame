@@ -5,6 +5,7 @@
 
 #include "BaseGame.h"
 #include "Ogre.h"
+#include "OIS.h"
 
 using namespace Ogre;
 
@@ -160,6 +161,7 @@ void CArmyWar::ReadPackets(void)
 		}
 	}
 }
+
 void CArmyWar::AddClient(int local, int ind, char *name)
 {
 	// First get a pointer to the beginning of client list
@@ -184,7 +186,7 @@ void CArmyWar::AddClient(int local, int ind, char *name)
 		clientList->index = ind;
 		strcpy(clientList->nickname, name);
 
-		clientList->character = new SinbadCharacterController(mBaseGame->getCamera(),clientList->index,local);
+		clientList->character = new SinbadCharacterController(this, mBaseGame->getCamera(),clientList->index,local);
 		if(clients % 2 == 0)
 			clientList->team = RED_TEAM;
 		else
@@ -224,7 +226,7 @@ void CArmyWar::AddClient(int local, int ind, char *name)
 		list->next = NULL;
 		prev->next = list;
 
-		list->character = new SinbadCharacterController(mBaseGame->getCamera(), list->index, local);
+		list->character = new SinbadCharacterController(this, mBaseGame->getCamera(), list->index, local);
 	}
 
 	clients++;
@@ -859,7 +861,25 @@ void CArmyWar::MoveObjects(void)
 			transVector.x = client->command.origin.x;
             		transVector.z = client->command.origin.y;
 			transVector.y = 5; //to keep player consistent y for now a hack
- 
+
+
+/*               else if (evt.key == OIS::KC_W) mKeyDirection.z = -1;
+                else if (evt.key == OIS::KC_A) mKeyDirection.x = -1;
+                else if (evt.key == OIS::KC_S) mKeyDirection.z = 1;
+                else if (evt.key == OIS::KC_D) mKeyDirection.x = 1; */
+
+			OIS::KeyEvent& evt;
+			
+			if (transVector.z == -1)
+				evt.key = OIS::KC_W; 	
+ 			else if (transVector.x == -1)
+				evt.key = OIS::KC_A;
+			else if (transVector.z == 1)
+				evt.key = OIS::KC_S;
+			else if (transVector.x == 1)
+				evt.key = OIS::KC_D;
+
+
 			//client->character->getSceneNode()->setPosition(transVector);
 				
 			client->command.bullet.origin.x += client->serverFrame.bullet.vel.x * frametime;
