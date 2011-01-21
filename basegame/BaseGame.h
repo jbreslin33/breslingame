@@ -45,7 +45,7 @@ Ogre::SceneManager* getSceneManager()
 
 protected:
 	virtual void createScene(void);
-//SinbadCharacterController* mChara;
+SinbadCharacterController* mChara;
 };
 
 #endif // #ifndef __BaseGame_h_
