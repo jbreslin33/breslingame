@@ -166,8 +166,8 @@ private:
 		mBodyNode->attachObject(mBodyEnt);
 
 		// create swords and attach to sheath
-		mSword1 = sceneMgr->createEntity("SinbadSword1", "Sword.mesh");
-		mSword2 = sceneMgr->createEntity("SinbadSword2", "Sword.mesh");
+		mSword1 = sceneMgr->createEntity("SinbadSword1" + playerName, "Sword.mesh");
+		mSword2 = sceneMgr->createEntity("SinbadSword2" + playerName, "Sword.mesh");
 		mBodyEnt->attachObjectToBone("Sheath.L", mSword1);
 		mBodyEnt->attachObjectToBone("Sheath.R", mSword2);
 
@@ -175,7 +175,7 @@ private:
 		NameValuePairList params;
 		params["numberOfChains"] = "2";
 		params["maxElements"] = "80";
-		mSwordTrail = (RibbonTrail*)sceneMgr->createMovableObject("RibbonTrail", &params);
+		mSwordTrail = (RibbonTrail*)sceneMgr->createMovableObject("RibbonTrail" + playerName, &params);
 		mSwordTrail->setMaterialName("Examples/LightRibbonTrail");
 		mSwordTrail->setTrailLength(20);
 		mSwordTrail->setVisible(false);
