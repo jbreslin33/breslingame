@@ -115,8 +115,9 @@ set(HDRS
 	./RESOURCE.H
 	
 	#Characters
-	../charactercontrollers/Character.h
-	../charactercontrollers/CharacterController.h
+	#../charactercontrollers/Character.h
+	#../charactercontrollers/CharacterController.h
+	../charactercontrollers/SinbadCharacterController.h
 )
  
 set(SRCS
@@ -144,9 +145,9 @@ set(SRCS
 	./Player_t.cpp
 	
 	#Characters
-	../charactercontrollers/Character.cpp
-	../charactercontrollers/CharacterController.cpp
-	
+	#../charactercontrollers/Character.cpp
+	#../charactercontrollers/CharacterController.cpp
+
 )
 
 endif(WIN32)
@@ -183,8 +184,9 @@ set(HDRS
 	./RESOURCE.H
 	
 	#Characters
-	../charactercontrollers/Character.h
-	../charactercontrollers/CharacterController.h
+	#../charactercontrollers/Character.h
+	#../charactercontrollers/CharacterController.h
+	../charactercontrollers/SinbadCharacterController.h
 )
  
 set(SRCS
@@ -212,8 +214,9 @@ set(SRCS
 	./Player_t.cpp
 
 	#Characters
-	../charactercontrollers/Character.cpp
-	../charactercontrollers/CharacterController.cpp
+	#../charactercontrollers/Character.cpp
+	#../charactercontrollers/CharacterController.cpp
+
 	
 )
 
