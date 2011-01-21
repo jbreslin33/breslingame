@@ -41,9 +41,9 @@ private:
 
 public:
 	
-	SinbadCharacterController(Camera* cam, std::string playerName, std::string ind)
+	SinbadCharacterController(Camera* cam, std::string ind)
 	{
-		setupBody(cam->getSceneManager(),playerName, ind);
+		setupBody(cam->getSceneManager(), ind);
 		setupCamera(cam);
 		setupAnimations();
 	}
@@ -158,11 +158,11 @@ public:
 
 private:
 
-	void setupBody(SceneManager* sceneMgr,std::string playerName, std::string ind)
+	void setupBody(SceneManager* sceneMgr, std::string ind)
 	{
 		// create main model
 		mBodyNode = sceneMgr->getRootSceneNode()->createChildSceneNode(Vector3::UNIT_Y * CHAR_HEIGHT);
-		mBodyEnt = sceneMgr->createEntity(playerName + ind, "Sinbad.mesh");
+		mBodyEnt = sceneMgr->createEntity("Sinbader" + ind, "Sinbad.mesh");
 		mBodyNode->attachObject(mBodyEnt);
 
 		// create swords and attach to sheath
