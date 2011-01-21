@@ -185,7 +185,7 @@ void CArmyWar::AddClient(int local, int ind, char *name)
 		strcpy(clientList->nickname, name);
 
 		//clientList->character = new CharacterController(mBaseGame->getSceneManager(), mBaseGame->getCamera(), "jay" + ind, "Sinbad.mesh", "RunBase",  0,  5, 0);
-	    clientList->character = new SinbadCharacterController(mBaseGame->getCamera(), ind, local);
+	//	clientList->character = new SinbadCharacterController(mBaseGame->getCamera());
 		if(clients % 2 == 0)
 			clientList->team = RED_TEAM;
 		else
@@ -227,7 +227,6 @@ void CArmyWar::AddClient(int local, int ind, char *name)
 
 		//list->character = new CharacterController(mBaseGame->getSceneManager(), mBaseGame->getCamera(), "jay" + ind, "Sinbad.mesh", "RunBase",  0,  5, 0);
 	//	list->character = new SinbadCharacterController(mBaseGame->getCamera());
-	    list->character = new SinbadCharacterController(mBaseGame->getCamera(), ind, local);
 	}
 
 	clients++;
@@ -863,7 +862,7 @@ void CArmyWar::MoveObjects(void)
             		transVector.z = client->command.origin.y;
 			transVector.y = 5; //to keep player consistent y for now a hack
  
-			client->character->getSceneNode()->setPosition(transVector);
+			//client->character->getSceneNode()->setPosition(transVector);
 			
 			client->command.bullet.origin.x += client->serverFrame.bullet.vel.x * frametime;
 			client->command.bullet.origin.y += client->serverFrame.bullet.vel.y * frametime;
@@ -882,7 +881,7 @@ void CArmyWar::MoveObjects(void)
 		        transVector.y = 5; //to keep player consistent y for now
 	
 			//myCharacter->getSceneNode()->setPosition(transVector);
-			client->character->getSceneNode()->setPosition(transVector);
+			//client->character->getSceneNode()->setPosition(transVector);
 
 			client->command.bullet.origin.x = client->command.bullet.predictedOrigin.x;
 			client->command.bullet.origin.y = client->command.bullet.predictedOrigin.y;
@@ -895,8 +894,8 @@ void CArmyWar::StartConnection(int ind)
 	//LogString("StartConnection");
 
 	//gameIndex = ind;
-	//char serverIP[32] = "127.0.0.1";
-	char serverIP[32] = "192.168.1.104";
+	char serverIP[32] = "127.0.0.1";
+	//char serverIP[32] = "192.168.1.104";
 
 	int ret = networkClient->Initialise("", serverIP, 30004);
 

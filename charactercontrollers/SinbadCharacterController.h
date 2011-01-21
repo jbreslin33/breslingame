@@ -41,24 +41,18 @@ private:
 
 public:
 	
-	SinbadCharacterController(Camera* cam, int ind, int local)
+	SinbadCharacterController(Camera* cam)
 	{
-		
-		mLocal = local;
-		setupBody(cam->getSceneManager(), ind);
-		if (local)
-			setupCamera(cam);
+		setupBody(cam->getSceneManager());
+		setupCamera(cam);
 		setupAnimations();
 	}
-
-	SceneNode* getSceneNode() { return mBodyNode; }
 
 	void addTime(Real deltaTime)
 	{
 		updateBody(deltaTime);
 		updateAnimations(deltaTime);
-		if (mLocal)
-			updateCamera(deltaTime);
+		updateCamera(deltaTime);
 	}
 
 	void injectKeyDown(const OIS::KeyEvent& evt)
@@ -164,16 +158,16 @@ public:
 
 private:
 
-	void setupBody(SceneManager* sceneMgr, int ind)
+	void setupBody(SceneManager* sceneMgr)
 	{
 		// create main model
 		mBodyNode = sceneMgr->getRootSceneNode()->createChildSceneNode(Vector3::UNIT_Y * CHAR_HEIGHT);
-		mBodyEnt = sceneMgr->createEntity("Sinbader" + StringConverter::toString(ind + 1), "Sinbad.mesh");
+		mBodyEnt = sceneMgr->createEntity("SinbadBody", "Sinbad.mesh");
 		mBodyNode->attachObject(mBodyEnt);
 
 		// create swords and attach to sheath
-		mSword1 = sceneMgr->createEntity("Sword1" + StringConverter::toString(ind + 1), "Sword.mesh");
-		mSword2 = sceneMgr->createEntity("Sword2" + StringConverter::toString(ind + 1), "Sword.mesh");
+		mSword1 = sceneMgr->createEntity("SinbadSword1", "Sword.mesh");
+		mSword2 = sceneMgr->createEntity("SinbadSword2", "Sword.mesh");
 		mBodyEnt->attachObjectToBone("Sheath.L", mSword1);
 		mBodyEnt->attachObjectToBone("Sheath.R", mSword2);
 
@@ -527,8 +521,6 @@ private:
 	Vector3 mGoalDirection;     // actual intended direction in world-space
 	Real mVerticalVelocity;     // for jumping
 	Real mTimer;                // general timer to see how long animations have been playing
-
-	int mLocal;
 };
 
 #endif
