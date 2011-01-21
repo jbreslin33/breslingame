@@ -162,12 +162,12 @@ private:
 	{
 		// create main model
 		mBodyNode = sceneMgr->getRootSceneNode()->createChildSceneNode(Vector3::UNIT_Y * CHAR_HEIGHT);
-		mBodyEnt = sceneMgr->createEntity("Sinbader" + ind, "Sinbad.mesh");
+		mBodyEnt = sceneMgr->createEntity("", "Sinbad.mesh");
 		mBodyNode->attachObject(mBodyEnt);
 
 		// create swords and attach to sheath
-		mSword1 = sceneMgr->createEntity("SinbadSword1" + ind, "Sword.mesh");
-		mSword2 = sceneMgr->createEntity("SinbadSword2" + ind, "Sword.mesh");
+		mSword1 = sceneMgr->createEntity("" + ind, "Sword.mesh");
+		mSword2 = sceneMgr->createEntity("" + ind, "Sword.mesh");
 		mBodyEnt->attachObjectToBone("Sheath.L", mSword1);
 		mBodyEnt->attachObjectToBone("Sheath.R", mSword2);
 
@@ -175,7 +175,7 @@ private:
 		NameValuePairList params;
 		params["numberOfChains"] = "2";
 		params["maxElements"] = "80";
-		mSwordTrail = (RibbonTrail*)sceneMgr->createMovableObject("RibbonTrail" + ind, &params);
+		mSwordTrail = (RibbonTrail*)sceneMgr->createMovableObject("", &params);
 		mSwordTrail->setMaterialName("Examples/LightRibbonTrail");
 		mSwordTrail->setTrailLength(20);
 		mSwordTrail->setVisible(false);
