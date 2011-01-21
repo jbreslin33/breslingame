@@ -51,6 +51,8 @@ public:
 		setupAnimations();
 	}
 
+	SceneNode* getSceneNode() { return mBodyNode; }
+
 	void addTime(Real deltaTime)
 	{
 		updateBody(deltaTime);
