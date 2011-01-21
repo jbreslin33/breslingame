@@ -41,8 +41,10 @@ private:
 
 public:
 	
-	SinbadCharacterController(Camera* cam)
+	SinbadCharacterController(Camera* cam, int id)
+	
 	{
+		mID = id;
 		setupBody(cam->getSceneManager());
 		setupCamera(cam);
 		setupAnimations();
@@ -160,6 +162,9 @@ private:
 
 	void setupBody(SceneManager* sceneMgr)
 	{
+	
+// use this to convert ints ... StringConverter::toString(screenSize.width) + " x "
+
 		// create main model
 		mBodyNode = sceneMgr->getRootSceneNode()->createChildSceneNode(Vector3::UNIT_Y * CHAR_HEIGHT);
 		mBodyEnt = sceneMgr->createEntity("SinbadBody", "Sinbad.mesh");
@@ -521,6 +526,7 @@ private:
 	Vector3 mGoalDirection;     // actual intended direction in world-space
 	Real mVerticalVelocity;     // for jumping
 	Real mTimer;                // general timer to see how long animations have been playing
+	int mID;
 };
 
 #endif
