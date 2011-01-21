@@ -52,6 +52,13 @@ public:
 		setupAnimations();
 	}
 
+
+
+void setKeyDirection(Vector3 keyDirection)
+{
+	mKeyDirection = keyDirection;
+}
+
 	void addTime(Real deltaTime)
 	{
 		updateBody(deltaTime);
@@ -262,8 +269,13 @@ private:
 		if (mKeyDirection != Vector3::ZERO && mBaseAnimID != ANIM_DANCE)
 		{
 			// calculate actually goal direction in world based on player's key directions
+				
 			mGoalDirection += mKeyDirection.z * mCameraNode->getOrientation().zAxis();
 			mGoalDirection += mKeyDirection.x * mCameraNode->getOrientation().xAxis();
+			
+		//	mGoalDirection += mKeyDirection.z * mCameraNode->getOrientation().zAxis();
+		//	mGoalDirection += mKeyDirection.x * mCameraNode->getOrientation().xAxis();
+			
 			mGoalDirection.y = 0;
 			mGoalDirection.normalise();
 
