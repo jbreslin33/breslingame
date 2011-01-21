@@ -112,6 +112,14 @@ bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
 	 bool ret = BaseApplication::frameRenderingQueued(evt);
 
+	if (mGame->localClient)
+	{
+		if (mGame->localClient->character)
+		{	
+			mGame->localClient->character->addTime(evt.timeSinceLastFrame);
+		}	
+	}
+
 	//mChara->addTime(evt.timeSinceLastFrame);
     	if(!processUnbufferedInput(evt)) return false;
 
