@@ -41,9 +41,9 @@ private:
 
 public:
 	
-	SinbadCharacterController(Camera* cam, std::string playerName)
+	SinbadCharacterController(Camera* cam, std::string playerName, std::string ind)
 	{
-		setupBody(cam->getSceneManager(),playerName);
+		setupBody(cam->getSceneManager(),playerName, ind);
 		setupCamera(cam);
 		setupAnimations();
 	}
@@ -158,7 +158,7 @@ public:
 
 private:
 
-	void setupBody(SceneManager* sceneMgr,std::string playerName)
+	void setupBody(SceneManager* sceneMgr,std::string playerName, std::string ind)
 	{
 		// create main model
 		mBodyNode = sceneMgr->getRootSceneNode()->createChildSceneNode(Vector3::UNIT_Y * CHAR_HEIGHT);
@@ -166,8 +166,8 @@ private:
 		mBodyNode->attachObject(mBodyEnt);
 
 		// create swords and attach to sheath
-		mSword1 = sceneMgr->createEntity("SinbadSword1" + playerName, "Sword.mesh");
-		mSword2 = sceneMgr->createEntity("SinbadSword2" + playerName, "Sword.mesh");
+		mSword1 = sceneMgr->createEntity("SinbadSword1" + ind, "Sword.mesh");
+		mSword2 = sceneMgr->createEntity("SinbadSword2" + ind, "Sword.mesh");
 		mBodyEnt->attachObjectToBone("Sheath.L", mSword1);
 		mBodyEnt->attachObjectToBone("Sheath.R", mSword2);
 
@@ -175,7 +175,7 @@ private:
 		NameValuePairList params;
 		params["numberOfChains"] = "2";
 		params["maxElements"] = "80";
-		mSwordTrail = (RibbonTrail*)sceneMgr->createMovableObject("RibbonTrail" + playerName, &params);
+		mSwordTrail = (RibbonTrail*)sceneMgr->createMovableObject("RibbonTrail" + ind, &params);
 		mSwordTrail->setMaterialName("Examples/LightRibbonTrail");
 		mSwordTrail->setTrailLength(20);
 		mSwordTrail->setVisible(false);
