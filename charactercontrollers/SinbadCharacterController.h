@@ -47,7 +47,8 @@ public:
 		mID = id;
 		mLocal = local;
 		setupBody(cam->getSceneManager());
-		setupCamera(cam);
+		if (mLocal)
+			setupCamera(cam);
 		setupAnimations();
 	}
 
@@ -55,7 +56,8 @@ public:
 	{
 		updateBody(deltaTime);
 		updateAnimations(deltaTime);
-		updateCamera(deltaTime);
+		if (mLocal)
+			updateCamera(deltaTime);
 	}
 
 	void injectKeyDown(const OIS::KeyEvent& evt)
@@ -128,7 +130,8 @@ public:
 	void injectMouseMove(const OIS::MultiTouchEvent& evt)
 	{
 		// update camera goal based on mouse movement
-		updateCameraGoal(-0.05f * evt.state.X.rel, -0.05f * evt.state.Y.rel, -0.0005f * evt.state.Z.rel);
+		if (mLocal)
+			updateCameraGoal(-0.05f * evt.state.X.rel, -0.05f * evt.state.Y.rel, -0.0005f * evt.state.Z.rel);
 	}
 
 	void injectMouseDown(const OIS::MultiTouchEvent& evt)
@@ -144,7 +147,8 @@ public:
 	void injectMouseMove(const OIS::MouseEvent& evt)
 	{
 		// update camera goal based on mouse movement
-		updateCameraGoal(-0.05f * evt.state.X.rel, -0.05f * evt.state.Y.rel, -0.0005f * evt.state.Z.rel);
+		if (mLocal)
+			updateCameraGoal(-0.05f * evt.state.X.rel, -0.05f * evt.state.Y.rel, -0.0005f * evt.state.Z.rel);
 	}
 
 	void injectMouseDown(const OIS::MouseEvent& evt, OIS::MouseButtonID id)

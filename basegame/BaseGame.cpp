@@ -140,19 +140,22 @@ bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
         bool BaseGame::keyPressed(const OIS::KeyEvent& evt)
         {
-BaseApplication::keyPressed(evt);       
-         // relay input events to character controller
+	//	BaseApplication::keyPressed(evt);       
+         	// relay input events to character controller
                 //if (!mTrayMgr->isDialogVisible()) 
-//mChara->injectKeyDown(evt);
-               // return SdkSample::keyPressed(evt);
+		//mChara->injectKeyDown(evt);
+                // return SdkSample::keyPressed(evt);
+		return BaseApplication::keyPressed(evt); 
+      
         }
 
         bool BaseGame::keyReleased(const OIS::KeyEvent& evt)
         {
                 // relay input events to character controller
                 //if (!mTrayMgr->isDialogVisible()) 
-//mChara->injectKeyUp(evt);
+		//mChara->injectKeyUp(evt);
                 //return SdkSample::keyReleased(evt);
+		return BaseApplication::keyReleased(evt);	
         }
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_IPHONE
@@ -160,24 +163,27 @@ BaseApplication::keyPressed(evt);
         {
                 // relay input events to character controller
                 ///if (!mTrayMgr->isDialogVisible()) 
-//mChara->injectMouseDown(evt);
+		//mChara->injectMouseDown(evt);
                 //return SdkSample::touchPressed(evt);
+		return BaseApplication::touchPressed(evt);
         }
 
         bool BaseGame::touchMoved(const OIS::MultiTouchEvent& evt)
         {
                 // relay input events to character controller
                 //if (!mTrayMgr->isDialogVisible())
- //mChara->injectMouseMove(evt);
+ 		//mChara->injectMouseMove(evt);
                 //return SdkSample::touchMoved(evt);
+		return BaseApplication::touchMoved(evt);
         }
 #else
         bool BaseGame::mouseMoved(const OIS::MouseEvent& evt)
         {
                 // relay input events to character controller
-//                if (!mTrayMgr->isDialogVisible()) 
-//mChara->injectMouseMove(evt);
- //               return SdkSample::mouseMoved(evt);
+		//                if (!mTrayMgr->isDialogVisible()) 
+		//mChara->injectMouseMove(evt);
+ 		//               return SdkSample::mouseMoved(evt);
+		return BaseApplication::mouseMoved(evt);
         }
 
         bool BaseGame::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID id)
@@ -186,6 +192,7 @@ BaseApplication::keyPressed(evt);
 //                if (!mTrayMgr->isDialogVisible()) 
 //mChara->injectMouseDown(evt, id);
  //               return SdkSample::mousePressed(evt, id);
+		return BaseApplication::mousePressed(evt, id);
         }
 #endif
 
