@@ -58,7 +58,7 @@ void BaseGame::createScene(void)
 	mCameraMan->setStyle(CS_MANUAL);
 
         //add a character
-    	mChara = new SinbadCharacterController(getCamera(),1);
+    	mChara = new SinbadCharacterController(getCamera(),1,1);
 	//getCamera()->setPosition(100,10,0);
 
         // Create application object

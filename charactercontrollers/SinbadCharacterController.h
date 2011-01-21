@@ -41,10 +41,11 @@ private:
 
 public:
 	
-	SinbadCharacterController(Camera* cam, int id)
+	SinbadCharacterController(Camera* cam, int id, int local)
 	
 	{
 		mID = id;
+		mLocal = local;
 		setupBody(cam->getSceneManager());
 		setupCamera(cam);
 		setupAnimations();
@@ -527,6 +528,7 @@ private:
 	Real mVerticalVelocity;     // for jumping
 	Real mTimer;                // general timer to see how long animations have been playing
 	int mID;
+	int mLocal;
 };
 
 #endif
