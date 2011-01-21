@@ -37,148 +37,153 @@ BaseGame::~BaseGame(void)
 //-------------------------------------------------------------------------------------
 void BaseGame::createScene(void)
 {
-        mSceneMgr->setAmbientLight(ColourValue(0.3, 0.3, 0.3));
+	mSceneMgr->setAmbientLight(ColourValue(0.3, 0.3, 0.3));
 
 	// add a bright light above the scene
-        Light* light = mSceneMgr->createLight();
-        light->setType(Light::LT_POINT);
-        light->setPosition(-10, 40, 20);
-        light->setSpecularColour(ColourValue::White);
+    Light* light = mSceneMgr->createLight();
+    light->setType(Light::LT_POINT);
+    light->setPosition(-10, 40, 20);
+    light->setSpecularColour(ColourValue::White);
 
-        // create a floor mesh resource
-        MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-        Plane(Vector3::UNIT_Y, 0), 200, 200, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
+    // create a floor mesh resource
+    MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+    Plane(Vector3::UNIT_Y, 0), 200, 200, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
 
-        // create a floor entity, give it a material, and place it at the origin
-    	Entity* floor = mSceneMgr->createEntity("Floor", "floor");
-    	floor->setMaterialName("Examples/Rockwall");
+    // create a floor entity, give it a material, and place it at the origin
+    Entity* floor = mSceneMgr->createEntity("Floor", "floor");
+    floor->setMaterialName("Examples/Rockwall");
   	floor->setCastShadows(false);
-    	mSceneMgr->getRootSceneNode()->attachObject(floor);
+    mSceneMgr->getRootSceneNode()->attachObject(floor);
 
+	//set camera to manual i.e. it will follow player???
 	mCameraMan->setStyle(CS_MANUAL);
 
-        //add a character
-    	mChara = new SinbadCharacterController(getCamera());
-	//getCamera()->setPosition(100,10,0);
+    //add a character
+//    mChara = new SinbadCharacterController(getCamera());
 
-        // Create application object
-    	mGame = new CArmyWar(this);
-        mGame->StartConnection(1);// doesn't matter what you pass in cause it ain't used.
+	// Create application object
+   	mGame = new CArmyWar(this);
+    mGame->StartConnection(1);// doesn't matter what you pass in cause it ain't used.
 
 }
 
 
 bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 {
- 
- 	if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
-    	{
+	if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
+	{
 		mGame->keys[VK_UP] = true;
-    	}
+    }
 	else
 	{
-        	mGame->keys[VK_UP] = false;
+       	mGame->keys[VK_UP] = false;
 	}
-    	if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
-    	{
+    if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
+    {
 		mGame->keys[VK_DOWN] = true;
-    	}
+    }
 	else
 	{
-        	mGame->keys[VK_DOWN] = false;
+		mGame->keys[VK_DOWN] = false;
 	}
 
-    	if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
-    	{
+    if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
+    {
 		mGame->keys[VK_LEFT] = true;
-    	}
+    }
 	else
 	{
-        	mGame->keys[VK_LEFT] = false;
+       	mGame->keys[VK_LEFT] = false;
 	}
-    	if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
-    	{
+    if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
+    {
 		mGame->keys[VK_RIGHT] = true;
   	}
 	else
 	{
-        	mGame->keys[VK_RIGHT] = false;
+       	mGame->keys[VK_RIGHT] = false;
 	}
          
-    	return true;
+    return true;
 }
 //-------------------------------------------------------------------------------------
 bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
-	 bool ret = BaseApplication::frameRenderingQueued(evt);
 
-	mChara->addTime(evt.timeSinceLastFrame);
-    	if(!processUnbufferedInput(evt)) return false;
+
+	bool ret = BaseApplication::frameRenderingQueued(evt);
+
+	//mChara->addTime(evt.timeSinceLastFrame);
+	if (mGame->localClient)
+		mGame->localClient->character->addTime(evt.timeSinceLastFrame);
+    if(!processUnbufferedInput(evt)) return false;
 
 	if(mGame != NULL)
 	{
-
-
-	mGame->RunNetwork(evt.timeSinceLastFrame * 1000);
-	mGame->CheckKeys();
-	mGame->Frame();
-	//if (mGame->clientList->character != NULL)	
-	//mGame->clientList->character->addTime(evt.timeSinceLastFrame);
+		mGame->RunNetwork(evt.timeSinceLastFrame * 1000);
+		mGame->CheckKeys();
+		mGame->Frame();
+		//if (mGame->clientList->character != NULL)	
+		//mGame->clientList->character->addTime(evt.timeSinceLastFrame);
 	}
  
-    	return ret;
+    return ret;
 }
 
 
-        bool BaseGame::keyPressed(const OIS::KeyEvent& evt)
-        {
-BaseApplication::keyPressed(evt);       
-         // relay input events to character controller
-                //if (!mTrayMgr->isDialogVisible()) 
-mChara->injectKeyDown(evt);
-                return BaseApplication::keyPressed(evt);
-        }
+bool BaseGame::keyPressed(const OIS::KeyEvent& evt)
+{
+	BaseApplication::keyPressed(evt);       
+    // relay input events to character controller
+    //if (!mTrayMgr->isDialogVisible()) 
+	//mChara->injectKeyDown(evt);
+	mGame->localClient->character->injectKeyDown(evt);
+    return BaseApplication::keyPressed(evt);
+}
 
-        bool BaseGame::keyReleased(const OIS::KeyEvent& evt)
-        {
-                // relay input events to character controller
-                //if (!mTrayMgr->isDialogVisible()) 
-mChara->injectKeyUp(evt);
-                return BaseApplication::keyReleased(evt);
-        }
+bool BaseGame::keyReleased(const OIS::KeyEvent& evt)
+{
+	// relay input events to character controller
+    //if (!mTrayMgr->isDialogVisible()) 
+	//mChara->injectKeyUp(evt);
+	mGame->localClient->character->injectKeyUp(evt);
+    return BaseApplication::keyReleased(evt);
+}
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_IPHONE
-        bool BaseGame::touchPressed(const OIS::MultiTouchEvent& evt)
-        {
-                // relay input events to character controller
-                ///if (!mTrayMgr->isDialogVisible()) 
-mChara->injectMouseDown(evt);
-                //return SdkSample::touchPressed(evt);
-        }
+bool BaseGame::touchPressed(const OIS::MultiTouchEvent& evt)
+{
+	// relay input events to character controller
+    ///if (!mTrayMgr->isDialogVisible()) 
+	mChara->injectMouseDown(evt);
+    //return SdkSample::touchPressed(evt);
+}
 
-        bool BaseGame::touchMoved(const OIS::MultiTouchEvent& evt)
-        {
-                // relay input events to character controller
-                //if (!mTrayMgr->isDialogVisible())
- mChara->injectMouseMove(evt);
-                //return SdkSample::touchMoved(evt);
-        }
+bool BaseGame::touchMoved(const OIS::MultiTouchEvent& evt)
+{
+	// relay input events to character controller
+    //if (!mTrayMgr->isDialogVisible())
+	mChara->injectMouseMove(evt);
+    //return SdkSample::touchMoved(evt);
+}
 #else
-        bool BaseGame::mouseMoved(const OIS::MouseEvent& evt)
-        {
-                // relay input events to character controller
-//                if (!mTrayMgr->isDialogVisible()) 
-mChara->injectMouseMove(evt);
-                return BaseApplication::mouseMoved(evt);
-        }
+bool BaseGame::mouseMoved(const OIS::MouseEvent& evt)
+{
+	// relay input events to character controller
+	// if (!mTrayMgr->isDialogVisible()) 
+	//mChara->injectMouseMove(evt);
+	mGame->localClient->character->injectMouseMove(evt);
+    return BaseApplication::mouseMoved(evt);
+}
 
-        bool BaseGame::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID id)
-        {
-                // relay input events to character controller
-//                if (!mTrayMgr->isDialogVisible()) 
-mChara->injectMouseDown(evt, id);
-               return BaseApplication::mousePressed(evt, id);
-        }
+bool BaseGame::mousePressed(const OIS::MouseEvent& evt, OIS::MouseButtonID id)
+{
+	// relay input events to character controller
+	// if (!mTrayMgr->isDialogVisible()) 
+	//mChara->injectMouseDown(evt, id);
+	mGame->localClient->character->injectMouseDown(evt, id);
+    return BaseApplication::mousePressed(evt, id);
+}
 #endif
 
 
