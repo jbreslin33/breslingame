@@ -41,10 +41,13 @@ private:
 
 public:
 	
-	SinbadCharacterController(Camera* cam, int ind)
+	SinbadCharacterController(Camera* cam, int ind, int local)
 	{
+		
+		mLocal = local;
 		setupBody(cam->getSceneManager(), ind);
-		setupCamera(cam);
+		if (local)
+			setupCamera(cam);
 		setupAnimations();
 	}
 
@@ -52,7 +55,8 @@ public:
 	{
 		updateBody(deltaTime);
 		updateAnimations(deltaTime);
-		updateCamera(deltaTime);
+		if (mLocal)
+			updateCamera(deltaTime);
 	}
 
 	void injectKeyDown(const OIS::KeyEvent& evt)
@@ -521,6 +525,8 @@ private:
 	Vector3 mGoalDirection;     // actual intended direction in world-space
 	Real mVerticalVelocity;     // for jumping
 	Real mTimer;                // general timer to see how long animations have been playing
+
+	int mLocal;
 };
 
 #endif
