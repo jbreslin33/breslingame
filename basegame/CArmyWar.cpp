@@ -868,18 +868,29 @@ void CArmyWar::MoveObjects(void)
                 else if (evt.key == OIS::KC_S) mKeyDirection.z = 1;
                 else if (evt.key == OIS::KC_D) mKeyDirection.x = 1; */
 
-			OIS::KeyEvent& evt;
-			
+
+			//Vector3 tempKeyDirection = client->character->getKeyDirection();
+			client->character->setKeyDirection(transVector);
+		/*	
 			if (transVector.z == -1)
-				evt.key = OIS::KC_W; 	
+			{	
+				Vector3 tempclient->character->getKeyDirection();				
+//mKeyDirection.z = -1;
+			}	
  			else if (transVector.x == -1)
-				evt.key = OIS::KC_A;
+			{
+				mKeyDirection.x = -1;
+			}
 			else if (transVector.z == 1)
-				evt.key = OIS::KC_S;
+			{
+				mkeyDirection.z = 1;
+			
 			else if (transVector.x == 1)
-				evt.key = OIS::KC_D;
-
-
+			{	
+				mKeyDirection.x = 1;
+			}
+		
+*/	
 			//client->character->getSceneNode()->setPosition(transVector);
 				
 			client->command.bullet.origin.x += client->serverFrame.bullet.vel.x * frametime;

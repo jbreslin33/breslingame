@@ -41,11 +41,10 @@ private:
 
 public:
 	
-	SinbadCharacterController(CArmyWar game, Camera* cam, int id, int local)
+	SinbadCharacterController(CArmyWar* mGame, Camera* cam, int id, int local)
 	
 	{
-		mGame  = game;
-		mID    = id;
+		mID = id;
 		mLocal = local;
 		setupBody(cam->getSceneManager());
 		if (mLocal)
@@ -60,6 +59,10 @@ void setKeyDirection(Vector3 keyDirection)
 	mKeyDirection = keyDirection;
 }
 
+Vector3 getKeyDirection()
+{
+	return mKeyDirection; 
+}
 	void addTime(Real deltaTime)
 	{
 		updateBody(deltaTime);
@@ -67,27 +70,6 @@ void setKeyDirection(Vector3 keyDirection)
 		if (mLocal)
 			updateCamera(deltaTime);
 	}
-
-
-void w_keyDown()
-{
-	mKeyDirection.z = -1;
-	checkForRunAnimation();
-}
-
-
-void checkForRunAnimation()
-{
-        if (!mKeyDirection.isZeroLength() && mBaseAnimID == ANIM_IDLE_BASE)
-        {
-        	// start running if not already moving and the player wants to move
-                setBaseAnimation(ANIM_RUN_BASE, true);
-                if (mTopAnimID == ANIM_IDLE_TOP) setTopAnimation(ANIM_RUN_TOP, true);
-        }
-}
-
-
-
 
 	void injectKeyDown(const OIS::KeyEvent& evt)
 	{
@@ -567,6 +549,8 @@ private:
 	Real mTimer;                // general timer to see how long animations have been playing
 	int mID;
 	int mLocal;
+	CArmyWar* mGame;
+
 };
 
 #endif
