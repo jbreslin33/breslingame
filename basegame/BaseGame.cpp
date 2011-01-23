@@ -110,28 +110,27 @@ bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 //-------------------------------------------------------------------------------------
 bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
-	 bool ret = BaseApplication::frameRenderingQueued(evt);
-/*
+	bool ret = BaseApplication::frameRenderingQueued(evt);
+        clientData *client = mGame->clientList;
+
 	if (mGame->localClient)
 	{
 		if (mGame->localClient->character)
 		{	
-			mGame->localClient->character->addTime(evt.timeSinceLastFrame);
 
 
+		        for( ; client != NULL; client = client->next)
+        		{
+				if (client->character)
+					client->character->addTime(evt.timeSinceLastFrame);		
 
+			}
+	
 		}	
 	}
-*/
 
-        clientData *client = mGame->clientList;
 
-        for( ; client != NULL; client = client->next)
-        {
-		client->character->addTime(evt.timeSinceLastFrame);		
 
-	}
-	
 
 
 	//mChara->addTime(evt.timeSinceLastFrame);
