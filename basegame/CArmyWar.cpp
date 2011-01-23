@@ -854,9 +854,9 @@ void CArmyWar::MoveObjects(void)
 			Ogre::Vector3 transVector = Ogre::Vector3::ZERO;
 			Ogre::Vector3 commandVector = Ogre::Vector3::ZERO;
 
-			//commandVector.x = client->command.vel.x;
-			//commandVector.y = client->command.vel.y;
-			//client->character->setKeyDirection(commandVector);
+			commandVector.x = client->command.vel.x;
+			commandVector.y = client->command.vel.y;
+			client->character->setKeyDirection(commandVector);
 			
 			
 			CalculateVelocity(&client->command, frametime);
@@ -865,9 +865,9 @@ void CArmyWar::MoveObjects(void)
 			client->command.origin.x += client->command.vel.x;
 			client->command.origin.y += client->command.vel.y;
 
-			transVector.x = client->command.origin.x;
-            		transVector.z = client->command.origin.y;
-			transVector.y = 5; //to keep player consistent y for now a hack
+		//	transVector.x = client->command.origin.x;
+            	//	transVector.z = client->command.origin.y;
+		//	transVector.y = 5; //to keep player consistent y for now a hack
 
 
 				
@@ -889,9 +889,9 @@ void CArmyWar::MoveObjects(void)
 			client->command.origin.x = client->command.predictedOrigin.x;
 			client->command.origin.y = client->command.predictedOrigin.y;
 
-			transVector.x = client->command.origin.x;
-            		transVector.z = client->command.origin.y;
-			transVector.y = 5; //to keep player consistent y for now
+		//	transVector.x = client->command.origin.x;
+            	//	transVector.z = client->command.origin.y;
+		//	transVector.y = 5; //to keep player consistent y for now
 
 			client->command.bullet.origin.x = client->command.bullet.predictedOrigin.x;
 			client->command.bullet.origin.y = client->command.bullet.predictedOrigin.y;
