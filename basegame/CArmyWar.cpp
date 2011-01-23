@@ -852,6 +852,13 @@ void CArmyWar::MoveObjects(void)
 		if(client != localClient)
 		{
 			Ogre::Vector3 transVector = Ogre::Vector3::ZERO;
+			Ogre::Vector3 commandVector = Ogre::Vector3::ZERO;
+
+			//commandVector.x = client->command.vel.x;
+			//commandVector.y = client->command.vel.y;
+			//client->character->setKeyDirection(commandVector);
+			
+			
 			CalculateVelocity(&client->command, frametime);
 			CalculateHeading(&client->command);
 
@@ -863,35 +870,6 @@ void CArmyWar::MoveObjects(void)
 			transVector.y = 5; //to keep player consistent y for now a hack
 
 
-/*               else if (evt.key == OIS::KC_W) mKeyDirection.z = -1;
-                else if (evt.key == OIS::KC_A) mKeyDirection.x = -1;
-                else if (evt.key == OIS::KC_S) mKeyDirection.z = 1;
-                else if (evt.key == OIS::KC_D) mKeyDirection.x = 1; */
-
-
-			//Vector3 tempKeyDirection = client->character->getKeyDirection();
-			client->character->setKeyDirection(transVector);
-		/*	
-			if (transVector.z == -1)
-			{	
-				Vector3 tempclient->character->getKeyDirection();				
-//mKeyDirection.z = -1;
-			}	
- 			else if (transVector.x == -1)
-			{
-				mKeyDirection.x = -1;
-			}
-			else if (transVector.z == 1)
-			{
-				mkeyDirection.z = 1;
-			
-			else if (transVector.x == 1)
-			{	
-				mKeyDirection.x = 1;
-			}
-		
-*/	
-			//client->character->getSceneNode()->setPosition(transVector);
 				
 			client->command.bullet.origin.x += client->serverFrame.bullet.vel.x * frametime;
 			client->command.bullet.origin.y += client->serverFrame.bullet.vel.y * frametime;
@@ -901,17 +879,20 @@ void CArmyWar::MoveObjects(void)
 		else
 		{
 			Ogre::Vector3 transVector = Ogre::Vector3::ZERO;
+			Ogre::Vector3 commandVector = Ogre::Vector3::ZERO;
+			
+			commandVector.x = client->command.vel.x;
+			commandVector.z = client->command.vel.y;
+	
+			client->character->setKeyDirection(commandVector);
 			
 			client->command.origin.x = client->command.predictedOrigin.x;
 			client->command.origin.y = client->command.predictedOrigin.y;
 
 			transVector.x = client->command.origin.x;
             		transVector.z = client->command.origin.y;
-		        transVector.y = 5; //to keep player consistent y for now
-	
-			//myCharacter->getSceneNode()->setPosition(transVector);
-			//client->character->getSceneNode()->setPosition(transVector);
-			client->character->setKeyDirection(transVector);
+			transVector.y = 5; //to keep player consistent y for now
+
 			client->command.bullet.origin.x = client->command.bullet.predictedOrigin.x;
 			client->command.bullet.origin.y = client->command.bullet.predictedOrigin.y;
 		}

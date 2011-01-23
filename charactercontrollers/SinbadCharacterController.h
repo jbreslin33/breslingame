@@ -56,7 +56,10 @@ public:
 
 void setKeyDirection(Vector3 keyDirection)
 {
+
+	mKeyDirection = Vector3::ZERO;
 	mKeyDirection = keyDirection;
+
 }
 
 Vector3 getKeyDirection()
