@@ -43,9 +43,10 @@ private:
 
 public:
 	
-	SinbadCharacterController(CArmyWar* mGame, Camera* cam, int id, int local)
+	SinbadCharacterController(CArmyWar* game, Camera* cam, int id, int local)
 	
 	{
+		mGame = game;
 		mID = id;
 		mLocal = local;
 		setupBody(cam->getSceneManager());
