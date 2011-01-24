@@ -4,6 +4,8 @@
 #include "Ogre.h"
 #include "OIS.h"
 
+#include "../basegame/CArmyWar.h"
+
 using namespace Ogre;
 
 #define NUM_ANIMS 13           // number of animations the character has
@@ -66,6 +68,13 @@ Vector3 getKeyDirection()
 {
 	return mKeyDirection; 
 }
+
+SceneNode* getCameraNode()
+{
+	return mCameraNode;
+}
+
+
 	void addTime(Real deltaTime)
 	{
 		updateBody(deltaTime);
@@ -284,8 +293,9 @@ private:
 			}
 			else
 			{
-				mGoalDirection += mKeyDirection.z; // * mCameraNode->getOrientation().zAxis();
-				mGoalDirection += mKeyDirection.x; // * mCameraNode->getOrientation().xAxis();
+		
+				mGoalDirection += mKeyDirection.z * mGame->localClient->character->getCameraNode()->getOrientation().zAxis();  // * mCameraNode->getOrientation().zAxis();
+				mGoalDirection += mKeyDirection.x * mGame->localClient->character->getCameraNode()->getOrientation().xAxis();  // * mCameraNode->getOrientation().xAxis();
 			}
 
 			mGoalDirection.y = 0;
