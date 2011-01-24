@@ -277,12 +277,17 @@ private:
 		{
 			// calculate actually goal direction in world based on player's key directions
 				
-			mGoalDirection += mKeyDirection.z; // * mCameraNode->getOrientation().zAxis();
-			mGoalDirection += mKeyDirection.x; // * mCameraNode->getOrientation().xAxis();
-			
-		//	mGoalDirection += mKeyDirection.z * mCameraNode->getOrientation().zAxis();
-		//	mGoalDirection += mKeyDirection.x * mCameraNode->getOrientation().xAxis();
-			
+			if (mLocal)
+			{
+				mGoalDirection += mKeyDirection.z * mCameraNode->getOrientation().zAxis();
+				mGoalDirection += mKeyDirection.x * mCameraNode->getOrientation().xAxis();
+			}
+			else
+			{
+				mGoalDirection += mKeyDirection.z; // * mCameraNode->getOrientation().zAxis();
+				mGoalDirection += mKeyDirection.x; // * mCameraNode->getOrientation().xAxis();
+			}
+
 			mGoalDirection.y = 0;
 			mGoalDirection.normalise();
 
