@@ -293,11 +293,12 @@ private:
 			}
 			else
 			{
-		
+				if (mGame->localClient->character->getCameraNode())
+{	
 				mGoalDirection += mKeyDirection.z * mGame->localClient->character->getCameraNode()->getOrientation().zAxis();  // * mCameraNode->getOrientation().zAxis();
 				mGoalDirection += mKeyDirection.x * mGame->localClient->character->getCameraNode()->getOrientation().xAxis();  // * mCameraNode->getOrientation().xAxis();
 			}
-
+}
 			mGoalDirection.y = 0;
 			mGoalDirection.normalise();
 
