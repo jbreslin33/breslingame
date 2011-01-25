@@ -287,7 +287,7 @@ private:
 		if (mKeyDirection != Vector3::ZERO && mBaseAnimID != ANIM_DANCE)
 		{
 			// calculate actually goal direction in world based on player's key directions
-				
+		/*		
 			if (mLocal)
 			{
 				mGoalDirection += mKeyDirection.z * mCameraNode->getOrientation().zAxis();
@@ -324,7 +324,9 @@ private:
 			// move in current body direction (not the goal direction)
 			//mBodyNode->translate(0, 0, deltaTime * RUN_SPEED * mAnims[mBaseAnimID]->getWeight(),
 			//	Node::TS_WORLD);
+*/	
 			mBodyNode->translate(mKeyDirection,Node::TS_WORLD);
+		
 		}
 
 		if (mBaseAnimID == ANIM_JUMP_LOOP)
