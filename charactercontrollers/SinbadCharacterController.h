@@ -290,9 +290,9 @@ private:
 				
 			if (mLocal)
 			{
-				//mGoalDirection += mKeyDirection.z * mCameraNode->getOrientation().zAxis();
-				//mGoalDirection += mKeyDirection.x * mCameraNode->getOrientation().xAxis();
-				mGoalDirection + = mKeyDirection.x * mCameraNod
+				mGoalDirection += mKeyDirection.z * mCameraNode->getOrientation().zAxis();
+				mGoalDirection += mKeyDirection.x * mCameraNode->getOrientation().xAxis();
+			//	mGoalDirection + = mKeyDirection.x * mCameraNod
 			}
 			else
 			{
