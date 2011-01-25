@@ -186,7 +186,7 @@ void CArmyWar::AddClient(int local, int ind, char *name)
 		clientList->index = ind;
 		strcpy(clientList->nickname, name);
 
-		clientList->character = new SinbadCharacterController(this, mBaseGame->getCamera(),clientList->index,local);
+		clientList->character = new SinbadCharacterController(clientList, this, mBaseGame->getCamera(),clientList->index,local);
 		if(clients % 2 == 0)
 			clientList->team = RED_TEAM;
 		else
@@ -226,7 +226,7 @@ void CArmyWar::AddClient(int local, int ind, char *name)
 		list->next = NULL;
 		prev->next = list;
 
-		list->character = new SinbadCharacterController(this, mBaseGame->getCamera(), list->index, local);
+		list->character = new SinbadCharacterController(clientList, this, mBaseGame->getCamera(), list->index, local);
 	}
 
 	clients++;
