@@ -6,6 +6,7 @@
 
 #include "../basegame/CArmyWar.h"
 
+
 using namespace Ogre;
 
 #define NUM_ANIMS 13           // number of animations the character has
@@ -43,9 +44,9 @@ private:
 
 public:
 	
-	SinbadCharacterController(CArmyWar* game, Camera* cam, int id, int local)
-	
+	SinbadCharacterController(clientData* cData, CArmyWar* game, Camera* cam, int id, int local)
 	{
+		mClientData = cData;
 		mGame = game;
 		mID = id;
 		mLocal = local;
@@ -289,17 +290,19 @@ private:
 				
 			if (mLocal)
 			{
-				mGoalDirection += mKeyDirection.z * mCameraNode->getOrientation().zAxis();
-				mGoalDirection += mKeyDirection.x * mCameraNode->getOrientation().xAxis();
+				//mGoalDirection += mKeyDirection.z * mCameraNode->getOrientation().zAxis();
+				//mGoalDirection += mKeyDirection.x * mCameraNode->getOrientation().xAxis();
+				mGoalDirection + = mKeyDirection.x * mCameraNod
 			}
 			else
 			{
 				if (mGame->localClient->character->getCameraNode())
-{	
-				mGoalDirection += mKeyDirection.z * mGame->localClient->character->getCameraNode()->getOrientation().zAxis();  // * mCameraNode->getOrientation().zAxis();
-				mGoalDirection += mKeyDirection.x * mGame->localClient->character->getCameraNode()->getOrientation().xAxis();  // * mCameraNode->getOrientation().xAxis();
+				{	
+					mGoalDirection += mKeyDirection.z * mGame->localClient->character->getCameraNode()->getOrientation().zAxis();  
+					mGoalDirection += mKeyDirection.x * mGame->localClient->character->getCameraNode()->getOrientation().xAxis();  
+				}
 			}
-}
+			
 			mGoalDirection.y = 0;
 			mGoalDirection.normalise();
 
@@ -570,7 +573,7 @@ private:
 	int mID;
 	int mLocal;
 	CArmyWar* mGame;
-
+	clientData* mClientData;
 };
 
 #endif
