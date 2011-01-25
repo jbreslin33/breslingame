@@ -855,7 +855,8 @@ void CArmyWar::MoveObjects(void)
 			Ogre::Vector3 commandVector = Ogre::Vector3::ZERO;
 
 			commandVector.x = client->command.vel.x;
-			commandVector.y = client->command.vel.y;
+			commandVector.z = client->command.vel.y;
+			//commandVector.y = 5;
 			client->character->setKeyDirection(commandVector);
 			
 			
@@ -883,7 +884,7 @@ void CArmyWar::MoveObjects(void)
 			
 			commandVector.x = client->command.vel.x;
 			commandVector.z = client->command.vel.y;
-	
+			//commandVector.y = 5;	
 			client->character->setKeyDirection(commandVector);
 			
 			client->command.origin.x = client->command.predictedOrigin.x;
