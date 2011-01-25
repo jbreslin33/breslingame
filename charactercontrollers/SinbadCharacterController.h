@@ -61,7 +61,7 @@ public:
 void setKeyDirection(Vector3 keyDirection)
 {
 
-	mKeyDirection = Vector3::ZERO;
+	//mKeyDirection = Vector3::ZERO;
 	mKeyDirection = keyDirection;
 
 }
@@ -322,8 +322,9 @@ private:
 			mBodyNode->yaw(Degree(yawToGoal));
 
 			// move in current body direction (not the goal direction)
-			mBodyNode->translate(0, 0, deltaTime * RUN_SPEED * mAnims[mBaseAnimID]->getWeight(),
-				Node::TS_LOCAL);
+			//mBodyNode->translate(0, 0, deltaTime * RUN_SPEED * mAnims[mBaseAnimID]->getWeight(),
+			//	Node::TS_WORLD);
+			mBodyNode->translate(mKeyDirection,Node::TS_WORLD);
 		}
 
 		if (mBaseAnimID == ANIM_JUMP_LOOP)
