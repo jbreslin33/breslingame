@@ -164,7 +164,7 @@ void CArmyWarServer::MovePlayer(clientData *client)
 
 	// Move the client based on the commands
 	client->command.origin.x += client->command.vel.x;
-	client->command.origin.y += (client->command.vel.y * -1);
+	client->command.origin.y += client->command.vel.y;
 
 	int f = client->netClient->GetIncomingSequence() & (COMMAND_HISTORY_SIZE-1);
 	client->processedFrame = f;
