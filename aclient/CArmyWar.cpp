@@ -853,6 +853,9 @@ void CArmyWar::MoveObjects(void)
 			client->command.origin.x += client->command.vel.x;
 			client->command.origin.y += client->command.vel.y;
 
+			
+			client->character->getSceneNode()->setPosition(transVector);
+
 			client->command.bullet.origin.x += client->serverFrame.bullet.vel.x * frametime;
 			client->command.bullet.origin.y += client->serverFrame.bullet.vel.y * frametime;
 		}
