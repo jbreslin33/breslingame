@@ -213,7 +213,7 @@ void CArmyWar::AddClient(int local, int ind, char *name)
 		}
 
 		list->index = ind;
-		clientList->character = new Character(mBaseGame->getSceneManager(), "jay" + ind, "Sinbad.mesh", "RunBase",  0,  5, 0);
+		list->character = new Character(mBaseGame->getSceneManager(), "jay" + ind, "Sinbad.mesh", "RunBase",  0,  5, 0);
 		strcpy(list->nickname, name);
 
 		if(clients % 2 == 0)
