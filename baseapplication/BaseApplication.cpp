@@ -79,11 +79,9 @@ void BaseApplication::createCamera(void)
     mCamera = mSceneMgr->createCamera("PlayerCam");
 
     // Position it at 500 in Z direction
-    //mCamera->setPosition(Ogre::Vector3(0,100,180));
-mCamera->setPosition(Ogre::Vector3(0,0,80));    
-
-// Look back along -Z
-    mCamera->lookAt(Ogre::Vector3(0,-150,-300));
+    mCamera->setPosition(Ogre::Vector3(0,0,80));
+    // Look back along -Z
+    mCamera->lookAt(Ogre::Vector3(0,0,-300));
     mCamera->setNearClipDistance(5);
 
     mCameraMan = new OgreBites::SdkCameraMan(mCamera);   // create a default camera controller
@@ -117,7 +115,7 @@ void BaseApplication::createFrameListener(void)
     mTrayMgr = new OgreBites::SdkTrayManager("InterfaceName", mWindow, mMouse, this);
     mTrayMgr->showFrameStats(OgreBites::TL_BOTTOMLEFT);
     mTrayMgr->showLogo(OgreBites::TL_BOTTOMRIGHT);
-    mTrayMgr->showCursor();
+    mTrayMgr->hideCursor();
 
     // create a params panel for displaying sample details
     Ogre::StringVector items;
@@ -147,19 +145,6 @@ void BaseApplication::destroyScene(void)
 //-------------------------------------------------------------------------------------
 void BaseApplication::createViewports(void)
 {
-	// setup default viewport layout and camera
-        mCamera = mSceneMgr->createCamera("MainCamera");
-        mViewport = mWindow->addViewport(mCamera);
-        mCamera->setAspectRatio((Ogre::Real)mViewport->getActualWidth() / (Ogre::Real)mViewport->getActualHeight());
-        mCamera->setNearClipDistance(5);
-    //:q    mCameraMan = new SdkCameraMan(mCamera);   // create a default camera controller
-
-
-
-//begin original
-
-/*
-
     // Create one viewport, entire window
     Ogre::Viewport* vp = mWindow->addViewport(mCamera);
     vp->setBackgroundColour(Ogre::ColourValue(0,0,0));
@@ -167,8 +152,6 @@ void BaseApplication::createViewports(void)
     // Alter the camera aspect ratio to match the viewport
     mCamera->setAspectRatio(
         Ogre::Real(vp->getActualWidth()) / Ogre::Real(vp->getActualHeight()));
-*/
-
 }
 //-------------------------------------------------------------------------------------
 void BaseApplication::setupResources(void)
@@ -435,4 +418,3 @@ void BaseApplication::windowClosed(Ogre::RenderWindow* rw)
         }
     }
 }
-

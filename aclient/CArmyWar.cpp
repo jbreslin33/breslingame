@@ -882,7 +882,7 @@ void CArmyWar::StartConnection(int ind)
 	//LogString("StartConnection");
 
 	//gameIndex = ind;
-	char serverIP[32] = "192.168.2.112";
+	char serverIP[32] = "192.168.1.104";
 	//char serverIP[32] = "192.168.1.101";
 
 	int ret = networkClient->Initialise("", serverIP, 30004);
