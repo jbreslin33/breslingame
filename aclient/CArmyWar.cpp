@@ -607,37 +607,37 @@ void CArmyWar::CalculateVelocity(command_t *command, float frametime)
 
 	if(command->key & KEY_UP)
 	{
-		checkX = (int) (command->origin.x / 32.0f);
-		checkY = (int) ((command->origin.y - multiplier * frametime) / 32.0f);
+	//	checkX = (int) (command->origin.x / 32.0f);
+	//	checkY = (int) ((command->origin.y - multiplier * frametime) / 32.0f);
 
-		if(mapdata[checkX][checkY] == false)
+	//	if(mapdata[checkX][checkY] == false)
 			command->vel.y += -multiplier * frametime;
 	}
 
 	if(command->key & KEY_DOWN)
 	{
-		checkX = (int) (command->origin.x / 32.0f);
-		checkY = (int) ((command->origin.y + multiplier * frametime) / 32.0f);
+	//	checkX = (int) (command->origin.x / 32.0f);
+	//	checkY = (int) ((command->origin.y + multiplier * frametime) / 32.0f);
 
-		if(mapdata[checkX][checkY] == false)
+	//	if(mapdata[checkX][checkY] == false)
 			command->vel.y += multiplier * frametime;
 	}
 
 	if(command->key & KEY_LEFT)
 	{
-		checkX = (int) ((command->origin.x - multiplier * frametime) / 32.0f);
-		checkY = (int) (command->origin.y / 32.0f);
+	//	checkX = (int) ((command->origin.x - multiplier * frametime) / 32.0f);
+	//	checkY = (int) (command->origin.y / 32.0f);
 
-		if(mapdata[checkX][checkY] == false)
+	//	if(mapdata[checkX][checkY] == false)
 			command->vel.x += -multiplier * frametime;
 	}
 
 	if(command->key & KEY_RIGHT)
 	{
-		checkX = (int) ((command->origin.x + multiplier * frametime) / 32.0f);
-		checkY = (int) (command->origin.y / 32.0f);
+	//	checkX = (int) ((command->origin.x + multiplier * frametime) / 32.0f);
+	//	checkY = (int) (command->origin.y / 32.0f);
 
-		if(mapdata[checkX][checkY] == false)
+	//	if(mapdata[checkX][checkY] == false)
 			command->vel.x += multiplier * frametime;
 	}
 }
