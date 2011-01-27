@@ -23,7 +23,7 @@ DreamWinSock::~DreamWinSock()
 
 }
 
-int DreamWinSock::DreamSock_InitializeWinSock(void)
+int DreamWinSock::dreamSock_InitializeWinSock(void)
 {
 	WORD versionRequested;
 	WSADATA wsaData;
@@ -101,7 +101,7 @@ int DreamWinSock::DreamSock_InitializeWinSock(void)
 }
 
 
-int DreamWinSock::DreamSock_Win_GetCurrentSystemTime(void)
+int DreamWinSock::dreamSock_Win_GetCurrentSystemTime(void)
 {
 	int curtime;
 	static int base;
