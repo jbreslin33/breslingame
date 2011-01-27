@@ -4,6 +4,6 @@ public:
 	DreamWinSock();
 	~DreamWinSock();
 
-int DreamSock_InitializeWinSock(void);
-int DreamSock_Win_GetCurrentSystemTime(void);
+int dreamSock_InitializeWinSock(void);
+int dreamSock_Win_GetCurrentSystemTime(void);
 };

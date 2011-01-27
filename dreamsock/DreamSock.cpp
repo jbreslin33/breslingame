@@ -41,7 +41,7 @@ DreamSock::~DreamSock()
 
 }
 
-int DreamSock::DreamSock_Initialize(void)
+int DreamSock::dreamSock_Initialize(void)
 {
 	if(dreamSock_init == true)
 		return 0;
@@ -52,13 +52,13 @@ int DreamSock::DreamSock_Initialize(void)
 
 #ifdef WIN32
 	dreamWinSock = new DreamWinSock();
-	return dreamWinSock->DreamSock_InitializeWinSock();
+	return dreamWinSock->dreamSock_InitializeWinSock();
 #else
 	return 0;
 #endif
 }
 
-void DreamSock::DreamSock_Shutdown(void)
+void DreamSock::dreamSock_Shutdown(void)
 {
 	if(dreamSock_init == false)
 		return;
@@ -74,7 +74,7 @@ void DreamSock::DreamSock_Shutdown(void)
 #endif
 }
 
-SOCKET DreamSock::DreamSock_Socket(int protocol)
+SOCKET DreamSock::dreamSock_Socket(int protocol)
 {
 	int type;
 	int proto;
@@ -110,7 +110,7 @@ SOCKET DreamSock::DreamSock_Socket(int protocol)
 	return sock;
 }
 
-int DreamSock::DreamSock_SetNonBlocking(SOCKET sock, u_long setMode)
+int DreamSock::dreamSock_SetNonBlocking(SOCKET sock, u_long setMode)
 {
 	u_long set = setMode;
 
@@ -126,7 +126,7 @@ int DreamSock::DreamSock_SetNonBlocking(SOCKET sock, u_long setMode)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-int DreamSock::DreamSock_SetBroadcasting(SOCKET sock, int mode)
+int DreamSock::dreamSock_SetBroadcasting(SOCKET sock, int mode)
 {
 	// make it broadcast capable
 	if(setsockopt(sock, SOL_SOCKET, SO_BROADCAST, (char *) &mode, sizeof(int)) == -1)
@@ -146,7 +146,7 @@ int DreamSock::DreamSock_SetBroadcasting(SOCKET sock, int mode)
 	return 0;
 }
 
-int DreamSock::DreamSock_StringToSockaddr(char *addressString, struct sockaddr *sadr)
+int DreamSock::dreamSock_StringToSockaddr(char *addressString, struct sockaddr *sadr)
 {
 	char copy[128];
 
@@ -169,19 +169,19 @@ int DreamSock::DreamSock_StringToSockaddr(char *addressString, struct sockaddr *
 }
 
 
-SOCKET DreamSock::DreamSock_OpenUDPSocket(char *netInterface, int port)
+SOCKET DreamSock::dreamSock_OpenUDPSocket(char *netInterface, int port)
 {
 	SOCKET sock;
 
 	struct sockaddr_in address;
 
-	sock = DreamSock_Socket(DREAMSOCK_UDP);
+	sock = dreamSock_Socket(DREAMSOCK_UDP);
 
 	if(sock == DreamSock_INVALID_SOCKET)
 		return sock;
 
-	DreamSock_SetNonBlocking(sock, 1);
-	DreamSock_SetBroadcasting(sock, 1);
+	dreamSock_SetNonBlocking(sock, 1);
+	dreamSock_SetBroadcasting(sock, 1);
 
 	// If no address string provided, use any interface available
 	if(!netInterface || !netInterface[0] || !strcmp(netInterface, "localhost"))
@@ -192,7 +192,7 @@ SOCKET DreamSock::DreamSock_OpenUDPSocket(char *netInterface, int port)
 	else
 	{
 		LogString("Using net interface = '%s'", netInterface);
-		DreamSock_StringToSockaddr(netInterface, (struct sockaddr *) &address);
+		dreamSock_StringToSockaddr(netInterface, (struct sockaddr *) &address);
 	}
 
 	// If no port number provided, use any port number available
@@ -230,7 +230,7 @@ SOCKET DreamSock::DreamSock_OpenUDPSocket(char *netInterface, int port)
 	return sock;
 }
 
-void DreamSock::DreamSock_CloseSocket(SOCKET sock)
+void DreamSock::dreamSock_CloseSocket(SOCKET sock)
 {
 #ifdef WIN32
 		closesocket(sock);
@@ -239,7 +239,7 @@ void DreamSock::DreamSock_CloseSocket(SOCKET sock)
 #endif
 }
 
-int DreamSock::DreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *from)
+int DreamSock::dreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *from)
 {
 	int ret;
 	struct sockaddr tempFrom;
@@ -284,7 +284,7 @@ int DreamSock::DreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *fro
 	return ret;
 }
 
-void DreamSock::DreamSock_SendPacket(SOCKET sock, int length, char *data, struct sockaddr addr)
+void DreamSock::dreamSock_SendPacket(SOCKET sock, int length, char *data, struct sockaddr addr)
 {
 	int	ret;
 
@@ -310,7 +310,7 @@ void DreamSock::DreamSock_SendPacket(SOCKET sock, int length, char *data, struct
 	}
 }
 
-void DreamSock::DreamSock_Broadcast(SOCKET sock, int length, char *data, int port)
+void DreamSock::dreamSock_Broadcast(SOCKET sock, int length, char *data, int port)
 {
 	struct sockaddr_in servaddr;
 	socklen_t len;
@@ -349,12 +349,17 @@ void DreamSock::DreamSock_Broadcast(SOCKET sock, int length, char *data, int por
 	}
 }
 
-int DreamSock::DreamSock_GetCurrentSystemTime(void)
+int DreamSock::dreamSock_Linux_GetCurrentSystemTime()
+{
+	
+}
+
+int DreamSock::dreamSock_GetCurrentSystemTime(void)
 {
 #ifndef WIN32
-	return dreamSock_Linux_GetCurrentSystemTime();
+	return dreamSock_Linux_GetCurrentSystemTimeJim();
 #else
-	return dreamWinSock->DreamSock_Win_GetCurrentSystemTime();
+	return dreamWinSock->dreamSock_Win_GetCurrentSystemTime();
 	//return 1;
 #endif
 }

@@ -76,30 +76,30 @@ public:
 
 
 // Function prototypes
-int	DreamSock_Initialize(void);
-void 	DreamSock_Shutdown(void);
+int	dreamSock_Initialize(void);
+void 	dreamSock_Shutdown(void);
 
-SOCKET DreamSock_Socket(int protocol);
-int 	DreamSock_SetNonBlocking(SOCKET sock, u_long setMode);
-int 	DreamSock_SetBroadcasting(SOCKET sock, int mode);
-int 	DreamSock_StringToSockaddr(char *addressString, struct sockaddr *sadr);
-SOCKET 	DreamSock_OpenUDPSocket(char netInterface[32], int port);
-void 	DreamSock_CloseSocket(SOCKET sock);
+SOCKET dreamSock_Socket(int protocol);
+int 	dreamSock_SetNonBlocking(SOCKET sock, u_long setMode);
+int 	dreamSock_SetBroadcasting(SOCKET sock, int mode);
+int 	dreamSock_StringToSockaddr(char *addressString, struct sockaddr *sadr);
+SOCKET 	dreamSock_OpenUDPSocket(char netInterface[32], int port);
+void 	dreamSock_CloseSocket(SOCKET sock);
 
-int 	DreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *from);
-void 	DreamSock_SendPacket(SOCKET sock, int length, char *data, struct sockaddr addr);
-void 	DreamSock_Broadcast(SOCKET sock, int length, char *data, int port);
+int 	dreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *from);
+void 	dreamSock_SendPacket(SOCKET sock, int length, char *data, struct sockaddr addr);
+void 	dreamSock_Broadcast(SOCKET sock, int length, char *data, int port);
 
 bool          dreamSock_init;
 DreamWinSock* dreamWinSock;
 
 #ifndef WIN32
-int DreamSock_Linux_GetCurrentSystemTime(void);
+int dreamSock_Linux_GetCurrentSystemTime(void);
 #else
 //int DreamSock_Win_GetCurrentSystemTime(void);
 #endif
 
-int DreamSock_GetCurrentSystemTime(void);
+int dreamSock_GetCurrentSystemTime(void);
 
 };
 #endif
