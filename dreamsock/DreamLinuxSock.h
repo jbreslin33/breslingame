@@ -1,1 +1,1 @@
-int dreamSock_Linux_GetCurrentSystemTime(void);
+int dreamSock_Linux_GetCurrentSystemTimeJim(void);

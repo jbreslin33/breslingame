@@ -38,7 +38,7 @@ DreamClient::DreamClient()
 //-----------------------------------------------------------------------------
 DreamClient::~DreamClient()
 {
-	dreamSock->DreamSock_CloseSocket(socket);
+	dreamSock->dreamSock_CloseSocket(socket);
 }
 
 //-----------------------------------------------------------------------------
@@ -48,7 +48,7 @@ DreamClient::~DreamClient()
 int DreamClient::Initialise(char *localIP, char *remoteIP, int port)
 {
 	// Initialise DreamSock if it is not already initialised
-	dreamSock->DreamSock_Initialize();
+	dreamSock->dreamSock_Initialize();
 
 	// Save server's address information for later use
 	serverPort = port;
@@ -57,7 +57,7 @@ int DreamClient::Initialise(char *localIP, char *remoteIP, int port)
 	LogString("Server's information: IP address: %s, port: %d", serverIP, serverPort);
 
 	// Create client socket
-	socket = dreamSock->DreamSock_OpenUDPSocket(localIP, 0);
+	socket = dreamSock->dreamSock_OpenUDPSocket(localIP, 0);
 
 	// Check that the address is not empty
 	u_long inetAddr = inet_addr(serverIP);
@@ -83,7 +83,7 @@ int DreamClient::Initialise(char *localIP, char *remoteIP, int port)
 //-----------------------------------------------------------------------------
 void DreamClient::Uninitialise(void)
 {
-	dreamSock->DreamSock_CloseSocket(socket);
+	dreamSock->dreamSock_CloseSocket(socket);
 
 	Reset();
 
@@ -120,7 +120,7 @@ void DreamClient::DumpBuffer(void)
 	char data[1400];
 	int ret;
 
-	while((ret = dreamSock->DreamSock_GetPacket(socket, data, NULL)) > 0)
+	while((ret = dreamSock->dreamSock_GetPacket(socket, data, NULL)) > 0)
 	{
 	}
 }
@@ -164,7 +164,7 @@ void DreamClient::SendDisconnect(void)
 //-----------------------------------------------------------------------------
 void DreamClient::SendPing(void)
 {
-	pingSent = dreamSock->DreamSock_GetCurrentSystemTime();
+	pingSent = dreamSock->dreamSock_GetCurrentSystemTime();
 
 	message.Init(message.outgoingData, sizeof(message.outgoingData));
 	message.WriteByte(DREAMSOCK_MES_PING);
@@ -246,7 +246,7 @@ int DreamClient::GetPacket(char *data, struct sockaddr *from)
 	DreamMessage mes;
 	mes.Init(data, sizeof(data));
 
-	ret = dreamSock->DreamSock_GetPacket(socket, mes.data, from);
+	ret = dreamSock->dreamSock_GetPacket(socket, mes.data, from);
 
 	if(ret <= 0)
 		return 0;
@@ -291,12 +291,12 @@ void DreamClient::SendPacket(void)
 		sendToAddress.sin_family = AF_INET;
 		sendToAddress.sin_addr.s_addr = inetAddr;
 
-		dreamSock->DreamSock_SendPacket(socket, message.GetSize(), message.data,
+		dreamSock->dreamSock_SendPacket(socket, message.GetSize(), message.data,
 			*(struct sockaddr *) &sendToAddress);
 	}
 	else
 	{
-		dreamSock->DreamSock_SendPacket(socket, message.GetSize(), message.data, myaddress);
+		dreamSock->dreamSock_SendPacket(socket, message.GetSize(), message.data, myaddress);
 	}
 
 	// Check if the packet is sequenced
@@ -341,12 +341,12 @@ void DreamClient::SendPacket(DreamMessage *theMes)
 		sendToAddress.sin_family = AF_INET;
 		sendToAddress.sin_addr.s_addr = inetAddr;
 
-		dreamSock->DreamSock_SendPacket(socket, theMes->GetSize(), theMes->data,
+		dreamSock->dreamSock_SendPacket(socket, theMes->GetSize(), theMes->data,
 			*(struct sockaddr *) &sendToAddress);
 	}
 	else
 	{
-		dreamSock->DreamSock_SendPacket(socket, theMes->GetSize(), theMes->data, myaddress);
+		dreamSock->dreamSock_SendPacket(socket, theMes->GetSize(), theMes->data, myaddress);
 	}
 
 	// Check if the packet is sequenced
