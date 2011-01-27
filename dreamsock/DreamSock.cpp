@@ -348,12 +348,12 @@ void DreamSock::dreamSock_Broadcast(SOCKET sock, int length, char *data, int por
 #endif
 	}
 }
-
+/*
 int DreamSock::dreamSock_Linux_GetCurrentSystemTime()
 {
 	
 }
-
+*/
 int DreamSock::dreamSock_GetCurrentSystemTime(void)
 {
 #ifndef WIN32
