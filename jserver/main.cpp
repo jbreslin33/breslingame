@@ -215,7 +215,7 @@ int keyPress(void)
 	struct timeval waittime;
 	int num_chars_read;
 	fd_set mask;
-//	struct fd_set mask;
+	
 	FD_SET(0, &mask);
 
 	waittime.tv_sec = 0;
@@ -252,23 +252,13 @@ int main(int argc, char **argv)
 	// Ignore the SIGPIPE signal, so the program does not terminate if the
 	// pipe gets broken
 	signal(SIGPIPE, SIG_IGN);
-/*
-	if(Lobby.InitNetwork() == 1)
-	{
-		exit(0);
-	}
-
-	if(Signin.InitNetwork() == 1)
-	{
-		exit(0);
-	}
-*/
+	
 	LogString("Init successful");
 
 	game = new CArmyWarServer();
 	game->InitNetwork();
 	
-int time, oldTime, newTime;
+	int time, oldTime, newTime;
 
 	oldTime = game->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
 
@@ -286,16 +276,7 @@ int time, oldTime, newTime;
 					time = newTime - oldTime;
 				} while (time < 1);
 
-				//Lobby.Frame(time);
-				//Signin.Frame(time);
-
-				//CArmyWarServer *list = Lobby.GetGameList();
-
-			//	for( ; list != NULL; list = list->next)
-			//	{
-					//list->Frame(time);
-					game->Frame(time);
-			//	}
+				game->Frame(time);
 
 				oldTime = newTime;
 			}
@@ -311,16 +292,7 @@ int time, oldTime, newTime;
 					time = newTime - oldTime;
 				} while (time < 1);
 
-				//Lobby.Frame(time);
-				//Signin.Frame(time);
-
-				//CArmyWarServer *list = Lobby.GetGameList();
-
-				//for( ; list != NULL; list = list->next)
-				//{
-					//list->Frame(time);
-					game->Frame(time);
-				//}
+				game->Frame(time);
 
 				oldTime = newTime;
 			}
@@ -328,8 +300,6 @@ int time, oldTime, newTime;
 	}
 	catch(...)
 	{
-	//	Lobby.ShutdownNetwork();
-	//	Signin.ShutdownNetwork();
 		game->networkServer->dreamSock->dreamSock_Shutdown();
 
 		LogString("Unknown Exception caught in main loop");
@@ -339,8 +309,6 @@ int time, oldTime, newTime;
 
 	LogString("Shutting down everything");
 
-	//Lobby.ShutdownNetwork();
-	//Signin.ShutdownNetwork();
 	game->networkServer->dreamSock->dreamSock_Shutdown();
 
 	return 0;
