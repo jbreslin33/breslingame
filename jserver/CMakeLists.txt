@@ -143,10 +143,10 @@ set(HDRS
 )
  
 set(SRCS
-	#tutGameServer
+	#jserver
 	./main.cpp
 	./network.cpp
-	./server.cpp
+	./server:q.cpp
 
 	#dreamSock
 	../dreamsock/DreamClient.cpp
