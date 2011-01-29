@@ -4,22 +4,24 @@
 #include <string.h>
 #include "network.h"
 
+#include "../math/Vector3D.h"
+
 class DreamClient;
 class DreamServer;
 class DreamMessage;
-
+/*
 typedef struct
 {
 	float x;
 	float y;
-} VECTOR2D;
-
+} Vector3D;
+*/
 typedef struct
 {
 	int key;								// Pressed keys
 
-	VECTOR2D vel;							// Velocity
-	VECTOR2D origin;						// Position
+	Vector3D vel;							// Velocity
+	Vector3D origin;						// Position
 
 	int msec;								// How long to run command (in ms)
 
@@ -36,7 +38,7 @@ typedef struct clientData
 	struct sockaddr address;
 	DreamClient *netClient;
 
-	VECTOR2D startPos;
+	Vector3D startPos;
 	bool team;
 
 	clientData *next;
