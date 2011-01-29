@@ -74,7 +74,7 @@ CArmyWarServer::~CArmyWarServer()
 //-----------------------------------------------------------------------------
 int CArmyWarServer::InitNetwork()
 {
-	if(networkServer->dreamSock->DreamSock_Initialize() != 0)
+	if(networkServer->dreamSock->dreamSock_Initialize() != 0)
 	{
 		LogString("Error initialising Communication Library!");
 		return 1;

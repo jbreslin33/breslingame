@@ -1,5 +1,6 @@
 //#include "Tutorial4.h"
 #include "common.h"
+#include "ClientSinbadCharacterController.h"
 
 CArmyWar* game;
 bool keys[256];
@@ -7,15 +8,19 @@ bool keys[256];
 
 void CArmyWar::createPlayer(int index)
 {
+	/*
 	Ogre::Entity* NinjaEntity = mSceneMgr->createEntity("ninja.mesh");
 	//Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "ogrehead.mesh");
 	Ogre::SceneNode* node = mSceneMgr->getRootSceneNode()->createChildSceneNode();
     node->attachObject(NinjaEntity);
     //node->setPosition(Ogre::Vector3(10, 10, 10));
-
+*/
     clientData *client = game->GetClientPointer(index);
 
-	client->myNode = node;
+	//client->character->mSceneMgr->getCamera();
+	client->character = new SinbadCharacterController(mSceneMgr->getCamera("PlayerCam"), "Sinbad" + index);
+
+	//client->myNode = node;
 }
 //-------------------------------------------------------------------------------------
 void CArmyWar::createScene(void)
@@ -31,10 +36,13 @@ void CArmyWar::createScene(void)
 //-------------------------------------------------------------------------------------
 bool CArmyWar::processUnbufferedInput(const Ogre::FrameEvent& evt)
 {
+	//LogString("processUnbufferedInput");
  
     if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
     {
+		//LogString("isKeyDown");
 		keys[VK_UP] = TRUE;
+		//localClient->character->simulateKeyDown(OIS::KC_I);
     }
 	else
 	{
@@ -71,9 +79,14 @@ bool CArmyWar::processUnbufferedInput(const Ogre::FrameEvent& evt)
 //-------------------------------------------------------------------------------------
 bool CArmyWar::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
+
+	//LogString("frameRenderingQueued");
     bool ret = BaseApplication::frameRenderingQueued(evt);
+
+	if (localClient)
+		localClient->character->addTime(evt.timeSinceLastFrame);
  
-    if(!processUnbufferedInput(evt)) return false;
+    //if(!processUnbufferedInput(evt)) return false;
 
 	if(game != NULL)
 	{
@@ -81,8 +94,34 @@ bool CArmyWar::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		game->CheckKeys();
 		//game->Frame();
 	}
+
+	
  
     return ret;
+}
+
+bool CArmyWar::keyPressed(const OIS::KeyEvent& evt)
+{
+
+	LogString("keyPressed");
+
+	//BaseApplication::keyPressed(evt);       
+    // relay input events to character controller
+    //if (!mTrayMgr->isDialogVisible()) 
+	//mChara->injectKeyDown(evt);
+	localClient->character->injectKeyDown(evt);
+    //return BaseApplication::keyPressed(evt);
+	return 1;
+}
+
+bool CArmyWar::keyReleased(const OIS::KeyEvent& evt)
+{
+	// relay input events to character controller
+    //if (!mTrayMgr->isDialogVisible()) 
+	//mChara->injectKeyUp(evt);
+	localClient->character->injectKeyUp(evt);
+    //return BaseApplication::keyReleased(evt);
+	return 1;
 }
 //-------------------------------------------------------------------------------------
  
@@ -107,6 +146,8 @@ extern "C" {
 
 		//game = new CArmyWar;
 	    game->StartConnection();
+
+		StartLogConsole();
 
  
         try {

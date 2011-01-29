@@ -1,12 +1,13 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
-#include "../baseApplication/BaseApplication.h"
+#include "BaseApplication.h"
 #include "common.h"
 //#include "Tutorial4.h"
 
 class DreamMessage;
 class DreamClient;
+class SinbadCharacterController;
 
 extern bool keys[256];
 
@@ -43,6 +44,8 @@ typedef struct clientData
 	char		password[30];
 
 	Ogre::SceneNode *myNode;
+
+	SinbadCharacterController* character;
 
 	clientData	*next;
 } clientData;
@@ -94,6 +97,7 @@ private:
 
 	//bool mapdata[100][100];
 	int gameIndex;
+	
 
 
 public:
@@ -103,6 +107,9 @@ public:
     void createPlayer(int index);
     virtual void createScene(void);
     virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+
+	virtual bool keyPressed(const OIS::KeyEvent &evt);
+    virtual bool keyReleased(const OIS::KeyEvent &evt);
 
 	// Client.cpp
 	void	Shutdown(void);
