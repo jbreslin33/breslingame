@@ -86,7 +86,6 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 endif()
 
 
-if(WIN32)
 set(HDRS
 	#jserver
 	./main.h
@@ -99,54 +98,26 @@ set(HDRS
 	../dreamsock/DreamMessage.h
 	../dreamsock/DreamServer.h
 	../dreamsock/DreamSock.h
-	
-	../dreamsock/DreamWinSock.h
-	
-	
 )
+
+if(UNIX)	
+set(HDRS
+	../dreamsock/DreamLinuxSock.h
+)
+endif(UNIX)	
+if(WIN32)
+set(HDRS
+	../dreamsock/DreamWinSock.h
+)
+endif(WIN32)
+
+
  
 set(SRCS
-	
-	#tutGameServer
+	#jserver
 	./main.cpp
 	./network.cpp
 	./server.cpp
-	
-	#dreamSock
-	../dreamsock/DreamClient.cpp
-	../dreamsock/DreamConsole.cpp
-	../dreamsock/DreamMessage.cpp
-	../dreamsock/DreamServer.cpp
-	../dreamsock/DreamSock.cpp
-	
-	../dreamsock/DreamWinSock.cpp
-	
-)
-endif(WIN32)
- 
-if(UNIX)
-set(HDRS
-	#jserver
-	./main.h
-	./network.h
-	./server.h
-	
-	#dreamSock
-	../dreamsock/DreamClient.h
-	../dreamsock/DreamConsole.h
-	../dreamsock/DreamMessage.h
-	../dreamsock/DreamServer.h
-	../dreamsock/DreamSock.h
-	
-	../dreamsock/DreamLinuxSock.h
-	
-)
- 
-set(SRCS
-	#jserver
-	./main.cpp
-	./network.cpp
-	./server:q.cpp
 
 	#dreamSock
 	../dreamsock/DreamClient.cpp
@@ -154,11 +125,18 @@ set(SRCS
 	../dreamsock/DreamMessage.cpp
 	../dreamsock/DreamServer.cpp
 	../dreamsock/DreamSock.cpp
-	
-	../dreamsock/DreamLinuxSock.cpp
-	
 )
-endif(UNIX)
+if(UNIX)	
+set(HDRS
+	../dreamsock/DreamLinuxSock.cpp
+)
+endif(UNIX)	
+if(WIN32)
+set(HDRS
+	../dreamsock/DreamWinSock.cpp
+)
+endif(WIN32)
+
 
 
  
