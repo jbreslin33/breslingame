@@ -122,6 +122,8 @@ set(SRCS
 	
 	../Dreamsock/DreamWinSock.cpp
 
+	#math
+	../math/Vector3D.cpp
 )
 
 endif(WIN32)
@@ -146,6 +148,8 @@ set(HDRS
 	
 	../dreamsock/DreamLinuxSock.h
 	
+	#math
+	../math/Vector3D.h
 )
  
 set(SRCS
