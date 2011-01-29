@@ -148,7 +148,7 @@ void CArmyWarServer::SendCommand(void)
 	{
 		int i = (toClient->netClient->GetOutgoingSequence() - 1) & (COMMAND_HISTORY_SIZE-1);
 
-		memcpy(&toClient->frame[i], &toClient->command, sizeof(command_t));
+		memcpy(&toClient->frame[i], &toClient->command, sizeof(Command));
 	}
 }
 

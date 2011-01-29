@@ -101,6 +101,9 @@ set(HDRS
 
 	#math
 	../math/Vector.h
+
+	#command
+	../command/Command.h
 )
 
 if(UNIX)	
@@ -131,6 +134,9 @@ set(SRCS
 
 	#math
 	../math/Vector3D.cpp
+
+	#command
+	../command/Command.cpp
 )
 if(UNIX)	
 set(HDRS

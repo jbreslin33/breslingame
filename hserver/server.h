@@ -5,6 +5,7 @@
 #include "network.h"
 
 #include "../math/Vector3D.h"
+#include "../command/Command.h"
 
 class DreamClient;
 class DreamServer;
@@ -16,6 +17,7 @@ typedef struct
 	float y;
 } Vector3D;
 */
+/*
 typedef struct
 {
 	int key;								// Pressed keys
@@ -25,13 +27,14 @@ typedef struct
 
 	int msec;								// How long to run command (in ms)
 
-} command_t;
+} Command;
+*/
 
 typedef struct clientData
 {
-	command_t frame[COMMAND_HISTORY_SIZE];
-	command_t serverFrame;
-	command_t command;
+	Command frame[COMMAND_HISTORY_SIZE];
+	Command serverFrame;
+	Command command;
 
 	long processedFrame;
 
@@ -79,7 +82,7 @@ public:
 	// Server.cpp
 	int		InitNetwork();
 	void	ShutdownNetwork(void);
-	void	CalculateVelocity(command_t *command, float frametime);
+	void	CalculateVelocity(Command *command, float frametime);
 	void	MovePlayers(void);
 	void	MovePlayer(clientData *client);
 	void	AddClient(void);
