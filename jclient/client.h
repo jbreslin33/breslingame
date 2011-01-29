@@ -114,6 +114,7 @@ public:
     void createPlayer(int index);
     virtual void createScene(void);
     virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+    virtual bool keyPressed( const OIS::KeyEvent &arg );
 
 	// Client.cpp
 	void	Shutdown(void);

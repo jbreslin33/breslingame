@@ -84,7 +84,10 @@ bool CArmyWar::frameRenderingQueued(const Ogre::FrameEvent& evt)
     return ret;
 }
 //-------------------------------------------------------------------------------------
- 
+bool CArmyWar::keyPressed( const OIS::KeyEvent &arg )
+{
+    Ogre::LogManager::getSingletonPtr()->logMessage("*** keyPressed CArmyWar n***");
+} 
  
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #define WIN32_LEAN_AND_MEAN
