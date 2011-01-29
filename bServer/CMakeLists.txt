@@ -95,6 +95,7 @@ set(HDRS
       ./common.h
       ./network.h
       ./server.h
+      ./ServerSinbadCharacterController.h
 
 	#DreamSock
 	../dreamsock/DreamClient.h
@@ -137,6 +138,7 @@ set(HDRS
       ./common.h
       ./network.h
       ./server.h
+      ./ServerSinbadCharacterController.h
 
 	#DreamSock
 	../dreamsock/DreamClient.h

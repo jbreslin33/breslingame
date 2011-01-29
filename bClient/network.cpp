@@ -506,7 +506,7 @@ void CArmyWar::RunNetwork(int msec)
 	// Check that we haven't gone too far
 	if(current - ack > COMMAND_HISTORY_SIZE)
 		return;
-
+/*
 	// Predict the frames that we are waiting from the server
 	for(int a = ack + 1; a < current; a++)
 	{
@@ -517,4 +517,5 @@ void CArmyWar::RunNetwork(int msec)
 	}
 
 	MoveObjects();
+*/
 }

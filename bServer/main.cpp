@@ -124,7 +124,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	// first peek the message without removing it
 	PeekMessage(&WinMsg, hwnd, 0, 0, PM_NOREMOVE);
 
-	oldTime = game->networkServer->dreamSock->DreamSock_GetCurrentSystemTime();
+	oldTime = game->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
 
 	try
 	{
@@ -134,7 +134,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 			{
 				if(!GetMessage(&WinMsg, NULL, 0, 0))
 				{
-					game->networkServer->dreamSock->DreamSock_Shutdown();
+					game->networkServer->dreamSock->dreamSock_Shutdown();
 
 
 					done = true;
@@ -146,7 +146,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 			do
 			{
-				newTime = game->networkServer->dreamSock->DreamSock_GetCurrentSystemTime();
+				newTime = game->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
 				time = newTime - oldTime;
 			} while (time < 1);
 			
@@ -160,7 +160,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	{
 		LogString("Unknown Exception caught in main loop");
 
-		game->networkServer->dreamSock->DreamSock_Shutdown();
+		game->networkServer->dreamSock->dreamSock_Shutdown();
 
 		MessageBox(NULL, "Unknown Exception caught in main loop", "Error", MB_OK | MB_TASKMODAL);
 
@@ -266,7 +266,7 @@ int main(int argc, char **argv)
 
 	int time, oldTime, newTime;
 
-	oldTime = game->networkServer->dreamSock->DreamSock_GetCurrentSystemTime();
+	oldTime = game->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
 
 	// App main loop
 	try
