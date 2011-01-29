@@ -17,7 +17,7 @@
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-float VectorLength(VECTOR2D *vec)
+float VectorLength(Vector3D *vec)
 {
 	return (float) sqrt(vec->x*vec->x + vec->y*vec->y);
 }
@@ -26,9 +26,9 @@ float VectorLength(VECTOR2D *vec)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-VECTOR2D VectorSubstract(VECTOR2D *vec1, VECTOR2D *vec2)
+Vector3D VectorSubstract(Vector3D *vec1, Vector3D *vec2)
 {
-	VECTOR2D vec;
+	Vector3D vec;
 
 	vec.x = vec1->x - vec2->x;
 	vec.y = vec1->y - vec2->y;

@@ -98,6 +98,9 @@ set(HDRS
 	../dreamsock/DreamMessage.h
 	../dreamsock/DreamServer.h
 	../dreamsock/DreamSock.h
+
+	#math
+	../math/Vector.h
 )
 
 if(UNIX)	
@@ -125,6 +128,9 @@ set(SRCS
 	../dreamsock/DreamMessage.cpp
 	../dreamsock/DreamServer.cpp
 	../dreamsock/DreamSock.cpp
+
+	#math
+	../math/Vector3D.cpp
 )
 if(UNIX)	
 set(HDRS
