@@ -9,6 +9,7 @@
 #include "server.h"
 #include "../dreamsock/DreamMessage.h"
 #include "../dreamsock/DreamServer.h"
+#include "../client/ServerSideClient.h"
 
 #include <math.h>
 
@@ -31,7 +32,7 @@ void CArmyWarServer::ReadPackets(void)
 
 	struct sockaddr address;
 
-	clientData *clList;
+	ServerSideClient *clList;
 
 	DreamMessage mes;
 	mes.Init(data, sizeof(data));
@@ -82,7 +83,7 @@ void CArmyWarServer::ReadPackets(void)
 
 			case USER_MES_NONDELTAFRAME:
 				clList = clientList;
-				clientData *dataClient;
+				ServerSideClient *dataClient;
 
 				for( ; clList != NULL; clList = clList->next)
 				{
@@ -122,8 +123,8 @@ void CArmyWarServer::ReadPackets(void)
 //-----------------------------------------------------------------------------
 void CArmyWarServer::SendCommand(void)
 {
-	clientData *toClient;
-	clientData *dataClient;
+	ServerSideClient *toClient;
+	ServerSideClient *dataClient;
 
 	// Fill messages
 	for(toClient = clientList; toClient != NULL; toClient = toClient->next)
@@ -158,7 +159,7 @@ void CArmyWarServer::SendCommand(void)
 //-----------------------------------------------------------------------------
 void CArmyWarServer::SendExitNotification(void)
 {
-	clientData *toClient = clientList;
+	ServerSideClient *toClient = clientList;
 
 	for( ; toClient != NULL; toClient = toClient->next)
 	{
@@ -176,7 +177,7 @@ void CArmyWarServer::SendExitNotification(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWarServer::ReadDeltaMoveCommand(DreamMessage *mes, clientData *client)
+void CArmyWarServer::ReadDeltaMoveCommand(DreamMessage *mes, ServerSideClient *client)
 {
 	int flags = 0;
 
@@ -199,7 +200,7 @@ void CArmyWarServer::ReadDeltaMoveCommand(DreamMessage *mes, clientData *client)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWarServer::BuildMoveCommand(DreamMessage *mes, clientData *client)
+void CArmyWarServer::BuildMoveCommand(DreamMessage *mes, ServerSideClient *client)
 {
 	// Add to the message
 	// Key
@@ -218,7 +219,7 @@ void CArmyWarServer::BuildMoveCommand(DreamMessage *mes, clientData *client)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWarServer::BuildDeltaMoveCommand(DreamMessage *mes, clientData *client)
+void CArmyWarServer::BuildDeltaMoveCommand(DreamMessage *mes, ServerSideClient *client)
 {
 	int flags = 0;
 
