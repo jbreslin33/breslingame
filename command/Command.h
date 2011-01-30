@@ -9,10 +9,11 @@ public:
 Command();
 ~Command();
 	
-	int      key;
-	int      msec;
-	Vector3D vel;
+	int key;
+	int msec;
+
 	Vector3D origin;
+	Vector3D vel;	
 
 };
 #endif
