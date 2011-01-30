@@ -104,6 +104,8 @@ set(HDRS
 
 	#command
 	../command/Command.h
+	../command/ClientSideCommand.h
+	../command/ServerSideCommand.h
 )
 
 if(UNIX)	
@@ -137,6 +139,8 @@ set(SRCS
 
 	#command
 	../command/Command.cpp
+	../command/ClientSideCommand.cpp
+	../command/ServerSideCommand.cpp
 )
 if(UNIX)	
 set(HDRS

@@ -115,7 +115,7 @@ void CArmyWarServer::ShutdownNetwork(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWarServer::CalculateVelocity(Command *command, float frametime)
+void CArmyWarServer::CalculateVelocity(ServerSideCommand *command, float frametime)
 {
 
 	float multiplier = 100.0f;
