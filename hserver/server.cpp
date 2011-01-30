@@ -7,6 +7,7 @@
 
 #include "server.h"
 #include "../dreamsock/DreamServer.h"
+#include "../client/ServerSideClient.h"
 
 #include <fstream>
 #include <math.h>
@@ -149,7 +150,7 @@ void CArmyWarServer::CalculateVelocity(ServerSideCommand *command, float frameti
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWarServer::MovePlayer(clientData *client)
+void CArmyWarServer::MovePlayer(ServerSideClient *client)
 {
 	float clientFrametime;
 
@@ -174,8 +175,8 @@ void CArmyWarServer::MovePlayer(clientData *client)
 void CArmyWarServer::AddClient(void)
 {
 	// First get a pointer to the beginning of client list
-	clientData *list = clientList;
-	clientData *prev;
+	ServerSideClient *list = clientList;
+	ServerSideClient *prev;
 	DreamClient *netList = networkServer->GetClientList();
 
 	// No clients yet, adding the first one
@@ -183,7 +184,7 @@ void CArmyWarServer::AddClient(void)
 	{
 		LogString("App: Server: Adding first client");
 
-		clientList = (clientData *) calloc(1, sizeof(clientData));
+		clientList = (ServerSideClient *) calloc(1, sizeof(ServerSideClient));
 
 		clientList->netClient = netList;
 
@@ -225,7 +226,7 @@ void CArmyWarServer::AddClient(void)
 			netList = netList->next;
 		}
 
-		list = (clientData *) calloc(1, sizeof(clientData));
+		list = (ServerSideClient *) calloc(1, sizeof(ServerSideClient));
 
 		list->netClient = netList;
 
@@ -265,9 +266,9 @@ void CArmyWarServer::AddClient(void)
 //-----------------------------------------------------------------------------
 void CArmyWarServer::RemoveClient(struct sockaddr *address)
 {
-	clientData *list = clientList;
-	clientData *prev = NULL;
-	clientData *next = NULL;
+	ServerSideClient *list = clientList;
+	ServerSideClient *prev = NULL;
+	ServerSideClient *next = NULL;
 
 	for( ; list != NULL; list = list->next)
 	{
@@ -315,8 +316,8 @@ void CArmyWarServer::RemoveClient(struct sockaddr *address)
 //-----------------------------------------------------------------------------
 void CArmyWarServer::RemoveClients(void)
 {
-	clientData *list = clientList;
-	clientData *next;
+	ServerSideClient *list = clientList;
+	ServerSideClient *next;
 
 	while(list != NULL)
 	{

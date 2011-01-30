@@ -10,6 +10,7 @@
 class DreamClient;
 class DreamServer;
 class DreamMessage;
+class ServerSideClient;
 /*
 typedef struct
 {
@@ -29,8 +30,8 @@ typedef struct
 
 } Command;
 */
-
-typedef struct clientData
+/*
+typedef struct ServerSideClient
 {
 	ServerSideCommand frame[COMMAND_HISTORY_SIZE];
 	ServerSideCommand serverFrame;
@@ -44,16 +45,16 @@ typedef struct clientData
 	Vector3D startPos;
 	bool team;
 
-	clientData *next;
-} clientData;
-
+	ServerSideClient *next;
+} ServerSideClient;
+*/
 
 class CArmyWarServer
 {
 public:
 	DreamServer	*networkServer;
 private:
-	clientData	*clientList;		// Client list
+	ServerSideClient	*clientList;		// Client list
 	int		clients;				// Number of clients
 
 	int		realtime;				// Real server up-time in ms
@@ -63,7 +64,7 @@ private:
 	char	gamename[32];
 	int		index;
 
-	clientData *playerWithFlag;
+	ServerSideClient *playerWithFlag;
 
 	long	framenum;
 
@@ -75,22 +76,22 @@ public:
 	void	ReadPackets(void);
 	void	SendCommand(void);
 	void	SendExitNotification(void);
-	void	ReadDeltaMoveCommand(DreamMessage *mes, clientData *client);
-	void	BuildMoveCommand(DreamMessage *mes, clientData *client);
-	void	BuildDeltaMoveCommand(DreamMessage *mes, clientData *client);
+	void	ReadDeltaMoveCommand(DreamMessage *mes, ServerSideClient *client);
+	void	BuildMoveCommand(DreamMessage *mes, ServerSideClient *client);
+	void	BuildDeltaMoveCommand(DreamMessage *mes, ServerSideClient *client);
 
 	// Server.cpp
 	int		InitNetwork();
 	void	ShutdownNetwork(void);
 	void	CalculateVelocity(ServerSideCommand *command, float frametime);
 	void	MovePlayers(void);
-	void	MovePlayer(clientData *client);
+	void	MovePlayer(ServerSideClient *client);
 	void	AddClient(void);
 	void	RemoveClient(struct sockaddr *address);
 	void	RemoveClients(void);
 	void	Frame(int msec);
 
-	clientData *GetClientList(void)	{ return clientList; }
+	ServerSideClient *GetClientList(void)	{ return clientList; }
 
 	void	SetName(char *n)		{ strcpy(gamename, n); }
 	char	*GetName(void)			{ return gamename; }
