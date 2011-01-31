@@ -110,6 +110,7 @@ set(HDRS
 
 	#network
 	../network/network.h
+	../network/serverSideNetwork.h
 
 	#game
 	../game/game.h
@@ -153,6 +154,7 @@ set(SRCS
 	
 	#network
 	../network/network.cpp
+	../network/serverSideNetwork.cpp
 	
 	#game
 	../game/game.cpp
