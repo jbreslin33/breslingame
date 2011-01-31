@@ -6,7 +6,7 @@
 class DreamClient;
 class DreamMessage;
 class ServerSideClient;
-class Server;
+class ServerSideGame;
 
 #define COMMAND_HISTORY_SIZE            64
 
@@ -34,7 +34,7 @@ class Network
 {
 
 public:
-Network(Server* server);
+Network(ServerSideGame* server);
 ~Network();
 
 void ReadPackets(void);
@@ -44,7 +44,7 @@ void ReadDeltaMoveCommand(DreamMessage *mes, ServerSideClient *client);
 void BuildMoveCommand(DreamMessage *mes, ServerSideClient *client);
 void BuildDeltaMoveCommand(DreamMessage *mes, ServerSideClient *client);
 
-Server* mServer;
+ServerSideGame* mServer;
 
 };
 #endif

@@ -44,10 +44,10 @@ int runningDaemon;
 
 
 #include "../dreamsock/DreamSock.h"
-#include "../server/server.h"
+#include "../game/serverSideGame.h"
 #include "../dreamsock/DreamServer.h"
 
-Server* game;
+ServerSideGame* game;
 
 #ifdef WIN32
 
@@ -255,7 +255,7 @@ int main(int argc, char **argv)
 	
 	LogString("Init successful");
 
-	game = new Server();
+	game = new ServerSideGame();
 	game->InitNetwork();
 	
 	int time, oldTime, newTime;

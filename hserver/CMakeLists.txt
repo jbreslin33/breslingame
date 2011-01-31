@@ -111,8 +111,9 @@ set(HDRS
 	#network
 	../network/network.h
 
-	#server
-	../server/server.h
+	#game
+	../game/game.h
+	../game/serverSideGame.h
 )
 
 if(UNIX)	
@@ -153,8 +154,9 @@ set(SRCS
 	#network
 	../network/network.cpp
 	
-	#server
-	../server/server.cpp
+	#game
+	../game/game.cpp
+	../game/serverSideGame.cpp
 )
 if(UNIX)	
 set(HDRS
