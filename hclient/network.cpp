@@ -8,16 +8,17 @@
 //#include "Tutorial4.h"
 
 //char serverIP[32] = "127.0.0.1";
-char serverIP[32] = "192.168.1.102";
-#include "client.h"
+char serverIP[32] = "192.168.1.104";
 #include "../dreamsock/DreamClient.h"
 #include "../dreamsock/DreamSock.h"
 #include "network.h"
+#include "baseGame.h"
+
 //-----------------------------------------------------------------------------
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWar::StartConnection()
+void BaseGame::StartConnection()
 {
 //	LogString("StartConnection");
 
@@ -40,12 +41,12 @@ void CArmyWar::StartConnection()
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWar::ReadPackets(void)
+void BaseGame::ReadPackets(void)
 {
 	char data[1400];
 	struct sockaddr address;
 
-	clientData *clList;
+	ClientSideClient *clList;
 
 	int type;
 	int ind;
@@ -124,11 +125,11 @@ void CArmyWar::ReadPackets(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWar::AddClient(int local, int ind, char *name)
+void BaseGame::AddClient(int local, int ind, char *name)
 {
 	// First get a pointer to the beginning of client list
-	clientData *list = clientList;
-	clientData *prev;
+	ClientSideClient *list = clientList;
+	ClientSideClient *prev;
 
 	LogString("App: Client: Adding client with index %d", ind);
 
@@ -137,7 +138,7 @@ void CArmyWar::AddClient(int local, int ind, char *name)
 	{
 		LogString("App: Client: Adding first client");
 
-		clientList = (clientData *) calloc(1, sizeof(clientData));
+		clientList = (ClientSideClient *) calloc(1, sizeof(ClientSideClient));
 
 		if(local)
 		{
@@ -168,7 +169,7 @@ void CArmyWar::AddClient(int local, int ind, char *name)
 			list = list->next;
 		}
 
-		list = (clientData *) calloc(1, sizeof(clientData));
+		list = (ClientSideClient *) calloc(1, sizeof(ClientSideClient));
 
 		if(local)
 		{
@@ -204,11 +205,11 @@ void CArmyWar::AddClient(int local, int ind, char *name)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWar::RemoveClient(int ind)
+void BaseGame::RemoveClient(int ind)
 {
-	clientData *list = clientList;
-	clientData *prev = NULL;
-	clientData *next = NULL;
+	ClientSideClient *list = clientList;
+	ClientSideClient *prev = NULL;
+	ClientSideClient *next = NULL;
 
 	// Look for correct client and update list
 	for( ; list != NULL; list = list->next)
@@ -259,10 +260,10 @@ void CArmyWar::RemoveClient(int ind)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWar::RemoveClients(void)
+void BaseGame::RemoveClients(void)
 {
-	clientData *list = clientList;
-	clientData *next;
+	ClientSideClient *list = clientList;
+	ClientSideClient *next;
 
 	while(list != NULL)
 	{
@@ -283,7 +284,7 @@ void CArmyWar::RemoveClients(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWar::SendCommand(void)
+void BaseGame::SendCommand(void)
 {
 	if(networkClient->GetConnectionState() != DREAMSOCK_CONNECTED)
 		return;
@@ -304,14 +305,14 @@ void CArmyWar::SendCommand(void)
 	networkClient->SendPacket(&message);
 
 	// Store the command to the input client's history
-	memcpy(&inputClient.frame[i], &inputClient.command, sizeof(command_t));
+	memcpy(&inputClient.frame[i], &inputClient.command, sizeof(ClientSideCommand));
 
-	clientData *clList = clientList;
+	ClientSideClient *clList = clientList;
 
 	// Store the commands to the clients' history
 	for( ; clList != NULL; clList = clList->next)
 	{
-		memcpy(&clList->frame[i], &clList->command, sizeof(command_t));
+		memcpy(&clList->frame[i], &clList->command, sizeof(ClientSideCommand));
 	}
 }
 
@@ -320,7 +321,7 @@ void CArmyWar::SendCommand(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWar::SendRequestNonDeltaFrame(void)
+void BaseGame::SendRequestNonDeltaFrame(void)
 {
 	char data[1400];
 	DreamMessage message;
@@ -336,7 +337,7 @@ void CArmyWar::SendRequestNonDeltaFrame(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWar::Connect(void)
+void BaseGame::Connect(void)
 {
 	if(init)
 	{
@@ -344,7 +345,7 @@ void CArmyWar::Connect(void)
 		return;
 	}
 
-	LogString("CArmyWar::Connect");
+	LogString("BaseGame::Connect");
 
 	init = true;
 
@@ -355,16 +356,16 @@ void CArmyWar::Connect(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWar::Disconnect(void)
+void BaseGame::Disconnect(void)
 {
 	if(!init)
 		return;
 
-	LogString("CArmyWar::Disconnect");
+	LogString("BaseGame::Disconnect");
 
 	init = false;
 	localClient = NULL;
-	memset(&inputClient, 0, sizeof(clientData));
+	memset(&inputClient, 0, sizeof(ClientSideClient));
 
 	networkClient->SendDisconnect();
 }
@@ -373,7 +374,7 @@ void CArmyWar::Disconnect(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWar::ReadMoveCommand(DreamMessage *mes, clientData *client)
+void BaseGame::ReadMoveCommand(DreamMessage *mes, ClientSideClient *client)
 {
 	// Key
 	client->serverFrame.key				= mes->ReadByte();
@@ -390,7 +391,7 @@ void CArmyWar::ReadMoveCommand(DreamMessage *mes, clientData *client)
 	// Read time to run command
 	client->serverFrame.msec = mes->ReadByte();
 
-	memcpy(&client->command, &client->serverFrame, sizeof(command_t));
+	memcpy(&client->command, &client->serverFrame, sizeof(ClientSideCommand));
 
 	// Fill the history array with the position we got
 	for(int f = 0; f < COMMAND_HISTORY_SIZE; f++)
@@ -404,7 +405,7 @@ void CArmyWar::ReadMoveCommand(DreamMessage *mes, clientData *client)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWar::ReadDeltaMoveCommand(DreamMessage *mes, clientData *client)
+void BaseGame::ReadDeltaMoveCommand(DreamMessage *mes, ClientSideClient *client)
 {
 	int processedFrame;
 	int flags = 0;
@@ -458,7 +459,7 @@ void CArmyWar::ReadDeltaMoveCommand(DreamMessage *mes, clientData *client)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWar::BuildDeltaMoveCommand(DreamMessage *mes, clientData *theClient)
+void BaseGame::BuildDeltaMoveCommand(DreamMessage *mes, ClientSideClient *theClient)
 {
 	int flags = 0;
 	int last = (networkClient->GetOutgoingSequence() - 1) & (COMMAND_HISTORY_SIZE-1);
@@ -484,7 +485,7 @@ void CArmyWar::BuildDeltaMoveCommand(DreamMessage *mes, clientData *theClient)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWar::RunNetwork(int msec)
+void BaseGame::RunNetwork(int msec)
 {
 	static int time = 0;
 	time += msec;

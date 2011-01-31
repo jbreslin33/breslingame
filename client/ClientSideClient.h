@@ -3,9 +3,13 @@
 
 #include "Client.h"
 
+#include "Ogre.h"
+
 #include "../dreamsock/DreamSock.h"
 //#include "../dreamsock/DreamClient.h"
 #include "../command/ClientSideCommand.h"
+
+using namespace Ogre;
 
 class DreamClient;
 
@@ -16,13 +20,13 @@ public:
 ClientSideClient();
 ~ClientSideClient();
 
-        ClientSideCommand  frame[COMMAND_HISTORY_SIZE];
+        ClientSideCommand  frame[64];
         ClientSideCommand  serverFrame;
         ClientSideCommand  command;
 
-	long 		processedFrame;
-	struct sockaddr address;
-	DreamClient* 	netClient;
+	char password[30];
+	int index;
+	Ogre::SceneNode *myNode;
 	
 	ClientSideClient* next;
 };
