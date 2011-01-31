@@ -5,7 +5,7 @@
 /* Teijo Hakala						      */
 /******************************************/
 
-
+/*
 #include "server.h"
 #include "../dreamsock/DreamMessage.h"
 #include "../dreamsock/DreamServer.h"
@@ -264,3 +264,4 @@ void CArmyWarServer::BuildDeltaMoveCommand(DreamMessage *mes, ServerSideClient *
 
 	mes->WriteByte(client->command.msec);
 }
+*/

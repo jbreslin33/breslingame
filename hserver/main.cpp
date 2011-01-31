@@ -44,10 +44,10 @@ int runningDaemon;
 
 
 #include "../dreamsock/DreamSock.h"
-#include "server.h"
+#include "../server/server.h"
 #include "../dreamsock/DreamServer.h"
 
-CArmyWarServer* game;
+Server* game;
 
 #ifdef WIN32
 
@@ -112,7 +112,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	StartLogConsole();
 
 
-	game = new CArmyWarServer();
+	game = new Server();
 
 	if(game->InitNetwork() != 0)
 	{
@@ -255,7 +255,7 @@ int main(int argc, char **argv)
 	
 	LogString("Init successful");
 
-	game = new CArmyWarServer();
+	game = new Server();
 	game->InitNetwork();
 	
 	int time, oldTime, newTime;

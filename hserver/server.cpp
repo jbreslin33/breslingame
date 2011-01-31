@@ -4,7 +4,7 @@
 /* Programming:						      */
 /* Teijo Hakala						      */
 /******************************************/
-
+/*
 #include "server.h"
 #include "../dreamsock/DreamServer.h"
 #include "../client/ServerSideClient.h"
@@ -367,3 +367,4 @@ void CArmyWarServer::Frame(int msec)
 
 	SendCommand();
 }
+*/
