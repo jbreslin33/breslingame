@@ -5,20 +5,31 @@
 /* Teijo Hakala						      */
 /******************************************/
 
-//#include "Tutorial4.h"
+#include "clientSideNetwork.h"
 
 //char serverIP[32] = "127.0.0.1";
 char serverIP[32] = "192.168.2.112";
 #include "../dreamsock/DreamClient.h"
 #include "../dreamsock/DreamSock.h"
-#include "network.h"
+#include "clientSideNetwork.h"
 #include "../basegame/baseGame.h"
+
+ClientSideNetwork::ClientSideNetwork()
+{
+
+}
+
+ClientSideNetwork::~ClientSideNetwork()
+{
+
+}
+
 
 //-----------------------------------------------------------------------------
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void BaseGame::StartConnection()
+void ClientSideNetwork::StartConnection()
 {
 //	LogString("StartConnection");
 
@@ -41,7 +52,7 @@ void BaseGame::StartConnection()
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void BaseGame::ReadPackets(void)
+void ClientSideNetwork::ReadPackets(void)
 {
 	char data[1400];
 	struct sockaddr address;
@@ -125,7 +136,7 @@ void BaseGame::ReadPackets(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void BaseGame::AddClient(int local, int ind, char *name)
+void ClientSideNetwork::AddClient(int local, int ind, char *name)
 {
 	// First get a pointer to the beginning of client list
 	ClientSideClient *list = clientList;
@@ -205,7 +216,7 @@ void BaseGame::AddClient(int local, int ind, char *name)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void BaseGame::RemoveClient(int ind)
+void ClientSideNetwork::RemoveClient(int ind)
 {
 	ClientSideClient *list = clientList;
 	ClientSideClient *prev = NULL;
@@ -260,7 +271,7 @@ void BaseGame::RemoveClient(int ind)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void BaseGame::RemoveClients(void)
+void ClientSideNetwork::RemoveClients(void)
 {
 	ClientSideClient *list = clientList;
 	ClientSideClient *next;
@@ -284,7 +295,7 @@ void BaseGame::RemoveClients(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void BaseGame::SendCommand(void)
+void ClientSideNetwork::SendCommand(void)
 {
 	if(networkClient->GetConnectionState() != DREAMSOCK_CONNECTED)
 		return;
@@ -321,7 +332,7 @@ void BaseGame::SendCommand(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void BaseGame::SendRequestNonDeltaFrame(void)
+void ClientSideNetwork::SendRequestNonDeltaFrame(void)
 {
 	char data[1400];
 	DreamMessage message;
@@ -337,7 +348,7 @@ void BaseGame::SendRequestNonDeltaFrame(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void BaseGame::Connect(void)
+void ClientSideNetwork::Connect(void)
 {
 	if(init)
 	{
@@ -345,7 +356,7 @@ void BaseGame::Connect(void)
 		return;
 	}
 
-	LogString("BaseGame::Connect");
+	LogString("ClientSideNetwork::Connect");
 
 	init = true;
 
@@ -356,12 +367,12 @@ void BaseGame::Connect(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void BaseGame::Disconnect(void)
+void ClientSideNetwork::Disconnect(void)
 {
 	if(!init)
 		return;
 
-	LogString("BaseGame::Disconnect");
+	LogString("ClientSideNetwork::Disconnect");
 
 	init = false;
 	localClient = NULL;
@@ -374,7 +385,7 @@ void BaseGame::Disconnect(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void BaseGame::ReadMoveCommand(DreamMessage *mes, ClientSideClient *client)
+void ClientSideNetwork::ReadMoveCommand(DreamMessage *mes, ClientSideClient *client)
 {
 	// Key
 	client->serverFrame.key				= mes->ReadByte();
@@ -405,7 +416,7 @@ void BaseGame::ReadMoveCommand(DreamMessage *mes, ClientSideClient *client)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void BaseGame::ReadDeltaMoveCommand(DreamMessage *mes, ClientSideClient *client)
+void ClientSideNetwork::ReadDeltaMoveCommand(DreamMessage *mes, ClientSideClient *client)
 {
 	int processedFrame;
 	int flags = 0;
@@ -459,7 +470,7 @@ void BaseGame::ReadDeltaMoveCommand(DreamMessage *mes, ClientSideClient *client)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void BaseGame::BuildDeltaMoveCommand(DreamMessage *mes, ClientSideClient *theClient)
+void ClientSideNetwork::BuildDeltaMoveCommand(DreamMessage *mes, ClientSideClient *theClient)
 {
 	int flags = 0;
 	int last = (networkClient->GetOutgoingSequence() - 1) & (COMMAND_HISTORY_SIZE-1);
@@ -485,7 +496,7 @@ void BaseGame::BuildDeltaMoveCommand(DreamMessage *mes, ClientSideClient *theCli
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void BaseGame::RunNetwork(int msec)
+void ClientSideNetwork::RunNetwork(int msec)
 {
 	static int time = 0;
 	time += msec;
