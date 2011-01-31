@@ -1,3 +1,4 @@
+/*
 #ifndef SERVER_H
 #define SERVER_H
 
@@ -11,6 +12,7 @@ class DreamClient;
 class DreamServer;
 class DreamMessage;
 class ServerSideClient;
+*/
 /*
 typedef struct
 {
@@ -48,7 +50,7 @@ typedef struct ServerSideClient
 	ServerSideClient *next;
 } ServerSideClient;
 */
-
+/*
 class CArmyWarServer
 {
 public:
@@ -103,3 +105,4 @@ public:
 };
 
 #endif
+*/

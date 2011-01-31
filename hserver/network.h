@@ -1,3 +1,4 @@
+/*
 #ifndef NETWORK_H
 #define NETWORK_H
 
@@ -30,3 +31,4 @@ typedef struct clientLoginData
 } clientLoginData;
 
 #endif
+*/
