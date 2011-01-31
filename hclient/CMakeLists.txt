@@ -91,8 +91,7 @@ endif()
 set(HDRS
 	#Basic Game 
 	../baseapplication/BaseApplication.h
-	./baseGame.h
-	./network.h
+	../basegame/baseGame.h
 	
 	#DreamSock
 	../dreamsock/DreamClient.h
@@ -111,6 +110,11 @@ set(HDRS
 	#client
 	../client/Client.h
 	../client/ClientSideClient.h
+
+	#network
+	../network/network.h
+	../network/clientSideNetwork.h
+	
 )
 
 
@@ -129,8 +133,7 @@ endif(WIN32)
 set(SRCS
 	#Basic Game
 	../baseapplication/BaseApplication.cpp
-	./network.cpp
-	./baseGame.cpp
+	../basegame/baseGame.cpp
 
 	#DreamSock
 	../dreamsock/DreamClient.cpp
@@ -149,6 +152,10 @@ set(SRCS
 	#client
 	../client/Client.cpp
 	../client/ClientSideClient.cpp
+	
+	#network
+	../network/network.cpp
+	../network/clientSideNetwork.cpp
 )
 if(UNIX)
 set(HDRS
