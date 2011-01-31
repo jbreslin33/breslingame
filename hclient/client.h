@@ -1,10 +1,16 @@
+/*
 #ifndef CLIENT_H
 #define CLIENT_H
 
 #include "../baseapplication/BaseApplication.h"
+#include "../math/Vector3D.h"
+#include "../command/ClientSideCommand.h"
+#include "../client/ClientSideClient.h"
+
 //#include "Tutorial4.h"
 class DreamMessage;
 class DreamClient;
+
 
 extern bool keys[256];
 
@@ -21,45 +27,28 @@ extern bool keys[256];
 #define VK_SPACE 5
 #endif
 
-
-
-typedef struct
+/*
+typedef struct ClientSideClient
 {
-	float x;
-	float y;
-} VECTOR2D;
+	ClientSideCommand	frame[64];	// frame history
+	ClientSideCommand	serverFrame;					// the latest frame from server
+	ClientSideCommand	command;						// current frame's commands
 
-typedef struct
-{
-	int			key;
-
-	VECTOR2D	vel;
-	VECTOR2D	origin;
-	VECTOR2D	predictedOrigin;
-
-	int			msec;
-} command_t;
-
-typedef struct clientData
-{
-	command_t	frame[64];	// frame history
-	command_t	serverFrame;					// the latest frame from server
-	command_t	command;						// current frame's commands
-
-	int			index;
-
-	VECTOR2D	startPos;
-	bool		team;
-	char		nickname[30];
+.int			index;
+.
+.	Vector3D	startPos;
+.	bool		team;
+.	char		nickname[30];
 	char		password[30];
 
 	Ogre::SceneNode *myNode;
 
-	clientData	*next;
-} clientData;
-
+	ClientSideClient	*next;
+} ClientSideClient;
+*/
+/*
 // The main application class interface
-class CArmyWar : public BaseApplication
+class BaseGame : public BaseApplication
 {
 private:
 	// Methods
@@ -68,7 +57,7 @@ private:
 	void	DrawMap(void);
 	
 	void	CheckPredictionError(int a);
-	void	CalculateVelocity(command_t *command, float frametime);
+	void	CalculateVelocity(ClientSideCommand *command, float frametime);
 	void	PredictMovement(int prevFrame, int curFrame);
 	void	MoveObjects(void);
 
@@ -80,9 +69,9 @@ private:
 	void	ReadPackets(void);
 	void	SendCommand(void);
 	void	SendRequestNonDeltaFrame(void);
-	void	ReadMoveCommand(DreamMessage *mes, clientData *client);
-	void	ReadDeltaMoveCommand(DreamMessage *mes, clientData *client);
-	void	BuildDeltaMoveCommand(DreamMessage *mes, clientData *theClient);
+	void	ReadMoveCommand(DreamMessage *mes, ClientSideClient *client);
+	void	ReadDeltaMoveCommand(DreamMessage *mes, ClientSideClient *client);
+	void	BuildDeltaMoveCommand(DreamMessage *mes, ClientSideClient *theClient);
 
 	bool processUnbufferedInput(const Ogre::FrameEvent& evt);
 
@@ -92,11 +81,11 @@ private:
 	// Network variables
 	DreamClient *networkClient;
 
-	clientData *clientList;			// Client list
-	clientData *localClient;		// Pointer to the local client in the client list
+	ClientSideClient *clientList;			// Client list
+	ClientSideClient *localClient;		// Pointer to the local client in the client list
 	int clients;
 
-	clientData inputClient;			// Handles all keyboard input
+	ClientSideClient inputClient;			// Handles all keyboard input
 
 	float frametime;
 
@@ -108,8 +97,8 @@ private:
 
 
 public:
-	CArmyWar();
-	~CArmyWar();
+	BaseGame();
+	~BaseGame();
 
     void createPlayer(int index);
     virtual void createScene(void);
@@ -134,12 +123,13 @@ public:
 	void	SetGameIndex(int index)	{ gameIndex = index; }
 	int		GetGameIndex(void)		{ return gameIndex; }
 
-	clientData *GetClientList(void) { return clientList; }
+	ClientSideClient *GetClientList(void) { return clientList; }
 
-	clientData *GetClientPointer(int index);
+	ClientSideClient *GetClientPointer(int index);
 
 
-	CArmyWar *next;
+	BaseGame *next;
 };
 
 #endif
+*/

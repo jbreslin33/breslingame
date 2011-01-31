@@ -87,12 +87,11 @@ endif()
 
 # SOURCE WINDOWS
 
-if(WIN32)
 
 set(HDRS
 	#Basic Game 
 	../baseapplication/BaseApplication.h
-	./client.h
+	./baseGame.h
 	./network.h
 	
 	#DreamSock
@@ -102,63 +101,36 @@ set(HDRS
 	../dreamsock/DreamServer.h
 	../dreamsock/DreamSock.h
 	
-	../dreamsock/DreamWinSock.h
-	
-)
- 
-set(SRCS
-	#Basic Game
-	../baseapplication/BaseApplication.cpp
-	./client.cpp
-	./network.cpp
-	./Tutorial4.cpp
+	#math	
+	../math/Vector3D.h
 
-	#DreamSock
-	../dreamsock/DreamClient.cpp
-	../dreamsock/DreamConsole.cpp
-	../dreamsock/DreamMessage.cpp
-	../dreamsock/DreamServer.cpp
-	../dreamsock/DreamSock.cpp
+	#command
+	../command/Command.h
+	../command/ClientSideCommand.h	
 	
-	../Dreamsock/DreamWinSock.cpp
-
-	#math
-	../math/Vector3D.cpp
+	#client
+	../client/Client.h
+	../client/ClientSideClient.h
 )
 
+
+if(UNIX)
+set(HDRS
+        ../dreamsock/DreamLinuxSock.h
+)
+endif(UNIX)
+if(WIN32)
+set(HDRS
+        ../dreamsock/DreamWinSock.h
+)
 endif(WIN32)
 
 
-# SOURCE UNIX
-
-if(UNIX)
-
-set(HDRS
-	#Basic Game 
-	../baseapplication/BaseApplication.h
-	./client.h
-	./network.h
-	
-	#DreamSock
-	../dreamsock/DreamClient.h
-	../dreamsock/DreamConsole.h
-	../dreamsock/DreamMessage.h
-	../dreamsock/DreamServer.h
-	../dreamsock/DreamSock.h
-	
-	../dreamsock/DreamLinuxSock.h
-	
-	#math
-	../math/Vector3D.h
-)
- 
 set(SRCS
-	
 	#Basic Game
 	../baseapplication/BaseApplication.cpp
-	./client.cpp
 	./network.cpp
-	./Tutorial4.cpp
+	./baseGame.cpp
 
 	#DreamSock
 	../dreamsock/DreamClient.cpp
@@ -167,13 +139,27 @@ set(SRCS
 	../dreamsock/DreamServer.cpp
 	../dreamsock/DreamSock.cpp
 	
-	../dreamsock/DreamLinuxSock.cpp
-	
-	
+	#math
+	../math/Vector3D.cpp
+
+	#command
+	../command/Command.cpp
+	../command/ClientSideCommand.cpp
+
+	#client
+	../client/Client.cpp
+	../client/ClientSideClient.cpp
 )
-
+if(UNIX)
+set(HDRS
+        ../dreamsock/DreamLinuxSock.cpp
+)
 endif(UNIX)
-
+if(WIN32)
+set(HDRS
+        ../dreamsock/DreamWinSock.cpp
+)
+endif(WIN32)
  
 
  

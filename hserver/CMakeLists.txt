@@ -102,12 +102,10 @@ set(HDRS
 
 	#command
 	../command/Command.h
-	../command/ClientSideCommand.h
 	../command/ServerSideCommand.h
 
 	#client
 	../client/Client.h
-	../client/ClientSideClient.h
 	../client/ServerSideClient.h
 
 	#network
@@ -146,12 +144,10 @@ set(SRCS
 
 	#command
 	../command/Command.cpp
-	../command/ClientSideCommand.cpp
 	../command/ServerSideCommand.cpp
 
 	#client
 	../client/Client.cpp
-	../client/ClientSideClient.cpp
 	../client/ServerSideClient.cpp
 	
 	#network
