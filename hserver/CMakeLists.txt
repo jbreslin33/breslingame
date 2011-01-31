@@ -89,8 +89,6 @@ endif()
 set(HDRS
 	#jserver
 	./main.h
-	./network.h
-	./server.h
 	
 	#dreamSock
 	../dreamsock/DreamClient.h
@@ -135,8 +133,6 @@ endif(WIN32)
 set(SRCS
 	#jserver
 	./main.cpp
-	./network.cpp
-	./server.cpp
 
 	#dreamSock
 	../dreamsock/DreamClient.cpp
