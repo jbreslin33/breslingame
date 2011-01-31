@@ -1,6 +1,6 @@
 #include "network.h"
 
-#include "../server/server.h"
+#include "../game/serverSideGame.h"
 #include "../dreamsock/DreamMessage.h"
 #include "../dreamsock/DreamServer.h"
 #include "../dreamsock/DreamClient.h"
@@ -17,7 +17,7 @@
 
 
 
-Network::Network(Server* server)
+Network::Network(ServerSideGame* server)
 {
 	mServer = server;
 }
