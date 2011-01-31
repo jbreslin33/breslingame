@@ -81,11 +81,12 @@ public:
 	void	RunNetwork(int msec);
 	
 	// Network.cpp
+/*
 	void	StartConnection();
 	void	Connect(void);
 	void	Disconnect(void);
 	void	SendStartGame(void);
-
+*/
 	void	SetName(char *n)		{ strcpy(gamename, n); }
 	char	*GetName(void)			{ return gamename; }
 

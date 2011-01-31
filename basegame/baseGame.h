@@ -64,13 +64,14 @@ private:
 	void	RemoveClients(void);
 
 	// Network.cpp
-	void	ReadPackets(void);
+/*	
+void	ReadPackets(void);
 	void	SendCommand(void);
 	void	SendRequestNonDeltaFrame(void);
 	void	ReadMoveCommand(DreamMessage *mes, ClientSideClient *client);
 	void	ReadDeltaMoveCommand(DreamMessage *mes, ClientSideClient *client);
 	void	BuildDeltaMoveCommand(DreamMessage *mes, ClientSideClient *theClient);
-
+*/
 	bool processUnbufferedInput(const Ogre::FrameEvent& evt);
 
 
