@@ -12,7 +12,7 @@ char serverIP[32] = "192.168.2.112";
 #include "../dreamsock/DreamClient.h"
 #include "../dreamsock/DreamSock.h"
 #include "network.h"
-#include "baseGame.h"
+#include "../basegame/baseGame.h"
 
 //-----------------------------------------------------------------------------
 // Name: empty()
