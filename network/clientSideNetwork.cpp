@@ -9,13 +9,17 @@
 
 //char serverIP[32] = "127.0.0.1";
 char serverIP[32] = "192.168.2.112";
+
+#include "../game/ClientSideGame.h"
 #include "../dreamsock/DreamClient.h"
 #include "../dreamsock/DreamSock.h"
 #include "clientSideNetwork.h"
 #include "../basegame/baseGame.h"
 
-ClientSideNetwork::ClientSideNetwork()
+ClientSideNetwork::ClientSideNetwork(ClientSideGame* clientSideGame)
 {
+	mClientSideGame = clientSideGame;
+	StartConnection();
 
 }
 
@@ -35,7 +39,7 @@ void ClientSideNetwork::StartConnection()
 
 	//gameIndex = ind;
 
-	int ret = networkClient->Initialise("", serverIP, 30004);
+	int ret = mClientSideGame->networkClient->Initialise("", serverIP, 30004);
 
 	if(ret == DREAMSOCK_CLIENT_ERROR)
 	{
@@ -69,7 +73,7 @@ void ClientSideNetwork::ReadPackets(void)
 	DreamMessage mes;
 	mes.Init(data, sizeof(data));
 
-	while(ret = networkClient->GetPacket(mes.data, &address))
+	while(ret = mClientSideGame->networkClient->GetPacket(mes.data, &address))
 	{
 		mes.SetSize(ret);
 		mes.BeginReading();
@@ -83,7 +87,7 @@ void ClientSideNetwork::ReadPackets(void)
 			ind		= mes.ReadByte();
 			strcpy(name, mes.ReadString());
 
-			AddClient(local, ind, name);
+			mClientSideGame->AddClient(local, ind, name);
 			break;
 
 		case DREAMSOCK_MES_REMOVECLIENT:
@@ -91,7 +95,7 @@ void ClientSideNetwork::ReadPackets(void)
 
 			LogString("Got removeclient %d message", ind);
 
-			RemoveClient(ind);
+			mClientSideGame->RemoveClient(ind);
 
 			break;
 
@@ -100,7 +104,7 @@ void ClientSideNetwork::ReadPackets(void)
 			mes.ReadShort();
 			mes.ReadShort();
 
-			for(clList = clientList; clList != NULL; clList = clList->next)
+			for(clList = mClientSideGame->clientList; clList != NULL; clList = clList->next)
 			{
 //				LogString("Reading DELTAFRAME for client %d", clList->index);
 				ReadDeltaMoveCommand(&mes, clList);
@@ -113,9 +117,9 @@ void ClientSideNetwork::ReadPackets(void)
 			mes.ReadShort();
 			mes.ReadShort();
 
-			clList = clientList;
+			clList = mClientSideGame->clientList;
 
-			for(clList = clientList; clList != NULL; clList = clList->next)
+			for(clList = mClientSideGame->clientList; clList != NULL; clList = clList->next)
 			{
 				LogString("Reading NONDELTAFRAME for client %d", clList->index);
 				ReadMoveCommand(&mes, clList);
@@ -132,164 +136,6 @@ void ClientSideNetwork::ReadPackets(void)
 	}
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
-void ClientSideNetwork::AddClient(int local, int ind, char *name)
-{
-	// First get a pointer to the beginning of client list
-	ClientSideClient *list = clientList;
-	ClientSideClient *prev;
-
-	LogString("App: Client: Adding client with index %d", ind);
-
-	// No clients yet, adding the first one
-	if(clientList == NULL)
-	{
-		LogString("App: Client: Adding first client");
-
-		clientList = (ClientSideClient *) calloc(1, sizeof(ClientSideClient));
-
-		if(local)
-		{
-			LogString("App: Client: This one is local");
-			localClient = clientList;
-		}
-
-		clientList->index = ind;
-		strcpy(clientList->nickname, name);
-
-		if(clients % 2 == 0) 
-			createPlayer(ind);
-		else
-			createPlayer(ind);
-
-		clientList->next = NULL;
-	}
-	else
-	{
-		LogString("App: Client: Adding another client");
-
-		prev = list;
-		list = clientList->next;
-
-		while(list != NULL)
-		{
-			prev = list;
-			list = list->next;
-		}
-
-		list = (ClientSideClient *) calloc(1, sizeof(ClientSideClient));
-
-		if(local)
-		{
-			LogString("App: Client: This one is local");
-			localClient = list;
-		}
-
-		list->index = ind;
-		strcpy(list->nickname, name);
-
-		clientList->next = NULL;
-
-		list->next = NULL;
-		prev->next = list;
-
-		if(clients % 2 == 0) 
-			createPlayer(ind);
-		else
-			createPlayer(ind);
-
-		
-	}
-
-	clients++;
-
-	// If we just joined the game, request a non-delta compressed frame
-	if(local)
-		SendRequestNonDeltaFrame();
-
-}
-
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
-void ClientSideNetwork::RemoveClient(int ind)
-{
-	ClientSideClient *list = clientList;
-	ClientSideClient *prev = NULL;
-	ClientSideClient *next = NULL;
-
-	// Look for correct client and update list
-	for( ; list != NULL; list = list->next)
-	{
-		if(list->index == ind)
-		{
-			if(prev != NULL)
-			{
-				prev->next = list->next;
-			}
-
-			break;
-		}
-
-		prev = list;
-	}
-
-	// First entry
-	if(list == clientList)
-	{
-		if(list)
-		{
-			next = list->next;
-			free(list);
-		}
-
-		list = NULL;
-		clientList = next;
-	}
-
-	// Other
-	else
-	{
-		if(list)
-		{
-			next = list->next;
-			free(list);
-		}
-
-		list = next;
-	}
-
-	clients--;
-
-}
-
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc: 
-//-----------------------------------------------------------------------------
-void ClientSideNetwork::RemoveClients(void)
-{
-	ClientSideClient *list = clientList;
-	ClientSideClient *next;
-
-	while(list != NULL)
-	{
-		if(list)
-		{
-			next = list->next;
-			free(list);
-		}
-
-		list = next;
-	}
-
-	clientList = NULL;
-	clients = 0;
-}
 
 //-----------------------------------------------------------------------------
 // Name: empty()
@@ -297,28 +143,28 @@ void ClientSideNetwork::RemoveClients(void)
 //-----------------------------------------------------------------------------
 void ClientSideNetwork::SendCommand(void)
 {
-	if(networkClient->GetConnectionState() != DREAMSOCK_CONNECTED)
+	if(mClientSideGame->networkClient->GetConnectionState() != DREAMSOCK_CONNECTED)
 		return;
 
 	DreamMessage message;
 	char data[1400];
 
-	int i = networkClient->GetOutgoingSequence() & (COMMAND_HISTORY_SIZE-1);
+	int i = mClientSideGame->networkClient->GetOutgoingSequence() & (COMMAND_HISTORY_SIZE-1);
 
 	message.Init(data, sizeof(data));
 	message.WriteByte(USER_MES_FRAME);						// type
-	message.AddSequences(networkClient);					// sequences
+	message.AddSequences(mClientSideGame->networkClient);					// sequences
 
 	// Build delta-compressed move command
-	BuildDeltaMoveCommand(&message, &inputClient);
+	BuildDeltaMoveCommand(&message, &mClientSideGame->inputClient);
 
 	// Send the packet
-	networkClient->SendPacket(&message);
+	mClientSideGame->networkClient->SendPacket(&message);
 
 	// Store the command to the input client's history
-	memcpy(&inputClient.frame[i], &inputClient.command, sizeof(ClientSideCommand));
+	memcpy(&mClientSideGame->inputClient.frame[i], &mClientSideGame->inputClient.command, sizeof(ClientSideCommand));
 
-	ClientSideClient *clList = clientList;
+	ClientSideClient *clList = mClientSideGame->clientList;
 
 	// Store the commands to the clients' history
 	for( ; clList != NULL; clList = clList->next)
@@ -339,9 +185,9 @@ void ClientSideNetwork::SendRequestNonDeltaFrame(void)
 	message.Init(data, sizeof(data));
 
 	message.WriteByte(USER_MES_NONDELTAFRAME);
-	message.AddSequences(networkClient);
+	message.AddSequences(mClientSideGame->networkClient);
 
-	networkClient->SendPacket(&message);
+	mClientSideGame->networkClient->SendPacket(&message);
 }
 
 //-----------------------------------------------------------------------------
@@ -350,7 +196,7 @@ void ClientSideNetwork::SendRequestNonDeltaFrame(void)
 //-----------------------------------------------------------------------------
 void ClientSideNetwork::Connect(void)
 {
-	if(init)
+	if(mClientSideGame->init)
 	{
 		LogString("ArmyWar already initialised");
 		return;
@@ -358,9 +204,9 @@ void ClientSideNetwork::Connect(void)
 
 	LogString("ClientSideNetwork::Connect");
 
-	init = true;
+	mClientSideGame->init = true;
 
-	networkClient->SendConnect("myname");
+	mClientSideGame->networkClient->SendConnect("myname");
 }
 
 //-----------------------------------------------------------------------------
@@ -369,16 +215,16 @@ void ClientSideNetwork::Connect(void)
 //-----------------------------------------------------------------------------
 void ClientSideNetwork::Disconnect(void)
 {
-	if(!init)
+	if(!mClientSideGame->init)
 		return;
 
 	LogString("ClientSideNetwork::Disconnect");
 
-	init = false;
-	localClient = NULL;
-	memset(&inputClient, 0, sizeof(ClientSideClient));
+	mClientSideGame->init = false;
+	mClientSideGame->localClient = NULL;
+	memset(&mClientSideGame->inputClient, 0, sizeof(ClientSideClient));
 
-	networkClient->SendDisconnect();
+	mClientSideGame->networkClient->SendDisconnect();
 }
 
 //-----------------------------------------------------------------------------
@@ -447,9 +293,9 @@ void ClientSideNetwork::ReadDeltaMoveCommand(DreamMessage *mes, ClientSideClient
 		client->serverFrame.vel.x = mes->ReadFloat();
 		client->serverFrame.vel.y = mes->ReadFloat();
 
-		if(client == localClient)
+		if(client == mClientSideGame->localClient)
 		{
-			CheckPredictionError(processedFrame);
+			mClientSideGame->CheckPredictionError(processedFrame);
 		}
 
 		else
@@ -473,7 +319,7 @@ void ClientSideNetwork::ReadDeltaMoveCommand(DreamMessage *mes, ClientSideClient
 void ClientSideNetwork::BuildDeltaMoveCommand(DreamMessage *mes, ClientSideClient *theClient)
 {
 	int flags = 0;
-	int last = (networkClient->GetOutgoingSequence() - 1) & (COMMAND_HISTORY_SIZE-1);
+	int last = (mClientSideGame->networkClient->GetOutgoingSequence() - 1) & (COMMAND_HISTORY_SIZE-1);
 
 	// Check what needs to be updated
 	if(theClient->frame[last].key != theClient->command.key)
@@ -505,15 +351,15 @@ void ClientSideNetwork::RunNetwork(int msec)
 	if(time < (1000 / 60))
 		return;
 
-	frametime = time / 1000.0f;
+	mClientSideGame->frametime = time / 1000.0f;
 	time = 0;
 
 	// Read packets from server, and send new commands
 	ReadPackets();
 	SendCommand();
 
-	int ack = networkClient->GetIncomingAcknowledged();
-	int current = networkClient->GetOutgoingSequence();
+	int ack = mClientSideGame->networkClient->GetIncomingAcknowledged();
+	int current = mClientSideGame->networkClient->GetOutgoingSequence();
 
 	// Check that we haven't gone too far
 	if(current - ack > COMMAND_HISTORY_SIZE)
@@ -525,8 +371,8 @@ void ClientSideNetwork::RunNetwork(int msec)
 		int prevframe = (a-1) & (COMMAND_HISTORY_SIZE-1);
 		int frame = a & (COMMAND_HISTORY_SIZE-1);
 
-		PredictMovement(prevframe, frame);
+		mClientSideGame->PredictMovement(prevframe, frame);
 	}
 
-	MoveObjects();
+	mClientSideGame->MoveObjects();
 }

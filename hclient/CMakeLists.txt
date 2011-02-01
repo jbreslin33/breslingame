@@ -93,6 +93,10 @@ set(HDRS
 	../baseapplication/BaseApplication.h
 	../basegame/baseGame.h
 	
+	#Game
+	../game/gameh.h
+	../game/ClientSideGame.h
+	
 	#DreamSock
 	../dreamsock/DreamClient.h
 	../dreamsock/DreamConsole.h
@@ -131,9 +135,13 @@ endif(WIN32)
 
 
 set(SRCS
-	#Basic Game
+	#Base Game
 	../baseapplication/BaseApplication.cpp
 	../basegame/baseGame.cpp
+
+	#Game
+	../game/game.cpp
+	../game/ClientSideGame.cpp
 
 	#DreamSock
 	../dreamsock/DreamClient.cpp

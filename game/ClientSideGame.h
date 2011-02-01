@@ -1,6 +1,7 @@
 #ifndef CLIENTSIDEGAME_H
 #define CLIENTSIDEGAME_H
 
+#include "game.h"
 #include "../math/Vector3D.h"
 #include "../command/ClientSideCommand.h"
 #include "../client/ClientSideClient.h"
@@ -8,10 +9,8 @@
 //#include "Tutorial4.h"
 class DreamMessage;
 class DreamClient;
-
-
-extern bool keys[256];
-
+class ClientSideNetwork;
+class BaseGame;
 
 #ifdef WIN32
         //do nothing
@@ -28,10 +27,7 @@ extern bool keys[256];
 // The main application class interface
 class ClientSideGame : public Game
 {
-private:
-	// Methods
-
-	// Client.cpp
+public:
 	void	DrawMap(void);
 	
 	void	CheckPredictionError(int a);
@@ -43,12 +39,8 @@ private:
 	void	RemoveClient(int index);
 	void	RemoveClients(void);
 
-	bool    processUnbufferedInput(const Ogre::FrameEvent& evt);
-
-	// Variables
-
-	// Network variables
 	DreamClient *networkClient;
+	ClientSideNetwork* mClientSideNetwork;
 
 	ClientSideClient *clientList;			// Client list
 	ClientSideClient *localClient;		// Pointer to the local client in the client list
@@ -61,32 +53,15 @@ private:
 	char gamename[32];
 	bool init;
 
-	//bool mapdata[100][100];
 	int gameIndex;
 
-
-public:
-	ClientSideGame();
+	ClientSideGame(BaseGame* baseGame);
 	~ClientSideGame();
 
-    void createPlayer(int index);
-    virtual void createScene(void);
-    virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
-    virtual bool keyPressed( const OIS::KeyEvent &arg );
-
-	// Client.cpp
 	void	Shutdown(void);
 	void	CheckKeys(void);
 	void	Frame(void);
-	void	RunNetwork(int msec);
 	
-	// Network.cpp
-/*
-	void	StartConnection();
-	void	Connect(void);
-	void	Disconnect(void);
-	void	SendStartGame(void);
-*/
 	void	SetName(char *n)		{ strcpy(gamename, n); }
 	char	*GetName(void)			{ return gamename; }
 
@@ -97,8 +72,9 @@ public:
 
 	ClientSideClient *GetClientPointer(int index);
 
+	ClientSideGame *next;
 
-	BaseGame *next;
+	BaseGame* mBaseGame;
 };
 
 #endif
