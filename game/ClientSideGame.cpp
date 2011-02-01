@@ -1,14 +1,21 @@
 //#include "Tutorial4.h"
-#include "baseGame.h"
-#include "network.h"
+//#include "baseGame.h"
+//#include "network.h"
+#include "../game/ClientSideGame.h"
 #include "../dreamsock/DreamClient.h"
+#include "../network/clientSideNetwork.h"
+#include "../basegame/baseGame.h"
 
-ClientSideGame* game;
-bool keys[256];
-
-
-ClientSideGame::ClientSideGame()
+ClientSideGame::ClientSideGame(BaseGame* baseGame)
 {
+
+	mBaseGame = baseGame;
+
+
+	mClientSideNetwork = new ClientSideNetwork(this);
+
+	mClientSideNetwork->StartConnection();
+
 	networkClient	= new DreamClient();
 	clientList		= NULL;
 	localClient		= NULL;
@@ -40,7 +47,7 @@ ClientSideGame::~ClientSideGame()
 //-----------------------------------------------------------------------------
 void ClientSideGame::Shutdown(void)
 {
-	Disconnect();
+	mClientSideNetwork->Disconnect();
 }
 
 //-----------------------------------------------------------------------------
@@ -66,29 +73,29 @@ void ClientSideGame::CheckKeys(void)
 {
 	inputClient.command.key = 0;
 
-	if(keys[VK_ESCAPE])
+	if(mBaseGame->keys[VK_ESCAPE])
 	{
 		Shutdown();
 
-		keys[VK_ESCAPE] = false;
+		mBaseGame->keys[VK_ESCAPE] = false;
 	}
 
-	if(keys[VK_DOWN])
+	if(mBaseGame->keys[VK_DOWN])
 	{
 		inputClient.command.key |= KEY_DOWN;
 	}
 
-	if(keys[VK_UP])
+	if(mBaseGame->keys[VK_UP])
 	{
 		inputClient.command.key |= KEY_UP;
 	}
 
-	if(keys[VK_LEFT])
+	if(mBaseGame->keys[VK_LEFT])
 	{
 		inputClient.command.key |= KEY_LEFT;
 	}
 
-	if(keys[VK_RIGHT])
+	if(mBaseGame->keys[VK_RIGHT])
 	{
 		inputClient.command.key |= KEY_RIGHT;
 	}
@@ -240,129 +247,161 @@ void ClientSideGame::MoveObjects(void)
 }
 
 
-void ClientSideGame::createPlayer(int index)
+//-----------------------------------------------------------------------------
+// Name: empty()
+// Desc: 
+//-----------------------------------------------------------------------------
+void ClientSideGame::AddClient(int local, int ind, char *name)
 {
-	Ogre::Entity* NinjaEntity = mSceneMgr->createEntity("ninja.mesh");
-	//Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "ogrehead.mesh");
-	Ogre::SceneNode* node = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-    node->attachObject(NinjaEntity);
-    //node->setPosition(Ogre::Vector3(10, 10, 10));
+	// First get a pointer to the beginning of client list
+	ClientSideClient *list = clientList;
+	ClientSideClient *prev;
 
-    ClientSideClient *client = game->GetClientPointer(index);
+	LogString("App: Client: Adding client with index %d", ind);
 
-	client->myNode = node;
-}
-//-------------------------------------------------------------------------------------
-void ClientSideGame::createScene(void)
-{
-    mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
- 
-    Ogre::Light* pointLight = mSceneMgr->createLight("pointLight");
-    pointLight->setType(Ogre::Light::LT_POINT);
-    pointLight->setPosition(Ogre::Vector3(250, 150, 250));
-    pointLight->setDiffuseColour(Ogre::ColourValue::White);
-    pointLight->setSpecularColour(Ogre::ColourValue::White);
-}
-//-------------------------------------------------------------------------------------
-bool ClientSideGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
-{
- 
-    if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
-    {
-		keys[VK_UP] = true;
-    }
+	// No clients yet, adding the first one
+	if(clientList == NULL)
+	{
+		LogString("App: Client: Adding first client");
+
+		clientList = (ClientSideClient *) calloc(1, sizeof(ClientSideClient));
+
+		if(local)
+		{
+			LogString("App: Client: This one is local");
+			localClient = clientList;
+		}
+
+		clientList->index = ind;
+		strcpy(clientList->nickname, name);
+
+		if(clients % 2 == 0) 
+			mBaseGame->createPlayer(ind);
+		else
+			mBaseGame->createPlayer(ind);
+
+		clientList->next = NULL;
+	}
 	else
 	{
-        keys[VK_UP] = false;
-	}
-    if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
-    {
-		keys[VK_DOWN] = true;
-    }
-	else
-	{
-        keys[VK_DOWN] = false;
+		LogString("App: Client: Adding another client");
+
+		prev = list;
+		list = clientList->next;
+
+		while(list != NULL)
+		{
+			prev = list;
+			list = list->next;
+		}
+
+		list = (ClientSideClient *) calloc(1, sizeof(ClientSideClient));
+
+		if(local)
+		{
+			LogString("App: Client: This one is local");
+			localClient = list;
+		}
+
+		list->index = ind;
+		strcpy(list->nickname, name);
+
+		clientList->next = NULL;
+
+		list->next = NULL;
+		prev->next = list;
+
+		if(clients % 2 == 0) 
+			mBaseGame->createPlayer(ind);
+		else
+			mBaseGame->createPlayer(ind);
+
+		
 	}
 
-    if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
-    {
-		keys[VK_LEFT] = true;
-    }
-	else
-	{
-        keys[VK_LEFT] = false;
-	}
-    if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
-    {
-		keys[VK_RIGHT] = true;
-    }
-	else
-	{
-        keys[VK_RIGHT] = false;
-	}
-         
-    return true;
+	clients++;
+
+	// If we just joined the game, request a non-delta compressed frame
+	if(local)
+		mClientSideNetwork->SendRequestNonDeltaFrame();
+
 }
-//-------------------------------------------------------------------------------------
-bool ClientSideGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
+
+//-----------------------------------------------------------------------------
+// Name: empty()
+// Desc: 
+//-----------------------------------------------------------------------------
+void ClientSideGame::RemoveClient(int ind)
 {
-    bool ret = BaseApplication::frameRenderingQueued(evt);
- 
-    if(!processUnbufferedInput(evt)) return false;
+	ClientSideClient *list = clientList;
+	ClientSideClient *prev = NULL;
+	ClientSideClient *next = NULL;
 
-	if(game != NULL)
+	// Look for correct client and update list
+	for( ; list != NULL; list = list->next)
 	{
-		game->RunNetwork(evt.timeSinceLastFrame * 1000);
-		game->CheckKeys();
-		//game->Frame();
+		if(list->index == ind)
+		{
+			if(prev != NULL)
+			{
+				prev->next = list->next;
+			}
+
+			break;
+		}
+
+		prev = list;
 	}
- 
-    return ret;
+
+	// First entry
+	if(list == clientList)
+	{
+		if(list)
+		{
+			next = list->next;
+			free(list);
+		}
+
+		list = NULL;
+		clientList = next;
+	}
+
+	// Other
+	else
+	{
+		if(list)
+		{
+			next = list->next;
+			free(list);
+		}
+
+		list = next;
+	}
+
+	clients--;
+
 }
-//-------------------------------------------------------------------------------------
-bool ClientSideGame::keyPressed( const OIS::KeyEvent &arg )
+
+//-----------------------------------------------------------------------------
+// Name: empty()
+// Desc: 
+//-----------------------------------------------------------------------------
+void ClientSideGame::RemoveClients(void)
 {
-	BaseApplication::keyPressed(arg);
-    	Ogre::LogManager::getSingletonPtr()->logMessage("*** keyPressed ClientSideGame n***");
-return true;
-} 
- 
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-#define WIN32_LEAN_AND_MEAN
-#include "windows.h"
-#endif
- 
-#ifdef __cplusplus
-extern "C" {
-#endif
- 
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-    INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT )
-#else
-    int main(int argc, char *argv[])
-#endif
-    {
-        // Create application object
-         game = new ClientSideGame;
+	ClientSideClient *list = clientList;
+	ClientSideClient *next;
 
-		//game = new ClientSideGame;
-	    game->StartConnection();
+	while(list != NULL)
+	{
+		if(list)
+		{
+			next = list->next;
+			free(list);
+		}
 
- 
-        try {
-            game->go();
-        } catch( Ogre::Exception& e ) {
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-            MessageBox( NULL, e.getFullDescription().c_str(), "An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
-#else
-            std::cerr << "An exception has occured: " <<
-                e.getFullDescription().c_str() << std::endl;
-#endif
-        }
- 
-        return 0;
-    }
- 
-#ifdef __cplusplus
+		list = next;
+	}
+
+	clientList = NULL;
+	clients = 0;
 }
-#endif
