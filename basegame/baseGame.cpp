@@ -131,6 +131,7 @@ extern "C" {
     {
         // Create application object
          mBaseGame = new BaseGame;
+		 //mBaseGame->mClientSideGame->mClientSideNetwork->StartConnection();
 
 		//game = new BaseGame;
 

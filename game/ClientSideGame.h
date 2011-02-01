@@ -8,7 +8,7 @@
 
 //#include "Tutorial4.h"
 class DreamMessage;
-class DreamClient;
+//class DreamClient;
 class ClientSideNetwork;
 class BaseGame;
 
@@ -16,7 +16,7 @@ class BaseGame;
         //do nothing
 #else
 
-#define VK_ESCAPE 0     
+#define VK_ESCAPE 0
 #define VK_DOWN 1
 #define VK_UP 2
 #define VK_LEFT 3
@@ -29,7 +29,7 @@ class ClientSideGame : public Game
 {
 public:
 	void	DrawMap(void);
-	
+
 	void	CheckPredictionError(int a);
 	void	CalculateVelocity(ClientSideCommand *command, float frametime);
 	void	PredictMovement(int prevFrame, int curFrame);
@@ -39,7 +39,7 @@ public:
 	void	RemoveClient(int index);
 	void	RemoveClients(void);
 
-	DreamClient *networkClient;
+
 	ClientSideNetwork* mClientSideNetwork;
 
 	ClientSideClient *clientList;			// Client list
@@ -61,7 +61,7 @@ public:
 	void	Shutdown(void);
 	void	CheckKeys(void);
 	void	Frame(void);
-	
+
 	void	SetName(char *n)		{ strcpy(gamename, n); }
 	char	*GetName(void)			{ return gamename; }
 
