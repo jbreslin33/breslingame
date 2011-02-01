@@ -16,7 +16,7 @@ ClientSideGame::ClientSideGame(BaseGame* baseGame)
 
 	mClientSideNetwork->StartConnection();
 
-	networkClient	= new DreamClient();
+	
 	clientList		= NULL;
 	localClient		= NULL;
 	clients			= 0;
@@ -38,7 +38,7 @@ ClientSideGame::ClientSideGame(BaseGame* baseGame)
 //-----------------------------------------------------------------------------
 ClientSideGame::~ClientSideGame()
 {
-	delete networkClient;
+//	delete networkClient;
 }
 
 //-----------------------------------------------------------------------------

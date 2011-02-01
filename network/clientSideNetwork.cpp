@@ -8,7 +8,7 @@
 #include "clientSideNetwork.h"
 
 //char serverIP[32] = "127.0.0.1";
-char serverIP[32] = "192.168.2.112";
+char serverIP[32] = "192.168.1.104";
 
 #include "../game/ClientSideGame.h"
 #include "../dreamsock/DreamClient.h"
@@ -19,13 +19,13 @@ char serverIP[32] = "192.168.2.112";
 ClientSideNetwork::ClientSideNetwork(ClientSideGame* clientSideGame)
 {
 	mClientSideGame = clientSideGame;
-	StartConnection();
+	//StartConnection();
 
 }
 
 ClientSideNetwork::~ClientSideNetwork()
 {
-
+delete networkClient;
 }
 
 
@@ -38,8 +38,8 @@ void ClientSideNetwork::StartConnection()
 //	LogString("StartConnection");
 
 	//gameIndex = ind;
-
-	int ret = mClientSideGame->networkClient->Initialise("", serverIP, 30004);
+networkClient	= new DreamClient();
+	int ret = networkClient->Initialise("", serverIP, 30004);
 
 	if(ret == DREAMSOCK_CLIENT_ERROR)
 	{
@@ -73,7 +73,7 @@ void ClientSideNetwork::ReadPackets(void)
 	DreamMessage mes;
 	mes.Init(data, sizeof(data));
 
-	while(ret = mClientSideGame->networkClient->GetPacket(mes.data, &address))
+	while(ret = networkClient->GetPacket(mes.data, &address))
 	{
 		mes.SetSize(ret);
 		mes.BeginReading();
@@ -143,23 +143,23 @@ void ClientSideNetwork::ReadPackets(void)
 //-----------------------------------------------------------------------------
 void ClientSideNetwork::SendCommand(void)
 {
-	if(mClientSideGame->networkClient->GetConnectionState() != DREAMSOCK_CONNECTED)
+	if(networkClient->GetConnectionState() != DREAMSOCK_CONNECTED)
 		return;
 
 	DreamMessage message;
 	char data[1400];
 
-	int i = mClientSideGame->networkClient->GetOutgoingSequence() & (COMMAND_HISTORY_SIZE-1);
+	int i = networkClient->GetOutgoingSequence() & (COMMAND_HISTORY_SIZE-1);
 
 	message.Init(data, sizeof(data));
 	message.WriteByte(USER_MES_FRAME);						// type
-	message.AddSequences(mClientSideGame->networkClient);					// sequences
+	message.AddSequences(networkClient);					// sequences
 
 	// Build delta-compressed move command
 	BuildDeltaMoveCommand(&message, &mClientSideGame->inputClient);
 
 	// Send the packet
-	mClientSideGame->networkClient->SendPacket(&message);
+	networkClient->SendPacket(&message);
 
 	// Store the command to the input client's history
 	memcpy(&mClientSideGame->inputClient.frame[i], &mClientSideGame->inputClient.command, sizeof(ClientSideCommand));
@@ -185,9 +185,9 @@ void ClientSideNetwork::SendRequestNonDeltaFrame(void)
 	message.Init(data, sizeof(data));
 
 	message.WriteByte(USER_MES_NONDELTAFRAME);
-	message.AddSequences(mClientSideGame->networkClient);
+	message.AddSequences(networkClient);
 
-	mClientSideGame->networkClient->SendPacket(&message);
+	networkClient->SendPacket(&message);
 }
 
 //-----------------------------------------------------------------------------
@@ -206,7 +206,7 @@ void ClientSideNetwork::Connect(void)
 
 	mClientSideGame->init = true;
 
-	mClientSideGame->networkClient->SendConnect("myname");
+	networkClient->SendConnect("myname");
 }
 
 //-----------------------------------------------------------------------------
@@ -224,7 +224,7 @@ void ClientSideNetwork::Disconnect(void)
 	mClientSideGame->localClient = NULL;
 	memset(&mClientSideGame->inputClient, 0, sizeof(ClientSideClient));
 
-	mClientSideGame->networkClient->SendDisconnect();
+	networkClient->SendDisconnect();
 }
 
 //-----------------------------------------------------------------------------
@@ -319,7 +319,7 @@ void ClientSideNetwork::ReadDeltaMoveCommand(DreamMessage *mes, ClientSideClient
 void ClientSideNetwork::BuildDeltaMoveCommand(DreamMessage *mes, ClientSideClient *theClient)
 {
 	int flags = 0;
-	int last = (mClientSideGame->networkClient->GetOutgoingSequence() - 1) & (COMMAND_HISTORY_SIZE-1);
+	int last = (networkClient->GetOutgoingSequence() - 1) & (COMMAND_HISTORY_SIZE-1);
 
 	// Check what needs to be updated
 	if(theClient->frame[last].key != theClient->command.key)
@@ -358,8 +358,8 @@ void ClientSideNetwork::RunNetwork(int msec)
 	ReadPackets();
 	SendCommand();
 
-	int ack = mClientSideGame->networkClient->GetIncomingAcknowledged();
-	int current = mClientSideGame->networkClient->GetOutgoingSequence();
+	int ack = networkClient->GetIncomingAcknowledged();
+	int current = networkClient->GetOutgoingSequence();
 
 	// Check that we haven't gone too far
 	if(current - ack > COMMAND_HISTORY_SIZE)

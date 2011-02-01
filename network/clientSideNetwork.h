@@ -18,6 +18,7 @@ extern char serverIP[32];
 
 
 class ClientSideGame;
+class DreamClient;
 
 class ClientSideNetwork : public Network
 {
@@ -35,7 +36,7 @@ void ReadDeltaMoveCommand(DreamMessage *mes, ClientSideClient *client);
 void BuildDeltaMoveCommand(DreamMessage *mes, ClientSideClient *theClient);
 
 void RunNetwork(int msec);
- 
+
         // Network.cpp
         void    StartConnection();
         void    Connect(void);
@@ -43,5 +44,6 @@ void RunNetwork(int msec);
         void    SendStartGame(void);
 
 ClientSideGame* mClientSideGame;
+	DreamClient *networkClient;
 };
 #endif
