@@ -249,10 +249,10 @@ void CArmyWar::MoveObjects(void)
 
 //char serverIP[32] = "127.0.0.1";
 char serverIP[32] = "192.168.2.112";
-#include "client.h"
+//#include "client.h"
 #include "../dreamsock/DreamClient.h"
 #include "../dreamsock/DreamSock.h"
-#include "network.h"
+//#include "network.h"
 //-----------------------------------------------------------------------------
 // Name: empty()
 // Desc: 
@@ -760,7 +760,7 @@ void CArmyWar::RunNetwork(int msec)
 }
 
 //#include "Tutorial4.h"
-#include "client.h"
+//#include "client.h"
 CArmyWar* game;
 bool keys[256];
 
@@ -849,6 +849,7 @@ bool CArmyWar::keyPressed( const OIS::KeyEvent &arg )
 {
 	BaseApplication::keyPressed(arg);
     Ogre::LogManager::getSingletonPtr()->logMessage("*** keyPressed CArmyWar n***");
+	return true;
 } 
  
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
