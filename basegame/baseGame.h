@@ -17,6 +17,7 @@
 #endif
 
 class ClientSideGame;
+class ClientSideNetwork;
 
 // The main application class interface
 class BaseGame : public BaseApplication
@@ -34,6 +35,7 @@ virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 virtual bool keyPressed( const OIS::KeyEvent &arg );
 
 ClientSideGame* mClientSideGame;
+ClientSideNetwork* mClientSideNetwork;
 
 bool keys[256];
 };

@@ -10,6 +10,24 @@ ClientSideGame::ClientSideGame(BaseGame* baseGame)
 {
 
 	mBaseGame = baseGame;
+        networkClient   = new DreamClient;
+        clientList              = NULL;
+        localClient             = NULL;
+        clients                 = 0;
+
+        memset(&inputClient, 0, sizeof(ClientSideClient));
+
+        frametime               = 0.0f;
+
+        init                    = false;
+
+        gameIndex               = 0;
+
+        next                    = NULL;
+
+/************/
+/*
+	mBaseGame = baseGame;
 
 
 	mClientSideNetwork = new ClientSideNetwork(this);
@@ -30,6 +48,7 @@ ClientSideGame::ClientSideGame(BaseGame* baseGame)
 	gameIndex		= 0;
 
 	next			= NULL;
+*/
 }
 
 //-----------------------------------------------------------------------------
@@ -38,7 +57,7 @@ ClientSideGame::ClientSideGame(BaseGame* baseGame)
 //-----------------------------------------------------------------------------
 ClientSideGame::~ClientSideGame()
 {
-//	delete networkClient;
+	delete networkClient;
 }
 
 //-----------------------------------------------------------------------------

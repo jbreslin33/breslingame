@@ -8,7 +8,7 @@
 
 //#include "Tutorial4.h"
 class DreamMessage;
-//class DreamClient;
+class DreamClient;
 class ClientSideNetwork;
 class BaseGame;
 
@@ -67,6 +67,8 @@ public:
 
 	void	SetGameIndex(int index)	{ gameIndex = index; }
 	int		GetGameIndex(void)		{ return gameIndex; }
+
+	DreamClient* networkClient;
 
 	ClientSideClient *GetClientList(void) { return clientList; }
 
