@@ -3,16 +3,16 @@
 
 #include "network.h"
 
-class ClientSideGame;
+class BaseGame;
 
 class ClientSideNetwork : public Network
 {
 public:
 
-ClientSideNetwork(ClientSideGame* clientSideGame);
+ClientSideNetwork(BaseGame* baseGame);
 ~ClientSideNetwork();
 
-ClientSideGame* mClientSideGame;
+BaseGame* mBaseGame;
 
 };
 #endif
