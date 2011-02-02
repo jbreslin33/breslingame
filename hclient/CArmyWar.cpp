@@ -15,6 +15,7 @@ bool keys[256];
 CArmyWar::CArmyWar()
 {
 	networkClient	= new DreamClient();
+
 	clientList		= NULL;
 	localClient		= NULL;
 	clients			= 0;
