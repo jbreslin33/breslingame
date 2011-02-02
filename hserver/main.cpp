@@ -112,7 +112,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	StartLogConsole();
 
 
-	game = new Server();
+	game = new ServerSideGame();
 
 	if(game->InitNetwork() != 0)
 	{
