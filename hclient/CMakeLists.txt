@@ -98,8 +98,8 @@ set(HDRS
 		
 
 	#Game
-	#../game/game.h
-	#../game/ClientSideGame.h
+	../game/game.h
+	../game/ClientSideGame.h
 	
 	#DreamSock
 	../dreamsock/DreamClient.h
@@ -120,8 +120,8 @@ set(HDRS
 	../client/ClientSideClient.h
 
 	#network
-	#../network/network.h
-	#../network/clientSideNetwork.h
+	../network/network.h
+	../network/clientSideNetwork.h
 	
 )
 
@@ -147,8 +147,8 @@ set(SRCS
 	#../basegame/baseGame.cpp
 
 	#Game
-	#../game/game.cpp
-	#../game/ClientSideGame.cpp
+	../game/game.cpp
+	../game/ClientSideGame.cpp
 
 	#DreamSock
 	../dreamsock/DreamClient.cpp
@@ -169,8 +169,8 @@ set(SRCS
 	../client/ClientSideClient.cpp
 	
 	#network
-	#../network/network.cpp
-	#../network/clientSideNetwork.cpp
+	../network/network.cpp
+	../network/clientSideNetwork.cpp
 )
 if(UNIX)
 set(HDRS
