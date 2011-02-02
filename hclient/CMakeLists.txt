@@ -109,15 +109,15 @@ set(HDRS
 	../dreamsock/DreamSock.h
 	
 	#math	
-	#../math/Vector3D.h
+	../math/Vector3D.h
 
 	#command
-	#../command/Command.h
-	#../command/ClientSideCommand.h	
+	../command/Command.h
+	../command/ClientSideCommand.h	
 	
 	#client
-	#../client/Client.h
-	#../client/ClientSideClient.h
+	../client/Client.h
+	../client/ClientSideClient.h
 
 	#network
 	#../network/network.h
@@ -158,15 +158,15 @@ set(SRCS
 	../dreamsock/DreamSock.cpp
 	
 	#math
-	#../math/Vector3D.cpp
+	../math/Vector3D.cpp
 
 	#command
-	#../command/Command.cpp
-	#../command/ClientSideCommand.cpp
+	../command/Command.cpp
+	../command/ClientSideCommand.cpp
 
 	#client
-	#../client/Client.cpp
-	#../client/ClientSideClient.cpp
+	../client/Client.cpp
+	../client/ClientSideClient.cpp
 	
 	#network
 	#../network/network.cpp
