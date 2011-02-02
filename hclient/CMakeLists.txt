@@ -90,12 +90,11 @@ endif()
 
 set(HDRS
 	#CArmyWar
-	./CArmyWar.h
+	#./CArmyWar.h
 	
 	#Basic Game 
 	../baseapplication/BaseApplication.h
-	#../basegame/baseGame.h
-		
+	../basegame/baseGame.h
 
 	#Game
 	../game/game.h
@@ -140,11 +139,11 @@ endif(WIN32)
 
 set(SRCS
 	#CArmyWar
-	./CArmyWar.cpp
+	#./CArmyWar.cpp
 	
 	#Base Game
 	../baseapplication/BaseApplication.cpp
-	#../basegame/baseGame.cpp
+	../basegame/baseGame.cpp
 
 	#Game
 	../game/game.cpp

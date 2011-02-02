@@ -3,14 +3,14 @@
 
 #include "game.h"
 
-class CArmyWar;
+class BaseGame;
 
 class ClientSideGame : public Game
 {
 public:
-	ClientSideGame(CArmyWar* cArmyWar);
+	ClientSideGame(BaseGame* baseGame);
 	~ClientSideGame();
-CArmyWar* mCArmyWar;
+BaseGame* mBaseGame;
 };
 
 #endif

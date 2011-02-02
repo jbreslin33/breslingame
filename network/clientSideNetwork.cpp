@@ -1,10 +1,10 @@
 #include "clientSideNetwork.h"
 
-#include "../game/ClientSideGame.h"
+#include "../basegame/baseGame.h"
 
-ClientSideNetwork::ClientSideNetwork(CArmyWar* clientSideGame)
+ClientSideNetwork::ClientSideNetwork(BaseGame* baseGame)
 {
-	mClientSideGame = clientSideGame;
+	mBaseGame = baseGame;
 }
 
 ClientSideNetwork::~ClientSideNetwork()

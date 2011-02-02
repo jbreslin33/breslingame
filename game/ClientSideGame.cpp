@@ -1,10 +1,10 @@
 #include "../game/ClientSideGame.h"
 
-#include "../hclient/CArmyWar.h"
+#include "../basegame/baseGame.h"
 
-ClientSideGame::ClientSideGame(CArmyWar* cArmyWar)
+ClientSideGame::ClientSideGame(BaseGame* baseGame)
 {
-	mCArmyWar = cArmyWar;
+	mBaseGame = baseGame;
 }
 
 

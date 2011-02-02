@@ -2,12 +2,19 @@
 #define BASEGAME_H
 
 #include "../baseapplication/BaseApplication.h"
+#include "../command/ClientSideCommand.h"
+#include "../client/ClientSideClient.h"
+#include "../math/Vector3D.h"
 
+class DreamMessage;
+class DreamClient;
 
+extern bool keys[256];
+
+//keys for linux
 #ifdef WIN32
         //do nothing
 #else
-
 #define VK_ESCAPE 0     
 #define VK_DOWN 1
 #define VK_UP 2
@@ -16,28 +23,110 @@
 #define VK_SPACE 5
 #endif
 
-class ClientSideGame;
-class ClientSideNetwork;
+#define COMMAND_HISTORY_SIZE	64
+
+#define KEY_UP					1
+#define KEY_DOWN				2
+#define KEY_LEFT				4
+#define KEY_RIGHT				8
+
+#define CMD_KEY					1
+#define CMD_ORIGIN				4
+
+#define USER_MES_FRAME			1
+#define USER_MES_NONDELTAFRAME	2
+#define USER_MES_SERVEREXIT		3
+
+#define USER_MES_KEEPALIVE		12
+
+typedef struct clientLoginData
+{
+	int					index;
+	char				nickname[30];
+	clientLoginData	*next;
+} clientLoginData;
+
+extern char serverIP[32];
 
 // The main application class interface
 class BaseGame : public BaseApplication
 {
 private:
 
+	// Client.cpp
+	void	DrawMap(void);
+	
+	void	CheckPredictionError(int a);
+	void	CalculateVelocity(ClientSideCommand *command, float frametime);
+	void	PredictMovement(int prevFrame, int curFrame);
+	void	MoveObjects(void);
+
+	void	AddClient(int local, int index, char *name);
+	void	RemoveClient(int index);
+	void	RemoveClients(void);
+
+	// Network.cpp
+	void	ReadPackets(void);
+	void	SendCommand(void);
+	void	SendRequestNonDeltaFrame(void);
+	void	ReadMoveCommand(DreamMessage *mes, ClientSideClient *client);
+	void	ReadDeltaMoveCommand(DreamMessage *mes, ClientSideClient *client);
+	void	BuildDeltaMoveCommand(DreamMessage *mes, ClientSideClient *theClient);
+
+	bool processUnbufferedInput(const Ogre::FrameEvent& evt);
+
+	// Variables
+
+	// Network variables
+	DreamClient *networkClient;
+
+	ClientSideClient *clientList;			// Client list
+	ClientSideClient *localClient;		// Pointer to the local client in the client list
+	int clients;
+
+	ClientSideClient inputClient;			// Handles all keyboard input
+
+	float frametime;
+
+	char gamename[32];
+	bool init;
+
+	int gameIndex;
+
+
 public:
 	BaseGame();
 	~BaseGame();
 
-void createPlayer(int index);
-bool         processUnbufferedInput(const Ogre::FrameEvent& evt);
-virtual void createScene(void);
-virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
-virtual bool keyPressed( const OIS::KeyEvent &arg );
+    void createPlayer(int index);
+    virtual void createScene(void);
+    virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+    virtual bool keyPressed( const OIS::KeyEvent &arg );
 
-ClientSideGame* mClientSideGame;
-ClientSideNetwork* mClientSideNetwork;
+	// Client.cpp
+	void	Shutdown(void);
+	void	CheckKeys(void);
+	void	Frame(void);
+	void	RunNetwork(int msec);
+	
+	// Network.cpp
+	void	StartConnection();
+	void	Connect(void);
+	void	Disconnect(void);
+	void	SendStartGame(void);
 
-bool keys[256];
+	void	SetName(char *n)		{ strcpy(gamename, n); }
+	char	*GetName(void)			{ return gamename; }
+
+	void	SetGameIndex(int index)	{ gameIndex = index; }
+	int		GetGameIndex(void)		{ return gameIndex; }
+
+	ClientSideClient *GetClientList(void) { return clientList; }
+
+	ClientSideClient *GetClientPointer(int index);
+
+
+	BaseGame *next;
 };
 
 #endif
