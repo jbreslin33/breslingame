@@ -89,13 +89,17 @@ endif()
 
 
 set(HDRS
+	#CArmyWar
+	./CArmyWar.h
+	
 	#Basic Game 
 	../baseapplication/BaseApplication.h
-	../basegame/baseGame.h
-	
+	#../basegame/baseGame.h
+		
+
 	#Game
-	../game/gameh.h
-	../game/ClientSideGame.h
+	#../game/game.h
+	#../game/ClientSideGame.h
 	
 	#DreamSock
 	../dreamsock/DreamClient.h
@@ -105,19 +109,19 @@ set(HDRS
 	../dreamsock/DreamSock.h
 	
 	#math	
-	../math/Vector3D.h
+	#../math/Vector3D.h
 
 	#command
-	../command/Command.h
-	../command/ClientSideCommand.h	
+	#../command/Command.h
+	#../command/ClientSideCommand.h	
 	
 	#client
-	../client/Client.h
-	../client/ClientSideClient.h
+	#../client/Client.h
+	#../client/ClientSideClient.h
 
 	#network
-	../network/network.h
-	../network/clientSideNetwork.h
+	#../network/network.h
+	#../network/clientSideNetwork.h
 	
 )
 
@@ -135,13 +139,16 @@ endif(WIN32)
 
 
 set(SRCS
+	#CArmyWar
+	./CArmyWar.cpp
+	
 	#Base Game
 	../baseapplication/BaseApplication.cpp
-	../basegame/baseGame.cpp
+	#../basegame/baseGame.cpp
 
 	#Game
-	../game/game.cpp
-	../game/ClientSideGame.cpp
+	#../game/game.cpp
+	#../game/ClientSideGame.cpp
 
 	#DreamSock
 	../dreamsock/DreamClient.cpp
@@ -151,19 +158,19 @@ set(SRCS
 	../dreamsock/DreamSock.cpp
 	
 	#math
-	../math/Vector3D.cpp
+	#../math/Vector3D.cpp
 
 	#command
-	../command/Command.cpp
-	../command/ClientSideCommand.cpp
+	#../command/Command.cpp
+	#../command/ClientSideCommand.cpp
 
 	#client
-	../client/Client.cpp
-	../client/ClientSideClient.cpp
+	#../client/Client.cpp
+	#../client/ClientSideClient.cpp
 	
 	#network
-	../network/network.cpp
-	../network/clientSideNetwork.cpp
+	#../network/network.cpp
+	#../network/clientSideNetwork.cpp
 )
 if(UNIX)
 set(HDRS

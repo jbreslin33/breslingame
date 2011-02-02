@@ -18,7 +18,6 @@ extern char serverIP[32];
 
 
 class ClientSideGame;
-class DreamClient;
 
 class ClientSideNetwork : public Network
 {
@@ -44,6 +43,5 @@ void RunNetwork(int msec);
         void    SendStartGame(void);
 
 ClientSideGame* mClientSideGame;
-	DreamClient *networkClient;
 };
 #endif

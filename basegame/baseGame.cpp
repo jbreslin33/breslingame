@@ -6,13 +6,14 @@
 #include "../game/ClientSideGame.h"
 #include "../network/clientSideNetwork.h"
 
-BaseGame* mBaseGame;
-//bool keys[256];
+#include "../dreamsock/DreamConsole.h"
 
+BaseGame*          mBaseGame;
+ClientSideGame*    mClientSideGame;
+ClientSideNetwork* mClientSideNetwork;
 
 BaseGame::BaseGame()
 {
-	mClientSideGame = new ClientSideGame(this);
 
 }
 
@@ -130,11 +131,14 @@ extern "C" {
 #endif
     {
         // Create application object
-         mBaseGame = new BaseGame;
+         mBaseGame 	    = new BaseGame;
+	 mClientSideGame    = new ClientSideGame(mBaseGame);
+	 mClientSideNetwork = new ClientSideNetwork(mClientSideGame);
+	 mClientSideNetwork->StartConnection();
 		 //mBaseGame->mClientSideGame->mClientSideNetwork->StartConnection();
-
+ //StartLogConsole();
 		//game = new BaseGame;
-
+	StartLogConsole();
  
         try {
             mBaseGame->go();
