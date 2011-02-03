@@ -28,7 +28,7 @@ extern bool keys[256];
 // The main application class interface
 class BaseGame : public BaseApplication
 {
-private:
+public:
 
 	// Client.cpp
 	void	CheckPredictionError(int a);
@@ -41,7 +41,7 @@ private:
 	void	RemoveClients(void);
 
 	// Network.cpp
-	void	ReadPackets(void);
+
 	void	SendCommand(void);
 	void	SendRequestNonDeltaFrame(void);
 	void	ReadMoveCommand(DreamMessage *mes, ClientSideClient *client);
@@ -49,8 +49,6 @@ private:
 	void	BuildDeltaMoveCommand(DreamMessage *mes, ClientSideClient *theClient);
 
 	bool processUnbufferedInput(const Ogre::FrameEvent& evt);
-
-	// Variables
 
 	// Network variables
 	DreamClient *networkClient;
@@ -74,6 +72,7 @@ public:
     virtual void createScene(void);
     virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
     virtual bool keyPressed( const OIS::KeyEvent &arg );
+
 
 	// Client.cpp
 	void	Shutdown(void);

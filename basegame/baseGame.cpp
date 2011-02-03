@@ -9,7 +9,8 @@
 
 //char serverIP[32] = "192.168.2.112";
 
-BaseGame* mBaseGame;
+BaseGame*          mBaseGame;
+ClientSideNetwork* mClientSideNetwork;
 
 bool keys[256];
 
@@ -231,86 +232,6 @@ void BaseGame::StartConnection(char serverIP[32])
 	}
 
 	Connect();
-}
-
-void BaseGame::ReadPackets(void)
-{
-	char data[1400];
-	struct sockaddr address;
-
-	ClientSideClient *clList;
-
-	int type;
-	int ind;
-	int local;
-	int ret;
-
-	char name[50];
-
-	DreamMessage mes;
-	mes.Init(data, sizeof(data));
-
-	while(ret = networkClient->GetPacket(mes.data, &address))
-	{
-		mes.SetSize(ret);
-		mes.BeginReading();
-
-		type = mes.ReadByte();
-
-		switch(type)
-		{
-		case DREAMSOCK_MES_ADDCLIENT:
-			local	= mes.ReadByte();
-			ind		= mes.ReadByte();
-			strcpy(name, mes.ReadString());
-
-			AddClient(local, ind, name);
-			break;
-
-		case DREAMSOCK_MES_REMOVECLIENT:
-			ind = mes.ReadByte();
-
-			LogString("Got removeclient %d message", ind);
-
-			RemoveClient(ind);
-
-			break;
-
-		case USER_MES_FRAME:
-			// Skip sequences
-			mes.ReadShort();
-			mes.ReadShort();
-
-			for(clList = clientList; clList != NULL; clList = clList->next)
-			{
-//				LogString("Reading DELTAFRAME for client %d", clList->index);
-				ReadDeltaMoveCommand(&mes, clList);
-			}
-
-			break;
-
-		case USER_MES_NONDELTAFRAME:
-			// Skip sequences
-			mes.ReadShort();
-			mes.ReadShort();
-
-			clList = clientList;
-
-			for(clList = clientList; clList != NULL; clList = clList->next)
-			{
-				LogString("Reading NONDELTAFRAME for client %d", clList->index);
-				ReadMoveCommand(&mes, clList);
-			}
-
-			break;
-
-		case USER_MES_SERVEREXIT:
-			//MessageBox(NULL, "Server disconnected", "Info", MB_OK);
-			Disconnect();
-			break;
-
-		}
-	}
 }
 
 void BaseGame::AddClient(int local, int ind, char *name)
@@ -631,7 +552,7 @@ void BaseGame::RunNetwork(int msec)
 	time = 0;
 
 	// Read packets from server, and send new commands
-	ReadPackets();
+	mClientSideNetwork->ReadPackets();
 	SendCommand();
 
 	int ack = networkClient->GetIncomingAcknowledged();
@@ -721,7 +642,7 @@ bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
  
     if(!processUnbufferedInput(evt)) return false;
 
-	if(mBaseGame != NULL)
+	if(mBaseGame != NULL && mClientSideNetwork != NULL)
 	{
 		mBaseGame->RunNetwork(evt.timeSinceLastFrame * 1000);
 		mBaseGame->CheckKeys();
@@ -752,7 +673,8 @@ extern "C" {
     int main(int argc, char *argv[])
 #endif
     {
-        mBaseGame = new BaseGame;
+        mBaseGame          = new BaseGame;
+	mClientSideNetwork = new ClientSideNetwork(mBaseGame);
 	 
 	
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
