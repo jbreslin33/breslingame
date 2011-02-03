@@ -18,15 +18,12 @@ BaseGame::BaseGame()
 
 	clientList		= NULL;
 	localClient		= NULL;
-	clients			= 0;
 
 	memset(&inputClient, 0, sizeof(ClientSideClient));
 
 	frametime		= 0.0f;
 
 	init			= false;
-
-	gameIndex		= 0;
 
 	next			= NULL;
 }
@@ -339,10 +336,7 @@ void BaseGame::AddClient(int local, int ind, char *name)
 		clientList->index = ind;
 		strcpy(clientList->nickname, name);
 
-		if(clients % 2 == 0) 
-			createPlayer(ind);
-		else
-			createPlayer(ind);
+		createPlayer(ind);
 
 		clientList->next = NULL;
 	}
@@ -375,15 +369,8 @@ void BaseGame::AddClient(int local, int ind, char *name)
 		list->next = NULL;
 		prev->next = list;
 
-		if(clients % 2 == 0) 
 			createPlayer(ind);
-		else
-			createPlayer(ind);
-
-		
 	}
-
-	clients++;
 
 	// If we just joined the game, request a non-delta compressed frame
 	if(local)
@@ -437,9 +424,6 @@ void BaseGame::RemoveClient(int ind)
 
 		list = next;
 	}
-
-	clients--;
-
 }
 
 void BaseGame::RemoveClients(void)
@@ -459,7 +443,6 @@ void BaseGame::RemoveClients(void)
 	}
 
 	clientList = NULL;
-	clients = 0;
 }
 
 void BaseGame::SendCommand(void)
@@ -672,13 +655,9 @@ void BaseGame::RunNetwork(int msec)
 void BaseGame::createPlayer(int index)
 {
 	Ogre::Entity* NinjaEntity = mSceneMgr->createEntity("ninja.mesh");
-	//Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "ogrehead.mesh");
 	Ogre::SceneNode* node = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-    node->attachObject(NinjaEntity);
-    //node->setPosition(Ogre::Vector3(10, 10, 10));
-
-    ClientSideClient *client = game->GetClientPointer(index);
-
+    	node->attachObject(NinjaEntity);
+	ClientSideClient *client = game->GetClientPointer(index);
 	client->myNode = node;
 }
 
@@ -743,7 +722,6 @@ bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	{
 		game->RunNetwork(evt.timeSinceLastFrame * 1000);
 		game->CheckKeys();
-		//game->Frame();
 	}
  
     return ret;
@@ -771,9 +749,7 @@ extern "C" {
     int main(int argc, char *argv[])
 #endif
     {
-        // Create application object
-        game = new BaseGame;
-
+        game = new BaseGame; 
 	
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	game->StartConnection(strCmdLine);
