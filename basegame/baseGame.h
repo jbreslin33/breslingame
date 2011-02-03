@@ -110,7 +110,7 @@ public:
 	void	RunNetwork(int msec);
 	
 	// Network.cpp
-	void	StartConnection();
+	void	StartConnection(char serverIP[32]);
 	void	Connect(void);
 	void	Disconnect(void);
 	void	SendStartGame(void);
