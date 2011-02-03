@@ -776,7 +776,7 @@ extern "C" {
 
 	
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	game->startConnection(strCmdLine);
+	game->StartConnection(strCmdLine);
 #else
 	game->StartConnection(argv[1]);
 #endif
