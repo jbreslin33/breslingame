@@ -772,11 +772,14 @@ extern "C" {
 #endif
     {
         // Create application object
-         game = new BaseGame;
+        game = new BaseGame;
 
-		//game = new BaseGame;
-	    game->StartConnection(argv[0]);
-
+	
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	game->startConnection(strCmdLine);
+#else
+	game->StartConnection(argv[1]);
+#endif
  
         try {
             game->go();
