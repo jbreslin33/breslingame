@@ -7,7 +7,7 @@
 
 #include "../client/ClientSideClient.h"
 
-char serverIP[32] = "192.168.2.112";
+//char serverIP[32] = "192.168.2.112";
 
 BaseGame* game;
 bool keys[256];
@@ -214,12 +214,14 @@ void BaseGame::MoveObjects(void)
 }
 
 
-void BaseGame::StartConnection()
+void BaseGame::StartConnection(char serverIP[32])
+
 {
 //	LogString("StartConnection");
 
 	//gameIndex = ind;
 
+//char serverIP[32] = "192.168.2.112";
 	int ret = networkClient->Initialise("", serverIP, 30004);
 
 	if(ret == DREAMSOCK_CLIENT_ERROR)
@@ -773,7 +775,7 @@ extern "C" {
          game = new BaseGame;
 
 		//game = new BaseGame;
-	    game->StartConnection();
+	    game->StartConnection(argv[0]);
 
  
         try {
