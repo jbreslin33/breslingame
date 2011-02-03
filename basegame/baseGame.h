@@ -6,6 +6,8 @@
 #include "../client/ClientSideClient.h"
 #include "../math/Vector3D.h"
 
+#include "../network/clientSideNetwork.h"
+
 class DreamMessage;
 class DreamClient;
 
@@ -22,31 +24,6 @@ extern bool keys[256];
 #define VK_RIGHT 4
 #define VK_SPACE 5
 #endif
-
-#define COMMAND_HISTORY_SIZE	64
-
-#define KEY_UP					1
-#define KEY_DOWN				2
-#define KEY_LEFT				4
-#define KEY_RIGHT				8
-
-#define CMD_KEY					1
-#define CMD_ORIGIN				4
-
-#define USER_MES_FRAME			1
-#define USER_MES_NONDELTAFRAME	2
-#define USER_MES_SERVEREXIT		3
-
-#define USER_MES_KEEPALIVE		12
-
-typedef struct clientLoginData
-{
-	int					index;
-	char				nickname[30];
-	clientLoginData	*next;
-} clientLoginData;
-
-extern char serverIP[32];
 
 // The main application class interface
 class BaseGame : public BaseApplication
@@ -82,16 +59,13 @@ private:
 
 	ClientSideClient *clientList;			// Client list
 	ClientSideClient *localClient;		// Pointer to the local client in the client list
-	int clients;
 
 	ClientSideClient inputClient;			// Handles all keyboard input
 
 	float frametime;
 
-	char gamename[32];
 	bool init;
 
-	int gameIndex;
 
 
 public:
@@ -114,12 +88,6 @@ public:
 	void	Connect(void);
 	void	Disconnect(void);
 	void	SendStartGame(void);
-
-	void	SetName(char *n)		{ strcpy(gamename, n); }
-	char	*GetName(void)			{ return gamename; }
-
-	void	SetGameIndex(int index)	{ gameIndex = index; }
-	int		GetGameIndex(void)		{ return gameIndex; }
 
 	ClientSideClient *GetClientList(void) { return clientList; }
 
