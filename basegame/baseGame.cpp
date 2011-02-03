@@ -9,7 +9,8 @@
 
 //char serverIP[32] = "192.168.2.112";
 
-BaseGame* game;
+BaseGame* mBaseGame;
+
 bool keys[256];
 
 BaseGame::BaseGame()
@@ -657,7 +658,7 @@ void BaseGame::createPlayer(int index)
 	Ogre::Entity* NinjaEntity = mSceneMgr->createEntity("ninja.mesh");
 	Ogre::SceneNode* node = mSceneMgr->getRootSceneNode()->createChildSceneNode();
     	node->attachObject(NinjaEntity);
-	ClientSideClient *client = game->GetClientPointer(index);
+	ClientSideClient *client = mBaseGame->GetClientPointer(index);
 	client->myNode = node;
 }
 
@@ -675,38 +676,40 @@ void BaseGame::createScene(void)
 bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 {
  
-    if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
-    {
+    	if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
+    	{
 		keys[VK_UP] = true;
-    }
+   	}
 	else
 	{
-        keys[VK_UP] = false;
+        	keys[VK_UP] = false;
 	}
-    if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
-    {
+    	
+	if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
+    	{
 		keys[VK_DOWN] = true;
-    }
+    	}
 	else
 	{
-        keys[VK_DOWN] = false;
+        	keys[VK_DOWN] = false;
 	}
 
-    if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
-    {
+    	if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
+    	{
 		keys[VK_LEFT] = true;
-    }
+    	}
 	else
 	{
-        keys[VK_LEFT] = false;
+        	keys[VK_LEFT] = false;
 	}
-    if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
-    {
+    	
+	if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
+    	{
 		keys[VK_RIGHT] = true;
-    }
+	}
 	else
 	{
-        keys[VK_RIGHT] = false;
+        	keys[VK_RIGHT] = false;
 	}
          
     return true;
@@ -718,10 +721,10 @@ bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
  
     if(!processUnbufferedInput(evt)) return false;
 
-	if(game != NULL)
+	if(mBaseGame != NULL)
 	{
-		game->RunNetwork(evt.timeSinceLastFrame * 1000);
-		game->CheckKeys();
+		mBaseGame->RunNetwork(evt.timeSinceLastFrame * 1000);
+		mBaseGame->CheckKeys();
 	}
  
     return ret;
@@ -730,7 +733,7 @@ bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 bool BaseGame::keyPressed( const OIS::KeyEvent &arg )
 {
 	BaseApplication::keyPressed(arg);
-    Ogre::LogManager::getSingletonPtr()->logMessage("*** keyPressed BaseGame n***");
+    	Ogre::LogManager::getSingletonPtr()->logMessage("*** keyPressed BaseGame n***");
 	return true;
 } 
  
@@ -749,16 +752,17 @@ extern "C" {
     int main(int argc, char *argv[])
 #endif
     {
-        game = new BaseGame; 
+        mBaseGame = new BaseGame;
+	 
 	
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	game->StartConnection(strCmdLine);
+	mBaseGame->StartConnection(strCmdLine);
 #else
-	game->StartConnection(argv[1]);
+	mBaseGame->StartConnection(argv[1]);
 #endif
  
         try {
-            game->go();
+            mBaseGame->go();
         } catch( Ogre::Exception& e ) {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
             MessageBox( NULL, e.getFullDescription().c_str(), "An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);

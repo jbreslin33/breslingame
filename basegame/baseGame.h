@@ -31,8 +31,6 @@ class BaseGame : public BaseApplication
 private:
 
 	// Client.cpp
-	void	DrawMap(void);
-	
 	void	CheckPredictionError(int a);
 	void	CalculateVelocity(ClientSideCommand *command, float frametime);
 	void	PredictMovement(int prevFrame, int curFrame);
@@ -72,7 +70,7 @@ public:
 	BaseGame();
 	~BaseGame();
 
-    void createPlayer(int index);
+    void         createPlayer(int index);
     virtual void createScene(void);
     virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
     virtual bool keyPressed( const OIS::KeyEvent &arg );
