@@ -19,6 +19,7 @@ void	ReadPackets		(void);
 void	SendCommand		(void);
 void	SendRequestNonDeltaFrame(void);
 void	ReadMoveCommand         (DreamMessage *mes, ClientSideClient *client);
+void	ReadDeltaMoveCommand    (DreamMessage *mes, ClientSideClient *client);
 
 BaseGame* mBaseGame;
 DreamClient* networkClient;

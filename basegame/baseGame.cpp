@@ -394,56 +394,6 @@ void BaseGame::Disconnect(void)
 	networkClient->SendDisconnect();
 }
 
-void BaseGame::ReadDeltaMoveCommand(DreamMessage *mes, ClientSideClient *client)
-{
-	int processedFrame;
-	int flags = 0;
-
-	// Flags
-	flags = mes->ReadByte();
-
-	// Key
-	if(flags & CMD_KEY)
-	{
-		client->serverFrame.key = mes->ReadByte();
-
-		client->command.key = client->serverFrame.key;
-		LogString("Client %d: Read key %d", client->index, client->command.key);
-	}
-
-	if(flags & CMD_ORIGIN)
-	{
-		processedFrame = mes->ReadByte();
-	}
-
-	// Origin
-	if(flags & CMD_ORIGIN)
-	{
-		client->serverFrame.origin.x = mes->ReadFloat();
-		client->serverFrame.origin.y = mes->ReadFloat();
-
-		client->serverFrame.vel.x = mes->ReadFloat();
-		client->serverFrame.vel.y = mes->ReadFloat();
-
-		if(client == localClient)
-		{
-			CheckPredictionError(processedFrame);
-		}
-
-		else
-		{
-			client->command.origin.x = client->serverFrame.origin.x;
-			client->command.origin.y = client->serverFrame.origin.y;
-
-			client->command.vel.x = client->serverFrame.vel.x;
-			client->command.vel.y = client->serverFrame.vel.y;
-		}
-	}
-
-	// Read time to run command
-	client->command.msec = mes->ReadByte();
-}
-
 void BaseGame::BuildDeltaMoveCommand(DreamMessage *mes, ClientSideClient *theClient)
 {
 	int flags = 0;

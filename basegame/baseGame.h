@@ -41,7 +41,7 @@ public:
 	void	RemoveClients(void);
 
 	// Network.cpp
-	void	ReadDeltaMoveCommand(DreamMessage *mes, ClientSideClient *client);
+
 	void	BuildDeltaMoveCommand(DreamMessage *mes, ClientSideClient *theClient);
 
 	bool processUnbufferedInput(const Ogre::FrameEvent& evt);
