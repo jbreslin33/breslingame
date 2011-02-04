@@ -394,28 +394,6 @@ void BaseGame::Disconnect(void)
 	networkClient->SendDisconnect();
 }
 
-void BaseGame::BuildDeltaMoveCommand(DreamMessage *mes, ClientSideClient *theClient)
-{
-	int flags = 0;
-	int last = (networkClient->GetOutgoingSequence() - 1) & (COMMAND_HISTORY_SIZE-1);
-
-	// Check what needs to be updated
-	if(theClient->frame[last].key != theClient->command.key)
-		flags |= CMD_KEY;
-
-	// Add to the message
-	// Flags
-	mes->WriteByte(flags);
-
-	// Key
-	if(flags & CMD_KEY)
-	{
-		mes->WriteByte(theClient->command.key);
-	}
-
-	mes->WriteByte(theClient->command.msec);
-}
-
 void BaseGame::RunNetwork(int msec)
 {
 	static int time = 0;
