@@ -41,7 +41,6 @@ public:
 	void	RemoveClients(void);
 
 	// Network.cpp
-	void	ReadMoveCommand(DreamMessage *mes, ClientSideClient *client);
 	void	ReadDeltaMoveCommand(DreamMessage *mes, ClientSideClient *client);
 	void	BuildDeltaMoveCommand(DreamMessage *mes, ClientSideClient *theClient);
 

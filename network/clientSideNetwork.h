@@ -5,6 +5,8 @@
 
 class BaseGame;
 class DreamClient;
+class DreamMessage;
+class ClientSideClient;
 
 class ClientSideNetwork : public Network
 {
@@ -16,6 +18,7 @@ ClientSideNetwork(BaseGame* baseGame);
 void	ReadPackets		(void);
 void	SendCommand		(void);
 void	SendRequestNonDeltaFrame(void);
+void	ReadMoveCommand         (DreamMessage *mes, ClientSideClient *client);
 
 BaseGame* mBaseGame;
 DreamClient* networkClient;
