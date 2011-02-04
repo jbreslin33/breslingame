@@ -7,8 +7,6 @@
 
 #include "../client/ClientSideClient.h"
 
-//char serverIP[32] = "192.168.2.112";
-
 BaseGame*          mBaseGame;
 ClientSideNetwork* mClientSideNetwork;
 
@@ -367,38 +365,6 @@ void BaseGame::RemoveClients(void)
 	clientList = NULL;
 }
 
-void BaseGame::SendCommand(void)
-{
-	if(networkClient->GetConnectionState() != DREAMSOCK_CONNECTED)
-		return;
-
-	DreamMessage message;
-	char data[1400];
-
-	int i = networkClient->GetOutgoingSequence() & (COMMAND_HISTORY_SIZE-1);
-
-	message.Init(data, sizeof(data));
-	message.WriteByte(USER_MES_FRAME);						// type
-	message.AddSequences(networkClient);					// sequences
-
-	// Build delta-compressed move command
-	BuildDeltaMoveCommand(&message, &inputClient);
-
-	// Send the packet
-	networkClient->SendPacket(&message);
-
-	// Store the command to the input client's history
-	memcpy(&inputClient.frame[i], &inputClient.command, sizeof(ClientSideCommand));
-
-	ClientSideClient *clList = clientList;
-
-	// Store the commands to the clients' history
-	for( ; clList != NULL; clList = clList->next)
-	{
-		memcpy(&clList->frame[i], &clList->command, sizeof(ClientSideCommand));
-	}
-}
-
 void BaseGame::SendRequestNonDeltaFrame(void)
 {
 	char data[1400];
@@ -553,7 +519,7 @@ void BaseGame::RunNetwork(int msec)
 
 	// Read packets from server, and send new commands
 	mClientSideNetwork->ReadPackets();
-	SendCommand();
+	mClientSideNetwork->SendCommand();
 
 	int ack = networkClient->GetIncomingAcknowledged();
 	int current = networkClient->GetOutgoingSequence();
