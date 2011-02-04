@@ -394,33 +394,6 @@ void BaseGame::Disconnect(void)
 	networkClient->SendDisconnect();
 }
 
-void BaseGame::ReadMoveCommand(DreamMessage *mes, ClientSideClient *client)
-{
-	// Key
-	client->serverFrame.key				= mes->ReadByte();
-
-	// Heading
-	//client->serverFrame.heading			= mes->ReadShort();
-
-	// Origin
-	client->serverFrame.origin.x		= mes->ReadFloat();
-	client->serverFrame.origin.y		= mes->ReadFloat();
-	client->serverFrame.vel.x			= mes->ReadFloat();
-	client->serverFrame.vel.y			= mes->ReadFloat();
-
-	// Read time to run command
-	client->serverFrame.msec = mes->ReadByte();
-
-	memcpy(&client->command, &client->serverFrame, sizeof(ClientSideCommand));
-
-	// Fill the history array with the position we got
-	for(int f = 0; f < COMMAND_HISTORY_SIZE; f++)
-	{
-		client->frame[f].predictedOrigin.x = client->command.origin.x;
-		client->frame[f].predictedOrigin.y = client->command.origin.y;
-	}
-}
-
 void BaseGame::ReadDeltaMoveCommand(DreamMessage *mes, ClientSideClient *client)
 {
 	int processedFrame;
