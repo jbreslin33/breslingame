@@ -129,4 +129,16 @@ void ClientSideNetwork::SendCommand(void)
 	}
 }
 
+void ClientSideNetwork::SendRequestNonDeltaFrame(void)
+{
+	char data[1400];
+	DreamMessage message;
+	message.Init(data, sizeof(data));
+
+	message.WriteByte(USER_MES_NONDELTAFRAME);
+	message.AddSequences(networkClient);
+
+	networkClient->SendPacket(&message);
+}
+
 

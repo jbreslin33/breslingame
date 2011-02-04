@@ -13,8 +13,9 @@ public:
 ClientSideNetwork(BaseGame* baseGame);
 ~ClientSideNetwork();
 
-void	ReadPackets(void);
-void	SendCommand(void);
+void	ReadPackets		(void);
+void	SendCommand		(void);
+void	SendRequestNonDeltaFrame(void);
 
 BaseGame* mBaseGame;
 DreamClient* networkClient;
