@@ -40,10 +40,6 @@ public:
 	void	RemoveClient(int index);
 	void	RemoveClients(void);
 
-	// Network.cpp
-
-	void	BuildDeltaMoveCommand(DreamMessage *mes, ClientSideClient *theClient);
-
 	bool processUnbufferedInput(const Ogre::FrameEvent& evt);
 
 	// Network variables

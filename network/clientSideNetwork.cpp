@@ -112,7 +112,7 @@ void ClientSideNetwork::SendCommand(void)
 	message.AddSequences(networkClient);					// sequences
 
 	// Build delta-compressed move command
-	mBaseGame->BuildDeltaMoveCommand(&message, &mBaseGame->inputClient);
+	BuildDeltaMoveCommand(&message, &mBaseGame->inputClient);
 
 	// Send the packet
 	networkClient->SendPacket(&message);
@@ -218,5 +218,27 @@ void ClientSideNetwork::ReadDeltaMoveCommand(DreamMessage *mes, ClientSideClient
 
 	// Read time to run command
 	client->command.msec = mes->ReadByte();
+}
+
+void ClientSideNetwork::BuildDeltaMoveCommand(DreamMessage *mes, ClientSideClient *theClient)
+{
+	int flags = 0;
+	int last = (networkClient->GetOutgoingSequence() - 1) & (COMMAND_HISTORY_SIZE-1);
+
+	// Check what needs to be updated
+	if(theClient->frame[last].key != theClient->command.key)
+		flags |= CMD_KEY;
+
+	// Add to the message
+	// Flags
+	mes->WriteByte(flags);
+
+	// Key
+	if(flags & CMD_KEY)
+	{
+		mes->WriteByte(theClient->command.key);
+	}
+
+	mes->WriteByte(theClient->command.msec);
 }
 
