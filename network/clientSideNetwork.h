@@ -14,6 +14,7 @@ ClientSideNetwork(BaseGame* baseGame);
 ~ClientSideNetwork();
 
 void	ReadPackets(void);
+void	SendCommand(void);
 
 BaseGame* mBaseGame;
 DreamClient* networkClient;

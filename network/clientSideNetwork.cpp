@@ -97,4 +97,36 @@ void ClientSideNetwork::ReadPackets(void)
 	}
 }
 
+void ClientSideNetwork::SendCommand(void)
+{
+	if(networkClient->GetConnectionState() != DREAMSOCK_CONNECTED)
+		return;
+
+	DreamMessage message;
+	char data[1400];
+
+	int i = networkClient->GetOutgoingSequence() & (COMMAND_HISTORY_SIZE-1);
+
+	message.Init(data, sizeof(data));
+	message.WriteByte(USER_MES_FRAME);						// type
+	message.AddSequences(networkClient);					// sequences
+
+	// Build delta-compressed move command
+	mBaseGame->BuildDeltaMoveCommand(&message, &mBaseGame->inputClient);
+
+	// Send the packet
+	networkClient->SendPacket(&message);
+
+	// Store the command to the input client's history
+	memcpy(&mBaseGame->inputClient.frame[i], &mBaseGame->inputClient.command, sizeof(ClientSideCommand));
+
+	ClientSideClient *clList = mBaseGame->clientList;
+
+	// Store the commands to the clients' history
+	for( ; clList != NULL; clList = clList->next)
+	{
+		memcpy(&clList->frame[i], &clList->command, sizeof(ClientSideCommand));
+	}
+}
+
 
