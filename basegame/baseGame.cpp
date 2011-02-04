@@ -294,7 +294,7 @@ void BaseGame::AddClient(int local, int ind, char *name)
 
 	// If we just joined the game, request a non-delta compressed frame
 	if(local)
-		SendRequestNonDeltaFrame();
+		mClientSideNetwork->SendRequestNonDeltaFrame();
 
 }
 
@@ -363,18 +363,6 @@ void BaseGame::RemoveClients(void)
 	}
 
 	clientList = NULL;
-}
-
-void BaseGame::SendRequestNonDeltaFrame(void)
-{
-	char data[1400];
-	DreamMessage message;
-	message.Init(data, sizeof(data));
-
-	message.WriteByte(USER_MES_NONDELTAFRAME);
-	message.AddSequences(networkClient);
-
-	networkClient->SendPacket(&message);
 }
 
 void BaseGame::Connect(void)
