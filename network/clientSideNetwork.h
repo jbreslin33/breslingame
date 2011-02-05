@@ -22,9 +22,15 @@ void	ReadMoveCommand         (DreamMessage *mes, ClientSideClient *client);
 void	ReadDeltaMoveCommand    (DreamMessage *mes, ClientSideClient *client);
 void	BuildDeltaMoveCommand   (DreamMessage *mes, ClientSideClient *theClient);
 
+void	StartConnection		(char serverIP[32]);
+void	Connect			(void);
+void	Disconnect		(void);
+void	SendStartGame		(void);
+
 BaseGame* mBaseGame;
 DreamClient* networkClient;
 
+bool init;
 
 };
 #endif

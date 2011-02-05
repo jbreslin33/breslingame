@@ -52,10 +52,6 @@ public:
 
 	float frametime;
 
-	bool init;
-
-
-
 public:
 	BaseGame();
 	~BaseGame();
@@ -65,19 +61,12 @@ public:
     virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
     virtual bool keyPressed( const OIS::KeyEvent &arg );
 
-
 	// Client.cpp
 	void	Shutdown(void);
 	void	CheckKeys(void);
 	void	Frame(void);
 	void	RunNetwork(int msec);
 	
-	// Network.cpp
-	void	StartConnection(char serverIP[32]);
-	void	Connect(void);
-	void	Disconnect(void);
-	void	SendStartGame(void);
-
 	ClientSideClient *GetClientList(void) { return clientList; }
 
 	ClientSideClient *GetClientPointer(int index);

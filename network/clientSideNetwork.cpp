@@ -9,13 +9,12 @@ ClientSideNetwork::ClientSideNetwork(BaseGame* baseGame)
 {
 	mBaseGame     = baseGame;
 	networkClient = mBaseGame->networkClient;
+	init = false;
 }
 
 ClientSideNetwork::~ClientSideNetwork()
 {
 }
-
-
 
 void ClientSideNetwork::ReadPackets(void)
 {
@@ -90,12 +89,25 @@ void ClientSideNetwork::ReadPackets(void)
 
 		case USER_MES_SERVEREXIT:
 			//MessageBox(NULL, "Server disconnected", "Info", MB_OK);
-			mBaseGame->Disconnect();
+			Disconnect();
 			break;
-
 		}
 	}
 }
+
+void ClientSideNetwork::StartConnection(char serverIP[32])
+
+{
+	int ret = networkClient->Initialise("", serverIP, 30004);
+
+	if(ret == DREAMSOCK_CLIENT_ERROR)
+	{
+		char text[64];
+		sprintf(text, "Could not open client socket");
+	}
+	Connect();
+}
+
 
 void ClientSideNetwork::SendCommand(void)
 {
@@ -240,5 +252,34 @@ void ClientSideNetwork::BuildDeltaMoveCommand(DreamMessage *mes, ClientSideClien
 	}
 
 	mes->WriteByte(theClient->command.msec);
+}
+
+void ClientSideNetwork::Connect(void)
+{
+	if(init)
+	{
+		LogString("ArmyWar already initialised");
+		return;
+	}
+
+	LogString("BaseGame::Connect");
+
+	init = true;
+
+	networkClient->SendConnect("myname");
+}
+
+void ClientSideNetwork::Disconnect(void)
+{
+	if(!init)
+		return;
+
+	LogString("BaseGame::Disconnect");
+
+	init = false;
+	mBaseGame->localClient = NULL;
+	memset(&mBaseGame->inputClient, 0, sizeof(ClientSideClient));
+
+	networkClient->SendDisconnect();
 }
 
