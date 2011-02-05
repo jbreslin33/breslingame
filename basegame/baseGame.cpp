@@ -23,19 +23,12 @@ BaseGame::BaseGame()
 
 	frametime		= 0.0f;
 
-	init			= false;
-
 	next			= NULL;
 }
 
 BaseGame::~BaseGame()
 {
 	delete networkClient;
-}
-
-void BaseGame::Shutdown(void)
-{
-	Disconnect();
 }
 
 ClientSideClient *BaseGame::GetClientPointer(int index)
@@ -210,28 +203,6 @@ void BaseGame::MoveObjects(void)
 	}
 }
 
-
-void BaseGame::StartConnection(char serverIP[32])
-
-{
-//	LogString("StartConnection");
-
-	//gameIndex = ind;
-
-//char serverIP[32] = "192.168.2.112";
-	int ret = networkClient->Initialise("", serverIP, 30004);
-
-	if(ret == DREAMSOCK_CLIENT_ERROR)
-	{
-		char text[64];
-		sprintf(text, "Could not open client socket");
-
-		//MessageBox(NULL, text, "Error", MB_OK);
-	}
-
-	Connect();
-}
-
 void BaseGame::AddClient(int local, int ind, char *name)
 {
 	// First get a pointer to the beginning of client list
@@ -365,33 +336,9 @@ void BaseGame::RemoveClients(void)
 	clientList = NULL;
 }
 
-void BaseGame::Connect(void)
+void BaseGame::Shutdown(void)
 {
-	if(init)
-	{
-		LogString("ArmyWar already initialised");
-		return;
-	}
-
-	LogString("BaseGame::Connect");
-
-	init = true;
-
-	networkClient->SendConnect("myname");
-}
-
-void BaseGame::Disconnect(void)
-{
-	if(!init)
-		return;
-
-	LogString("BaseGame::Disconnect");
-
-	init = false;
-	localClient = NULL;
-	memset(&inputClient, 0, sizeof(ClientSideClient));
-
-	networkClient->SendDisconnect();
+	mClientSideNetwork->Disconnect();
 }
 
 void BaseGame::RunNetwork(int msec)
@@ -533,9 +480,9 @@ extern "C" {
 	 
 	
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	mBaseGame->StartConnection(strCmdLine);
+	mClientSideNetwork->StartConnection(strCmdLine);
 #else
-	mBaseGame->StartConnection(argv[1]);
+	mClientSideNetwork->StartConnection(argv[1]);
 #endif
  
         try {
