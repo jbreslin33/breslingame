@@ -20,6 +20,7 @@
 	#include <netinet/in.h>
 	#include <arpa/inet.h>
 	#include <netdb.h>
+	#include "DreamLinuxSock.h"
 #endif
 
 #include <stdlib.h>
@@ -27,9 +28,6 @@
 
 
 
-#ifndef WIN32
-#include "DreamLinuxSock.h"
-#endif
 
 DreamSock::DreamSock()
 {
@@ -368,10 +366,9 @@ int DreamSock::dreamSock_Linux_GetCurrentSystemTime()
 */
 int DreamSock::dreamSock_GetCurrentSystemTime(void)
 {
-#ifndef WIN32
-	return dreamSock_Linux_GetCurrentSystemTimeJim();
-#else
+#ifdef WIN32
 	return dreamWinSock->dreamSock_Win_GetCurrentSystemTime();
-	//return 1;
+#else
+	return dreamSock_Linux_GetCurrentSystemTimeJim();
 #endif
 }

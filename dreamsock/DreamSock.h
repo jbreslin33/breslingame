@@ -93,12 +93,6 @@ void 	dreamSock_Broadcast(SOCKET sock, int length, char *data, int port);
 bool          dreamSock_init;
 DreamWinSock* dreamWinSock;
 
-#ifndef WIN32
-int dreamSock_Linux_GetCurrentSystemTime(void);
-#else
-//int DreamSock_Win_GetCurrentSystemTime(void);
-#endif
-
 int dreamSock_GetCurrentSystemTime(void);
 
 };
