@@ -88,7 +88,7 @@ void DreamMessage::AddSequences(DreamClient *client)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void DreamMessage::Write(void *d, int length)
+void DreamMessage::Write(const void *d, int length)
 {
 	memcpy(GetNewPoint(length), d, length);		
 }
@@ -149,7 +149,7 @@ void DreamMessage::WriteFloat(float c)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void DreamMessage::WriteString(char *s)
+void DreamMessage::WriteString(const char *s)
 {
 	if(!s)
 	{

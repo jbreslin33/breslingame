@@ -52,14 +52,14 @@ private:
 public:
 	void    Init(char *d, int length);
 	void	Clear(void);
-	void	Write(void *d, int length);
+	void	Write(const void *d, int length);
 	void	AddSequences(DreamClient *client);
 
 	void    WriteByte(char c);
 	void	WriteShort(short c);
 	void	WriteLong(long c);
 	void    WriteFloat(float c);
-	void	WriteString(char *s);
+	void	WriteString(const char *s);
 	void	BeginReading(void);
 	void	BeginReading(int s);
 	char	*Read(int s);

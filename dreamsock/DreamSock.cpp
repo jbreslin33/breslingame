@@ -146,7 +146,7 @@ int DreamSock::dreamSock_SetBroadcasting(SOCKET sock, int mode)
 	return 0;
 }
 
-int DreamSock::dreamSock_StringToSockaddr(char *addressString, struct sockaddr *sadr)
+int DreamSock::dreamSock_StringToSockaddr(const char *addressString, struct sockaddr *sadr)
 {
 	char copy[128];
 
@@ -169,7 +169,7 @@ int DreamSock::dreamSock_StringToSockaddr(char *addressString, struct sockaddr *
 }
 
 
-SOCKET DreamSock::dreamSock_OpenUDPSocket(char *netInterface, int port)
+SOCKET DreamSock::dreamSock_OpenUDPSocket(const char *netInterface, int port)
 {
 	SOCKET sock;
 

@@ -129,7 +129,7 @@ void DreamClient::DumpBuffer(void)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void DreamClient::SendConnect(char *name)
+void DreamClient::SendConnect(const char *name)
 {
 	// Dump buffer so there won't be any old packets to process
 	DumpBuffer();
