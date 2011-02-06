@@ -60,7 +60,7 @@ public:
 	DreamServer();
 	~DreamServer();
 
-	int		Initialise    (char *localIP, int serverPort);
+	int		Initialise    (const char *localIP, int serverPort);
 	void		Uninitialise  (void);
 	void		SendPing      (void);
 	int		GetPacket     (char *data, struct sockaddr *from);

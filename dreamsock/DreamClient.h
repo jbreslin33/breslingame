@@ -78,7 +78,7 @@ public:
 	int		Initialise(char *localIP, char *remoteIP, int port);
 	void		Uninitialise(void);
 	void		Reset(void);
-	void		SendConnect(char *name);
+	void		SendConnect(const char *name);
 	void		SendDisconnect(void);
 	void		SendPing(void);
 
