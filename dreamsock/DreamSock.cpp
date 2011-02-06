@@ -99,7 +99,8 @@ SOCKET DreamSock::dreamSock_Socket(int protocol)
 
 #ifdef WIN32
 		errno = WSAGetLastError();
-		LogString("Error: socket() code %d : %s", errno, strerror(errno));
+		char* buf;
+		LogString("Error: socket() code %d : %s", errno, strerror_s(buf,64,errno));
 #else
 		LogString("Error: socket() : %s", strerror(errno));
 #endif
@@ -135,7 +136,8 @@ int DreamSock::dreamSock_SetBroadcasting(SOCKET sock, int mode)
 
 #ifdef WIN32
 		int err = WSAGetLastError();
-		LogString("Error code %d: setsockopt() : %s", err, strerror(err));
+		char* buf;
+		LogString("Error code %d: setsockopt() : %s", err, strerror_s(buf,64,err));
 #else
 		LogString("Error code %d: setsockopt() : %s", errno, strerror(errno));
 #endif
@@ -156,8 +158,13 @@ int DreamSock::dreamSock_StringToSockaddr(const char *addressString, struct sock
 
 	addressPtr->sin_family = AF_INET;
 	addressPtr->sin_port = htons(0);
-
+#ifdef WIN32
+	strncpy_s(copy, addressString, 128);
+#endif
+#ifdef UNIX
 	strncpy(copy, addressString, 128);
+#endif
+
 
 	// If the address string begins with a number, assume an IP address
 	if(copy[0] >= '0' && copy[0] <= '9')
@@ -213,8 +220,10 @@ SOCKET DreamSock::dreamSock_OpenUDPSocket(const char *netInterface, int port)
 	{
 #ifdef WIN32
 		errno = WSAGetLastError();
-		LogString("Error code %d: bind() : %s", errno, strerror(errno));
-#else
+		char* buf;
+		LogString("Error code %d: bind() : %s", errno, strerror_s(buf,128,errno));
+#endif
+#ifdef UNIX
 		LogString("Error code %d: bind() : %s", errno, strerror(errno));
 #endif
 
@@ -268,9 +277,10 @@ int DreamSock::dreamSock_GetPacket(SOCKET sock, char *data, struct sockaddr *fro
 
 			return ret;
 		}
-
-		LogString("Error code %d: recvfrom() : %s", errno, strerror(errno));
-#else
+		char* buf;
+		LogString("Error code %d: recvfrom() : %s", errno, strerror_s(buf, 128,errno));
+#endif
+#ifdef UNIX
 		// Silently handle wouldblock
 		if(errno == EWOULDBLOCK || errno == ECONNREFUSED)
 			return ret;
@@ -298,9 +308,10 @@ void DreamSock::dreamSock_SendPacket(SOCKET sock, int length, char *data, struct
 		// Silently handle wouldblock
 		if(errno == WSAEWOULDBLOCK)
 			return;
-
-		LogString("Error code %d: sendto() : %s", errno, strerror(errno));
-#else
+		char* buf;
+		LogString("Error code %d: sendto() : %s", errno, strerror_s(buf,128,errno));
+#endif
+#ifdef UNIX
 		// Silently handle wouldblock
 		if(errno == EWOULDBLOCK)
 			return;
@@ -337,9 +348,10 @@ void DreamSock::dreamSock_Broadcast(SOCKET sock, int length, char *data, int por
 		// Silently handle wouldblock
 		if(errno == WSAEWOULDBLOCK)
 			return;
-
-		LogString("Error code %d: sendto() : %s", errno, strerror(errno));
-#else
+		char* buf;
+		LogString("Error code %d: sendto() : %s", errno, strerror_s(buf,128,errno));
+#endif
+#ifdef UNIX
 		// Silently handle wouldblock
 		if(errno == EWOULDBLOCK)
 			return;

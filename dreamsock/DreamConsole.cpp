@@ -23,7 +23,20 @@ DreamConsole *console = NULL;
 void StartLog(void)
 {
 	time_t current = time(NULL);
+#ifdef WIN32
+	//FILE *stream;
+	if((fopen_s(&LogFile,"DreamSock.log", "w")) != NULL)
+	{
+		fprintf_s(LogFile, "Log file started %s", ctime(&current));
+		
+		fclose(LogFile);
+	}
 
+	if((fopen_s(&LogFile,"DreamSock.log", "a")) != NULL)
+	{
+	}
+#endif
+#ifdef UNIX
 	if((LogFile = fopen("DreamSock.log", "w")) != NULL)
 	{
 		fprintf(LogFile, "Log file started %s", ctime(&current));
@@ -34,6 +47,7 @@ void StartLog(void)
 	if((LogFile = fopen("DreamSock.log", "a")) != NULL)
 	{
 	}
+#endif
 }
 
 #ifdef WIN32
@@ -84,10 +98,17 @@ void LogString(const char *string, ...)
 
 	// Output log string
 #ifdef WIN32
-	fprintf(LogFile, "%s: %s\n", timedate, buf);
+	char c = '\n';
+	//fprintf_s(LogFile, "%s:", timedate,c);
+
+	if(console)
+		console->println(timedate, 0);
+//
+	//fprintf_s(LogFile, "%s:", buf,c);
 
 	if(console)
 		console->println(buf, 0);
+
 #else
 	// Linux outputs to screen and to the open file when running as daemon
 	printf("%s: %s\n", timedate, buf);
