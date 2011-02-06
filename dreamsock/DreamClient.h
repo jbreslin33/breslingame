@@ -75,7 +75,7 @@ public:
 	DreamClient();
 	~DreamClient();
 
-	int		Initialise(char *localIP, const char *remoteIP, int port);
+	int		Initialise(const char *localIP, const char *remoteIP, int port);
 	void		Uninitialise(void);
 	void		Reset(void);
 	void		SendConnect(const char *name);
