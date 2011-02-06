@@ -70,7 +70,7 @@ void LogString(const char *string, ...)
 	time_t current = time(NULL);
 
 	char timedate[64];
-	sprintf(timedate, ctime(&current));
+	sprintf(timedate, "time: %s", ctime(&current));
 
 	// Remove linefeed from time / date string
 	int i = 0;
