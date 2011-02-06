@@ -29,7 +29,7 @@ void    	 Frame            (int msec);
 
 ServerSideClient *GetClientList	  (void)   { return clientList; }
 
-void    	 SetName          (char *n)                { strcpy(gamename, n); }
+void    	 SetName          (char *n)                { strcpy_s(gamename, n); }
 char    	 *GetName         (void)                  { return gamename; }
 void    	 SetIndex         (int ind)       { index = ind; }
 int              GetIndex         (void)          { return index; }

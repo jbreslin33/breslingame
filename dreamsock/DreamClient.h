@@ -105,7 +105,7 @@ public:
 	void		SetIndex(int ind)		{ index = ind; }
 
 	char		*GetName(void)			{ return name; }
-	void		SetName(char *n)		{ strcpy(name, n); }
+	void		SetName(char *n)		{ strcpy_s(name, n); }
 
 	SOCKET		GetSocket(void)			{ return socket; }
 	void		SetSocket(SOCKET sock)	{ socket = sock; }

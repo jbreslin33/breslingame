@@ -64,7 +64,7 @@ int ServerSideGame::InitNetwork()
 	{
 #ifdef WIN32
 		char text[64];
-		sprintf(text, "Could not open server on port %d", networkServer->GetPort());
+		sprintf_s(text, "Could not open server on port %d", networkServer->GetPort());
 
 		MessageBox(NULL, text, "Error", MB_OK);
 #else
