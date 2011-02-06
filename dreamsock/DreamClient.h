@@ -59,7 +59,7 @@ private:
 	int		serverPort;				// Port
 	char		serverIP[32];			// IP address
 	int		index;					// Client index (starts from 1, running number)
-	char		name[32];				// Client name
+	char	        name[32];				// Client name
 
 	SOCKET		socket;					// Socket
 	struct sockaddr	myaddress;				// Socket address
@@ -104,8 +104,9 @@ public:
 	int		GetIndex(void)			{ return index; }
 	void		SetIndex(int ind)		{ index = ind; }
 
-	char		*GetName(void)			{ return name; }
+	const char*	GetName(void)			{ return name; }
 	void		SetName(char *n)		{ strcpy(name, n); }
+	//void		SetName(const char* clientName[64])   { mClientName = clientName; } 	
 
 	SOCKET		GetSocket(void)			{ return socket; }
 	void		SetSocket(SOCKET sock)	{ socket = sock; }
