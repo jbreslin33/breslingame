@@ -105,7 +105,7 @@ public:
 	void		SetIndex(int ind)		{ index = ind; }
 
 	const char*	GetName(void)			{ return name; }
-	void		SetName(char *n)		{ strcpy(name, n); }
+	void		SetName(char *n)		{ strncpy(name, n, 32); }
 	//void		SetName(const char* clientName[64])   { mClientName = clientName; } 	
 
 	SOCKET		GetSocket(void)			{ return socket; }
