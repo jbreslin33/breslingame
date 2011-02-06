@@ -108,8 +108,7 @@ public:
 
 #ifdef WIN32
 	void		SetName(char *n)		{ strncpy_s(name, n, 32); }
-#endif
-#ifdef UNIX
+#else
 	void		SetName(char *n)		{ strncpy(name, n, 32); }
 #endif
 
