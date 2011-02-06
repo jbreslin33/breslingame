@@ -45,7 +45,7 @@ DreamClient::~DreamClient()
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-int DreamClient::Initialise(char *localIP, char *remoteIP, int port)
+int DreamClient::Initialise(char *localIP, const char *remoteIP, int port)
 {
 	// Initialise DreamSock if it is not already initialised
 	dreamSock->dreamSock_Initialize();
