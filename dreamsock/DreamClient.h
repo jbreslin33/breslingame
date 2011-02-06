@@ -75,7 +75,7 @@ public:
 	DreamClient();
 	~DreamClient();
 
-	int		Initialise(char *localIP, char *remoteIP, int port);
+	int		Initialise(char *localIP, const char *remoteIP, int port);
 	void		Uninitialise(void);
 	void		Reset(void);
 	void		SendConnect(const char *name);
@@ -105,7 +105,7 @@ public:
 	void		SetIndex(int ind)		{ index = ind; }
 
 	char		*GetName(void)			{ return name; }
-	void		SetName(char *n)		{ strcpy_s(name, n); }
+	void		SetName(char *n)		{ strcpy(name, n); }
 
 	SOCKET		GetSocket(void)			{ return socket; }
 	void		SetSocket(SOCKET sock)	{ socket = sock; }

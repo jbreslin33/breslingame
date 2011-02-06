@@ -95,7 +95,7 @@ void ClientSideNetwork::ReadPackets(void)
 	}
 }
 
-void ClientSideNetwork::StartConnection(char serverIP[32])
+void ClientSideNetwork::StartConnection(const char serverIP[32])
 
 {
 	int ret = networkClient->Initialise("", serverIP, 30004);
