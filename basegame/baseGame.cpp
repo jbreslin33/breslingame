@@ -14,7 +14,7 @@ bool keys[256];
 
 BaseGame::BaseGame()
 {
-	networkClient	= new DreamClient();
+
 
 	clientList		= NULL;
 	localClient		= NULL;
@@ -28,7 +28,7 @@ BaseGame::BaseGame()
 
 BaseGame::~BaseGame()
 {
-	delete networkClient;
+
 }
 
 ClientSideClient *BaseGame::GetClientPointer(int index)
@@ -74,7 +74,7 @@ void BaseGame::CheckKeys(void)
 	}
 
 	inputClient.command.msec = (int) (frametime * 1000);
-	
+
 }
 
 void BaseGame::CheckPredictionError(int a)
@@ -84,7 +84,7 @@ void BaseGame::CheckPredictionError(int a)
 
 	float errorX =
 		localClient->serverFrame.origin.x - localClient->frame[a].predictedOrigin.x;
-		
+
 	float errorY =
 		localClient->serverFrame.origin.y - localClient->frame[a].predictedOrigin.y;
 
@@ -142,7 +142,7 @@ void BaseGame::PredictMovement(int prevFrame, int curFrame)
 	//
 	// Player ->
 	//
-	
+
 	// Process commands
 	CalculateVelocity(&localClient->frame[curFrame], frametime);
 
@@ -357,8 +357,8 @@ void BaseGame::RunNetwork(int msec)
 	mClientSideNetwork->ReadPackets();
 	mClientSideNetwork->SendCommand();
 
-	int ack = networkClient->GetIncomingAcknowledged();
-	int current = networkClient->GetOutgoingSequence();
+	int ack = mClientSideNetwork->networkClient->GetIncomingAcknowledged();
+	int current = mClientSideNetwork->networkClient->GetOutgoingSequence();
 
 	// Check that we haven't gone too far
 	if(current - ack > COMMAND_HISTORY_SIZE)
@@ -388,7 +388,7 @@ void BaseGame::createPlayer(int index)
 void BaseGame::createScene(void)
 {
     mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
- 
+
     Ogre::Light* pointLight = mSceneMgr->createLight("pointLight");
     pointLight->setType(Ogre::Light::LT_POINT);
     pointLight->setPosition(Ogre::Vector3(250, 150, 250));
@@ -398,7 +398,7 @@ void BaseGame::createScene(void)
 
 bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 {
- 
+
     	if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
     	{
 		keys[VK_UP] = true;
@@ -407,7 +407,7 @@ bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 	{
         	keys[VK_UP] = false;
 	}
-    	
+
 	if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
     	{
 		keys[VK_DOWN] = true;
@@ -425,7 +425,7 @@ bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 	{
         	keys[VK_LEFT] = false;
 	}
-    	
+
 	if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
     	{
 		keys[VK_RIGHT] = true;
@@ -434,14 +434,14 @@ bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 	{
         	keys[VK_RIGHT] = false;
 	}
-         
+
     return true;
 }
 
 bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
     bool ret = BaseApplication::frameRenderingQueued(evt);
- 
+
     if(!processUnbufferedInput(evt)) return false;
 
 	if(mBaseGame != NULL && mClientSideNetwork != NULL)
@@ -449,7 +449,7 @@ bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		mBaseGame->RunNetwork(evt.timeSinceLastFrame * 1000);
 		mBaseGame->CheckKeys();
 	}
- 
+
     return ret;
 }
 
@@ -458,17 +458,17 @@ bool BaseGame::keyPressed( const OIS::KeyEvent &arg )
 	BaseApplication::keyPressed(arg);
     	Ogre::LogManager::getSingletonPtr()->logMessage("*** keyPressed BaseGame n***");
 	return true;
-} 
- 
+}
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #define WIN32_LEAN_AND_MEAN
 #include "windows.h"
 #endif
- 
+
 #ifdef __cplusplus
 extern "C" {
 #endif
- 
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 
     INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT )
@@ -479,14 +479,14 @@ extern "C" {
     {
         mBaseGame          = new BaseGame;
 	mClientSideNetwork = new ClientSideNetwork(mBaseGame);
-	 
-	
+
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	mClientSideNetwork->StartConnection(strCmdLine);
 #else
 	mClientSideNetwork->StartConnection(argv[1]);
 #endif
- 
+
         try {
             mBaseGame->go();
         } catch( Ogre::Exception& e ) {
@@ -497,10 +497,10 @@ extern "C" {
                 e.getFullDescription().c_str() << std::endl;
 #endif
         }
- 
+
         return 0;
     }
- 
+
 #ifdef __cplusplus
 }
 #endif
