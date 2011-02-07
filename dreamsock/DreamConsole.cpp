@@ -28,8 +28,8 @@ void StartLog(void)
 	//FILE *stream;
 	if((fopen_s(&LogFile,"DreamSock.log", "w")) != NULL)
 	{
-		char* tbuf;
-		fprintf_s(LogFile, "Log file started %s", ctime_s(tbuf,64,&current));
+		//char* tbuf;
+		//fprintf_s(LogFile, "Log file started %s", ctime_s(tbuf,64,&current));
 		
 		fclose(LogFile);
 	}
