@@ -7,13 +7,15 @@
 
 ClientSideNetwork::ClientSideNetwork(BaseGame* baseGame)
 {
+	networkClient	= new DreamClient();
 	mBaseGame     = baseGame;
-	networkClient = mBaseGame->networkClient;
+	//networkClient = mBaseGame->networkClient;
 	init = false;
 }
 
 ClientSideNetwork::~ClientSideNetwork()
 {
+		delete networkClient;
 }
 
 void ClientSideNetwork::ReadPackets(void)

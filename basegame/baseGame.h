@@ -17,7 +17,7 @@ extern bool keys[256];
 #ifdef WIN32
         //do nothing
 #else
-#define VK_ESCAPE 0     
+#define VK_ESCAPE 0
 #define VK_DOWN 1
 #define VK_UP 2
 #define VK_LEFT 3
@@ -43,7 +43,7 @@ public:
 	bool processUnbufferedInput(const Ogre::FrameEvent& evt);
 
 	// Network variables
-	DreamClient *networkClient;
+	//DreamClient *networkClient;
 
 	ClientSideClient *clientList;			// Client list
 	ClientSideClient *localClient;		// Pointer to the local client in the client list
@@ -66,7 +66,7 @@ public:
 	void	CheckKeys(void);
 	void	Frame(void);
 	void	RunNetwork(int msec);
-	
+
 	ClientSideClient *GetClientList(void) { return clientList; }
 
 	ClientSideClient *GetClientPointer(int index);
