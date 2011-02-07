@@ -119,5 +119,3 @@ int DreamWinSock::dreamSock_Win_GetCurrentSystemTime(void)
 
 	return curtime;
 }
-
-//#endif
