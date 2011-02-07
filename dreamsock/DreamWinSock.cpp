@@ -98,7 +98,7 @@ int DreamWinSock::dreamSock_InitializeWinSock(void)
 
 int DreamWinSock::dreamSock_Win_GetCurrentSystemTime(void)
 {
-	int curtime;
+	static unsigned int curtime;
 	static unsigned int base;
 	static bool initialized = false;
 
@@ -111,7 +111,7 @@ int DreamWinSock::dreamSock_Win_GetCurrentSystemTime(void)
 		initialized = true;
 	}
 
-	curtime = time(NULL) * 1000 - base;
+	curtime = static_cast<unsigned int> (time(NULL)) * 1000 - base;
 
 	return curtime;
 
