@@ -30,6 +30,9 @@ class BaseGame : public BaseApplication
 {
 public:
 
+BaseGame();
+~BaseGame();
+
 	// Client.cpp
 	void	CheckPredictionError(int a);
 	void	CalculateVelocity(ClientSideCommand *command, float frametime);
@@ -42,19 +45,12 @@ public:
 
 	bool processUnbufferedInput(const Ogre::FrameEvent& evt);
 
-	// Network variables
-	//DreamClient *networkClient;
-
 	ClientSideClient *clientList;			// Client list
 	ClientSideClient *localClient;		// Pointer to the local client in the client list
 
 	ClientSideClient inputClient;			// Handles all keyboard input
 
 	float frametime;
-
-public:
-	BaseGame();
-	~BaseGame();
 
     void         createPlayer(int index);
     virtual void createScene(void);
@@ -70,7 +66,6 @@ public:
 	ClientSideClient *GetClientList(void) { return clientList; }
 
 	ClientSideClient *GetClientPointer(int index);
-
 
 	BaseGame *next;
 };
