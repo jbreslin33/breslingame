@@ -1,9 +1,4 @@
-/**********************************/
-/* Programmers:                   */
-/* Teijo Hakala                   */
-/**********************************/
 // Windows code only
-//#ifdef WIN32
 
 #include "DreamWinSock.h"
 #include "DreamSock.h"
@@ -101,21 +96,23 @@ int DreamWinSock::dreamSock_InitializeWinSock(void)
 }
 
 
-time_t DreamWinSock::dreamSock_Win_GetCurrentSystemTime(void)
+int DreamWinSock::dreamSock_Win_GetCurrentSystemTime(void)
 {
 	int curtime;
-	static int base;
+	static unsigned int base;
 	static bool initialized = false;
 
 	if(!initialized)
 	{
-
+//unsigned int uiTime = static_cast<unsigned int>( time( NULL ) );
 		//base = timeGetTime() & 0xffff0000;
-		base = time(NULL) * 1000;
+		//base = time(NULL) * 1000;
+		base = static_cast<unsigned int> (time(NULL)) * 1000;
 		initialized = true;
 	}
 
 	curtime = time(NULL) * 1000 - base;
 
 	return curtime;
+
 }

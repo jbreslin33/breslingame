@@ -7,5 +7,5 @@ public:
 	~DreamWinSock();
 
 int dreamSock_InitializeWinSock(void);
-time_t dreamSock_Win_GetCurrentSystemTime(void);
+int dreamSock_Win_GetCurrentSystemTime(void);
 };
