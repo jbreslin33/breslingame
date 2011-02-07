@@ -1,3 +1,5 @@
+#include <time.h>
+
 class DreamWinSock
 {
 public:
@@ -5,5 +7,5 @@ public:
 	~DreamWinSock();
 
 int dreamSock_InitializeWinSock(void);
-int dreamSock_Win_GetCurrentSystemTime(void);
+time_t dreamSock_Win_GetCurrentSystemTime(void);
 };
