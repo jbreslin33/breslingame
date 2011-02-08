@@ -42,6 +42,9 @@ void BaseGame::createScene(void)
 
 bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 {
+//from jim: I believe having this here makes local client react faster as
+//this is where ogre wants movement code. but....
+//it causes a longer delay to server. needs to get to server quicker!
         mClientSideGame->inputClient.command.key = 0;
     	
 	if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
