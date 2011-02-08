@@ -7,6 +7,7 @@ class BaseGame;
 class DreamClient;
 class DreamMessage;
 class ClientSideClient;
+class ClientSideGame;
 
 class ClientSideNetwork : public Network
 {
@@ -29,6 +30,8 @@ void	SendStartGame		(void);
 
 BaseGame* mBaseGame;
 DreamClient* networkClient;
+
+ClientSideGame* mClientSideGame;
 
 bool init;
 

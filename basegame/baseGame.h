@@ -8,8 +8,8 @@
 
 #include "../network/clientSideNetwork.h"
 
-class DreamMessage;
-class DreamClient;
+//class DreamMessage;
+//class DreamClient;
 
 extern bool keys[256];
 
@@ -33,24 +33,7 @@ public:
 BaseGame();
 ~BaseGame();
 
-	// Client.cpp
-	void	CheckPredictionError(int a);
-	void	CalculateVelocity(ClientSideCommand *command, float frametime);
-	void	PredictMovement(int prevFrame, int curFrame);
-	void	MoveObjects(void);
-
-	void	AddClient(int local, int index, char *name);
-	void	RemoveClient(int index);
-	void	RemoveClients(void);
-
 	bool processUnbufferedInput(const Ogre::FrameEvent& evt);
-
-	ClientSideClient *clientList;			// Client list
-	ClientSideClient *localClient;		// Pointer to the local client in the client list
-
-	ClientSideClient inputClient;			// Handles all keyboard input
-
-	float frametime;
 
     void         createPlayer(int index);
     virtual void createScene(void);
@@ -58,16 +41,7 @@ BaseGame();
     virtual bool keyPressed( const OIS::KeyEvent &arg );
 
 	// Client.cpp
-	void	Shutdown(void);
-	void	CheckKeys(void);
-	void	Frame(void);
-	void	RunNetwork(int msec);
 
-	ClientSideClient *GetClientList(void) { return clientList; }
-
-	ClientSideClient *GetClientPointer(int index);
-
-	BaseGame *next;
 };
 
 #endif
