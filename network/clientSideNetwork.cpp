@@ -4,12 +4,14 @@
 
 #include "../dreamsock/DreamMessage.h"
 #include "../dreamsock/DreamClient.h"
+#include "../game/ClientSideGame.h"
 
 ClientSideNetwork::ClientSideNetwork(BaseGame* baseGame)
 {
 	networkClient	= new DreamClient();
 	mBaseGame     = baseGame;
 	//networkClient = mBaseGame->networkClient;
+	mClientSideGame = NULL;
 	init = false;
 }
 
@@ -49,7 +51,7 @@ void ClientSideNetwork::ReadPackets(void)
 			ind		= mes.ReadByte();
 			strcpy(name, mes.ReadString());
 
-			mBaseGame->AddClient(local, ind, name);
+			mClientSideGame->AddClient(local, ind, name);
 			break;
 
 		case DREAMSOCK_MES_REMOVECLIENT:
@@ -57,7 +59,7 @@ void ClientSideNetwork::ReadPackets(void)
 
 			LogString("Got removeclient %d message", ind);
 
-			mBaseGame->RemoveClient(ind);
+			mClientSideGame->RemoveClient(ind);
 
 			break;
 
@@ -66,7 +68,7 @@ void ClientSideNetwork::ReadPackets(void)
 			mes.ReadShort();
 			mes.ReadShort();
 
-			for(clList = mBaseGame->clientList; clList != NULL; clList = clList->next)
+			for(clList = mClientSideGame->clientList; clList != NULL; clList = clList->next)
 			{
 //				LogString("Reading DELTAFRAME for client %d", clList->index);
 				ReadDeltaMoveCommand(&mes, clList);
@@ -79,9 +81,9 @@ void ClientSideNetwork::ReadPackets(void)
 			mes.ReadShort();
 			mes.ReadShort();
 
-			clList = mBaseGame->clientList;
+			clList = mClientSideGame->clientList;
 
-			for(clList = mBaseGame->clientList; clList != NULL; clList = clList->next)
+			for(clList = mClientSideGame->clientList; clList != NULL; clList = clList->next)
 			{
 				LogString("Reading NONDELTAFRAME for client %d", clList->index);
 				ReadMoveCommand(&mes, clList);
@@ -126,15 +128,15 @@ void ClientSideNetwork::SendCommand(void)
 	message.AddSequences(networkClient);					// sequences
 
 	// Build delta-compressed move command
-	BuildDeltaMoveCommand(&message, &mBaseGame->inputClient);
+	BuildDeltaMoveCommand(&message, &mClientSideGame->inputClient);
 
 	// Send the packet
 	networkClient->SendPacket(&message);
 
 	// Store the command to the input client's history
-	memcpy(&mBaseGame->inputClient.frame[i], &mBaseGame->inputClient.command, sizeof(ClientSideCommand));
+	memcpy(&mClientSideGame->inputClient.frame[i], &mClientSideGame->inputClient.command, sizeof(ClientSideCommand));
 
-	ClientSideClient *clList = mBaseGame->clientList;
+	ClientSideClient *clList = mClientSideGame->clientList;
 
 	// Store the commands to the clients' history
 	for( ; clList != NULL; clList = clList->next)
@@ -215,9 +217,9 @@ void ClientSideNetwork::ReadDeltaMoveCommand(DreamMessage *mes, ClientSideClient
 		client->serverFrame.vel.x = mes->ReadFloat();
 		client->serverFrame.vel.y = mes->ReadFloat();
 
-		if(client == mBaseGame->localClient)
+		if(client == mClientSideGame->localClient)
 		{
-			mBaseGame->CheckPredictionError(processedFrame);
+			mClientSideGame->CheckPredictionError(processedFrame);
 		}
 
 		else
@@ -279,8 +281,8 @@ void ClientSideNetwork::Disconnect(void)
 	LogString("BaseGame::Disconnect");
 
 	init = false;
-	mBaseGame->localClient = NULL;
-	memset(&mBaseGame->inputClient, 0, sizeof(ClientSideClient));
+	mClientSideGame->localClient = NULL;
+	memset(&mClientSideGame->inputClient, 0, sizeof(ClientSideClient));
 
 	networkClient->SendDisconnect();
 }
