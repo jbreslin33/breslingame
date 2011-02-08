@@ -10,7 +10,6 @@
 
 #include "../network/clientSideNetwork.h"
 
-BaseGame*          mBaseGame;
 ClientSideNetwork* mClientSideNetwork;
 ClientSideGame*     mClientSideGame;
 
@@ -94,7 +93,7 @@ bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
     if(!processUnbufferedInput(evt)) return false;
 
-	if(mBaseGame != NULL && mClientSideNetwork != NULL)
+	if(mClientSideNetwork != NULL)
 	{
 		mClientSideGame->RunNetwork(evt.timeSinceLastFrame * 1000);
 		mClientSideGame->CheckKeys();
@@ -127,6 +126,8 @@ extern "C" {
     int main(int argc, char *argv[])
 #endif
     {
+
+	BaseGame*          mBaseGame;
         mBaseGame          = new BaseGame;
 	mClientSideGame    = new ClientSideGame(mBaseGame);
 	mClientSideNetwork = new ClientSideNetwork(mBaseGame);
