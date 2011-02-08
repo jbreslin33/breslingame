@@ -42,9 +42,9 @@ void BaseGame::createScene(void)
 
 bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 {
-
         mClientSideGame->inputClient.command.key = 0;
-    	if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
+    	
+	if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
     	{
 		mClientSideGame->inputClient.command.key |= KEY_UP;
    	}
@@ -66,75 +66,8 @@ bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 
                 mClientSideGame->inputClient.command.key |= KEY_RIGHT;
 	}
-/*
-	else
-	{
-        	keys[VK_UP] = false;
-	}
-
-	if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
-    	{
-		keys[VK_DOWN] = true;
-    	}
-	else
-	{
-        	keys[VK_DOWN] = false;
-	}
-
-    	if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
-    	{
-		keys[VK_LEFT] = true;
-    	}
-	else
-	{
-        	keys[VK_LEFT] = false;
-	}
-
-	if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
-    	{
-		keys[VK_RIGHT] = true;
-	}
-	else
-	{
-        	keys[VK_RIGHT] = false;
-	}
-*/
-
-/*
-        if(keys[VK_ESCAPE])
-        {
-                Shutdown();
-
-                keys[VK_ESCAPE] = false;
-        }
-
-        if(keys[VK_DOWN])
-        {
-                inputClient.command.key |= KEY_DOWN;
-        }
-
-        if(keys[VK_UP])
-        {
-                inputClient.command.key |= KEY_UP;
-        }
-
-        if(keys[VK_LEFT])
-        {
-                inputClient.command.key |= KEY_LEFT;
-        }
-
-        if(keys[VK_RIGHT])
-        {
-                inputClient.command.key |= KEY_RIGHT;
-        }
-*/
-/*
-        if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
-        {
-                inputClient.command.key |= KEY_UP;
-        }
-*/  
-      mClientSideGame->inputClient.command.msec = (int) (mClientSideGame->frametime * 1000);
+      	
+	mClientSideGame->inputClient.command.msec = (int) (mClientSideGame->frametime * 1000);
 
     return true;
 }
