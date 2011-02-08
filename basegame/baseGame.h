@@ -2,15 +2,7 @@
 #define BASEGAME_H
 
 #include "../baseapplication/BaseApplication.h"
-#include "../command/ClientSideCommand.h"
-#include "../client/ClientSideClient.h"
-#include "../math/Vector3D.h"
-
-#include "../network/clientSideNetwork.h"
-
-//class DreamMessage;
-//class DreamClient;
-
+/*
 extern bool keys[256];
 
 //keys for linux
@@ -25,6 +17,22 @@ extern bool keys[256];
 #define VK_SPACE 5
 #endif
 
+#define COMMAND_HISTORY_SIZE            64
+
+#define KEY_UP                                          1
+#define KEY_DOWN                                        2
+#define KEY_LEFT                                        4
+#define KEY_RIGHT                                       8
+
+#define CMD_KEY                                         1
+#define CMD_ORIGIN                                      4
+
+#define USER_MES_FRAME                          1
+#define USER_MES_NONDELTAFRAME          2
+#define USER_MES_SERVEREXIT                     3
+*/
+
+
 // The main application class interface
 class BaseGame : public BaseApplication
 {
@@ -33,14 +41,12 @@ public:
 BaseGame();
 ~BaseGame();
 
-	bool processUnbufferedInput(const Ogre::FrameEvent& evt);
+bool processUnbufferedInput(const Ogre::FrameEvent& evt);
 
-    void         createPlayer(int index);
-    virtual void createScene(void);
-    virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
-    virtual bool keyPressed( const OIS::KeyEvent &arg );
-
-	// Client.cpp
+void         createPlayer(int index);
+virtual void createScene(void);
+virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+virtual bool keyPressed( const OIS::KeyEvent &arg );
 
 };
 

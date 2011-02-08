@@ -3,6 +3,8 @@
 #include "../basegame/baseGame.h"
 #include "../dreamsock/DreamClient.h"
 
+#include "../network/clientSideNetwork.h"
+
 ClientSideGame::ClientSideGame(BaseGame* baseGame)
 {
 	mBaseGame = baseGame;
