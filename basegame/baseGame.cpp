@@ -6,7 +6,9 @@
 #include "../dreamsock/DreamSock.h"
 
 #include "../client/ClientSideClient.h"
-#include "../game/clientSideGame.h"
+#include "../game/ClientSideGame.h"
+
+#include "../network/clientSideNetwork.h"
 
 BaseGame*          mBaseGame;
 ClientSideNetwork* mClientSideNetwork;
@@ -17,15 +19,12 @@ bool keys[256];
 BaseGame::BaseGame()
 {
 
-
-
 }
 
 BaseGame::~BaseGame()
 {
 
 }
-
 
 void BaseGame::createPlayer(int index)
 {
@@ -129,13 +128,11 @@ extern "C" {
 #endif
     {
         mBaseGame          = new BaseGame;
+	mClientSideGame    = new ClientSideGame(mBaseGame);
+	mClientSideNetwork = new ClientSideNetwork(mBaseGame);
 
-		mClientSideGame    = new ClientSideGame(mBaseGame);
-	    mClientSideNetwork = new ClientSideNetwork(mBaseGame);
-
-		mClientSideGame->mClientSideNetwork = mClientSideNetwork;
-		mClientSideNetwork->mClientSideGame = mClientSideGame;
-
+	mClientSideGame->mClientSideNetwork = mClientSideNetwork;
+	mClientSideNetwork->mClientSideGame = mClientSideGame;
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	mClientSideNetwork->StartConnection(strCmdLine);
