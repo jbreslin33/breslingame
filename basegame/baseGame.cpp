@@ -1,10 +1,5 @@
 #include "baseGame.h"
 
-#include "../baseapplication/BaseApplication.h"
-
-#include "../dreamsock/DreamClient.h"
-#include "../dreamsock/DreamSock.h"
-
 #include "../client/ClientSideClient.h"
 #include "../game/ClientSideGame.h"
 
@@ -48,10 +43,30 @@ void BaseGame::createScene(void)
 bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 {
 
+        mClientSideGame->inputClient.command.key = 0;
     	if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
     	{
-		keys[VK_UP] = true;
+		mClientSideGame->inputClient.command.key |= KEY_UP;
    	}
+	
+	if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
+	{
+	
+                mClientSideGame->inputClient.command.key |= KEY_DOWN;
+	}
+
+    	if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
+	{
+
+                mClientSideGame->inputClient.command.key |= KEY_LEFT;
+	}
+
+	if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
+	{
+
+                mClientSideGame->inputClient.command.key |= KEY_RIGHT;
+	}
+/*
 	else
 	{
         	keys[VK_UP] = false;
@@ -83,6 +98,43 @@ bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 	{
         	keys[VK_RIGHT] = false;
 	}
+*/
+
+/*
+        if(keys[VK_ESCAPE])
+        {
+                Shutdown();
+
+                keys[VK_ESCAPE] = false;
+        }
+
+        if(keys[VK_DOWN])
+        {
+                inputClient.command.key |= KEY_DOWN;
+        }
+
+        if(keys[VK_UP])
+        {
+                inputClient.command.key |= KEY_UP;
+        }
+
+        if(keys[VK_LEFT])
+        {
+                inputClient.command.key |= KEY_LEFT;
+        }
+
+        if(keys[VK_RIGHT])
+        {
+                inputClient.command.key |= KEY_RIGHT;
+        }
+*/
+/*
+        if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
+        {
+                inputClient.command.key |= KEY_UP;
+        }
+*/  
+      mClientSideGame->inputClient.command.msec = (int) (mClientSideGame->frametime * 1000);
 
     return true;
 }

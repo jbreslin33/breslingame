@@ -4,6 +4,8 @@
 #include "../dreamsock/DreamClient.h"
 
 #include "../network/clientSideNetwork.h"
+#include <OISKeyboard.h>
+#include "../baseapplication/BaseApplication.h"
 
 ClientSideGame::ClientSideGame(BaseGame* baseGame)
 {
@@ -298,6 +300,7 @@ ClientSideClient *ClientSideGame::GetClientPointer(int index)
 
 void ClientSideGame::CheckKeys(void)
 {
+/*
 	inputClient.command.key = 0;
 
 	if(keys[VK_ESCAPE])
@@ -327,8 +330,12 @@ void ClientSideGame::CheckKeys(void)
 		inputClient.command.key |= KEY_RIGHT;
 	}
 
+        if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
+	{
+		inputClient.command.key |= KEY_UP;
+	}
 	inputClient.command.msec = (int) (frametime * 1000);
-
+*/
 }
 
 
