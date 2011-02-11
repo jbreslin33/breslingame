@@ -1,18 +1,16 @@
 #include "baseGame.h"
 
-#include "../client/ClientSideClient.h"
+//#include "../client/ClientSideClient.h"
 #include "../game/ClientSideGame.h"
 
 #include "../network/clientSideNetwork.h"
-
-ClientSideNetwork* mClientSideNetwork;
-ClientSideGame*     mClientSideGame;
 
 bool keys[256];
 
 BaseGame::BaseGame()
 {
-
+	mClientSideNetwork = NULL;
+	mClientSideGame    = NULL;
 }
 
 BaseGame::~BaseGame()
@@ -93,7 +91,6 @@ bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 bool BaseGame::keyPressed( const OIS::KeyEvent &arg )
 {
 	BaseApplication::keyPressed(arg);
-    	Ogre::LogManager::getSingletonPtr()->logMessage("*** keyPressed BaseGame n***");
 	return true;
 }
 
@@ -117,16 +114,16 @@ extern "C" {
 
 	BaseGame*          mBaseGame;
         mBaseGame          = new BaseGame;
-	mClientSideGame    = new ClientSideGame(mBaseGame);
-	mClientSideNetwork = new ClientSideNetwork(mBaseGame);
+	mBaseGame->mClientSideGame    = new ClientSideGame(mBaseGame);
+	mBaseGame->mClientSideNetwork = new ClientSideNetwork(mBaseGame);
 
-	mClientSideGame->mClientSideNetwork = mClientSideNetwork;
-	mClientSideNetwork->mClientSideGame = mClientSideGame;
+	mBaseGame->mClientSideGame->mClientSideNetwork = mBaseGame->mClientSideNetwork;
+	mBaseGame->mClientSideNetwork->mClientSideGame = mBaseGame->mClientSideGame;
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	mClientSideNetwork->StartConnection(strCmdLine);
+	mBaseGame->mClientSideNetwork->StartConnection(strCmdLine);
 #else
-	mClientSideNetwork->StartConnection(argv[1]);
+	mBaseGame->mClientSideNetwork->StartConnection(argv[1]);
 #endif
 
         try {

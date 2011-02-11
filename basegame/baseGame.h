@@ -5,6 +5,9 @@ extern bool keys[256];
 
 #include "../baseapplication/BaseApplication.h"
 
+class ClientSideNetwork;
+class ClientSideGame;
+
 class BaseGame : public BaseApplication
 {
 public:
@@ -20,6 +23,9 @@ virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 virtual bool keyPressed( const OIS::KeyEvent &arg );
 
 OIS::Keyboard* getKeyboard() { return  mKeyboard; }
+
+ClientSideNetwork* mClientSideNetwork;
+ClientSideGame*    mClientSideGame;
 
 };
 
