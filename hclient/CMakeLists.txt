@@ -121,7 +121,9 @@ set(HDRS
 	#network
 	../network/network.h
 	../network/clientSideNetwork.h
-	
+
+	#shape
+	../shape/shape.h	
 )
 
 
@@ -170,6 +172,9 @@ set(SRCS
 	#network
 	../network/network.cpp
 	../network/clientSideNetwork.cpp
+
+	#shape
+	../shape/shape.cpp
 )
 if(UNIX)
 set(HDRS
