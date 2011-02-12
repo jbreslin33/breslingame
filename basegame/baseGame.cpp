@@ -3,7 +3,7 @@
 #include "../client/ClientSideClient.h"
 #include "../game/ClientSideGame.h"
 #include "../network/clientSideNetwork.h"
-#include "../shape/shape.h"
+#include "../shape/clientSideShape.h"
 
 bool keys[256];
 
@@ -20,15 +20,15 @@ BaseGame::~BaseGame()
 
 void BaseGame::createPlayer(int index)
 {
+        Ogre::LogManager::getSingletonPtr()->logMessage("*** BaseGame::createPlayer() ***");
+
 
 	//create a human player and or ghost player 
-	Shape* jay = new Shape(mSceneMgr,"jay" + index,"sinbad.mesh",0,0,0);
+	ClientSideShape* jay = new ClientSideShape(mSceneMgr,"jay" + index,0,0,0,"sinbad.mesh");
 	mShapeVector.push_back(jay);
 	
 	ClientSideClient *client = mClientSideGame->GetClientPointer(index);
 	client->mShape = jay;
-	
-
 }
 
 void BaseGame::createScene(void)

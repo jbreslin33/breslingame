@@ -18,19 +18,19 @@ cmake_minimum_required(VERSION 2.6)
  
 project(OgreApp)
  
-#if(WIN32)
-#	set(CMAKE_MODULE_PATH "$ENV{OGRE_HOME}/CMake/;${CMAKE_MODULE_PATH}")
-	#set(OGRE_SAMPLES_INCLUDEPATH
-	#	$ENV{OGRE_HOME}/Samples/include
-	#)
-#endif(WIN32)
+if(WIN32)
+	set(CMAKE_MODULE_PATH "$ENV{OGRE_HOME}/CMake/;${CMAKE_MODULE_PATH}")
+	set(OGRE_SAMPLES_INCLUDEPATH
+		$ENV{OGRE_HOME}/Samples/include
+	)
+endif(WIN32)
  
-#if(UNIX)
-	#set(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
-	#set(OGRE_SAMPLES_INCLUDEPATH
-	#	/usr/local/share/OGRE/samples/Common/include/
-	#)
-#endif(UNIX)
+if(UNIX)
+	set(CMAKE_MODULE_PATH "/usr/local/lib/OGRE/cmake/;${CMAKE_MODULE_PATH}")
+	set(OGRE_SAMPLES_INCLUDEPATH
+		/usr/local/share/OGRE/samples/Common/include/
+	)
+endif(UNIX)
  
 if (CMAKE_BUILD_TYPE STREQUAL "")
   # CMake defaults to leaving CMAKE_BUILD_TYPE empty. This screws up
@@ -42,17 +42,17 @@ set(CMAKE_DEBUG_POSTFIX "_d")
  
 set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/dist")
  
-#find_package(OGRE REQUIRED)
+find_package(OGRE REQUIRED)
  
-#if(NOT "${OGRE_VERSION_NAME}" STREQUAL "Cthugha")
-#  message(SEND_ERROR "You need Ogre 1.7 Cthugha to build this.")
-#endif()
+if(NOT "${OGRE_VERSION_NAME}" STREQUAL "Cthugha")
+  message(SEND_ERROR "You need Ogre 1.7 Cthugha to build this.")
+endif()
  
-#find_package(OIS REQUIRED)
+find_package(OIS REQUIRED)
  
-#if(NOT OIS_FOUND)
-#	message(SEND_ERROR "Failed to find OIS.")
-#endif()
+if(NOT OIS_FOUND)
+	message(SEND_ERROR "Failed to find OIS.")
+endif()
  
 # Find Boost
 if (NOT OGRE_BUILD_PLATFORM_IPHONE)
@@ -115,6 +115,10 @@ set(HDRS
 	#game
 	../game/game.h
 	../game/serverSideGame.h
+
+	#shape
+	../shape/shape.h
+	../shape/serverSideShape.h
 )
 
 if(UNIX)	
@@ -159,6 +163,11 @@ set(SRCS
 	#game
 	../game/game.cpp
 	../game/serverSideGame.cpp
+
+	#shape
+	../shape/shape.cpp
+	../shape/serverSideShape.cpp
+
 )
 if(UNIX)	
 set(HDRS
@@ -174,16 +183,16 @@ endif(WIN32)
 
 
  
-#include_directories( ${OIS_INCLUDE_DIRS}
-#	${OGRE_INCLUDE_DIRS}
-#	${OGRE_SAMPLES_INCLUDEPATH}
-#)
+include_directories( ${OIS_INCLUDE_DIRS}
+	${OGRE_INCLUDE_DIRS}
+	${OGRE_SAMPLES_INCLUDEPATH}
+)
  
 add_executable(OgreApp WIN32 ${HDRS} ${SRCS})
  
 set_target_properties(OgreApp PROPERTIES DEBUG_POSTFIX _d)
  
-#target_link_libraries(OgreApp ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
+target_link_libraries(OgreApp ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
  
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/bin)
 #file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/media)
