@@ -9,7 +9,7 @@ extern bool keys[256];
 
 class ClientSideNetwork;
 class ClientSideGame;
-class Shape;
+class ClientSideShape;
 
 class BaseGame : public BaseApplication
 {
@@ -30,7 +30,7 @@ OIS::Keyboard* getKeyboard() { return  mKeyboard; }
 ClientSideNetwork* mClientSideNetwork;
 ClientSideGame*    mClientSideGame;
 
-std::vector<Shape*> mShapeVector;
+std::vector<ClientSideShape*> mShapeVector;
 
 };
 
