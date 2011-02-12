@@ -21,14 +21,25 @@ BaseGame::~BaseGame()
 void BaseGame::createPlayer(int index)
 {
 
-	//create yourself
+	//create a human player and or ghost player 
 	Shape jay = Shape(mSceneMgr,"jay" + index,"sinbad.mesh",0,0,0);
 	mShapeVector.push_back(jay);
 	
-//	ClientSideClient *client = mClientSideGame->GetClientPointer(index);
-//	mShapeVector->back()->getSceneNode();
 	ClientSideClient *client = mClientSideGame->GetClientPointer(index);
 	client->myNode = jay.getSceneNode();
+	
+
+}
+
+void BaseGame::createScene(void)
+{
+        mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
+
+        Ogre::Light* pointLight = mSceneMgr->createLight("pointLight");
+        pointLight->setType(Ogre::Light::LT_POINT);
+        pointLight->setPosition(Ogre::Vector3(250, 150, 250));
+        pointLight->setDiffuseColour(Ogre::ColourValue::White);
+	pointLight->setSpecularColour(Ogre::ColourValue::White);
 	
 	// create a floor mesh resource
 	MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
@@ -39,18 +50,6 @@ void BaseGame::createPlayer(int index)
         floor->setMaterialName("Examples/Rockwall");
 	floor->setCastShadows(false);
         mSceneMgr->getRootSceneNode()->attachObject(floor);
-
-}
-
-void BaseGame::createScene(void)
-{
-    mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
-
-    Ogre::Light* pointLight = mSceneMgr->createLight("pointLight");
-    pointLight->setType(Ogre::Light::LT_POINT);
-    pointLight->setPosition(Ogre::Vector3(250, 150, 250));
-    pointLight->setDiffuseColour(Ogre::ColourValue::White);
-    pointLight->setSpecularColour(Ogre::ColourValue::White);
 }
 
 bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
