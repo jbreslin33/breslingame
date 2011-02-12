@@ -21,17 +21,15 @@ BaseGame::~BaseGame()
 void BaseGame::createPlayer(int index)
 {
 
-        Shape* jay = new Shape(mSceneMgr,"jay","sinbad.mesh",0,0,0);
+	//create yourself
+	Shape jay = Shape(mSceneMgr,"jay","sinbad.mesh",0,0,0);
+	mShapeVector.push_back(jay);
 	
-	
-/*
-	Ogre::Entity* NinjaEntity = mSceneMgr->createEntity("ninja.mesh");
-*/	
-//Ogre::SceneNode* node = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-  //  	node->attachObject(NinjaEntity);
+//	ClientSideClient *client = mClientSideGame->GetClientPointer(index);
+//	mShapeVector->back()->getSceneNode();
 	ClientSideClient *client = mClientSideGame->GetClientPointer(index);
-//	client->myNode = node;
-	client->myNode = jay->getSceneNode();
+	client->myNode = jay.getSceneNode();
+	
 	// create a floor mesh resource
 	MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 	Plane(Vector3::UNIT_Y, 0), 100, 100, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);

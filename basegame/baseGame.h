@@ -5,8 +5,11 @@ extern bool keys[256];
 
 #include "../baseapplication/BaseApplication.h"
 
+#include <vector>
+
 class ClientSideNetwork;
 class ClientSideGame;
+class Shape;
 
 class BaseGame : public BaseApplication
 {
@@ -26,6 +29,8 @@ OIS::Keyboard* getKeyboard() { return  mKeyboard; }
 
 ClientSideNetwork* mClientSideNetwork;
 ClientSideGame*    mClientSideGame;
+
+std::vector<Shape> mShapeVector;
 
 };
 
