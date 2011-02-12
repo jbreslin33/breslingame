@@ -22,7 +22,7 @@ void BaseGame::createPlayer(int index)
 {
 
 	//create yourself
-	Shape jay = Shape(mSceneMgr,"jay","sinbad.mesh",0,0,0);
+	Shape jay = Shape(mSceneMgr,"jay" + index,"sinbad.mesh",0,0,0);
 	mShapeVector.push_back(jay);
 	
 //	ClientSideClient *client = mClientSideGame->GetClientPointer(index);
