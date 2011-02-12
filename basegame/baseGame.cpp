@@ -26,7 +26,7 @@ void BaseGame::createPlayer(int index)
 	mShapeVector.push_back(jay);
 	
 	ClientSideClient *client = mClientSideGame->GetClientPointer(index);
-	client->myNode = jay->getSceneNode();
+	client->mShape = jay;
 	
 
 }

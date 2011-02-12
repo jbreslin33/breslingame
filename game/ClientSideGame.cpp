@@ -6,6 +6,7 @@
 #include "../network/clientSideNetwork.h"
 #include <OISKeyboard.h>
 #include "../baseapplication/BaseApplication.h"
+#include "../shape/shape.h"
 
 ClientSideGame::ClientSideGame(BaseGame* baseGame)
 {
@@ -132,8 +133,7 @@ void ClientSideGame::MoveObjects(void)
            		transVector.x = client->command.origin.x;
             		transVector.y = client->command.origin.y;
 
-			client->myNode->setPosition(transVector);
-
+			client->mShape->getSceneNode()->setPosition(transVector);
 
 		}
 
@@ -146,7 +146,7 @@ void ClientSideGame::MoveObjects(void)
 			transVector.x = client->command.origin.x;
         		transVector.y = client->command.origin.y;
 
-			client->myNode->setPosition(transVector);
+			client->mShape->getSceneNode()->setPosition(transVector);
 
 
 		}

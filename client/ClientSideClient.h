@@ -6,12 +6,12 @@
 #include "Ogre.h"
 
 #include "../dreamsock/DreamSock.h"
-//#include "../dreamsock/DreamClient.h"
 #include "../command/ClientSideCommand.h"
 
 using namespace Ogre;
 
 class DreamClient;
+class Shape;
 
 class ClientSideClient : public Client
 {
@@ -26,8 +26,8 @@ ClientSideClient();
 
 	char password[30];
 	int index;
-	Ogre::SceneNode *myNode;
 	
+	Shape* mShape;
 	ClientSideClient* next;
 };
 
