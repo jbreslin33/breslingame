@@ -1,9 +1,9 @@
 #include "baseGame.h"
 
-//#include "../client/ClientSideClient.h"
+#include "../client/ClientSideClient.h"
 #include "../game/ClientSideGame.h"
-
 #include "../network/clientSideNetwork.h"
+#include "../shape/shape.h"
 
 bool keys[256];
 
@@ -20,11 +20,28 @@ BaseGame::~BaseGame()
 
 void BaseGame::createPlayer(int index)
 {
+
+        Shape* jay = new Shape(mSceneMgr,"jay","sinbad.mesh",0,0,0);
+	
+	
+/*
 	Ogre::Entity* NinjaEntity = mSceneMgr->createEntity("ninja.mesh");
-	Ogre::SceneNode* node = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-    	node->attachObject(NinjaEntity);
+*/	
+//Ogre::SceneNode* node = mSceneMgr->getRootSceneNode()->createChildSceneNode();
+  //  	node->attachObject(NinjaEntity);
 	ClientSideClient *client = mClientSideGame->GetClientPointer(index);
-	client->myNode = node;
+//	client->myNode = node;
+	client->myNode = jay->getSceneNode();
+	// create a floor mesh resource
+	MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+	Plane(Vector3::UNIT_Y, 0), 100, 100, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
+
+	// create a floor entity, give it a material, and place it at the origin
+        Entity* floor = mSceneMgr->createEntity("Floor", "floor");
+        floor->setMaterialName("Examples/Rockwall");
+	floor->setCastShadows(false);
+        mSceneMgr->getRootSceneNode()->attachObject(floor);
+
 }
 
 void BaseGame::createScene(void)
