@@ -5,6 +5,7 @@ ClientSideClient::ClientSideClient()
 //        netClient      = 0;
 	next           = 0;
 	index = 0;
+	myNode = NULL;
 }
 
 ClientSideClient::~ClientSideClient()

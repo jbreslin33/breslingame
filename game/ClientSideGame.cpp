@@ -129,8 +129,8 @@ void ClientSideGame::MoveObjects(void)
 			client->command.origin.x += client->command.vel.x;
 			client->command.origin.y += client->command.vel.y;
 
-            transVector.x = client->command.origin.x;
-            transVector.y = client->command.origin.y;
+           		transVector.x = client->command.origin.x;
+            		transVector.y = client->command.origin.y;
 
 			client->myNode->setPosition(transVector);
 
@@ -144,7 +144,7 @@ void ClientSideGame::MoveObjects(void)
 			client->command.origin.y = client->command.predictedOrigin.y;
 
 			transVector.x = client->command.origin.x;
-            transVector.y = client->command.origin.y;
+        		transVector.y = client->command.origin.y;
 
 			client->myNode->setPosition(transVector);
 

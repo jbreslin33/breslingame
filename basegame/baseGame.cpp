@@ -22,11 +22,11 @@ void BaseGame::createPlayer(int index)
 {
 
 	//create a human player and or ghost player 
-	Shape jay = Shape(mSceneMgr,"jay" + index,"sinbad.mesh",0,0,0);
+	Shape* jay = new Shape(mSceneMgr,"jay" + index,"sinbad.mesh",0,0,0);
 	mShapeVector.push_back(jay);
 	
 	ClientSideClient *client = mClientSideGame->GetClientPointer(index);
-	client->myNode = jay.getSceneNode();
+	client->myNode = jay->getSceneNode();
 	
 
 }

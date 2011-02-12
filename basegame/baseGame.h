@@ -30,7 +30,7 @@ OIS::Keyboard* getKeyboard() { return  mKeyboard; }
 ClientSideNetwork* mClientSideNetwork;
 ClientSideGame*    mClientSideGame;
 
-std::vector<Shape> mShapeVector;
+std::vector<Shape*> mShapeVector;
 
 };
 
