@@ -4,11 +4,13 @@
 #include "game.h"
 
 #include <string.h>
+#include <vector>
 
 class ServerSideCommand;
 class ServerSideClient;
 class DreamServer;
 class ServerSideNetwork;
+class ServerSideShape;
 
 class ServerSideGame : public Game
 {
@@ -25,6 +27,7 @@ void    	  AddClient        (void);
 void    	  RemoveClient	   (struct sockaddr *address);
 void   		  RemoveClients    (void);
 void    	  Frame            (int msec);
+void createPlayer(int index);
 
 ServerSideClient* GetClientList	   (void)   { return clientList; }
 
@@ -35,6 +38,8 @@ ServerSideNetwork* network;
 DreamServer*       networkServer;
 ServerSideGame*    next;
 ServerSideClient*  clientList;            // Client list
+
+std::vector<ServerSideShape*> mServerSideShapeVector;
 
 int                clients;                                // Number of clients
 int                realtime;                               // Real server up-time in ms

@@ -12,9 +12,6 @@ Shape::Shape(Ogre::SceneManager* sceneMgr, std::string shapeName, int x, int y, 
 
 	//the all powerful SceneManager
 	mSceneManager = sceneMgr;
-
-        //actually create and show the model on screen...assuming you put it somewhere visible etc.
-       // setupModel();
 }
 
 Shape::~Shape()
