@@ -316,3 +316,14 @@ void ServerSideGame::Frame(int msec)
 
 	network->SendCommand();
 }
+
+void ServerSideGame::createPlayer(int index)
+{
+        //create a human player and or ghost player 
+//        ServerSideShape* jay = new ServerSideShape(mSceneMgr,"jay" + index,0,0,0);
+  //      mServerSideShapeVector.push_back(jay);
+
+       // ServerSideClient *client = mClientSideGame->GetClientPointer(index);
+       // client->mShape = jay;
+}
+

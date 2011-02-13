@@ -34,15 +34,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-// WIN32 only
-#ifdef WIN32
-
-// UNIX only
-#else
-int runningDaemon;
-#endif
-
-
 #include "../dreamsock/DreamSock.h"
 #include "../game/serverSideGame.h"
 #include "../dreamsock/DreamServer.h"
@@ -173,81 +164,11 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 
 #else
 
-//-----------------------------------------------------------------------------
-// Name: daemonInit()
-// Desc: Initialize UNIX daemon
-//-----------------------------------------------------------------------------
-static int daemonInit(void)
-{
-	printf("Running daemon...\n\n");
 
-	runningDaemon = 1;
-
-	pid_t pid;
-
-	if((pid = fork()) < 0)
-	{
-		return -1;
-	}
-	else if(pid != 0)
-	{
-		exit(0);
-	}
-
-	setsid();
-
-	umask(0);
-
-	close(1);
-	close(2);
-	close(3);
-
-	return 0;
-}
-
-//-----------------------------------------------------------------------------
-// Name: keyPress()
-// Desc: Check for a keypress
-//-----------------------------------------------------------------------------
-int keyPress(void)
-{
-	static char keypressed;
-	struct timeval waittime;
-	int num_chars_read;
-	fd_set mask;
-	
-	FD_SET(0, &mask);
-
-	waittime.tv_sec = 0;
-	waittime.tv_usec = 0;
-
-	if(select(1, &mask, 0, 0, &waittime))
-	{
-		num_chars_read = read(0, &keypressed, 1);
-
-		if(num_chars_read == 1) 
-			return ((int) keypressed);
-	}
-
-	return (-1);
-}
-
-//-----------------------------------------------------------------------------
-// Name: main()
-// Desc: UNIX app start position
-//-----------------------------------------------------------------------------
 int main(int argc, char **argv)
 {
 	LogString("Welcome to Army War Server v2.0");
 	LogString("-------------------------------\n");
-
-	if(argc > 1)
-	{
-		if(strcmp(argv[1], "-daemon") == 0)
-		{
-			daemonInit();
-		}
-	}
 
 	// Ignore the SIGPIPE signal, so the program does not terminate if the
 	// pipe gets broken
@@ -265,37 +186,17 @@ int main(int argc, char **argv)
 	// App main loop
 	try
 	{
-		if(runningDaemon)
+		// Keep server alive (wait for keypress to kill it)
+		while(1)
 		{
-			// Keep server alive
-			while(1)
+			do
 			{
-				do
-				{
-					newTime = game->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
-					time = newTime - oldTime;
-				} while (time < 1);
+				newTime = game->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
+				time = newTime - oldTime;
+			} while (time < 1);
 
-				game->Frame(time);
-
-				oldTime = newTime;
-			}
-		}
-		else
-		{
-			// Keep server alive (wait for keypress to kill it)
-			while(keyPress() == -1)
-			{
-				do
-				{
-					newTime = game->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
-					time = newTime - oldTime;
-				} while (time < 1);
-
-				game->Frame(time);
-
-				oldTime = newTime;
-			}
+			game->Frame(time);
+			oldTime = newTime;
 		}
 	}
 	catch(...)
