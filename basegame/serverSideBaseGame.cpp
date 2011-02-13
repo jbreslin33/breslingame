@@ -87,7 +87,7 @@ ServerSideGame* game;
 	WinClass.lpfnWndProc	= WindowProc;
 	WinClass.cbClsExtra		= 0;
 	WinClass.cbWndExtra		= 0;
-	WinClass.hInstance		= hInstance;
+	WinClass.hInstance		= hInst;
 	WinClass.hIcon			= LoadIcon(NULL, IDI_APPLICATION);
 	WinClass.hCursor		= LoadCursor(NULL, IDC_ARROW);
 	WinClass.hbrBackground	= (HBRUSH) (COLOR_MENU);
@@ -105,8 +105,8 @@ ServerSideGame* game;
 						320, 240,
 						NULL,
 						NULL,
-						hInstance,
-						NULL);ServerSideBaseGame
+						hInst,
+						NULL);
 
 	ShowWindow(hwnd, SW_HIDE);
 
@@ -162,9 +162,7 @@ ServerSideGame* game;
 	{
 		LogString("Unknown Exception caught in main loop");
 
-		game->networkServer->dreamS#include "../dreamsock/DreamSock.h"
-#include "../game/serverSideGame.h"
-#include "../dreamsock/DreamServer.h"ock->dreamSock_Shutdown();
+		game->networkServer->dreamSock->dreamSock_Shutdown();
 
 		MessageBox(NULL, "Unknown Exception caught in main loop", "Error", MB_OK | MB_TASKMODAL);
 
