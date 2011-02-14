@@ -1,6 +1,6 @@
 #include "../game/ClientSideGame.h"
 
-#include "../basegame/baseGame.h"
+#include "../basegame/clientSideBaseGame.h"
 #include "../dreamsock/DreamClient.h"
 
 #include "../network/clientSideNetwork.h"
@@ -8,7 +8,7 @@
 #include "../baseapplication/BaseApplication.h"
 #include "../shape/shape.h"
 
-ClientSideGame::ClientSideGame(BaseGame* baseGame)
+ClientSideGame::ClientSideGame(ClientSideBaseGame* baseGame)
 {
 	mBaseGame = baseGame;
 	mClientSideNetwork = NULL;
