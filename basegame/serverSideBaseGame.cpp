@@ -9,12 +9,10 @@
 #include "../dreamsock/DreamSock.h"
 #include "../dreamsock/DreamServer.h"
 
-bool keys[256];
+//bool keys[256];
 
 ServerSideBaseGame::ServerSideBaseGame()
 {
-	//mClientSideNetwork = NULL;
-	//mClientSideGame    = NULL;
 }
 
 ServerSideBaseGame::~ServerSideBaseGame()

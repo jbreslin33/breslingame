@@ -4,7 +4,7 @@
 #include "game.h"
 #include "../client/ClientSideClient.h"
 
-class BaseGame;
+class ClientSideBaseGame;
 class ClientSideCommand;
 class ClientSideNetwork;
 
@@ -12,7 +12,7 @@ class ClientSideNetwork;
 class ClientSideGame : public Game
 {
 public:
-	ClientSideGame(BaseGame* baseGame);
+	ClientSideGame(ClientSideBaseGame* baseGame);
 	~ClientSideGame();
 
 
@@ -45,9 +45,9 @@ public:
 
 	ClientSideNetwork* mClientSideNetwork;
 
-	BaseGame *next;
+	ClientSideBaseGame *next;
 
-BaseGame* mBaseGame;
+ClientSideBaseGame* mBaseGame;
 };
 
 #endif
