@@ -19,7 +19,7 @@ bool processUnbufferedInput(const Ogre::FrameEvent& evt);
 void         createPlayer(int index);
 virtual void createScene(void);
 virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
-
+void go(void);
 
 };
 
