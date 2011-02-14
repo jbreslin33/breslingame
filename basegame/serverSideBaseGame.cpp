@@ -57,7 +57,7 @@ return true;
 
 void ServerSideBaseGame::go(void)
 {
-/*
+
 #ifdef _DEBUG
     mResourcesCfg = "resources_d.cfg";
     mPluginsCfg = "plugins_d.cfg";
@@ -65,7 +65,7 @@ void ServerSideBaseGame::go(void)
     mResourcesCfg = "resources.cfg";
     mPluginsCfg = "plugins.cfg";
 #endif
-
+/*
     if (!setup())
         return;
 
@@ -116,6 +116,7 @@ LRESULT CALLBACK WindowProc(HWND WindowhWnd, UINT Message, WPARAM wParam, LPARAM
     {
 ServerSideGame* game;
 
+
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	WNDCLASS WinClass;
 
@@ -145,6 +146,7 @@ ServerSideGame* game;
 						NULL);
 
 	ShowWindow(hwnd, SW_HIDE);
+//this is the begining of code that should go in ServerSideGame....
 
 	StartLogConsole();
 
@@ -204,6 +206,7 @@ ServerSideGame* game;
 
 		return -1;
 	}
+//this is the end of code that should go in ServerSideGame....
 
 	return WinMsg.wParam;
 
@@ -216,6 +219,8 @@ ServerSideGame* game;
 	// pipe gets broken
 	signal(SIGPIPE, SIG_IGN);
 	
+
+//this is the begining of code that should go in ServerSideGame....
 	LogString("Init successful");
 
 	game = new ServerSideGame();
@@ -254,12 +259,13 @@ ServerSideGame* game;
 
 	game->networkServer->dreamSock->dreamSock_Shutdown();
 
+//this is the end of code that should go in ServerSideGame....
 	return 0;
 
 #endif
 
         try {
-          //  mBaseGame->go();
+            //mBaseGame->go();
         } catch( Ogre::Exception& e ) {
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
             //MessageBox( NULL, e.getFullDescription().c_str(), "An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);

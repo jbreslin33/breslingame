@@ -128,6 +128,7 @@ extern "C" {
 
 	ClientSideBaseGame*          mClientSideBaseGame;
         mClientSideBaseGame          = new ClientSideBaseGame;
+
 	mClientSideBaseGame->mClientSideGame    = new ClientSideGame(mClientSideBaseGame);
 	mClientSideBaseGame->mClientSideNetwork = new ClientSideNetwork(mClientSideBaseGame);
 
