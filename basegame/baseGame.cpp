@@ -21,10 +21,13 @@ void BaseGame::createScene(void)
 
 bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 {
+	return true;
+
 }
 
 bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
+	return true;
 }
 
 bool BaseGame::keyPressed( const OIS::KeyEvent &arg )
