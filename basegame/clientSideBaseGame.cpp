@@ -9,19 +9,26 @@
 
 ClientSideBaseGame::ClientSideBaseGame()
 {
-	mClientSideNetwork = NULL;
-	mClientSideGame    = NULL;
+        mClientSideGame    = new ClientSideGame(this);
+        mClientSideNetwork = new ClientSideNetwork(this);
+
+        mClientSideGame->mClientSideNetwork = mClientSideNetwork;
+        mClientSideNetwork->mClientSideGame = mClientSideGame;
+
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	mClientSideBaseGame->mClientSideNetwork->StartConnection(strCmdLine);
+#else
+	mClientSideBaseGame->mClientSideNetwork->StartConnection(argv[1]);
+#endif
 }
 
 ClientSideBaseGame::~ClientSideBaseGame()
 {
-
 }
 
 void ClientSideBaseGame::createPlayer(int index)
 {
         Ogre::LogManager::getSingletonPtr()->logMessage("*** ClientSideBaseGame::createPlayer() ***");
-
 
 	//create a human player and or ghost player 
 	ClientSideShape* jay = new ClientSideShape(mSceneMgr,"jay" + index,0,0,0,"sinbad.mesh");
@@ -66,22 +73,18 @@ bool ClientSideBaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 	
 	if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
 	{
-	
                 mClientSideGame->inputClient.command.key |= KEY_DOWN;
 	}
 
     	if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
 	{
-
                 mClientSideGame->inputClient.command.key |= KEY_LEFT;
 	}
 
 	if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
 	{
-
                 mClientSideGame->inputClient.command.key |= KEY_RIGHT;
 	}
-      	
 	mClientSideGame->inputClient.command.msec = (int) (mClientSideGame->frametime * 1000);
 
     return true;
@@ -125,21 +128,8 @@ extern "C" {
     int main(int argc, char *argv[])
 #endif
     {
-
-	ClientSideBaseGame*          mClientSideBaseGame;
-        mClientSideBaseGame          = new ClientSideBaseGame;
-
-	mClientSideBaseGame->mClientSideGame    = new ClientSideGame(mClientSideBaseGame);
-	mClientSideBaseGame->mClientSideNetwork = new ClientSideNetwork(mClientSideBaseGame);
-
-	mClientSideBaseGame->mClientSideGame->mClientSideNetwork = mClientSideBaseGame->mClientSideNetwork;
-	mClientSideBaseGame->mClientSideNetwork->mClientSideGame = mClientSideBaseGame->mClientSideGame;
-
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	mClientSideBaseGame->mClientSideNetwork->StartConnection(strCmdLine);
-#else
-	mClientSideBaseGame->mClientSideNetwork->StartConnection(argv[1]);
-#endif
+	ClientSideBaseGame* mClientSideBaseGame;
+        mClientSideBaseGame = new ClientSideBaseGame;
 
         try {
             mClientSideBaseGame->go();
@@ -151,7 +141,6 @@ extern "C" {
                 e.getFullDescription().c_str() << std::endl;
 #endif
         }
-
         return 0;
     }
 
