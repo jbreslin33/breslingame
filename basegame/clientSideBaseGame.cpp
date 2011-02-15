@@ -131,7 +131,6 @@ extern "C" {
 	ClientSideBaseGame* mClientSideBaseGame;
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	mClientSideBaseGame(
 	mClientSideBaseGame = new ClientSideBaseGame(strCmdLine);
 #else
 	mClientSideBaseGame = new ClientSideBaseGame(argv[1]);
