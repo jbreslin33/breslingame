@@ -15,7 +15,7 @@ class ClientSideBaseGame : public BaseGame
 {
 public:
 
-ClientSideBaseGame();
+ClientSideBaseGame(const char* ip);
 ~ClientSideBaseGame();
 
 bool processUnbufferedInput(const Ogre::FrameEvent& evt);
