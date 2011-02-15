@@ -13,6 +13,115 @@
 
 ServerSideBaseGame::ServerSideBaseGame()
 {
+
+ServerSideGame* game;
+//if windows
+//this is the begining of code that should go in ServerSideGame....
+
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	StartLogConsole();
+
+
+	game = new ServerSideGame();
+
+	if(game->InitNetwork() != 0)
+	{
+		LogString("Could not create game server");
+	}
+
+	MSG WinMsg;
+	bool done = false;
+	int time, oldTime, newTime;
+
+	// first peek the message without removing it
+	PeekMessage(&WinMsg, hwnd, 0, 0, PM_NOREMOVE);
+
+	oldTime = game->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
+
+	try
+	{
+		while(!done)
+		{
+			while (PeekMessage(&WinMsg, NULL, 0, 0, PM_NOREMOVE))
+			{
+				if(!GetMessage(&WinMsg, NULL, 0, 0))
+				{
+					game->networkServer->dreamSock->dreamSock_Shutdown();
+
+					done = true;
+				}
+
+				TranslateMessage(&WinMsg);
+   				DispatchMessage(&WinMsg);
+			}
+
+			do
+			{
+				newTime = game->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
+				time = newTime - oldTime;
+			} while (time < 1);
+			
+			game->Frame(time);
+			
+
+			oldTime = newTime;
+		}
+	}
+	catch(...)
+	{
+		LogString("Unknown Exception caught in main loop");
+
+		game->networkServer->dreamSock->dreamSock_Shutdown();
+
+		MessageBox(NULL, "Unknown Exception caught in main loop", "Error", MB_OK | MB_TASKMODAL);
+
+		return -1;
+	}
+//unix
+#else
+
+//this is the begining of code that should go in ServerSideGame....
+	LogString("Init successful");
+
+	game = new ServerSideGame();
+	game->InitNetwork();
+	
+	int time, oldTime, newTime;
+
+	oldTime = game->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
+
+	// App main loop
+	try
+	{
+		// Keep server alive (wait for keypress to kill it)
+		while(1)
+		{
+			do
+			{
+				newTime = game->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
+				time = newTime - oldTime;
+			} while (time < 1);
+
+			game->Frame(time);
+			oldTime = newTime;
+		}
+	}
+	catch(...)
+	{
+		game->networkServer->dreamSock->dreamSock_Shutdown();
+
+		LogString("Unknown Exception caught in main loop");
+
+		//return -1;
+	}
+
+	LogString("Shutting down everything");
+
+	game->networkServer->dreamSock->dreamSock_Shutdown();
+
+//this is the end of code that should go in ServerSideGame....
+#endif
+
 }
 
 ServerSideBaseGame::~ServerSideBaseGame()
@@ -106,15 +215,12 @@ LRESULT CALLBACK WindowProc(HWND WindowhWnd, UINT Message, WPARAM wParam, LPARAM
 	return DefWindowProc(WindowhWnd, Message, wParam, lParam);
 }
 
-
-
     INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT )
 #else
 	#define UNIX
     int main(int argc, char *argv[])
 #endif
     {
-ServerSideGame* game;
 
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
@@ -146,68 +252,10 @@ ServerSideGame* game;
 						NULL);
 
 	ShowWindow(hwnd, SW_HIDE);
-//this is the begining of code that should go in ServerSideGame....
 
-	StartLogConsole();
-
-
-	game = new ServerSideGame();
-
-	if(game->InitNetwork() != 0)
-	{
-		LogString("Could not create game server");
-	}
-
-	MSG WinMsg;
-	bool done = false;
-	int time, oldTime, newTime;
-
-	// first peek the message without removing it
-	PeekMessage(&WinMsg, hwnd, 0, 0, PM_NOREMOVE);
-
-	oldTime = game->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
-
-	try
-	{
-		while(!done)
-		{
-			while (PeekMessage(&WinMsg, NULL, 0, 0, PM_NOREMOVE))
-			{
-				if(!GetMessage(&WinMsg, NULL, 0, 0))
-				{
-					game->networkServer->dreamSock->dreamSock_Shutdown();
-
-					done = true;
-				}
-
-				TranslateMessage(&WinMsg);
-   				DispatchMessage(&WinMsg);
-			}
-
-			do
-			{
-				newTime = game->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
-				time = newTime - oldTime;
-			} while (time < 1);
-			
-			game->Frame(time);
-			
-
-			oldTime = newTime;
-		}
-	}
-	catch(...)
-	{
-		LogString("Unknown Exception caught in main loop");
-
-		game->networkServer->dreamSock->dreamSock_Shutdown();
-
-		MessageBox(NULL, "Unknown Exception caught in main loop", "Error", MB_OK | MB_TASKMODAL);
-
-		return -1;
-	}
-//this is the end of code that should go in ServerSideGame....
-
+	ServerSideBaseGame* mServerSideBaseGame;
+	mServerSideBaseGame = new ServerSideBaseGame();
+	
 	return WinMsg.wParam;
 
 #else
@@ -218,48 +266,10 @@ ServerSideGame* game;
 	// Ignore the SIGPIPE signal, so the program does not terminate if the
 	// pipe gets broken
 	signal(SIGPIPE, SIG_IGN);
+
+	ServerSideBaseGame* mServerSideBaseGame;
+	mServerSideBaseGame = new ServerSideBaseGame();
 	
-
-//this is the begining of code that should go in ServerSideGame....
-	LogString("Init successful");
-
-	game = new ServerSideGame();
-	game->InitNetwork();
-	
-	int time, oldTime, newTime;
-
-	oldTime = game->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
-
-	// App main loop
-	try
-	{
-		// Keep server alive (wait for keypress to kill it)
-		while(1)
-		{
-			do
-			{
-				newTime = game->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
-				time = newTime - oldTime;
-			} while (time < 1);
-
-			game->Frame(time);
-			oldTime = newTime;
-		}
-	}
-	catch(...)
-	{
-		game->networkServer->dreamSock->dreamSock_Shutdown();
-
-		LogString("Unknown Exception caught in main loop");
-
-		return -1;
-	}
-
-	LogString("Shutting down everything");
-
-	game->networkServer->dreamSock->dreamSock_Shutdown();
-
-//this is the end of code that should go in ServerSideGame....
 	return 0;
 
 #endif
