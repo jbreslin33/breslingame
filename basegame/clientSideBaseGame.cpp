@@ -136,8 +136,6 @@ extern "C" {
 	mClientSideBaseGame = new ClientSideBaseGame(argv[1]);
 #endif
 
-
-
         try {
             mClientSideBaseGame->go();
         } catch( Ogre::Exception& e ) {
