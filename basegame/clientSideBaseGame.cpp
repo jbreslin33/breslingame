@@ -7,7 +7,7 @@
 
 //bool keys[256];
 
-ClientSideBaseGame::ClientSideBaseGame()
+ClientSideBaseGame::ClientSideBaseGame(const char* ip)
 {
         mClientSideGame    = new ClientSideGame(this);
         mClientSideNetwork = new ClientSideNetwork(this);
@@ -16,9 +16,9 @@ ClientSideBaseGame::ClientSideBaseGame()
         mClientSideNetwork->mClientSideGame = mClientSideGame;
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	mClientSideBaseGame->mClientSideNetwork->StartConnection(strCmdLine);
+	mClientSideNetwork->StartConnection(ip);
 #else
-	mClientSideBaseGame->mClientSideNetwork->StartConnection(argv[1]);
+	mClientSideNetwork->StartConnection(ip);
 #endif
 }
 
@@ -129,7 +129,15 @@ extern "C" {
 #endif
     {
 	ClientSideBaseGame* mClientSideBaseGame;
-        mClientSideBaseGame = new ClientSideBaseGame;
+
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	mClientSideBaseGame(
+	mClientSideBaseGame = new ClientSideBaseGame(strCmdLine);
+#else
+	mClientSideBaseGame = new ClientSideBaseGame(argv[1]);
+#endif
+
+
 
         try {
             mClientSideBaseGame->go();
