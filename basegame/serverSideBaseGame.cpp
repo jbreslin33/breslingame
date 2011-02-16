@@ -10,8 +10,16 @@
 #include "../dreamsock/DreamServer.h"
 
 //bool keys[256];
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+ServerSideBaseGame::ServerSideBaseGame(HWND hwnd)
+
+#else
+
+
 
 ServerSideBaseGame::ServerSideBaseGame()
+#endif
+
 {
 
 ServerSideGame* game;
@@ -75,7 +83,7 @@ ServerSideGame* game;
 
 		MessageBox(NULL, "Unknown Exception caught in main loop", "Error", MB_OK | MB_TASKMODAL);
 
-		return -1;
+//		return -1;
 	}
 //unix
 #else
@@ -254,9 +262,10 @@ LRESULT CALLBACK WindowProc(HWND WindowhWnd, UINT Message, WPARAM wParam, LPARAM
 	ShowWindow(hwnd, SW_HIDE);
 
 	ServerSideBaseGame* mServerSideBaseGame;
-	mServerSideBaseGame = new ServerSideBaseGame();
+	mServerSideBaseGame = new ServerSideBaseGame(hwnd);
 	
-	return WinMsg.wParam;
+//	return WinMsg.wParam;
+	return 0;
 
 #else
 	//mBaseGame->mClientSideNetwork->StartConnection(argv[1]);
