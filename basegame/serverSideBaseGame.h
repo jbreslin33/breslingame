@@ -7,6 +7,8 @@
 
 #include <vector>
 
+class ServerSideGame;
+
 class ServerSideBaseGame : public BaseGame
 {
 public:
@@ -24,6 +26,8 @@ void         createPlayer(int index);
 virtual void createScene(void);
 virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 void go(void);
+
+ServerSideGame* mServerSideGame;
 
 };
 
