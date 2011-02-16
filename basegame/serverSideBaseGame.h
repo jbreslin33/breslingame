@@ -7,11 +7,15 @@
 
 #include <vector>
 
-class ServerSideBaseGame : public BaseGame 
+class ServerSideBaseGame : public BaseGame
 {
 public:
-
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+ServerSideBaseGame(HWND hwnd);
+#else
 ServerSideBaseGame();
+#endif
+
 ~ServerSideBaseGame();
 
 bool processUnbufferedInput(const Ogre::FrameEvent& evt);
