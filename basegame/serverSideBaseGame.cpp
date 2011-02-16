@@ -22,7 +22,6 @@ ServerSideBaseGame::ServerSideBaseGame()
 
 {
 
-ServerSideGame* game;
 //if windows
 //this is the begining of code that should go in ServerSideGame....
 
@@ -91,12 +90,12 @@ ServerSideGame* game;
 //this is the begining of code that should go in ServerSideGame....
 	LogString("Init successful");
 
-	game = new ServerSideGame();
-	game->InitNetwork();
+	mServerSideGame = new ServerSideGame();
+	mServerSideGame->InitNetwork();
 	
 	int time, oldTime, newTime;
 
-	oldTime = game->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
+	oldTime = mServerSideGame->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
 
 	// App main loop
 	try
@@ -106,17 +105,17 @@ ServerSideGame* game;
 		{
 			do
 			{
-				newTime = game->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
+				newTime = mServerSideGame->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
 				time = newTime - oldTime;
 			} while (time < 1);
 
-			game->Frame(time);
+			mServerSideGame->Frame(time);
 			oldTime = newTime;
 		}
 	}
 	catch(...)
 	{
-		game->networkServer->dreamSock->dreamSock_Shutdown();
+		mServerSideGame->networkServer->dreamSock->dreamSock_Shutdown();
 
 		LogString("Unknown Exception caught in main loop");
 
@@ -125,7 +124,7 @@ ServerSideGame* game;
 
 	LogString("Shutting down everything");
 
-	game->networkServer->dreamSock->dreamSock_Shutdown();
+	mServerSideGame->networkServer->dreamSock->dreamSock_Shutdown();
 
 //this is the end of code that should go in ServerSideGame....
 #endif
