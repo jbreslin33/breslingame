@@ -11,7 +11,7 @@
 ClientSideGame::ClientSideGame(ClientSideBaseGame* baseGame)
 {
 	mBaseGame = baseGame;
-	mClientSideNetwork = NULL;
+	//mClientSideNetwork = NULL;
 	clientList		= NULL;
 	localClient		= NULL;
 
@@ -20,6 +20,8 @@ ClientSideGame::ClientSideGame(ClientSideBaseGame* baseGame)
 	frametime		= 0.0f;
 
 	next			= NULL;
+
+	mClientSideNetwork = new ClientSideNetwork(this);
 }
 
 

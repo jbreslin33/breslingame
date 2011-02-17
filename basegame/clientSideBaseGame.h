@@ -27,7 +27,7 @@ virtual bool keyPressed( const OIS::KeyEvent &arg );
 
 OIS::Keyboard* getKeyboard() { return  mKeyboard; }
 
-ClientSideNetwork* mClientSideNetwork;
+//ClientSideNetwork* mClientSideNetwork;
 ClientSideGame*    mClientSideGame;
 
 std::vector<ClientSideShape*> mShapeVector;

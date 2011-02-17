@@ -7,16 +7,16 @@
 
 ClientSideBaseGame::ClientSideBaseGame(const char* ip)
 {
-	mClientSideGame    = new ClientSideGame(this);
-    	mClientSideNetwork = new ClientSideNetwork(this);
+		mClientSideGame    = new ClientSideGame(this);
+    	//mClientSideNetwork = new ClientSideNetwork(this);
 
-    	mClientSideGame->mClientSideNetwork = mClientSideNetwork;
-    	mClientSideNetwork->mClientSideGame = mClientSideGame;
+    //	mClientSideGame->mClientSideNetwork = mClientSideNetwork;
+    //	mClientSideNetwork->mClientSideGame = mClientSideGame;
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	mClientSideNetwork->StartConnection(ip);
+		mClientSideGame->mClientSideNetwork->StartConnection(ip);
 #else
-	mClientSideNetwork->StartConnection(ip);
+		mClientSideGame->mClientSideNetwork->StartConnection(ip);
 #endif
 }
 
@@ -95,7 +95,7 @@ bool ClientSideBaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
     	if(!processUnbufferedInput(evt)) return false;
 
-	if(mClientSideNetwork != NULL)
+	if(mClientSideGame->mClientSideNetwork != NULL && mClientSideGame->mClientSideNetwork->ready)
 	{
 		mClientSideGame->RunNetwork(evt.timeSinceLastFrame * 1000);
 		mClientSideGame->CheckKeys();
