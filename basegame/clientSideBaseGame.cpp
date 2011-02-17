@@ -7,11 +7,11 @@
 
 ClientSideBaseGame::ClientSideBaseGame(const char* ip)
 {
-	mClientSideGame    = new ClientSideGame(this);
-    mClientSideNetwork = new ClientSideNetwork(this);
+	ClientSideGame    = new ClientSideGame(this);
+    	ClientSideNetwork = new ClientSideNetwork(this);
 
-    mClientSideGame->mClientSideNetwork = mClientSideNetwork;
-    mClientSideNetwork->mClientSideGame = mClientSideGame;
+    	ClientSideGame->mClientSideNetwork = mClientSideNetwork;
+    	ClientSideNetwork->mClientSideGame = mClientSideGame;
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	mClientSideNetwork->StartConnection(ip);
@@ -26,7 +26,7 @@ ClientSideBaseGame::~ClientSideBaseGame()
 
 void ClientSideBaseGame::createPlayer(int index)
 {
-    Ogre::LogManager::getSingletonPtr()->logMessage("*** ClientSideBaseGame::createPlayer() ***");
+    	Ogre::LogManager::getSingletonPtr()->logMessage("*** ClientSideBaseGame::createPlayer() ***");
 
 	//create a human player and or ghost player 
 	ClientSideShape* jay = new ClientSideShape(mSceneMgr,"jay" + index,0,0,0,"sinbad.mesh");
@@ -40,10 +40,10 @@ void ClientSideBaseGame::createScene(void)
 {
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
 
-    Ogre::Light* pointLight = mSceneMgr->createLight("pointLight");
-    pointLight->setType(Ogre::Light::LT_POINT);
-    pointLight->setPosition(Ogre::Vector3(250, 150, 250));
-    pointLight->setDiffuseColour(Ogre::ColourValue::White);
+    	Ogre::Light* pointLight = mSceneMgr->createLight("pointLight");
+    	pointLight->setType(Ogre::Light::LT_POINT);
+    	pointLight->setPosition(Ogre::Vector3(250, 150, 250));
+    	pointLight->setDiffuseColour(Ogre::ColourValue::White);
 	pointLight->setSpecularColour(Ogre::ColourValue::White);
 	
 	// create a floor mesh resource
@@ -51,10 +51,10 @@ void ClientSideBaseGame::createScene(void)
 	Plane(Vector3::UNIT_Y, 0), 100, 100, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
 
 	// create a floor entity, give it a material, and place it at the origin
-    Entity* floor = mSceneMgr->createEntity("Floor", "floor");
-    floor->setMaterialName("Examples/Rockwall");
+    	Entity* floor = mSceneMgr->createEntity("Floor", "floor");
+    	floor->setMaterialName("Examples/Rockwall");
 	floor->setCastShadows(false);
-    mSceneMgr->getRootSceneNode()->attachObject(floor);
+    	mSceneMgr->getRootSceneNode()->attachObject(floor);
 }
 
 bool ClientSideBaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
@@ -65,23 +65,23 @@ bool ClientSideBaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 	mClientSideGame->inputClient.command.key = 0;
     	
 	if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
-    {
+    	{
 		mClientSideGame->inputClient.command.key |= KEY_UP;
    	}
 	
 	if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
 	{
-        mClientSideGame->inputClient.command.key |= KEY_DOWN;
+        	ClientSideGame->inputClient.command.key |= KEY_DOWN;
 	}
 
-    if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
+    	if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
 	{
 		mClientSideGame->inputClient.command.key |= KEY_LEFT;
 	}
 
 	if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
 	{
-        mClientSideGame->inputClient.command.key |= KEY_RIGHT;
+        	ClientSideGame->inputClient.command.key |= KEY_RIGHT;
 	}
 
 	mClientSideGame->inputClient.command.msec = (int) (mClientSideGame->frametime * 1000);
@@ -91,9 +91,9 @@ bool ClientSideBaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 
 bool ClientSideBaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
-    bool ret = BaseApplication::frameRenderingQueued(evt);
+   	 bool ret = BaseApplication::frameRenderingQueued(evt);
 
-    if(!processUnbufferedInput(evt)) return false;
+    	if(!processUnbufferedInput(evt)) return false;
 
 	if(mClientSideNetwork != NULL)
 	{
@@ -101,7 +101,7 @@ bool ClientSideBaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		mClientSideGame->CheckKeys();
 	}
 
-    return ret;
+    	return ret;
 }
 
 bool ClientSideBaseGame::keyPressed( const OIS::KeyEvent &arg )
@@ -120,34 +120,33 @@ extern "C" {
 #endif
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-
-    INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT )
+INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT )
 #else
-	#define UNIX
-    int main(int argc, char *argv[])
+#define UNIX
+int main(int argc, char *argv[])
 #endif
-    {
+{
 	ClientSideBaseGame* mClientSideBaseGame;
-
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	mClientSideBaseGame = new ClientSideBaseGame(strCmdLine);
 #else
 	mClientSideBaseGame = new ClientSideBaseGame(argv[1]);
 #endif
-
 	try
 	{
 		mClientSideBaseGame->go();
-        } catch( Ogre::Exception& e ) {
+        }
+	catch( Ogre::Exception& e )
+	{
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-            MessageBox( NULL, e.getFullDescription().c_str(), "An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
+        	MessageBox( NULL, e.getFullDescription().c_str(), "An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
 #else
-            std::cerr << "An exception has occured: " <<
+            	std::cerr << "An exception has occured: " <<
                 e.getFullDescription().c_str() << std::endl;
 #endif
-        }
+	}
         return 0;
-    }
+}
 
 #ifdef __cplusplus
 }
