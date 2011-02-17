@@ -7,16 +7,12 @@
 
 ClientSideBaseGame::ClientSideBaseGame(const char* ip)
 {
-		mClientSideGame    = new ClientSideGame(this);
-    	//mClientSideNetwork = new ClientSideNetwork(this);
-
-    //	mClientSideGame->mClientSideNetwork = mClientSideNetwork;
-    //	mClientSideNetwork->mClientSideGame = mClientSideGame;
+	mClientSideGame    = new ClientSideGame(this);
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		mClientSideGame->mClientSideNetwork->StartConnection(ip);
+	mClientSideGame->mClientSideNetwork->StartConnection(ip);
 #else
-		mClientSideGame->mClientSideNetwork->StartConnection(ip);
+	mClientSideGame->mClientSideNetwork->StartConnection(ip);
 #endif
 }
 
@@ -26,8 +22,6 @@ ClientSideBaseGame::~ClientSideBaseGame()
 
 void ClientSideBaseGame::createPlayer(int index)
 {
-    	Ogre::LogManager::getSingletonPtr()->logMessage("*** ClientSideBaseGame::createPlayer() ***");
-
 	//create a human player and or ghost player 
 	ClientSideShape* jay = new ClientSideShape(mSceneMgr,"jay" + index,0,0,0,"sinbad.mesh");
 	mShapeVector.push_back(jay);
