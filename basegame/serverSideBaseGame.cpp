@@ -1,25 +1,19 @@
 #include "serverSideBaseGame.h"
 
-#include "../client/ClientSideClient.h"
-#include "../game/ClientSideGame.h"
-#include "../network/clientSideNetwork.h"
-#include "../shape/clientSideShape.h"
-#include "../game/serverSideGame.h"
+#include "Ogre.h"
 
+using namespace Ogre;
+
+#include "../network/clientSideNetwork.h"
+#include "../game/serverSideGame.h"
 #include "../dreamsock/DreamSock.h"
 #include "../dreamsock/DreamServer.h"
 
-//bool keys[256];
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 ServerSideBaseGame::ServerSideBaseGame(HWND hwnd)
-
 #else
-
-
-
 ServerSideBaseGame::ServerSideBaseGame()
 #endif
-
 {
 
 //if windows
@@ -28,10 +22,9 @@ ServerSideBaseGame::ServerSideBaseGame()
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	StartLogConsole();
 
+	mServerSideGame = new ServerSideGame();
 
-	game = new ServerSideGame();
-
-	if(game->InitNetwork() != 0)
+	if(mServerSideGame->InitNetwork() != 0)
 	{
 		LogString("Could not create game server");
 	}
@@ -43,7 +36,7 @@ ServerSideBaseGame::ServerSideBaseGame()
 	// first peek the message without removing it
 	PeekMessage(&WinMsg, hwnd, 0, 0, PM_NOREMOVE);
 
-	oldTime = game->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
+	oldTime = mServerSideGame->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
 
 	try
 	{
@@ -53,7 +46,7 @@ ServerSideBaseGame::ServerSideBaseGame()
 			{
 				if(!GetMessage(&WinMsg, NULL, 0, 0))
 				{
-					game->networkServer->dreamSock->dreamSock_Shutdown();
+					mServerSideGame->networkServer->dreamSock->dreamSock_Shutdown();
 
 					done = true;
 				}
@@ -64,11 +57,11 @@ ServerSideBaseGame::ServerSideBaseGame()
 
 			do
 			{
-				newTime = game->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
+				newTime = mServerSideGame->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
 				time = newTime - oldTime;
 			} while (time < 1);
 			
-			game->Frame(time);
+			mServerSideGame->Frame(time);
 			
 
 			oldTime = newTime;
@@ -78,7 +71,7 @@ ServerSideBaseGame::ServerSideBaseGame()
 	{
 		LogString("Unknown Exception caught in main loop");
 
-		game->networkServer->dreamSock->dreamSock_Shutdown();
+		mServerSideGame->networkServer->dreamSock->dreamSock_Shutdown();
 
 		MessageBox(NULL, "Unknown Exception caught in main loop", "Error", MB_OK | MB_TASKMODAL);
 
@@ -128,12 +121,10 @@ ServerSideBaseGame::ServerSideBaseGame()
 
 //this is the end of code that should go in ServerSideGame....
 #endif
-
 }
 
 ServerSideBaseGame::~ServerSideBaseGame()
 {
-
 }
 
 void ServerSideBaseGame::createPlayer(int index)
@@ -142,12 +133,12 @@ void ServerSideBaseGame::createPlayer(int index)
 
 void ServerSideBaseGame::createScene(void)
 {
-        mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
+	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
 
-        Ogre::Light* pointLight = mSceneMgr->createLight("pointLight");
-        pointLight->setType(Ogre::Light::LT_POINT);
-        pointLight->setPosition(Ogre::Vector3(250, 150, 250));
-        pointLight->setDiffuseColour(Ogre::ColourValue::White);
+    Ogre::Light* pointLight = mSceneMgr->createLight("pointLight");
+    pointLight->setType(Ogre::Light::LT_POINT);
+    pointLight->setPosition(Ogre::Vector3(250, 150, 250));
+    pointLight->setDiffuseColour(Ogre::ColourValue::White);
 	pointLight->setSpecularColour(Ogre::ColourValue::White);
 	
 	// create a floor mesh resource
@@ -155,20 +146,20 @@ void ServerSideBaseGame::createScene(void)
 	Plane(Vector3::UNIT_Y, 0), 100, 100, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
 
 	// create a floor entity, give it a material, and place it at the origin
-        Entity* floor = mSceneMgr->createEntity("Floor", "floor");
-        floor->setMaterialName("Examples/Rockwall");
+    Entity* floor = mSceneMgr->createEntity("Floor", "floor");
+    floor->setMaterialName("Examples/Rockwall");
 	floor->setCastShadows(false);
-        mSceneMgr->getRootSceneNode()->attachObject(floor);
+    mSceneMgr->getRootSceneNode()->attachObject(floor);
 }
 
 bool ServerSideBaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 {
-    return true;
+	return true;
 }
 
 bool ServerSideBaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
-return true;
+	return true;
 }
 
 void ServerSideBaseGame::go(void)
