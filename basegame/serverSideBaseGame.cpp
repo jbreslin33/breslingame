@@ -15,10 +15,6 @@ ServerSideBaseGame::ServerSideBaseGame(HWND hwnd)
 ServerSideBaseGame::ServerSideBaseGame()
 #endif
 {
-
-//if windows
-//this is the begining of code that should go in ServerSideGame....
-
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	StartLogConsole();
 
@@ -74,13 +70,9 @@ ServerSideBaseGame::ServerSideBaseGame()
 		mServerSideGame->networkServer->dreamSock->dreamSock_Shutdown();
 
 		MessageBox(NULL, "Unknown Exception caught in main loop", "Error", MB_OK | MB_TASKMODAL);
-
-//		return -1;
 	}
 //unix
 #else
-
-//this is the begining of code that should go in ServerSideGame....
 	LogString("Init successful");
 
 	mServerSideGame = new ServerSideGame();
@@ -111,15 +103,11 @@ ServerSideBaseGame::ServerSideBaseGame()
 		mServerSideGame->networkServer->dreamSock->dreamSock_Shutdown();
 
 		LogString("Unknown Exception caught in main loop");
-
-		//return -1;
 	}
 
 	LogString("Shutting down everything");
 
 	mServerSideGame->networkServer->dreamSock->dreamSock_Shutdown();
-
-//this is the end of code that should go in ServerSideGame....
 #endif
 }
 
@@ -135,10 +123,10 @@ void ServerSideBaseGame::createScene(void)
 {
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
 
-    Ogre::Light* pointLight = mSceneMgr->createLight("pointLight");
-    pointLight->setType(Ogre::Light::LT_POINT);
-    pointLight->setPosition(Ogre::Vector3(250, 150, 250));
-    pointLight->setDiffuseColour(Ogre::ColourValue::White);
+    	Ogre::Light* pointLight = mSceneMgr->createLight("pointLight");
+    	pointLight->setType(Ogre::Light::LT_POINT);
+    	pointLight->setPosition(Ogre::Vector3(250, 150, 250));
+    	pointLight->setDiffuseColour(Ogre::ColourValue::White);
 	pointLight->setSpecularColour(Ogre::ColourValue::White);
 	
 	// create a floor mesh resource
@@ -146,10 +134,10 @@ void ServerSideBaseGame::createScene(void)
 	Plane(Vector3::UNIT_Y, 0), 100, 100, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
 
 	// create a floor entity, give it a material, and place it at the origin
-    Entity* floor = mSceneMgr->createEntity("Floor", "floor");
-    floor->setMaterialName("Examples/Rockwall");
+    	Entity* floor = mSceneMgr->createEntity("Floor", "floor");
+    	floor->setMaterialName("Examples/Rockwall");
 	floor->setCastShadows(false);
-    mSceneMgr->getRootSceneNode()->attachObject(floor);
+    	mSceneMgr->getRootSceneNode()->attachObject(floor);
 }
 
 bool ServerSideBaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
@@ -166,21 +154,12 @@ void ServerSideBaseGame::go(void)
 {
 
 #ifdef _DEBUG
-    mResourcesCfg = "resources_d.cfg";
-    mPluginsCfg = "plugins_d.cfg";
+	mResourcesCfg = "resources_d.cfg";
+    	mPluginsCfg = "plugins_d.cfg";
 #else
-    mResourcesCfg = "resources.cfg";
-    mPluginsCfg = "plugins.cfg";
+    	mResourcesCfg = "resources.cfg";
+    	mPluginsCfg = "plugins.cfg";
 #endif
-/*
-    if (!setup())
-        return;
-
-    mRoot->startRendering();
-
-    // clean up
-    destroyScene();
-*/
 }
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
@@ -213,12 +192,12 @@ LRESULT CALLBACK WindowProc(HWND WindowhWnd, UINT Message, WPARAM wParam, LPARAM
 	return DefWindowProc(WindowhWnd, Message, wParam, lParam);
 }
 
-    INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT )
+INT WINAPI WinMain( HINSTANCE hInst, HINSTANCE, LPSTR strCmdLine, INT )
 #else
-	#define UNIX
-    int main(int argc, char *argv[])
+#define UNIX
+int main(int argc, char *argv[])
 #endif
-    {
+{
 
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
@@ -254,11 +233,9 @@ LRESULT CALLBACK WindowProc(HWND WindowhWnd, UINT Message, WPARAM wParam, LPARAM
 	ServerSideBaseGame* mServerSideBaseGame;
 	mServerSideBaseGame = new ServerSideBaseGame(hwnd);
 	
-//	return WinMsg.wParam;
 	return 0;
 
 #else
-	//mBaseGame->mClientSideNetwork->StartConnection(argv[1]);
 	LogString("Welcome to Army War Server v2.0");
 	LogString("-------------------------------\n");
 
