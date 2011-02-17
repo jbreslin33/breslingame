@@ -7,11 +7,11 @@
 
 ClientSideBaseGame::ClientSideBaseGame(const char* ip)
 {
-	ClientSideGame    = new ClientSideGame(this);
-    	ClientSideNetwork = new ClientSideNetwork(this);
+	mClientSideGame    = new ClientSideGame(this);
+    	mClientSideNetwork = new ClientSideNetwork(this);
 
-    	ClientSideGame->mClientSideNetwork = mClientSideNetwork;
-    	ClientSideNetwork->mClientSideGame = mClientSideGame;
+    	mClientSideGame->mClientSideNetwork = mClientSideNetwork;
+    	mClientSideNetwork->mClientSideGame = mClientSideGame;
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	mClientSideNetwork->StartConnection(ip);
@@ -71,7 +71,7 @@ bool ClientSideBaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 	
 	if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
 	{
-        	ClientSideGame->inputClient.command.key |= KEY_DOWN;
+        	mClientSideGame->inputClient.command.key |= KEY_DOWN;
 	}
 
     	if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
@@ -81,7 +81,7 @@ bool ClientSideBaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 
 	if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
 	{
-        	ClientSideGame->inputClient.command.key |= KEY_RIGHT;
+        	mClientSideGame->inputClient.command.key |= KEY_RIGHT;
 	}
 
 	mClientSideGame->inputClient.command.msec = (int) (mClientSideGame->frametime * 1000);
