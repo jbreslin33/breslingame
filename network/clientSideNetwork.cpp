@@ -1,18 +1,22 @@
 #include "clientSideNetwork.h"
 
-#include "../basegame/baseGame.h"
+#include "../basegame/clientSideBaseGame.h"
 
 #include "../dreamsock/DreamMessage.h"
 #include "../dreamsock/DreamClient.h"
 #include "../game/ClientSideGame.h"
 
-ClientSideNetwork::ClientSideNetwork(BaseGame* baseGame)
+ClientSideNetwork::ClientSideNetwork(ClientSideGame* clientSideGame)
 {
+
+	mClientSideGame = clientSideGame;
+	ready = false;
 	networkClient	= new DreamClient();
-	mBaseGame     = baseGame;
+	//mClientSideBaseGame     = baseGame;
 	//networkClient = mBaseGame->networkClient;
-	mClientSideGame = NULL;
+	//mClientSideGame = mClientSideBaseGame->mClientSideGame;
 	init = false;
+	ready = true;
 }
 
 ClientSideNetwork::~ClientSideNetwork()

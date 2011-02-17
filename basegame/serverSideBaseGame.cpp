@@ -4,7 +4,7 @@
 
 using namespace Ogre;
 
-#include "../network/clientSideNetwork.h"
+//#include "../network/clientSideNetwork.h"
 #include "../game/serverSideGame.h"
 #include "../dreamsock/DreamSock.h"
 #include "../dreamsock/DreamServer.h"

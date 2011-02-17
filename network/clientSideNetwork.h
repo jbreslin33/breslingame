@@ -3,7 +3,7 @@
 
 #include "network.h"
 
-class BaseGame;
+class ClientSideBaseGame;
 class DreamClient;
 class DreamMessage;
 class ClientSideClient;
@@ -13,7 +13,7 @@ class ClientSideNetwork : public Network
 {
 public:
 
-ClientSideNetwork(BaseGame* baseGame);
+ClientSideNetwork(ClientSideGame* clientSideGame);
 ~ClientSideNetwork();
 
 void	ReadPackets		(void);
@@ -28,12 +28,13 @@ void	Connect			(void);
 void	Disconnect		(void);
 void	SendStartGame		(void);
 
-BaseGame* mBaseGame;
+ClientSideBaseGame* mClientSideBaseGame;
 DreamClient* networkClient;
 
 ClientSideGame* mClientSideGame;
 
 bool init;
+bool ready;
 
 };
 #endif

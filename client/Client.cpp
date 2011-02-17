@@ -5,6 +5,7 @@ Client::Client()
 {
         startPos.x  = 0;
 	startPos.y  = 0;
+//	nickname = "non";
 }
 
 Client::~Client()
