@@ -11,7 +11,7 @@
 ClientSideGame::ClientSideGame(ClientSideBaseGame* baseGame)
 {
 	mBaseGame = baseGame;
-	//mClientSideNetwork = NULL;
+	
 	clientList		= NULL;
 	localClient		= NULL;
 
