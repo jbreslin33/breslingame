@@ -1,7 +1,7 @@
 // Windows code only
 
-#include "DreamWinSock.h"
-#include "DreamSock.h"
+#include "dreamWinSock.h"
+#include "dreamSock.h"
 
 #include <stdio.h>
 #include <windows.h>

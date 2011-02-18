@@ -3,7 +3,7 @@
 
 
 #ifdef WIN32
-#include "../DreamSock/DreamConsole.h"
+#include "../dreamSock/dreamConsole.h"
 	#pragma comment (lib,"ws2_32.lib")
 	#pragma message ("Auto linking WinSock2 library")
 

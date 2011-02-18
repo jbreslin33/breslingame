@@ -1,5 +1,5 @@
-#include "Client.h"
-#include "../math/Vector3D.h"
+#include "client.h"
+#include "../math/vector3D.h"
 
 Client::Client()
 {

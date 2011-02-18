@@ -1,12 +1,12 @@
 #ifndef CLIENTSIDECLIENT_H
 #define CLIENTSIDECLIENT_H
 
-#include "Client.h"
+#include "client.h"
 
 #include "Ogre.h"
 
-#include "../dreamsock/DreamSock.h"
-#include "../command/ClientSideCommand.h"
+#include "../dreamsock/dreamSock.h"
+#include "../command/clientSideCommand.h"
 
 using namespace Ogre;
 

@@ -1,8 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-//extern bool keys[256];
-
 //keys for linux
 #ifdef WIN32
         //do nothing

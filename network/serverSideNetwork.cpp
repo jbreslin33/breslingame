@@ -3,11 +3,11 @@
 
 
 #include "../game/serverSideGame.h"
-#include "../dreamsock/DreamMessage.h"
-#include "../dreamsock/DreamServer.h"
-#include "../dreamsock/DreamClient.h"
+#include "../dreamsock/dreamMessage.h"
+#include "../dreamsock/dreamServer.h"
+#include "../dreamsock/dreamClient.h"
 
-#include "../client/ServerSideClient.h"
+#include "../client/serverSideClient.h"
 
 #include <math.h>
 

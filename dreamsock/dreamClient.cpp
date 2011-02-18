@@ -1,5 +1,5 @@
-#include "DreamClient.h"
-#include "DreamSock.h"
+#include "dreamClient.h"
+#include "dreamSock.h"
 
 #ifdef WIN32
 

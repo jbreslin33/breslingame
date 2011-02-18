@@ -1,11 +1,10 @@
 #ifndef SERVERSIDECLIENT_H
 #define SERVERSIDECLIENT_H
 
-#include "Client.h"
+#include "client.h"
 
-#include "../dreamsock/DreamSock.h"
-//#include "../dreamsock/DreamClient.h"
-#include "../command/ServerSideCommand.h"
+#include "../dreamsock/dreamSock.h"
+#include "../command/serverSideCommand.h"
 
 class DreamClient;
 

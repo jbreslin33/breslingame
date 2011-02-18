@@ -1,4 +1,4 @@
-#include "ServerSideClient.h"
+#include "serverSideClient.h"
 
 ServerSideClient::ServerSideClient()
 {

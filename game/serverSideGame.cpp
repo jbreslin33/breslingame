@@ -1,9 +1,9 @@
 #include "serverSideGame.h"
 
 #include "../network/serverSideNetwork.h"
-#include "../dreamsock/DreamServer.h"
-#include "../dreamsock/DreamClient.h"
-#include "../client/ServerSideClient.h"
+#include "../dreamsock/dreamServer.h"
+#include "../dreamsock/dreamClient.h"
+#include "../client/serverSideClient.h"
 
 #include <fstream>
 #include <math.h>

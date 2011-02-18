@@ -3,7 +3,7 @@
 
 #include "network.h"
 
-#include "../dreamsock/DreamSock.h"
+#include "../dreamsock/dreamSock.h"
 
 class DreamClient;
 class DreamMessage;
