@@ -17,9 +17,9 @@ ClientSideNetwork::ClientSideNetwork(ClientSideGame* clientSideGame)
 	ready = true;
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	StartConnection(mClientSideGame->mBaseGame->mServerIP);
+	StartConnection(mClientSideGame->mClientSideBaseGame->mServerIP);
 #else
-	StartConnection(mClientSideGame->mBaseGame->mServerIP);
+	StartConnection(mClientSideGame->mClientSideBaseGame->mServerIP);
 #endif
 }
 

@@ -51,6 +51,7 @@ bool ClientSideBaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 //from jim: I believe having this here makes local client react faster as
 //this is where ogre wants movement code. but....
 //it causes a longer delay to server. needs to get to server quicker!
+	/*
 	mClientSideGame->inputClient.command.key = 0;
     	
 	if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
@@ -74,7 +75,7 @@ bool ClientSideBaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 	}
 
 	mClientSideGame->inputClient.command.msec = (int) (mClientSideGame->frametime * 1000);
-
+*/
     return true;
 }
 
@@ -83,9 +84,9 @@ bool ClientSideBaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
    	bool ret = BaseApplication::frameRenderingQueued(evt);
 
-    	if(!processUnbufferedInput(evt)) return false;
+    	//if(!processUnbufferedInput(evt)) return false;
 
-	if(mClientSideGame->mClientSideNetwork != NULL && mClientSideGame->mClientSideNetwork->ready)
+	if(mClientSideGame->mClientSideNetwork != NULL)
 	{
 		mClientSideGame->RunNetwork(evt.timeSinceLastFrame * 1000);
 		mClientSideGame->CheckKeys();
