@@ -6,7 +6,7 @@
 #include "../network/clientSideNetwork.h"
 #include <OISKeyboard.h>
 #include "../baseapplication/baseApplication.h"
-#include "../shape/shape.h"
+#include "../shape/clientSideShape.h"
 
 ClientSideGame::ClientSideGame(ClientSideBaseGame* clientSideBaseGame)
 {
@@ -29,7 +29,7 @@ ClientSideGame::~ClientSideGame()
 {
 }
 
-
+//Movement
 void ClientSideGame::CheckPredictionError(int a)
 {
 	if(a < 0 && a > COMMAND_HISTORY_SIZE)
@@ -155,6 +155,8 @@ void ClientSideGame::MoveObjects(void)
 	}
 }
 
+
+//Clients
 void ClientSideGame::AddClient(int local, int ind, char *name)
 {
 	// First get a pointer to the beginning of client list
@@ -179,7 +181,7 @@ void ClientSideGame::AddClient(int local, int ind, char *name)
 		clientList->index = ind;
 		strcpy(clientList->nickname, name);
 
-		mClientSideBaseGame->createPlayer(ind);
+		createPlayer(ind);
 
 		clientList->next = NULL;
 	}
@@ -212,7 +214,7 @@ void ClientSideGame::AddClient(int local, int ind, char *name)
 		list->next = NULL;
 		prev->next = list;
 
-		mClientSideBaseGame->createPlayer(ind);
+		createPlayer(ind);
 	}
 
 	// If we just joined the game, request a non-delta compressed frame
@@ -300,6 +302,19 @@ ClientSideClient *ClientSideGame::GetClientPointer(int index)
 	return NULL;
 }
 
+
+//Player stuff
+void ClientSideGame::createPlayer(int index)
+{
+        //create a human player and or ghost player 
+        ClientSideShape* jay = new ClientSideShape(mClientSideBaseGame->getSceneManager(),"jay" + index,0,0,0,"sinbad.mesh");
+        mClientSideShapeVector.push_back(jay);
+
+        ClientSideClient *client = GetClientPointer(index);
+        client->mShape = jay;
+}
+
+//input
 void ClientSideGame::CheckKeys(void)
 {
 	inputClient.command.key = 0;
@@ -325,50 +340,15 @@ void ClientSideGame::CheckKeys(void)
 	}
 
 	inputClient.command.msec = (int) (frametime * 1000);
-/*
-	inputClient.command.key = 0;
-
-	if(keys[VK_ESCAPE])
-	{
-		Shutdown();
-
-		keys[VK_ESCAPE] = false;
-	}
-
-	if(keys[VK_DOWN])
-	{
-		inputClient.command.key |= KEY_DOWN;
-	}
-
-	if(keys[VK_UP])
-	{
-		inputClient.command.key |= KEY_UP;
-	}
-
-	if(keys[VK_LEFT])
-	{
-		inputClient.command.key |= KEY_LEFT;
-	}
-
-	if(keys[VK_RIGHT])
-	{
-		inputClient.command.key |= KEY_RIGHT;
-	}
-
-        if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
-	{
-		inputClient.command.key |= KEY_UP;
-	}
-	inputClient.command.msec = (int) (frametime * 1000);
-*/
 }
 
-
+//power up and down
 void ClientSideGame::Shutdown(void)
 {
 	mClientSideNetwork->Disconnect();
 }
 
+//network
 void ClientSideGame::RunNetwork(int msec)
 {
 	static int time = 0;

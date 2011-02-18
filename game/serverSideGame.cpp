@@ -10,20 +10,6 @@
 #include <malloc.h>
 #include <stdlib.h>
 
-float VectorLength(Vector3D *vec)
-{
-	return (float) sqrt(vec->x*vec->x + vec->y*vec->y);
-}
-
-Vector3D VectorSubstract(Vector3D *vec1, Vector3D *vec2)
-{
-	Vector3D vec;
-
-	vec.x = vec1->x - vec2->x;
-	vec.y = vec1->y - vec2->y;
-
-	return vec;
-}
 
 ServerSideGame::ServerSideGame()
 {
@@ -42,11 +28,30 @@ ServerSideGame::ServerSideGame()
 	framenum	= 0;
 }
 
+
+
 ServerSideGame::~ServerSideGame()
 {
 	delete networkServer;
 }
 
+//Math
+float VectorLength(Vector3D *vec)
+{
+	return (float) sqrt(vec->x*vec->x + vec->y*vec->y);
+}
+
+Vector3D VectorSubstract(Vector3D *vec1, Vector3D *vec2)
+{
+	Vector3D vec;
+
+	vec.x = vec1->x - vec2->x;
+	vec.y = vec1->y - vec2->y;
+
+	return vec;
+}
+
+//Network
 int ServerSideGame::InitNetwork()
 {
 	if(networkServer->dreamSock->dreamSock_Initialize() != 0)
@@ -76,15 +81,7 @@ int ServerSideGame::InitNetwork()
 	return 0;
 }
 
-void ServerSideGame::ShutdownNetwork(void)
-{
-	LogString("Shutting down game server...");
-
-	RemoveClients();
-
-	networkServer->Uninitialise();
-}
-
+//Movement
 void ServerSideGame::CalculateVelocity(ServerSideCommand *command, float frametime)
 {
 
@@ -133,6 +130,7 @@ void ServerSideGame::MovePlayer(ServerSideClient *client)
 	client->processedFrame = f;
 }
 
+//Clients
 void ServerSideGame::AddClient(void)
 {
 	// First get a pointer to the beginning of client list
@@ -287,6 +285,7 @@ void ServerSideGame::RemoveClients(void)
 	clients = 0;
 }
 
+//Ticks frame
 void ServerSideGame::Frame(int msec)
 {
 	realtime += msec;
@@ -317,13 +316,14 @@ void ServerSideGame::Frame(int msec)
 	network->SendCommand();
 }
 
-void ServerSideGame::createPlayer(int index)
+//power up and down
+void ServerSideGame::ShutdownNetwork(void)
 {
-        //create a human player and or ghost player 
-//        ServerSideShape* jay = new ServerSideShape(mSceneMgr,"jay" + index,0,0,0);
-  //      mServerSideShapeVector.push_back(jay);
+	LogString("Shutting down game server...");
 
-       // ServerSideClient *client = mClientSideGame->GetClientPointer(index);
-       // client->mShape = jay;
+	RemoveClients();
+
+	networkServer->Uninitialise();
 }
+
 

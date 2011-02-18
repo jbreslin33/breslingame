@@ -18,18 +18,29 @@ public:
 ServerSideGame();
 ~ServerSideGame();
 
+//network
 int               InitNetwork();
+
+//power up down
 void    	  ShutdownNetwork  (void);
+
+//movement
 void    	  CalculateVelocity(ServerSideCommand *command, float frametime);
 void              MovePlayers      (void);
 void    	  MovePlayer       (ServerSideClient *client);
+
+//clients
 void    	  AddClient        (void);
 void    	  RemoveClient	   (struct sockaddr *address);
 void   		  RemoveClients    (void);
+ServerSideClient* GetClientList	   (void)   { return clientList; }
+
+//frame ticks
 void    	  Frame            (int msec);
+
+//players
 void createPlayer(int index);
 
-ServerSideClient* GetClientList	   (void)   { return clientList; }
 
 void    	 SetIndex          (int ind)       { index = ind; }
 int              GetIndex          (void)          { return index; }
