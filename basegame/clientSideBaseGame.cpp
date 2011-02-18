@@ -78,6 +78,7 @@ bool ClientSideBaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
     return true;
 }
 
+//this is where i believe ogre wants keys to be processed...
 bool ClientSideBaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
    	bool ret = BaseApplication::frameRenderingQueued(evt);
