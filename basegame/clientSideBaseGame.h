@@ -22,7 +22,7 @@ virtual void createScene(void);
 virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 virtual bool keyPressed( const OIS::KeyEvent &arg );
 
-OIS::Keyboard* getKeyboard() { return  mKeyboard; }
+OIS::Keyboard* getKeyBoard() { return  mKeyboard; }
 
 ClientSideGame*    mClientSideGame;
 

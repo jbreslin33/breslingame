@@ -8,9 +8,9 @@
 #include "../baseapplication/baseApplication.h"
 #include "../shape/shape.h"
 
-ClientSideGame::ClientSideGame(ClientSideBaseGame* baseGame)
+ClientSideGame::ClientSideGame(ClientSideBaseGame* clientSideBaseGame)
 {
-	mBaseGame = baseGame;
+	mClientSideBaseGame = clientSideBaseGame;
 	
 	clientList		= NULL;
 	localClient		= NULL;
@@ -179,7 +179,7 @@ void ClientSideGame::AddClient(int local, int ind, char *name)
 		clientList->index = ind;
 		strcpy(clientList->nickname, name);
 
-		mBaseGame->createPlayer(ind);
+		mClientSideBaseGame->createPlayer(ind);
 
 		clientList->next = NULL;
 	}
@@ -212,7 +212,7 @@ void ClientSideGame::AddClient(int local, int ind, char *name)
 		list->next = NULL;
 		prev->next = list;
 
-		mBaseGame->createPlayer(ind);
+		mClientSideBaseGame->createPlayer(ind);
 	}
 
 	// If we just joined the game, request a non-delta compressed frame
@@ -302,6 +302,29 @@ ClientSideClient *ClientSideGame::GetClientPointer(int index)
 
 void ClientSideGame::CheckKeys(void)
 {
+	inputClient.command.key = 0;
+    	
+	if (mClientSideBaseGame->getKeyBoard()->isKeyDown(OIS::KC_I)) // Forward
+    {
+		inputClient.command.key |= KEY_UP;
+   	}
+	
+	if (mClientSideBaseGame->getKeyBoard()->isKeyDown(OIS::KC_K)) // Backward
+	{
+        inputClient.command.key |= KEY_DOWN;
+	}
+
+    if (mClientSideBaseGame->getKeyBoard()->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
+	{
+		inputClient.command.key |= KEY_LEFT;
+	}
+
+	if (mClientSideBaseGame->getKeyBoard()->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
+	{
+        inputClient.command.key |= KEY_RIGHT;
+	}
+
+	inputClient.command.msec = (int) (frametime * 1000);
 /*
 	inputClient.command.key = 0;
 

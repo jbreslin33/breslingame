@@ -47,7 +47,7 @@ public:
 
 	ClientSideBaseGame *next;
 
-ClientSideBaseGame* mBaseGame;
+	ClientSideBaseGame* mClientSideBaseGame;
 };
 
 #endif
