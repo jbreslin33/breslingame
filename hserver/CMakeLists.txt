@@ -88,29 +88,29 @@ endif()
 
 set(HDRS
 	#BaseApplication
-	../baseapplication/BaseApplication.h
+	../baseapplication/baseApplication.h
 
 	#basegame
 	../basegame/baseGame.h
 	../basegame/serverSideBaseGame.h
 	
 	#dreamSock
-	../dreamsock/DreamClient.h
-	../dreamsock/DreamConsole.h
-	../dreamsock/DreamMessage.h
-	../dreamsock/DreamServer.h
-	../dreamsock/DreamSock.h
+	../dreamsock/dreamClient.h
+	../dreamsock/dreamConsole.h
+	../dreamsock/dreamMessage.h
+	../dreamsock/dreamServer.h
+	../dreamsock/dreamSock.h
 
 	#math
-	../math/Vector.h
+	../math/vector.h
 
 	#command
-	../command/Command.h
-	../command/ServerSideCommand.h
+	../command/command.h
+	../command/serverSideCommand.h
 
 	#client
-	../client/Client.h
-	../client/ServerSideClient.h
+	../client/client.h
+	../client/serverSideClient.h
 
 	#network
 	../network/network.h
@@ -127,12 +127,12 @@ set(HDRS
 
 if(UNIX)	
 set(HDRS
-	../dreamsock/DreamLinuxSock.h
+	../dreamsock/dreamLinuxSock.h
 )
 endif(UNIX)	
 if(WIN32)
 set(HDRS
-	../dreamsock/DreamWinSock.h
+	../dreamsock/dreamWinSock.h
 )
 endif(WIN32)
 
@@ -140,7 +140,7 @@ endif(WIN32)
  
 set(SRCS
 	#BaseApplication
-	../baseapplication/BaseApplication.cpp
+	../baseapplication/baseApplication.cpp
 
 	#basegame
 	../basegame/baseGame.cpp
@@ -150,22 +150,22 @@ set(SRCS
 	../basegame/serverSideBaseGame.cpp
 
 	#dreamSock
-	../dreamsock/DreamClient.cpp
-	../dreamsock/DreamConsole.cpp
-	../dreamsock/DreamMessage.cpp
-	../dreamsock/DreamServer.cpp
-	../dreamsock/DreamSock.cpp
+	../dreamsock/dreamClient.cpp
+	../dreamsock/dreamConsole.cpp
+	../dreamsock/dreamMessage.cpp
+	../dreamsock/dreamServer.cpp
+	../dreamsock/dreamSock.cpp
 
 	#math
-	../math/Vector3D.cpp
+	../math/vector3D.cpp
 
 	#command
-	../command/Command.cpp
-	../command/ServerSideCommand.cpp
+	../command/command.cpp
+	../command/serverSideCommand.cpp
 
 	#client
-	../client/Client.cpp
-	../client/ServerSideClient.cpp
+	../client/client.cpp
+	../client/serverSideClient.cpp
 	
 	#network
 	../network/network.cpp
@@ -182,12 +182,12 @@ set(SRCS
 )
 if(UNIX)	
 set(HDRS
-	../dreamsock/DreamLinuxSock.cpp
+	../dreamsock/dreamLinuxSock.cpp
 )
 endif(UNIX)	
 if(WIN32)
 set(HDRS
-	../dreamsock/DreamWinSock.cpp
+	../dreamsock/dreamWinSock.cpp
 )
 endif(WIN32)
 
