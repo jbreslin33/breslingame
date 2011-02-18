@@ -4,6 +4,7 @@ bool keys[256];
 
 BaseGame::BaseGame()
 {
+	
 }
 
 BaseGame::~BaseGame()
