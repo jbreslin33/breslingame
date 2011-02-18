@@ -199,7 +199,7 @@ int main(int argc, char *argv[])
 #endif
 {
 
-
+ServerSideBaseGame* mServerSideBaseGame;
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 	WNDCLASS WinClass;
 
@@ -230,7 +230,6 @@ int main(int argc, char *argv[])
 
 	ShowWindow(hwnd, SW_HIDE);
 
-	ServerSideBaseGame* mServerSideBaseGame;
 	mServerSideBaseGame = new ServerSideBaseGame(hwnd);
 	
 	return 0;
@@ -243,7 +242,6 @@ int main(int argc, char *argv[])
 	// pipe gets broken
 	signal(SIGPIPE, SIG_IGN);
 
-	ServerSideBaseGame* mServerSideBaseGame;
 	mServerSideBaseGame = new ServerSideBaseGame();
 	
 	return 0;

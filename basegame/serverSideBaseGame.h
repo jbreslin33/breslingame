@@ -1,8 +1,6 @@
 #ifndef SERVERSIDEBASEGAME_H
 #define SERVERSIDEBASEGAME_H
 
-//extern bool keys[256];
-
 #include "baseGame.h"
 
 #include <vector>

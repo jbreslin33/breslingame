@@ -80,7 +80,7 @@ bool ClientSideBaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 
 bool ClientSideBaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
-   	 bool ret = BaseApplication::frameRenderingQueued(evt);
+   	bool ret = BaseApplication::frameRenderingQueued(evt);
 
     	if(!processUnbufferedInput(evt)) return false;
 
