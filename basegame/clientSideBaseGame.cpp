@@ -116,12 +116,9 @@ int main(int argc, char *argv[])
 #endif
 {
 	ClientSideBaseGame* mClientSideBaseGame;
-	//mClientSideBaseGame = new ClientSideBaseGame();
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	//mClientSideBaseGame->mServerIP = strCmdLine;
 	mClientSideBaseGame = new ClientSideBaseGame(strCmdLine);
 #else
-	//mClientSideBaseGame->mServerIP = argv[1];
 	mClientSideBaseGame = new ClientSideBaseGame(argv[1]);
 #endif
 	try
