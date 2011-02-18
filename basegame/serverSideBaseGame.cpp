@@ -5,8 +5,8 @@
 using namespace Ogre;
 
 #include "../game/serverSideGame.h"
-#include "../dreamsock/DreamSock.h"
-#include "../dreamsock/DreamServer.h"
+#include "../dreamsock/dreamSock.h"
+#include "../dreamsock/dreamServer.h"
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 ServerSideBaseGame::ServerSideBaseGame(HWND hwnd)

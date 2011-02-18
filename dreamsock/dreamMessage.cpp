@@ -1,5 +1,5 @@
-#include "DreamMessage.h"
-#include "DreamClient.h"
+#include "dreamMessage.h"
+#include "dreamClient.h"
 /*
 #ifdef WIN32
 // Windows specific headers
@@ -25,8 +25,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <time.h>
-#include "DreamSock.h"
-#include "DreamConsole.h"
+#include "dreamSock.h"
+#include "dreamConsole.h"
 
 
 //-----------------------------------------------------------------------------

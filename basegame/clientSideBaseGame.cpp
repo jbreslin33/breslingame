@@ -1,7 +1,7 @@
 #include "clientSideBaseGame.h"
 
-#include "../client/ClientSideClient.h"
-#include "../game/ClientSideGame.h"
+#include "../client/clientSideClient.h"
+#include "../game/clientSideGame.h"
 #include "../network/clientSideNetwork.h"
 #include "../shape/clientSideShape.h"
 

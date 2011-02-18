@@ -1,8 +1,8 @@
 #ifndef __DREAMCLIENT_H
 #define __DREAMCLIENT_H
 
-#include "DreamConsole.h"
-#include "DreamMessage.h"
+#include "dreamConsole.h"
+#include "dreamMessage.h"
 
 
 #ifdef WIN32

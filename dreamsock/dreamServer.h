@@ -1,7 +1,7 @@
 #ifndef __DREAMSERVER_H
 #define __DREAMSERVER_H
 
-#include "DreamConsole.h"
+#include "dreamConsole.h"
 
 #ifdef WIN32
 	#pragma comment (lib,"ws2_32.lib")

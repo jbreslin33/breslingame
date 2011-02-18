@@ -2,7 +2,7 @@
 #define CLIENTSIDEGAME_H
 
 #include "game.h"
-#include "../client/ClientSideClient.h"
+#include "../client/clientSideClient.h"
 
 class ClientSideBaseGame;
 class ClientSideCommand;

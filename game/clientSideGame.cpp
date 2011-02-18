@@ -1,11 +1,11 @@
-#include "../game/ClientSideGame.h"
+#include "../game/clientSideGame.h"
 
 #include "../basegame/clientSideBaseGame.h"
-#include "../dreamsock/DreamClient.h"
+#include "../dreamsock/dreamClient.h"
 
 #include "../network/clientSideNetwork.h"
 #include <OISKeyboard.h>
-#include "../baseapplication/BaseApplication.h"
+#include "../baseapplication/baseApplication.h"
 #include "../shape/shape.h"
 
 ClientSideGame::ClientSideGame(ClientSideBaseGame* baseGame)

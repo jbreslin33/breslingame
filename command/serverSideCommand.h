@@ -1,7 +1,7 @@
 #ifndef SERVERSIDECOMMAND_H
 #define SERVERSIDECOMMAND_H
 
-#include "Command.h"
+#include "command.h"
 
 class ServerSideCommand : public Command
 {

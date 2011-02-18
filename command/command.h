@@ -1,7 +1,7 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
-#include "../math/Vector3D.h"
+#include "../math/vector3D.h"
 
 class Command
 {

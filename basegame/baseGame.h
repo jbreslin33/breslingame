@@ -3,7 +3,7 @@
 
 extern bool keys[256];
 
-#include "../baseapplication/BaseApplication.h"
+#include "../baseapplication/baseApplication.h"
 
 class BaseGame : public BaseApplication
 {

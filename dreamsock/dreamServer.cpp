@@ -1,5 +1,5 @@
-#include "DreamServer.h"
-#include "DreamClient.h"
+#include "dreamServer.h"
+#include "dreamClient.h"
 
 //#define WIN32
 
@@ -32,8 +32,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <time.h>
-#include "DreamSock.h"
-#include "DreamConsole.h"
+#include "dreamSock.h"
+#include "dreamConsole.h"
 
 
 //-----------------------------------------------------------------------------

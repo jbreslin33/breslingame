@@ -1,7 +1,7 @@
 #ifndef __DreamSock_H
 #define __DreamSock_H
 
-#include "DreamConsole.h"
+#include "dreamConsole.h"
 
 #ifdef WIN32
 	#pragma comment (lib,"ws2_32.lib")

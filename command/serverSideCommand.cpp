@@ -1,4 +1,4 @@
-#include "ServerSideCommand.h"
+#include "serverSideCommand.h"
 
 ServerSideCommand::ServerSideCommand()
 {

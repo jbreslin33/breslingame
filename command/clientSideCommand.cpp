@@ -1,4 +1,4 @@
-#include "ClientSideCommand.h"
+#include "clientSideCommand.h"
 
 ClientSideCommand::ClientSideCommand()
 {

@@ -2,9 +2,9 @@
 
 #include "../basegame/clientSideBaseGame.h"
 
-#include "../dreamsock/DreamMessage.h"
-#include "../dreamsock/DreamClient.h"
-#include "../game/ClientSideGame.h"
+#include "../dreamsock/dreamMessage.h"
+#include "../dreamsock/dreamClient.h"
+#include "../game/clientSideGame.h"
 
 ClientSideNetwork::ClientSideNetwork(ClientSideGame* clientSideGame)
 {

@@ -1,4 +1,4 @@
-#include "DreamSock.h"
+#include "dreamSock.h"
 
 #ifdef WIN32
 // Windows specific headers
@@ -7,8 +7,8 @@
 	#endif
 	#include <windows.h>
 	#include <winsock2.h>
-	#include "DreamWinSock.h"
-	#include "DreamClient.h"
+	#include "dreamWinSock.h"
+	#include "dreamClient.h"
 #else
 // UNIX specific headers
 	#include <memory.h>
@@ -20,14 +20,11 @@
 	#include <netinet/in.h>
 	#include <arpa/inet.h>
 	#include <netdb.h>
-	#include "DreamLinuxSock.h"
+	#include "dreamLinuxSock.h"
 #endif
 
 #include <stdlib.h>
 #include <stdio.h>
-
-
-
 
 DreamSock::DreamSock()
 {
