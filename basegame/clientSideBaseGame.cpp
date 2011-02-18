@@ -5,15 +5,10 @@
 #include "../network/clientSideNetwork.h"
 #include "../shape/clientSideShape.h"
 
-ClientSideBaseGame::ClientSideBaseGame(const char* ip)
+ClientSideBaseGame::ClientSideBaseGame(const char* serverIP)
 {
+	mServerIP = serverIP;
 	mClientSideGame    = new ClientSideGame(this);
-
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	mClientSideGame->mClientSideNetwork->StartConnection(ip);
-#else
-	mClientSideGame->mClientSideNetwork->StartConnection(ip);
-#endif
 }
 
 ClientSideBaseGame::~ClientSideBaseGame()
@@ -121,9 +116,12 @@ int main(int argc, char *argv[])
 #endif
 {
 	ClientSideBaseGame* mClientSideBaseGame;
+	//mClientSideBaseGame = new ClientSideBaseGame();
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	//mClientSideBaseGame->mServerIP = strCmdLine;
 	mClientSideBaseGame = new ClientSideBaseGame(strCmdLine);
 #else
+	//mClientSideBaseGame->mServerIP = argv[1];
 	mClientSideBaseGame = new ClientSideBaseGame(argv[1]);
 #endif
 	try

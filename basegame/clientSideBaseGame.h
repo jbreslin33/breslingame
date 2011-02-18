@@ -12,7 +12,7 @@ class ClientSideBaseGame : public BaseGame
 {
 public:
 
-ClientSideBaseGame(const char* ip);
+ClientSideBaseGame(const char* serverIP);
 ~ClientSideBaseGame();
 
 bool processUnbufferedInput(const Ogre::FrameEvent& evt);
@@ -27,6 +27,8 @@ OIS::Keyboard* getKeyboard() { return  mKeyboard; }
 ClientSideGame*    mClientSideGame;
 
 std::vector<ClientSideShape*> mShapeVector;
+
+const char* mServerIP;
 
 };
 

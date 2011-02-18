@@ -12,11 +12,15 @@ ClientSideNetwork::ClientSideNetwork(ClientSideGame* clientSideGame)
 	mClientSideGame = clientSideGame;
 	ready = false;
 	networkClient	= new DreamClient();
-	//mClientSideBaseGame     = baseGame;
-	//networkClient = mBaseGame->networkClient;
-	//mClientSideGame = mClientSideBaseGame->mClientSideGame;
+
 	init = false;
 	ready = true;
+
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	StartConnection(mClientSideGame->mBaseGame->mServerIP);
+#else
+	StartConnection(mClientSideGame->mBaseGame->mServerIP);
+#endif
 }
 
 ClientSideNetwork::~ClientSideNetwork()
