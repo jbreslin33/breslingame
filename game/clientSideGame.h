@@ -4,10 +4,12 @@
 #include "game.h"
 #include "../client/clientSideClient.h"
 
+#include <vector>
+
 class ClientSideBaseGame;
 class ClientSideCommand;
 class ClientSideNetwork;
-
+class ClientSideShape;
 
 class ClientSideGame : public Game
 {
@@ -16,21 +18,31 @@ public:
 	~ClientSideGame();
 
 
-	// Client.cpp
-	void	CheckPredictionError(int a);
-	void	CalculateVelocity(ClientSideCommand *command, float frametime);
-	void	PredictMovement(int prevFrame, int curFrame);
-	void	MoveObjects(void);
+	//Movement 
+	void CheckPredictionError(int a);
+	void CalculateVelocity(ClientSideCommand *command, float frametime);
+	void PredictMovement(int prevFrame, int curFrame);
+	void MoveObjects(void);
 
-	void	AddClient(int local, int index, char *name);
-	void	RemoveClient(int index);
-	void	RemoveClients(void);
+	//clients
+	void AddClient(int local, int index, char *name);
+	void RemoveClient(int index);
+	void RemoveClients(void);
 
+	//players
+	void createPlayer(int index);
 
-	void	Shutdown(void);
-	void	CheckKeys(void);
-	void	Frame(void);
-	void	RunNetwork(int msec);
+	//power up and down
+	void Shutdown(void);
+
+	//input
+	void CheckKeys(void);
+	
+	void Frame(void);
+	
+	//network
+	void RunNetwork(int msec);
+
 
 	ClientSideClient *clientList;			// Client list
 	ClientSideClient *localClient;		// Pointer to the local client in the client list
@@ -48,6 +60,9 @@ public:
 	ClientSideBaseGame *next;
 
 	ClientSideBaseGame* mClientSideBaseGame;
+
+	std::vector<ClientSideShape*> mClientSideShapeVector;
+
 };
 
 #endif

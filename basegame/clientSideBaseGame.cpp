@@ -14,7 +14,7 @@ ClientSideBaseGame::ClientSideBaseGame(const char* serverIP)
 ClientSideBaseGame::~ClientSideBaseGame()
 {
 }
-
+/*
 void ClientSideBaseGame::createPlayer(int index)
 {
 	//create a human player and or ghost player 
@@ -24,7 +24,7 @@ void ClientSideBaseGame::createPlayer(int index)
 	ClientSideClient *client = mClientSideGame->GetClientPointer(index);
 	client->mShape = jay;
 }
-
+*/
 void ClientSideBaseGame::createScene(void)
 {
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
@@ -46,45 +46,10 @@ void ClientSideBaseGame::createScene(void)
     	mSceneMgr->getRootSceneNode()->attachObject(floor);
 }
 
-bool ClientSideBaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
-{
-//from jim: I believe having this here makes local client react faster as
-//this is where ogre wants movement code. but....
-//it causes a longer delay to server. needs to get to server quicker!
-	/*
-	mClientSideGame->inputClient.command.key = 0;
-    	
-	if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
-    	{
-		mClientSideGame->inputClient.command.key |= KEY_UP;
-   	}
-	
-	if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
-	{
-        	mClientSideGame->inputClient.command.key |= KEY_DOWN;
-	}
-
-    	if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
-	{
-		mClientSideGame->inputClient.command.key |= KEY_LEFT;
-	}
-
-	if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
-	{
-        	mClientSideGame->inputClient.command.key |= KEY_RIGHT;
-	}
-
-	mClientSideGame->inputClient.command.msec = (int) (mClientSideGame->frametime * 1000);
-*/
-    return true;
-}
-
 //this is where i believe ogre wants keys to be processed...
 bool ClientSideBaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
    	bool ret = BaseApplication::frameRenderingQueued(evt);
-
-    	//if(!processUnbufferedInput(evt)) return false;
 
 	if(mClientSideGame->mClientSideNetwork != NULL)
 	{
