@@ -4,7 +4,6 @@
 
 using namespace Ogre;
 
-//#include "../network/clientSideNetwork.h"
 #include "../game/serverSideGame.h"
 #include "../dreamsock/DreamSock.h"
 #include "../dreamsock/DreamServer.h"
@@ -58,7 +57,6 @@ ServerSideBaseGame::ServerSideBaseGame()
 			} while (time < 1);
 			
 			mServerSideGame->Frame(time);
-			
 
 			oldTime = newTime;
 		}
@@ -248,9 +246,12 @@ ServerSideBaseGame* mServerSideBaseGame;
 
 #endif
 
-        try {
-            //mBaseGame->go();
-        } catch( Ogre::Exception& e ) {
+	try
+	{
+        	mServerSideBaseGame->go();
+        }
+	catch( Ogre::Exception& e )
+	{
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
             //MessageBox( NULL, e.getFullDescription().c_str(), "An exception has occured!", MB_OK | MB_ICONERROR | MB_TASKMODAL);
 #else
@@ -258,7 +259,6 @@ ServerSideBaseGame* mServerSideBaseGame;
               //  e.getFullDescription().c_str() << std::endl;
 #endif
         }
-
         return 0;
     }
 
