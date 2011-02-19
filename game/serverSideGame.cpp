@@ -4,15 +4,21 @@
 #include "../dreamsock/dreamServer.h"
 #include "../dreamsock/dreamClient.h"
 #include "../client/serverSideClient.h"
+#include "../basegame/serverSideBaseGame.h"
 
 #include <fstream>
 #include <math.h>
 #include <malloc.h>
 #include <stdlib.h>
 
+#include "Ogre.h"
 
-ServerSideGame::ServerSideGame()
+using namespace Ogre;
+
+ServerSideGame::ServerSideGame(ServerSideBaseGame* serverSideBaseGame)
 {
+	mServerSideBaseGame = serverSideBaseGame;
+
 	network       = new ServerSideNetwork(this);
 	networkServer = new DreamServer();
 
@@ -34,6 +40,29 @@ ServerSideGame::~ServerSideGame()
 {
 	delete networkServer;
 }
+
+//scene
+void ServerSideGame::createScene(void)
+{
+        mServerSideBaseGame->getSceneManager()->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
+
+        Ogre::Light* pointLight = mServerSideBaseGame->getSceneManager()->createLight("pointLight");
+        pointLight->setType(Ogre::Light::LT_POINT);
+        pointLight->setPosition(Ogre::Vector3(250, 150, 250));
+        pointLight->setDiffuseColour(Ogre::ColourValue::White);
+        pointLight->setSpecularColour(Ogre::ColourValue::White);
+
+        // create a floor mesh resource
+        MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+        Plane(Vector3::UNIT_Y, 0), 100, 100, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
+
+        // create a floor entity, give it a material, and place it at the origin
+        Entity* floor = mServerSideBaseGame->getSceneManager()->createEntity("Floor", "floor");
+        floor->setMaterialName("Examples/Rockwall");
+        floor->setCastShadows(false);
+        mServerSideBaseGame->getSceneManager()->getRootSceneNode()->attachObject(floor);
+}
+
 
 //Math
 float VectorLength(Vector3D *vec)

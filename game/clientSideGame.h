@@ -17,6 +17,8 @@ public:
 	ClientSideGame(ClientSideBaseGame* baseGame);
 	~ClientSideGame();
 
+	//Scene
+	void createScene(void);
 
 	//Movement 
 	void CheckPredictionError(int a);

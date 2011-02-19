@@ -29,6 +29,30 @@ ClientSideGame::~ClientSideGame()
 {
 }
 
+
+//scene
+void ClientSideGame::createScene(void)
+{
+        mClientSideBaseGame->getSceneManager()->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
+
+        Ogre::Light* pointLight = mClientSideBaseGame->getSceneManager()->createLight("pointLight");
+        pointLight->setType(Ogre::Light::LT_POINT);
+        pointLight->setPosition(Ogre::Vector3(250, 150, 250));
+        pointLight->setDiffuseColour(Ogre::ColourValue::White);
+        pointLight->setSpecularColour(Ogre::ColourValue::White);
+
+        // create a floor mesh resource
+        MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+        Plane(Vector3::UNIT_Y, 0), 100, 100, 10, 10, true, 1, 10, 10, Vector3::UNIT_Z);
+
+        // create a floor entity, give it a material, and place it at the origin
+        Entity* floor = mClientSideBaseGame->getSceneManager()->createEntity("Floor", "floor");
+        floor->setMaterialName("Examples/Rockwall");
+        floor->setCastShadows(false);
+        mClientSideBaseGame->getSceneManager()->getRootSceneNode()->attachObject(floor);
+}
+
+
 //Movement
 void ClientSideGame::CheckPredictionError(int a)
 {
