@@ -343,22 +343,22 @@ void ClientSideGame::CheckKeys(void)
 {
 	inputClient.command.key = 0;
     	
-	if (mClientSideBaseGame->getKeyBoard()->isKeyDown(OIS::KC_I)) // Forward
+	if (mClientSideBaseGame->getKeyboard()->isKeyDown(OIS::KC_I)) // Forward
     {
 		inputClient.command.key |= KEY_UP;
    	}
 	
-	if (mClientSideBaseGame->getKeyBoard()->isKeyDown(OIS::KC_K)) // Backward
+	if (mClientSideBaseGame->getKeyboard()->isKeyDown(OIS::KC_K)) // Backward
 	{
         inputClient.command.key |= KEY_DOWN;
 	}
 
-    if (mClientSideBaseGame->getKeyBoard()->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
+    if (mClientSideBaseGame->getKeyboard()->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
 	{
 		inputClient.command.key |= KEY_LEFT;
 	}
 
-	if (mClientSideBaseGame->getKeyBoard()->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
+	if (mClientSideBaseGame->getKeyboard()->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
 	{
         inputClient.command.key |= KEY_RIGHT;
 	}

@@ -34,12 +34,6 @@ bool ClientSideBaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
     	return ret;
 }
 
-bool ClientSideBaseGame::keyPressed( const OIS::KeyEvent &arg )
-{
-	BaseApplication::keyPressed(arg);
-	return true;
-}
-
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #define WIN32_LEAN_AND_MEAN
 #include "windows.h"

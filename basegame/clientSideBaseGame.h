@@ -12,11 +12,8 @@ public:
 ClientSideBaseGame(const char* serverIP);
 ~ClientSideBaseGame();
 
-virtual void createScene(void);
+virtual void createScene	 (void);
 virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
-virtual bool keyPressed( const OIS::KeyEvent &arg );
-
-OIS::Keyboard*  getKeyBoard() { return  mKeyboard; }
 
 ClientSideGame* mClientSideGame;
 

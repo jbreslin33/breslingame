@@ -113,18 +113,9 @@ ServerSideBaseGame::~ServerSideBaseGame()
 {
 }
 
-void ServerSideBaseGame::createPlayer(int index)
-{
-}
-
 void ServerSideBaseGame::createScene(void)
 {
 	mServerSideGame->createScene();
-}
-
-bool ServerSideBaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
-{
-	return true;
 }
 
 bool ServerSideBaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
