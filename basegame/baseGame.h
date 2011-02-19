@@ -12,10 +12,6 @@ public:
 BaseGame();
 ~BaseGame();
 
-virtual void createScene(void);
-virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
-virtual bool keyPressed( const OIS::KeyEvent &arg );
-
 OIS::Keyboard* 	    getKeyboard    () { return mKeyboard; }
 Ogre::SceneManager* getSceneManager() { return mSceneMgr; }
 
