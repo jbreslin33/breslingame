@@ -14,17 +14,7 @@ ClientSideBaseGame::ClientSideBaseGame(const char* serverIP)
 ClientSideBaseGame::~ClientSideBaseGame()
 {
 }
-/*
-void ClientSideBaseGame::createPlayer(int index)
-{
-	//create a human player and or ghost player 
-	ClientSideShape* jay = new ClientSideShape(mSceneMgr,"jay" + index,0,0,0,"sinbad.mesh");
-	mShapeVector.push_back(jay);
-	
-	ClientSideClient *client = mClientSideGame->GetClientPointer(index);
-	client->mShape = jay;
-}
-*/
+
 void ClientSideBaseGame::createScene(void)
 {
 	mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
