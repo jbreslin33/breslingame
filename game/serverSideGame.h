@@ -11,12 +11,16 @@ class ServerSideClient;
 class DreamServer;
 class ServerSideNetwork;
 class ServerSideShape;
+class ServerSideBaseGame;
 
 class ServerSideGame : public Game
 {
 public:
-ServerSideGame();
+ServerSideGame(ServerSideBaseGame* serverSideBaseGame);
 ~ServerSideGame();
+
+//Scene
+void              createScene(void);
 
 //network
 int               InitNetwork();
@@ -58,6 +62,8 @@ int                servertime;                             // ServerSideGame fra
 float              frametime;                              // Frame time in seconds
 int                index;
 long               framenum;
+
+ServerSideBaseGame* mServerSideBaseGame;
 
 };
 #endif
