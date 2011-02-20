@@ -21,6 +21,7 @@ public:
 	void createScene(void);
 
 	//Movement 
+	void RunLocalPredictions(void);
 	void CheckPredictionError(int a);
 	void CalculateVelocity(ClientSideCommand *command, float frametime);
 	void PredictMovement(int prevFrame, int curFrame);
