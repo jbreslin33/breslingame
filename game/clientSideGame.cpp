@@ -377,18 +377,26 @@ void ClientSideGame::RunNetwork(int msec)
 {
 	static int time = 0;
 	time += msec;
-
+	//LogString("time in RunNetwork: %d",time);
 	// Framerate is too high
+	
 	if(time < (1000 / 60))
+	{
+//		LogString("FRAMRATE TOO HIGH!!!!");
 		return;
+	}
 
+//	LogString("<<<<<<<<<<<<<<<Running Network>>>>>>>>>>>>>>>>");
 	frametime = time / 1000.0f;
 	time = 0;
 
 	// Read packets from server, and send new commands
 	mClientSideNetwork->ReadPackets();
 	mClientSideNetwork->SendCommand();
+}
 
+void ClientSideGame::RunLocalPredictions()
+{
 	int ack = mClientSideNetwork->networkClient->GetIncomingAcknowledged();
 	int current = mClientSideNetwork->networkClient->GetOutgoingSequence();
 
@@ -405,5 +413,5 @@ void ClientSideGame::RunNetwork(int msec)
 		PredictMovement(prevframe, frame);
 	}
 
-	MoveObjects();
+	//MoveObjects();
 }

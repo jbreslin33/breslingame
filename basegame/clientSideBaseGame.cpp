@@ -30,7 +30,8 @@ bool ClientSideBaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 		mClientSideGame->RunNetwork(evt.timeSinceLastFrame * 1000);
 		mClientSideGame->CheckKeys();
 	}
-
+	mClientSideGame->RunLocalPredictions();
+	mClientSideGame->MoveObjects();
     	return ret;
 }
 
