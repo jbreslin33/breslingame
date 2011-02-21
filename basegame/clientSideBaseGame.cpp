@@ -24,15 +24,18 @@ void ClientSideBaseGame::createScene(void)
 bool ClientSideBaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
    	bool ret = BaseApplication::frameRenderingQueued(evt);
+	
 
 	if(mClientSideGame->mClientSideNetwork != NULL)
 	{
 		mClientSideGame->RunNetwork(evt.timeSinceLastFrame * 1000);
-		mClientSideGame->CheckKeys();
 	}
+	
+	mClientSideGame->CheckKeys();
 	mClientSideGame->RunLocalPredictions();
 	mClientSideGame->MoveObjects();
-    	return ret;
+    	
+	return ret;
 }
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32

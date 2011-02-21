@@ -376,6 +376,7 @@ void ClientSideGame::Shutdown(void)
 void ClientSideGame::RunNetwork(int msec)
 {
 	static int time = 0;
+	LogString("time static:%d",time);
 	time += msec;
 	//LogString("time in RunNetwork: %d",time);
 	// Framerate is too high

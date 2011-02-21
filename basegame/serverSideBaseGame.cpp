@@ -89,9 +89,10 @@ ServerSideBaseGame::ServerSideBaseGame()
 			do
 			{
 				newTime = mServerSideGame->networkServer->dreamSock->dreamSock_GetCurrentSystemTime();
+				//LogString("mytime: %d",newTime);
 				time = newTime - oldTime;
 			} while (time < 1);
-
+			//LogString("time in while:%d",time);
 			mServerSideGame->Frame(time);
 			oldTime = newTime;
 		}
