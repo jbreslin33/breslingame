@@ -114,7 +114,7 @@ int ServerSideGame::InitNetwork()
 void ServerSideGame::CalculateVelocity(ServerSideCommand *command, float frametime)
 {
 
-	float multiplier = 100.0f;
+	float multiplier = 10.0f;
 
 	command->vel.x = 0.0f;
 	command->vel.y = 0.0f;
@@ -145,7 +145,7 @@ void ServerSideGame::MovePlayer(ServerSideClient *client)
 {
 	float clientFrametime;
 
-	float multiplier = 100.0f;
+	float multiplier = 10.0f;
 
 	clientFrametime = client->command.msec / 1000.0f;;
 

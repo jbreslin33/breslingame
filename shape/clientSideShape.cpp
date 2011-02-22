@@ -1,6 +1,6 @@
 #include "clientSideShape.h"
 
-#define RUN_SPEED 17
+#define RUN_SPEED 100
 
 ClientSideShape::ClientSideShape(Ogre::SceneManager* sceneMgr, std::string shapeName,int x, int y, int z,std::string meshName) : Shape(sceneMgr,shapeName,x,y,z)
 {
