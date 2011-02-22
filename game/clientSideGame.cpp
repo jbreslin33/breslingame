@@ -82,7 +82,7 @@ void ClientSideGame::CheckPredictionError(int a)
 
 void ClientSideGame::CalculateVelocity(ClientSideCommand *command, float frametime)
 {
-	float multiplier = 10.0f;
+	float multiplier = 17.0f;
 
 	command->vel.x = 0.0f;
 	command->vel.y = 0.0f;
@@ -348,31 +348,54 @@ void ClientSideGame::CheckKeys(void)
     	
 	if (mClientSideBaseGame->getKeyboard()->isKeyDown(OIS::KC_I)) // Forward
     	{
-		//inputClient.command.key |= KEY_UP;
-	 	localGuy->mKeyDirection.x = 1;
+		inputClient.command.key |= KEY_UP;
+	 	//localGuy->mKeyDirection.x = 1;
    	}
 	
 	if (mClientSideBaseGame->getKeyboard()->isKeyDown(OIS::KC_K)) // Backward
 	{
-        	//inputClient.command.key |= KEY_DOWN;
-	 	localGuy->mKeyDirection.x = -1;
+        	inputClient.command.key |= KEY_DOWN;
+	 	//localGuy->mKeyDirection.x = -1;
 	}
 
     	if (mClientSideBaseGame->getKeyboard()->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
 	{
-		//inputClient.command.key |= KEY_LEFT;
-	 	localGuy->mKeyDirection.z = -1;
+		inputClient.command.key |= KEY_LEFT;
+	 	//localGuy->mKeyDirection.z = -1;
 	}
 
 	if (mClientSideBaseGame->getKeyboard()->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
 	{
-        	//inputClient.command.key |= KEY_RIGHT;
-		localGuy->mKeyDirection.z = 1;
+        	inputClient.command.key |= KEY_RIGHT;
+		//localGuy->mKeyDirection.z = 1;
 	}
 
 	inputClient.command.msec = (int) (frametime * 1000);
 }
 
+
+void ClientSideGame::CheckKeys(int i)
+{
+	if (mClientSideBaseGame->getKeyboard()->isKeyDown(OIS::KC_T)) // Forward
+    {
+		 localGuy->mKeyDirection.x = 1;
+   	}
+	
+	if (mClientSideBaseGame->getKeyboard()->isKeyDown(OIS::KC_G)) // Backward
+	{
+	 	localGuy->mKeyDirection.x = -1;
+	}
+
+    if (mClientSideBaseGame->getKeyboard()->isKeyDown(OIS::KC_F)) // Left - yaw or strafe
+	{
+	 	localGuy->mKeyDirection.z = -1;
+	}
+
+	if (mClientSideBaseGame->getKeyboard()->isKeyDown(OIS::KC_H)) // Right - yaw or strafe
+	{
+		localGuy->mKeyDirection.z = 1;
+	}
+}
 //power up and down
 void ClientSideGame::Shutdown(void)
 {
