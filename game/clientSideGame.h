@@ -65,7 +65,7 @@ public:
 	ClientSideBaseGame* mClientSideBaseGame;
 
 	std::vector<ClientSideShape*> mClientSideShapeVector;
-
+	ClientSideShape* localGuy;
 };
 
 #endif

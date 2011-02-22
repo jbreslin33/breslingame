@@ -50,8 +50,9 @@ void ClientSideGame::createScene(void)
         floor->setMaterialName("Examples/Rockwall");
         floor->setCastShadows(false);
         mClientSideBaseGame->getSceneManager()->getRootSceneNode()->attachObject(floor);
-}
 
+        localGuy = new ClientSideShape(mClientSideBaseGame->getSceneManager(),"localGuy",0,0,0,"sinbad.mesh");
+}
 
 //Movement
 void ClientSideGame::CheckPredictionError(int a)
@@ -336,6 +337,8 @@ void ClientSideGame::createPlayer(int index)
 
         ClientSideClient *client = GetClientPointer(index);
         client->mShape = jay;
+
+	
 }
 
 //input
@@ -344,23 +347,27 @@ void ClientSideGame::CheckKeys(void)
 	inputClient.command.key = 0;
     	
 	if (mClientSideBaseGame->getKeyboard()->isKeyDown(OIS::KC_I)) // Forward
-    {
-		inputClient.command.key |= KEY_UP;
+    	{
+		//inputClient.command.key |= KEY_UP;
+	 	localGuy->mKeyDirection.x = 1;
    	}
 	
 	if (mClientSideBaseGame->getKeyboard()->isKeyDown(OIS::KC_K)) // Backward
 	{
-        inputClient.command.key |= KEY_DOWN;
+        	//inputClient.command.key |= KEY_DOWN;
+	 	localGuy->mKeyDirection.x = -1;
 	}
 
-    if (mClientSideBaseGame->getKeyboard()->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
+    	if (mClientSideBaseGame->getKeyboard()->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
 	{
-		inputClient.command.key |= KEY_LEFT;
+	//	inputClient.command.key |= KEY_LEFT;
+	 	localGuy->mKeyDirection.z = -1;
 	}
 
 	if (mClientSideBaseGame->getKeyboard()->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
 	{
-        inputClient.command.key |= KEY_RIGHT;
+        //	inputClient.command.key |= KEY_RIGHT;
+		localGuy->mKeyDirection.z = 1;
 	}
 
 	inputClient.command.msec = (int) (frametime * 1000);
@@ -376,7 +383,7 @@ void ClientSideGame::Shutdown(void)
 void ClientSideGame::RunNetwork(int msec)
 {
 	static int time = 0;
-	LogString("time static:%d",time);
+	//LogString("time static:%d",time);
 	time += msec;
 	//LogString("time in RunNetwork: %d",time);
 	// Framerate is too high
