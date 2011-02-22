@@ -33,6 +33,7 @@ bool ClientSideBaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	}
 	
 	mClientSideGame->CheckKeys();
+	mClientSideGame->CheckKeys(1);
 	mClientSideGame->RunLocalPredictions();
 	mClientSideGame->MoveObjects();
 

@@ -20,7 +20,7 @@ public:
 	//Scene
 	void createScene(void);
 
-	//Movement 
+	//Movement
 	void RunLocalPredictions(void);
 	void CheckPredictionError(int a);
 	void CalculateVelocity(ClientSideCommand *command, float frametime);
@@ -40,9 +40,10 @@ public:
 
 	//input
 	void CheckKeys(void);
-	
+	void CheckKeys(int i);
+
 	void Frame(void);
-	
+
 	//network
 	void RunNetwork(int msec);
 
