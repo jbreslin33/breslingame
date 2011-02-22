@@ -25,6 +25,7 @@ bool ClientSideBaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
    	bool ret = BaseApplication::frameRenderingQueued(evt);
 	
+	mClientSideGame->localGuy->updatePosition(evt.timeSinceLastFrame);
 
 	if(mClientSideGame->mClientSideNetwork != NULL)
 	{
@@ -34,6 +35,7 @@ bool ClientSideBaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	mClientSideGame->CheckKeys();
 	mClientSideGame->RunLocalPredictions();
 	mClientSideGame->MoveObjects();
+
     	
 	return ret;
 }

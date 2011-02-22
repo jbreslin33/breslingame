@@ -18,10 +18,13 @@ ClientSideShape(Ogre::SceneManager* mSceneMgr, std::string name, int xPos, int y
 
 
 void setupModel();
+void updatePosition(Real deltaTime);
 
 //stats
 std::string mMeshName;
 
+Vector3 mKeyDirection;      // player's local intended direction based on WASD keys
+Vector3 mGoalDirection;
 };
 
 #endif
