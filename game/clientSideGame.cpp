@@ -82,7 +82,7 @@ void ClientSideGame::CheckPredictionError(int a)
 
 void ClientSideGame::CalculateVelocity(ClientSideCommand *command, float frametime)
 {
-	float multiplier = 100.0f;
+	float multiplier = 10.0f;
 
 	command->vel.x = 0.0f;
 	command->vel.y = 0.0f;
@@ -360,13 +360,13 @@ void ClientSideGame::CheckKeys(void)
 
     	if (mClientSideBaseGame->getKeyboard()->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
 	{
-	//	inputClient.command.key |= KEY_LEFT;
+		//inputClient.command.key |= KEY_LEFT;
 	 	localGuy->mKeyDirection.z = -1;
 	}
 
 	if (mClientSideBaseGame->getKeyboard()->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
 	{
-        //	inputClient.command.key |= KEY_RIGHT;
+        	//inputClient.command.key |= KEY_RIGHT;
 		localGuy->mKeyDirection.z = 1;
 	}
 
