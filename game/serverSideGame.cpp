@@ -42,6 +42,7 @@ ServerSideGame::~ServerSideGame()
 }
 
 //scene
+/*
 void ServerSideGame::createScene(void)
 {
         mServerSideBaseGame->getSceneManager()->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
@@ -62,6 +63,7 @@ void ServerSideGame::createScene(void)
         floor->setCastShadows(false);
         mServerSideBaseGame->getSceneManager()->getRootSceneNode()->attachObject(floor);
 }
+*/
 
 
 //Math

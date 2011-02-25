@@ -1,8 +1,8 @@
 #include "serverSideBaseGame.h"
 
-#include "Ogre.h"
+//#include "Ogre.h"
 
-using namespace Ogre;
+//using namespace Ogre;
 
 #include "../game/serverSideGame.h"
 #include "../dreamsock/dreamSock.h"
@@ -113,17 +113,19 @@ ServerSideBaseGame::ServerSideBaseGame()
 ServerSideBaseGame::~ServerSideBaseGame()
 {
 }
-
+/*
 void ServerSideBaseGame::createScene(void)
 {
 	mServerSideGame->createScene();
 }
-
+*/
+/*
 bool ServerSideBaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
 	return true;
 }
-
+*/
+/*
 void ServerSideBaseGame::go(void)
 {
 
@@ -135,12 +137,13 @@ void ServerSideBaseGame::go(void)
     	mPluginsCfg = "plugins.cfg";
 #endif
 }
-
+*/
+/*
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #define WIN32_LEAN_AND_MEAN
 #include "windows.h"
 #endif
-
+*/
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -221,10 +224,10 @@ ServerSideBaseGame* mServerSideBaseGame;
 	return 0;
 
 #endif
-
+/*
 	try
 	{
-        	mServerSideBaseGame->go();
+        	//mServerSideBaseGame->go();
         }
 	catch( Ogre::Exception& e )
 	{
@@ -235,6 +238,7 @@ ServerSideBaseGame* mServerSideBaseGame;
               //  e.getFullDescription().c_str() << std::endl;
 #endif
         }
+		*/
         return 0;
     }
 

@@ -51,7 +51,7 @@ void ClientSideGame::createScene(void)
         floor->setCastShadows(false);
         mClientSideBaseGame->getSceneManager()->getRootSceneNode()->attachObject(floor);
 
-        localGuy = new ClientSideShape(mClientSideBaseGame->getSceneManager(),"localGuy",0,0,0,"sinbad.mesh");
+        localGuy = new ClientSideShape(mClientSideBaseGame->getSceneManager(),"localGuy",0,0,0,"ninja.mesh");
 }
 
 //Movement
@@ -332,7 +332,7 @@ ClientSideClient *ClientSideGame::GetClientPointer(int index)
 void ClientSideGame::createPlayer(int index)
 {
         //create a human player and or ghost player 
-        ClientSideShape* jay = new ClientSideShape(mClientSideBaseGame->getSceneManager(),"jay" + index,0,0,0,"sinbad.mesh");
+        ClientSideShape* jay = new ClientSideShape(mClientSideBaseGame->getSceneManager(),"jay" + index,0,0,0,"ninja.mesh");
         mClientSideShapeVector.push_back(jay);
 
         ClientSideClient *client = GetClientPointer(index);
