@@ -82,7 +82,7 @@ void ClientSideGame::CheckPredictionError(int a)
 
 void ClientSideGame::CalculateVelocity(ClientSideCommand *command, float frametime)
 {
-	float multiplier = 42.0f;
+	float multiplier = 100.0f;
 
 	command->vel.x = 0.0f;
 	command->vel.y = 0.0f;
