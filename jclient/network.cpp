@@ -7,8 +7,8 @@
 
 //#include "Tutorial4.h"
 
-//char serverIP[32] = "127.0.0.1";
-char serverIP[32] = "192.168.1.104";
+char serverIP[32] = "127.0.0.1";
+//char serverIP[32] = "192.168.1.104";
 #include "client.h"
 #include "../dreamsock/DreamClient.h"
 #include "../dreamsock/DreamSock.h"

@@ -84,27 +84,34 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 	add_definitions(-DBOOST_ALL_NO_LIB)
 	set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
 endif()
- 
+
 set(HDRS
-	./BaseApplication.h
-	./BasicTutorial4.h
+	./common.h
+	./dreamSock.h
+	./dreamSockLog.h
+	./main.h
+	./network.h
+	./server.h
 )
  
 set(SRCS
-	./BaseApplication.cpp
-	./BasicTutorial4.cpp
+	./main.cpp
+	./network.cpp
+	./server.cpp
 )
  
 include_directories( ${OIS_INCLUDE_DIRS}
 	${OGRE_INCLUDE_DIRS}
 	${OGRE_SAMPLES_INCLUDEPATH}
 )
- 
+
 add_executable(OgreApp WIN32 ${HDRS} ${SRCS})
  
 set_target_properties(OgreApp PROPERTIES DEBUG_POSTFIX _d)
  
 target_link_libraries(OgreApp ${OGRE_LIBRARIES} ${OIS_LIBRARIES})
+#link to dreamsock library
+#target_link_libraries (OgreApp dreamSock) 
  
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/bin)
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/dist/media)
@@ -195,3 +202,4 @@ if(UNIX)
 	)
  
 endif(UNIX)
+
