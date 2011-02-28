@@ -74,6 +74,30 @@ void CArmyWar::CheckKeys(void)
 {
 	inputClient.command.key = 0;
 
+	if (getKeyboard()->isKeyDown(OIS::KC_I)) // Forward
+    	{
+		inputClient.command.key |= KEY_UP;
+	 	//localGuy->mKeyDirection.x = 1;
+   	}
+	
+	if (getKeyboard()->isKeyDown(OIS::KC_K)) // Backward
+	{
+        	inputClient.command.key |= KEY_DOWN;
+	 	//localGuy->mKeyDirection.x = -1;
+	}
+
+    	if (getKeyboard()->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
+	{
+		inputClient.command.key |= KEY_LEFT;
+	 	//localGuy->mKeyDirection.z = -1;
+	}
+
+	if (getKeyboard()->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
+	{
+        	inputClient.command.key |= KEY_RIGHT;
+		//localGuy->mKeyDirection.z = 1;
+	}
+/*
 	if(keys[VK_ESCAPE])
 	{
 		Shutdown();
@@ -100,7 +124,7 @@ void CArmyWar::CheckKeys(void)
 	{
 		inputClient.command.key |= KEY_RIGHT;
 	}
-
+*/
 	inputClient.command.msec = (int) (frametime * 1000);
 	
 }
@@ -228,7 +252,7 @@ void CArmyWar::MovePlayer(void)
 	static Ogre::Real mMove = 17.0;
 	Ogre::Vector3 transVector = Ogre::Vector3::ZERO;
 
-
+/*
 	if(keys[VK_DOWN])
 	{
 		transVector.y -= mMove;
@@ -249,7 +273,7 @@ void CArmyWar::MovePlayer(void)
 	{
 		transVector.x += mMove;
 	}
-
+*/
 	if(localClient)
 	   localClient->myNode->translate(transVector * rendertime, Ogre::Node::TS_LOCAL);
 

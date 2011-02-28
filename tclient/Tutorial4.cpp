@@ -29,7 +29,8 @@ void CArmyWar::createScene(void)
 //-------------------------------------------------------------------------------------
 bool CArmyWar::processUnbufferedInput(const Ogre::FrameEvent& evt)
 {
- 
+CheckKeys();
+ /*
     if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
     {
 		keys[VK_UP] = TRUE;
@@ -64,7 +65,8 @@ bool CArmyWar::processUnbufferedInput(const Ogre::FrameEvent& evt)
         keys[VK_RIGHT] = FALSE;
 	}
          
-    return true;
+*/  
+  return true;
 }
 //-------------------------------------------------------------------------------------
 bool CArmyWar::frameRenderingQueued(const Ogre::FrameEvent& evt)
@@ -111,8 +113,9 @@ extern "C" {
 		//game = new CArmyWar;
 	    game->StartConnection();
 
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		StartLogConsole();
-
+#endif
  
         try {
             game->go();

@@ -42,7 +42,7 @@ public:
     virtual ~BaseApplication(void);
 
     virtual void go(void);
-
+OIS::Keyboard* 	    getKeyboard    () { return mKeyboard; }
 protected:
     virtual bool setup();
     virtual bool configure(void);

@@ -6,15 +6,16 @@
 //
 /////////////////////////////////////////////////////////
 
-#define WIN32
+//#define WIN32
 
 #ifdef WIN32
 // Windows specific headers
 	#ifndef _WINSOCKAPI_
 	#define _WINSOCKAPI_
-	#endif
 	#include <windows.h>
 	#include <winsock2.h>
+
+	#endif
 #else
 // UNIX specific headers
 	#include <memory.h>
