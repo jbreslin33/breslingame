@@ -8,6 +8,7 @@
 ClientSideBaseGame::ClientSideBaseGame(const char* serverIP)
 {
 	mServerIP = serverIP;
+	rendertime		= 0.0f;
 	mClientSideGame    = new ClientSideGame(this);
 }
 
@@ -30,6 +31,7 @@ bool ClientSideBaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	if(mClientSideGame->mClientSideNetwork != NULL)
 	{
 		mClientSideGame->RunNetwork(evt.timeSinceLastFrame * 1000);
+		rendertime = evt.timeSinceLastFrame;
 	}
 	
 	mClientSideGame->CheckKeys();

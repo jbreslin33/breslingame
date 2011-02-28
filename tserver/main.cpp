@@ -10,6 +10,8 @@
 #define _WINSOCKAPI_
 #endif
 
+#include "server.h"
+
 #include <windows.h>
 
 #endif
@@ -28,8 +30,6 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #endif
-
-#include "common.h"
 
 #include <string.h>
 #include <stdlib.h>

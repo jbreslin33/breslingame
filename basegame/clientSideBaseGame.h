@@ -19,6 +19,8 @@ ClientSideGame* mClientSideGame;
 
 const char* mServerIP;
 
+	float rendertime;
+
 };
 
 #endif

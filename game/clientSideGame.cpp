@@ -82,7 +82,7 @@ void ClientSideGame::CheckPredictionError(int a)
 
 void ClientSideGame::CalculateVelocity(ClientSideCommand *command, float frametime)
 {
-	float multiplier = 100.0f;
+	float multiplier = 17.0f;
 
 	command->vel.x = 0.0f;
 	command->vel.y = 0.0f;
@@ -332,7 +332,7 @@ ClientSideClient *ClientSideGame::GetClientPointer(int index)
 void ClientSideGame::createPlayer(int index)
 {
         //create a human player and or ghost player 
-        ClientSideShape* jay = new ClientSideShape(mClientSideBaseGame->getSceneManager(),"jay" + index,0,0,0,"ninja.mesh");
+        ClientSideShape* jay = new ClientSideShape(mClientSideBaseGame->getSceneManager(),"jay" + index,0,0,0,"sinbad.mesh");
         mClientSideShapeVector.push_back(jay);
 
         ClientSideClient *client = GetClientPointer(index);
@@ -414,6 +414,7 @@ void ClientSideGame::RunNetwork(int msec)
 	if(time < (1000 / 60))
 	{
 //		LogString("FRAMRATE TOO HIGH!!!!");
+		        MovePlayer();
 		return;
 	}
 
@@ -445,4 +446,39 @@ void ClientSideGame::RunLocalPredictions()
 	}
 
 	//MoveObjects();
+}
+
+
+void ClientSideGame::MovePlayer(void)
+{
+
+	static Ogre::Real mMove = 17;
+	Ogre::Vector3 transVector = Ogre::Vector3::ZERO;
+
+
+	if(keys[VK_DOWN])
+	{
+		transVector.y -= mMove;
+
+	}
+
+	if(keys[VK_UP])
+	{
+		transVector.y += mMove;
+	}
+
+	if(keys[VK_LEFT])
+	{
+		transVector.x -= mMove;
+	}
+
+	if(keys[VK_RIGHT])
+	{
+		transVector.x += mMove;
+	}
+
+	if(localClient)
+		localClient->mShape->getSceneNode()->translate(transVector * mClientSideBaseGame->rendertime, Ogre::Node::TS_LOCAL);
+	   //localClient->myNode->translate(transVector * rendertime, Ogre::Node::TS_LOCAL);
+
 }
