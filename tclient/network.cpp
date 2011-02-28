@@ -5,8 +5,8 @@
 /* Teijo Hakala						      */
 /******************************************/
 
-
-//#include "Tutorial4.h"
+#include "client.h"
+#include "network.h"
 
 char serverIP[32] = "127.0.0.1";
 //char serverIP[32] = "192.168.1.102";

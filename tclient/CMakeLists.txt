@@ -220,3 +220,8 @@ if(UNIX)
 	)
  
 endif(UNIX)
+
+if(WIN32)
+# Need to link this for timeGetTime windows function.
+target_link_libraries (OgreApp winmm) 
+endif(WIN32)
