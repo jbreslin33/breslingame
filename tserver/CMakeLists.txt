@@ -59,6 +59,8 @@ if (NOT OGRE_BUILD_PLATFORM_IPHONE)
 	set(OGRE_LIBRARIES ${OGRE_LIBRARIES} ${Boost_LIBRARIES})
 endif()
 
+
+if(WIN32)
 set(HDRS
 	#server
 	./main.h
@@ -79,19 +81,36 @@ set(SRCS
 	../tdreamsock/dreamSockLog.cpp
 	../tdreamsock/dreamSock.cpp
 	../tdreamsock/dreamSockGlobal.cpp
+	
 	../tdreamsock/dreamWinSock.cpp
 )
-#if (WIN32)
-#set(SRCS
-#	../tdreamsock/dreamWinSock.cpp
-#)
-#endif (WIN32)
+endif(WIN32)
 
-#if (UNIX)
-#set(SRCS	
-#	../tdreamsock/dreamLinuxSock.cpp
-#)
-#endif (UNIX)
+if(UNIX)
+set(HDRS
+	#server
+	./main.h
+	./network.h
+	./server.h
+	
+	#dreamsock
+	../tdreamsock/dreamSock.h
+	../tdreamsock/dreamSockLog.h
+)
+ 
+set(SRCS
+	./main.cpp
+	./network.cpp
+	./server.cpp
+	
+	#dreamsock
+	../tdreamsock/dreamSockLog.cpp
+	../tdreamsock/dreamSock.cpp
+	../tdreamsock/dreamSockGlobal.cpp
+	
+	../tdreamsock/dreamLinuxSock.cpp
+)
+endif(UNIX)
 
  
 add_executable(ServerApp WIN32 ${HDRS} ${SRCS})
