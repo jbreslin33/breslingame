@@ -4,8 +4,7 @@
 /* Programming:						      */
 /* Teijo Hakala						      */
 /******************************************/
-
-#include "common.h"
+#include "server.h"
 #include <math.h>
 
 #ifdef WIN32

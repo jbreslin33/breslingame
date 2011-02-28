@@ -4,8 +4,8 @@
 /* Programming:						      */
 /* Teijo Hakala						      */
 /******************************************/
+#include "server.h"
 
-#include "common.h"
 #include <fstream>
 #include <math.h>
 #include <malloc.h>
