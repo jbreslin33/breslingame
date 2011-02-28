@@ -1,7 +1,7 @@
 #ifndef __COMMON_H__
 #define __COMMON_H__
 
-#include "dreamSock.h"
+#include "../tdreamsock/dreamSock.h"
 
 #include "network.h"
 #include "server.h"

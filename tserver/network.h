@@ -1,7 +1,7 @@
 #ifndef NETWORK_H
 #define NETWORK_H
 
-#include "dreamSock.h"
+#include "../tdreamsock/dreamSock.h"
 
 #define COMMAND_HISTORY_SIZE		64
 
