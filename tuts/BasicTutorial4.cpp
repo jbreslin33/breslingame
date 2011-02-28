@@ -29,7 +29,7 @@ void BasicTutorial4::createScene(void)
 {
     mSceneMgr->setAmbientLight(Ogre::ColourValue(0.25, 0.25, 0.25));
 
-    Ogre::Entity* ninjaEntity = mSceneMgr->createEntity("Ninja", "sinbad.mesh");
+    Ogre::Entity* ninjaEntity = mSceneMgr->createEntity("Ninja", "ninja.mesh");
     Ogre::SceneNode *node = mSceneMgr->getRootSceneNode()->createChildSceneNode("NinjaNode");
     node->attachObject(ninjaEntity);
 

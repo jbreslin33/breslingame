@@ -10,12 +10,12 @@
 #define _WINSOCKAPI_
 #endif
 
-#include "server.h"
 
 #include <windows.h>
 
 #endif
 
+#include "server.h"
 #ifdef WIN32
 #include <shellapi.h>
 
@@ -249,16 +249,22 @@ int main(int argc, char **argv)
 	// pipe gets broken
 	signal(SIGPIPE, SIG_IGN);
 
-	if(Lobby.InitNetwork() == 1)
-	{
-		exit(0);
-	}
+	//if(Lobby.InitNetwork() == 1)
+	//{
+//		exit(0);
+//	}
 
-	if(Signin.InitNetwork() == 1)
-	{
-		exit(0);
-	}
+	//if(Signin.InitNetwork() == 1)
+	//{
+	//	exit(0);
+	//}
 
+	game = new CArmyWarServer;
+
+	if(game->InitNetwork() != 0)
+	{
+		LogString("Could not create game server");
+	}
 	LogString("Init successful");
 
 	int time, oldTime, newTime;
@@ -279,15 +285,15 @@ int main(int argc, char **argv)
 					time = newTime - oldTime;
 				} while (time < 1);
 
-				Lobby.Frame(time);
-				Signin.Frame(time);
+				//Lobby.Frame(time);
+				//Signin.Frame(time);
 
-				CArmyWarServer *list = Lobby.GetGameList();
+				//CArmyWarServer *list = Lobby.GetGameList();
 
-				for( ; list != NULL; list = list->next)
-				{
-					list->Frame(time);
-				}
+				//for( ; list != NULL; list = list->next)
+				//{
+				//	list->Frame(time);
+				//}
 
 				oldTime = newTime;
 			}
@@ -303,24 +309,27 @@ int main(int argc, char **argv)
 					time = newTime - oldTime;
 				} while (time < 1);
 
-				Lobby.Frame(time);
-				Signin.Frame(time);
+				//Lobby.Frame(time);
+				//Signin.Frame(time);
 
-				CArmyWarServer *list = Lobby.GetGameList();
+				//CArmyWarServer *list = Lobby.GetGameList();
 
-				for( ; list != NULL; list = list->next)
-				{
-					list->Frame(time);
-				}
+				//for( ; list != NULL; list = list->next)
+				//{
+				//	list->Frame(time);
+				//}
+			game->Frame(time);
+			
 
+			oldTime = newTime;
 				oldTime = newTime;
 			}
 		}
 	}
 	catch(...)
 	{
-		Lobby.ShutdownNetwork();
-		Signin.ShutdownNetwork();
+		//Lobby.ShutdownNetwork();
+		//Signin.ShutdownNetwork();
 		dreamSock_Shutdown();
 
 		LogString("Unknown Exception caught in main loop");
@@ -330,8 +339,8 @@ int main(int argc, char **argv)
 
 	LogString("Shutting down everything");
 
-	Lobby.ShutdownNetwork();
-	Signin.ShutdownNetwork();
+	//Lobby.ShutdownNetwork();
+	//Signin.ShutdownNetwork();
 	dreamSock_Shutdown();
 
 	return 0;
