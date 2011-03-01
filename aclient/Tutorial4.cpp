@@ -25,6 +25,8 @@ void CArmyWar::createScene(void)
     pointLight->setPosition(Ogre::Vector3(250, 150, 250));
     pointLight->setDiffuseColour(Ogre::ColourValue::White);
     pointLight->setSpecularColour(Ogre::ColourValue::White);
+	        Ogre::Light* light = mSceneMgr->getLight("pointLight");
+        light->setVisible(true);
 }
 //-------------------------------------------------------------------------------------
 bool CArmyWar::processUnbufferedInput(const Ogre::FrameEvent& evt)
@@ -76,9 +78,7 @@ bool CArmyWar::frameRenderingQueued(const Ogre::FrameEvent& evt)
 	
 	if(game != NULL)
 	{
-		game->CheckKeys();
 
-		game->RunNetwork(evt.timeSinceLastFrame * 1000);
 
 		rendertime = evt.timeSinceLastFrame;
 
@@ -88,7 +88,31 @@ bool CArmyWar::frameRenderingQueued(const Ogre::FrameEvent& evt)
     return ret;
 }
 //-------------------------------------------------------------------------------------
- 
+ void CArmyWar::go(void)
+{
+#ifdef _DEBUG
+    mResourcesCfg = "resources_d.cfg";
+    mPluginsCfg = "plugins_d.cfg";
+#else
+    mResourcesCfg = "resources.cfg";
+    mPluginsCfg = "plugins.cfg";
+#endif
+
+    if (!setup())
+        return;
+
+	while(game->keepRunning) {
+		game->CheckKeys();
+
+		game->RunNetwork(rendertime * 1000);
+Ogre::WindowEventUtilities::messagePump();
+		keepRunning = mRoot->renderOneFrame();
+	}
+    //mRoot->startRendering();
+
+    // clean up
+    destroyScene();
+}
  
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #define WIN32_LEAN_AND_MEAN
