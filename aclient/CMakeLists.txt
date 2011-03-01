@@ -89,9 +89,7 @@ if (WIN32)
 set(HDRS
 	#server
 	./BaseApplication.h
-	./client.h
-	./network.h
-	./Tutorial4.h
+	./baseGame.h
 	
 	#dreamsock
 	../tdreamsock/dreamSock.h
@@ -100,9 +98,7 @@ set(HDRS
  
 set(SRCS
 	./BaseApplication.cpp
-	./client.cpp
-	./network.cpp
-	./Tutorial4.cpp
+	./baseGame.cpp
 	
 	#dreamsock
 	../tdreamsock/dreamSockLog.cpp
@@ -116,9 +112,7 @@ if (UNIX)
 set(HDRS
 	#server
 	./BaseApplication.h
-	./client.h
-	./network.h
-	./Tutorial4.h
+	./baseGame.h
 	
 	#dreamsock
 	../tdreamsock/dreamSock.h
@@ -127,10 +121,8 @@ set(HDRS
  
 set(SRCS
 	./BaseApplication.cpp
-	./client.cpp
-	./network.cpp
-	./Tutorial4.cpp
-	
+	./baseGame.cpp
+
 	#dreamsock
 	../tdreamsock/dreamSockLog.cpp
 	../tdreamsock/dreamSock.cpp
