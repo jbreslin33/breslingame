@@ -111,7 +111,9 @@ extern "C" {
 		//game = new CArmyWar;
 	    game->StartConnection();
 
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		StartLogConsole();
+#endif
 
  
         try {

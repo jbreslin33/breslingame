@@ -29,7 +29,7 @@ void BasicTutorial4::createScene(void)
 {
     mSceneMgr->setAmbientLight(Ogre::ColourValue(0.25, 0.25, 0.25));
 
-    Ogre::Entity* ninjaEntity = mSceneMgr->createEntity("Ninja", "ninja.mesh");
+    Ogre::Entity* ninjaEntity = mSceneMgr->createEntity("Ninja", "sinbad.mesh");
     Ogre::SceneNode *node = mSceneMgr->getRootSceneNode()->createChildSceneNode("NinjaNode");
     node->attachObject(ninjaEntity);
 
@@ -45,7 +45,7 @@ bool BasicTutorial4::processUnbufferedInput(const Ogre::FrameEvent& evt)
     static bool mMouseDown = false;     // If a mouse button is depressed
     static Ogre::Real mToggle = 0.0;    // The time left until next toggle
     static Ogre::Real mRotate = 0.13;   // The rotate constant
-    static Ogre::Real mMove = 50;      // The movement constant
+    static Ogre::Real mMove = 17;      // The movement constant
 
     bool currMouse = mMouse->getMouseState().buttonDown(OIS::MB_Left);
 
