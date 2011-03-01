@@ -49,6 +49,9 @@ typedef struct clientData
 // The main application class interface
 class CArmyWar : public BaseApplication
 {
+
+public:
+	    virtual void go(void);
 private:
 	// Methods
 
@@ -107,7 +110,7 @@ public:
 
 	// Client.cpp
 	void	Shutdown(void);
-	void	CheckKeys(void);
+	bool	CheckKeys(void);
 	void	Frame(void);
 	void	RunNetwork(int msec);
 	
@@ -127,7 +130,7 @@ public:
 
 	clientData *GetClientPointer(int index);
 
-
+	bool keepRunning;
 	CArmyWar *next;
 };
 

@@ -31,6 +31,7 @@ CArmyWar::CArmyWar()
 	gameIndex		= 0;
 
 	next			= NULL;
+	keepRunning = true;
 }
 
 //-----------------------------------------------------------------------------
@@ -70,12 +71,13 @@ clientData *CArmyWar::GetClientPointer(int index)
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWar::CheckKeys(void)
+bool CArmyWar::CheckKeys(void)
 {
 	inputClient.command.key = 0;
 
 	if(keys[VK_ESCAPE])
 	{
+		return false;
 		Shutdown();
 
 		keys[VK_ESCAPE] = false;
@@ -102,7 +104,7 @@ void CArmyWar::CheckKeys(void)
 	}
 
 	inputClient.command.msec = (int) (frametime * 1000);
-	
+	return true;
 }
 
 //-----------------------------------------------------------------------------
