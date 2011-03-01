@@ -9,11 +9,7 @@
 #ifndef _WINSOCKAPI_
 #define _WINSOCKAPI_
 #endif
-
-#include "server.h"
-
 #include <windows.h>
-
 #endif
 
 #ifdef WIN32
@@ -42,7 +38,7 @@
 #else
 int runningDaemon;
 #endif
-
+#include "server.h"
 CArmyWarServer* game;
 
 #ifdef WIN32
@@ -237,6 +233,13 @@ int main(int argc, char **argv)
 	LogString("Welcome to Army War Server v2.0");
 	LogString("-------------------------------\n");
 
+	game = new CArmyWarServer;
+
+	if(game->InitNetwork() != 0)
+	{
+		LogString("Could not create game server");
+	}
+
 	if(argc > 1)
 	{
 		if(strcmp(argv[1], "-daemon") == 0)
@@ -248,7 +251,7 @@ int main(int argc, char **argv)
 	// Ignore the SIGPIPE signal, so the program does not terminate if the
 	// pipe gets broken
 	signal(SIGPIPE, SIG_IGN);
-
+/*
 	if(Lobby.InitNetwork() == 1)
 	{
 		exit(0);
@@ -258,7 +261,7 @@ int main(int argc, char **argv)
 	{
 		exit(0);
 	}
-
+*/
 	LogString("Init successful");
 
 	int time, oldTime, newTime;
@@ -278,7 +281,7 @@ int main(int argc, char **argv)
 					newTime = dreamSock_GetCurrentSystemTime();
 					time = newTime - oldTime;
 				} while (time < 1);
-
+/*
 				Lobby.Frame(time);
 				Signin.Frame(time);
 
@@ -288,7 +291,7 @@ int main(int argc, char **argv)
 				{
 					list->Frame(time);
 				}
-
+*/
 				oldTime = newTime;
 			}
 		}
@@ -302,7 +305,7 @@ int main(int argc, char **argv)
 					newTime = dreamSock_GetCurrentSystemTime();
 					time = newTime - oldTime;
 				} while (time < 1);
-
+/*
 				Lobby.Frame(time);
 				Signin.Frame(time);
 
@@ -312,15 +315,18 @@ int main(int argc, char **argv)
 				{
 					list->Frame(time);
 				}
-
+*/
+			game->Frame(time);
 				oldTime = newTime;
 			}
 		}
 	}
 	catch(...)
 	{
+/*
 		Lobby.ShutdownNetwork();
 		Signin.ShutdownNetwork();
+*/
 		dreamSock_Shutdown();
 
 		LogString("Unknown Exception caught in main loop");
@@ -329,9 +335,10 @@ int main(int argc, char **argv)
 	}
 
 	LogString("Shutting down everything");
-
+/*
 	Lobby.ShutdownNetwork();
 	Signin.ShutdownNetwork();
+*/
 	dreamSock_Shutdown();
 
 	return 0;
