@@ -132,8 +132,16 @@ extern "C" {
         // Create application object
          game = new CArmyWar;
 
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+	//mClientSideBaseGame = new ClientSideBaseGame(strCmdLine);
+		 game->StartConnection(strCmdLine);
+#else
+	//mClientSideBaseGame = new ClientSideBaseGame(argv[1]);
+		 game->StartConnection(argv[1]);
+#endif
+
 		//game = new CArmyWar;
-	    game->StartConnection();
+	    //game->StartConnection();
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		StartLogConsole();
