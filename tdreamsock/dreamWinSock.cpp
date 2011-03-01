@@ -3,15 +3,10 @@
 /* Teijo Hakala                   */
 /**********************************/
 // Windows code only
-#ifdef WIN32
-#include <windows.h>
-#endif
 
 #include "dreamSock.h"
-
 #include <stdio.h>
-
-
+#include <windows.h>
 #include <assert.h>
 
 
