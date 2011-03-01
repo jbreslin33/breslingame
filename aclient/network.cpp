@@ -9,13 +9,13 @@
 #include "network.h"
 
 //char serverIP[32] = "127.0.0.1";
-char serverIP[32] = "192.1682.112";
+//char serverIP[32] = "192.1682.112";
 
 //-----------------------------------------------------------------------------
 // Name: empty()
 // Desc: 
 //-----------------------------------------------------------------------------
-void CArmyWar::StartConnection()
+void CArmyWar::StartConnection(char* serverIP)
 {
 //	LogString("StartConnection");
 
