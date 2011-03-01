@@ -1,7 +1,7 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
-#include "BaseApplication.h"
+#include "../baseapplication/baseApplication.h"
 #include "../tdreamsock/dreamSock.h"
 
 extern bool keys[256];
