@@ -1,8 +1,8 @@
-#include "baseGame.h"
-BaseGame* game;
+#include "networkedGame.h"
+NetworkedGame* game;
 bool keys[256];
 
-BaseGame::BaseGame()
+NetworkedGame::NetworkedGame()
 {
 	networkClient	= new dreamClient;
 	clientList		= NULL;
@@ -27,7 +27,7 @@ BaseGame::BaseGame()
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-BaseGame::~BaseGame()
+NetworkedGame::~NetworkedGame()
 {
 	delete networkClient;
 }
@@ -36,7 +36,7 @@ BaseGame::~BaseGame()
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void BaseGame::Shutdown(void)
+void NetworkedGame::Shutdown(void)
 {
 	Disconnect();
 }
@@ -45,7 +45,7 @@ void BaseGame::Shutdown(void)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-clientData *BaseGame::GetClientPointer(int index)
+clientData *NetworkedGame::GetClientPointer(int index)
 {
 	for(clientData *clList = clientList; clList != NULL; clList = clList->next)
 	{
@@ -60,7 +60,7 @@ clientData *BaseGame::GetClientPointer(int index)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-bool BaseGame::CheckKeys(void)
+bool NetworkedGame::CheckKeys(void)
 {
 	inputClient.command.key = 0;
 
@@ -100,7 +100,7 @@ bool BaseGame::CheckKeys(void)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void BaseGame::CheckPredictionError(int a)
+void NetworkedGame::CheckPredictionError(int a)
 {
 	if(a < 0 && a > COMMAND_HISTORY_SIZE)
 		return;
@@ -143,7 +143,7 @@ void BaseGame::CheckPredictionError(int a)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void BaseGame::CalculateVelocity(command_t *command, float frametime)
+void NetworkedGame::CalculateVelocity(command_t *command, float frametime)
 {
 	float multiplier = 17.0f;
 
@@ -182,7 +182,7 @@ void BaseGame::CalculateVelocity(command_t *command, float frametime)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void BaseGame::PredictMovement(int prevFrame, int curFrame)
+void NetworkedGame::PredictMovement(int prevFrame, int curFrame)
 {
 	if(!localClient)
 		return;
@@ -213,7 +213,7 @@ void BaseGame::PredictMovement(int prevFrame, int curFrame)
 		= localClient->frame[curFrame].vel.y;
 }
 
-void BaseGame::MovePlayer(void)
+void NetworkedGame::MovePlayer(void)
 {
 
 	static Ogre::Real mMove = 17.0;
@@ -250,7 +250,7 @@ void BaseGame::MovePlayer(void)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void BaseGame::MoveObjects(void)
+void NetworkedGame::MoveObjects(void)
 {
 	if(!localClient)
 		return;
@@ -311,7 +311,7 @@ void BaseGame::MoveObjects(void)
 
 
 
-void BaseGame::createPlayer(int index)
+void NetworkedGame::createPlayer(int index)
 {
 	Ogre::Entity* NinjaEntity = mSceneMgr->createEntity("sinbad.mesh");
 	//Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "ogrehead.mesh");
@@ -324,7 +324,7 @@ void BaseGame::createPlayer(int index)
 	client->myNode = node;
 }
 //-------------------------------------------------------------------------------------
-void BaseGame::createScene(void)
+void NetworkedGame::createScene(void)
 {
     mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
 
@@ -337,7 +337,7 @@ void BaseGame::createScene(void)
         light->setVisible(true);
 }
 //-------------------------------------------------------------------------------------
-bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
+bool NetworkedGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
 {
 
     if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
@@ -377,7 +377,7 @@ bool BaseGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
     return true;
 }
 //-------------------------------------------------------------------------------------
-bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
+bool NetworkedGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
     bool ret = BaseApplication::frameRenderingQueued(evt);
 
@@ -396,7 +396,7 @@ bool BaseGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
     return ret;
 }
 //-------------------------------------------------------------------------------------
- void BaseGame::go(void)
+ void NetworkedGame::go(void)
 {
 #ifdef _DEBUG
     mResourcesCfg = "resources_d.cfg";
@@ -427,7 +427,7 @@ Ogre::WindowEventUtilities::messagePump();
 //**************************************************************
 //BEGIN NETWORK CODE FUNCTIONS
 //************************************************
-void BaseGame::StartConnection(char* serverIP)
+void NetworkedGame::StartConnection(char* serverIP)
 {
 //	LogString("StartConnection");
 
@@ -450,7 +450,7 @@ void BaseGame::StartConnection(char* serverIP)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void BaseGame::ReadPackets(void)
+void NetworkedGame::ReadPackets(void)
 {
 	char data[1400];
 	struct sockaddr address;
@@ -534,7 +534,7 @@ void BaseGame::ReadPackets(void)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void BaseGame::AddClient(int local, int ind, char *name)
+void NetworkedGame::AddClient(int local, int ind, char *name)
 {
 	// First get a pointer to the beginning of client list
 	clientData *list = clientList;
@@ -614,7 +614,7 @@ void BaseGame::AddClient(int local, int ind, char *name)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void BaseGame::RemoveClient(int ind)
+void NetworkedGame::RemoveClient(int ind)
 {
 	clientData *list = clientList;
 	clientData *prev = NULL;
@@ -669,7 +669,7 @@ void BaseGame::RemoveClient(int ind)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void BaseGame::RemoveClients(void)
+void NetworkedGame::RemoveClients(void)
 {
 	clientData *list = clientList;
 	clientData *next;
@@ -693,7 +693,7 @@ void BaseGame::RemoveClients(void)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void BaseGame::SendCommand(void)
+void NetworkedGame::SendCommand(void)
 {
 	if(networkClient->GetConnectionState() != DREAMSOCK_CONNECTED)
 		return;
@@ -730,7 +730,7 @@ void BaseGame::SendCommand(void)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void BaseGame::SendRequestNonDeltaFrame(void)
+void NetworkedGame::SendRequestNonDeltaFrame(void)
 {
 	char data[1400];
 	dreamMessage message;
@@ -746,7 +746,7 @@ void BaseGame::SendRequestNonDeltaFrame(void)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void BaseGame::Connect(void)
+void NetworkedGame::Connect(void)
 {
 	if(init)
 	{
@@ -754,7 +754,7 @@ void BaseGame::Connect(void)
 		return;
 	}
 
-	LogString("BaseGame::Connect");
+	LogString("NetworkedGame::Connect");
 
 	init = true;
 
@@ -765,12 +765,12 @@ void BaseGame::Connect(void)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void BaseGame::Disconnect(void)
+void NetworkedGame::Disconnect(void)
 {
 	if(!init)
 		return;
 
-	LogString("BaseGame::Disconnect");
+	LogString("NetworkedGame::Disconnect");
 
 	init = false;
 	localClient = NULL;
@@ -783,7 +783,7 @@ void BaseGame::Disconnect(void)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void BaseGame::ReadMoveCommand(dreamMessage *mes, clientData *client)
+void NetworkedGame::ReadMoveCommand(dreamMessage *mes, clientData *client)
 {
 	// Key
 	client->serverFrame.key				= mes->ReadByte();
@@ -814,7 +814,7 @@ void BaseGame::ReadMoveCommand(dreamMessage *mes, clientData *client)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void BaseGame::ReadDeltaMoveCommand(dreamMessage *mes, clientData *client)
+void NetworkedGame::ReadDeltaMoveCommand(dreamMessage *mes, clientData *client)
 {
 	int processedFrame;
 	int flags = 0;
@@ -868,7 +868,7 @@ void BaseGame::ReadDeltaMoveCommand(dreamMessage *mes, clientData *client)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void BaseGame::BuildDeltaMoveCommand(dreamMessage *mes, clientData *theClient)
+void NetworkedGame::BuildDeltaMoveCommand(dreamMessage *mes, clientData *theClient)
 {
 	int flags = 0;
 	int last = (networkClient->GetOutgoingSequence() - 1) & (COMMAND_HISTORY_SIZE-1);
@@ -894,7 +894,7 @@ void BaseGame::BuildDeltaMoveCommand(dreamMessage *mes, clientData *theClient)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void BaseGame::RunNetwork(int msec)
+void NetworkedGame::RunNetwork(int msec)
 {
     //MovePlayer();
 
@@ -956,17 +956,17 @@ extern "C" {
 #endif
     {
         // Create application object
-         game = new BaseGame;
+         game = new NetworkedGame;
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	//mClientSideBaseGame = new ClientSideBaseGame(strCmdLine);
+	//mClientSideNetworkedGame = new ClientSideNetworkedGame(strCmdLine);
 		 game->StartConnection(strCmdLine);
 #else
-	//mClientSideBaseGame = new ClientSideBaseGame(argv[1]);
+	//mClientSideNetworkedGame = new ClientSideNetworkedGame(argv[1]);
 		 game->StartConnection(argv[1]);
 #endif
 
-		//game = new BaseGame;
+		//game = new NetworkedGame;
 	    //game->StartConnection();
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32

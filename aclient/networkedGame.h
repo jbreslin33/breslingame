@@ -1,5 +1,5 @@
-#ifndef BASEGAME_H
-#define BASEGAME_H
+#ifndef NETWORKEDGAME_H
+#define NETWORKEDGAME_H
 
 #include "../baseapplication/baseApplication.h"
 #include "../tdreamsock/dreamSock.h"
@@ -75,7 +75,7 @@ typedef struct clientData
 } clientData;
 
 // The main application class interface
-class BaseGame : public BaseApplication
+class NetworkedGame : public BaseApplication
 {
 
 public:
@@ -129,8 +129,8 @@ private:
 
 
 public:
-	BaseGame();
-	~BaseGame();
+	NetworkedGame();
+	~NetworkedGame();
 
     void createPlayer(int index);
     virtual void createScene(void);
@@ -159,7 +159,7 @@ public:
 	clientData *GetClientPointer(int index);
 
 	bool keepRunning;
-	BaseGame *next;
+	NetworkedGame *next;
 };
 
 #endif
