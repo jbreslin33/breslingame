@@ -1,5 +1,9 @@
 #include "networkedGame.h"
 
+#include <iostream>
+#include <string>
+using namespace std;
+
 NetworkedGame* game;
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
@@ -17,19 +21,31 @@ extern "C" {
     int main(int argc, char *argv[])
 #endif
     {
-        // Create application object
-         game = new NetworkedGame;
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-	//mClientSideNetworkedGame = new ClientSideNetworkedGame(strCmdLine);
-		 game->StartConnection(strCmdLine);
+		char *ip;
+		char strIP[15];
+		ip = strIP;
+		if (strCmdLine[0] == '1')
+		{
+			game = new NetworkedGame;
+			int i = 0;
+			while(strCmdLine[i] != 'E')
+			{
+				ip[i] = strCmdLine[i + 2];
+				i++;
+			}
+		}
+		
 #else
-	//mClientSideNetworkedGame = new ClientSideNetworkedGame(argv[1]);
-		 game->StartConnection(argv[1]);
+
 #endif
 
-		//game = new NetworkedGame;
-	    //game->StartConnection();
+#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+		 game->StartConnection(ip);
+#else
+		 game->StartConnection(ip);
+#endif
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 		StartLogConsole();
