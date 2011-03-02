@@ -49,6 +49,7 @@ extern "C" {
 		if (strCmdLine[0] == '3')
 		{
 			game = new PolyNetworkedGame;
+			game->StartConnection(ip);
 		}
 
 		int i = 0;
@@ -60,12 +61,6 @@ extern "C" {
 		
 #else
 
-#endif
-
-#if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
-		 game->StartConnection(ip);
-#else
-		 game->StartConnection(ip);
 #endif
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
