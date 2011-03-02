@@ -10,5 +10,7 @@ public:
 Game();
 ~Game();
 
+virtual	void StartConnection(char* serverIP) { bool doNothing = true; }
+
 };
 #endif
