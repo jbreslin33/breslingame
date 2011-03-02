@@ -1,10 +1,15 @@
+//#include "soloGame.h"
 #include "networkedGame.h"
+//#include "polyNetworkedGame.h"
 
 #include <iostream>
 #include <string>
 using namespace std;
 
+//SoloGame* game;
 NetworkedGame* game;
+//PolyNetworkedGame* game;
+
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #define WIN32_LEAN_AND_MEAN
@@ -23,18 +28,34 @@ extern "C" {
     {
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
+		//jim's crazy ass way to change game types while dealing with c++'s annoying way of dealing with chars.
 		char *ip;
 		char strIP[15];
 		ip = strIP;
+		
+		//NetworkedGame
 		if (strCmdLine[0] == '1')
 		{
+//			game = new SoloGame;
+		}
+
+		//NetworkedGame
+		if (strCmdLine[0] == '2')
+		{
 			game = new NetworkedGame;
-			int i = 0;
-			while(strCmdLine[i] != 'E')
-			{
-				ip[i] = strCmdLine[i + 2];
-				i++;
-			}
+		}
+
+		//NetworkedGame
+		if (strCmdLine[0] == '3')
+		{
+//			game = new PolyNetworkedGame;
+		}
+
+		int i = 0;
+		while(strCmdLine[i] != 'E')
+		{
+			ip[i] = strCmdLine[i + 2];
+			i++;
 		}
 		
 #else
