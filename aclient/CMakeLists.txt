@@ -88,8 +88,10 @@ endif()
 if (WIN32)
 set(HDRS
 	#server
-	./BaseApplication.h
-	./baseGame.h
+	../baseapplication/baseApplication.h
+	./game.h
+	./soloGame.h
+	./networkedGame.h
 	
 	#dreamsock
 	../tdreamsock/dreamSock.h
@@ -97,8 +99,10 @@ set(HDRS
 )
  
 set(SRCS
-	./BaseApplication.cpp
-	./baseGame.cpp
+	../baseapplication/baseApplication.cpp
+	./game.cpp
+	./soloGame.cpp
+	./networkedGame.cpp
 	
 	#dreamsock
 	../tdreamsock/dreamSockLog.cpp
@@ -111,8 +115,10 @@ endif (WIN32)
 if (UNIX)
 set(HDRS
 	#server
-	./BaseApplication.h
-	./baseGame.h
+	../baseapplication/baseApplication.h
+	./game.h
+	./soloGame.h
+	./networkedGame.h
 	
 	#dreamsock
 	../tdreamsock/dreamSock.h
@@ -120,8 +126,10 @@ set(HDRS
 )
  
 set(SRCS
-	./BaseApplication.cpp
-	./baseGame.cpp
+	../baseapplication/baseApplication.cpp
+	./game.cpp
+	./soloGame.cpp
+	./networkedGame.cpp
 
 	#dreamsock
 	../tdreamsock/dreamSockLog.cpp
