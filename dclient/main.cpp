@@ -1,14 +1,12 @@
-//#include "soloGame.h"
-//#include "networkedGame.h"
+#include "soloGame.h"
+#include "networkedGame.h"
 #include "polyNetworkedGame.h"
 
 #include <iostream>
 #include <string>
 using namespace std;
 
-//SoloGame* game;
-//NetworkedGame* game;
-PolyNetworkedGame* game;
+Game* game;
 
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
@@ -36,13 +34,13 @@ extern "C" {
 		//NetworkedGame
 		if (strCmdLine[0] == '1')
 		{
-//			game = new SoloGame;
+			//game = new SoloGame;
 		}
 
 		//NetworkedGame
 		if (strCmdLine[0] == '2')
 		{
-//			game = new NetworkedGame;
+			//game = new NetworkedGame;
 		}
 
 		//NetworkedGame
