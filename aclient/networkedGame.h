@@ -1,7 +1,7 @@
 #ifndef NETWORKEDGAME_H
 #define NETWORKEDGAME_H
 
-#include "../baseapplication/baseApplication.h"
+#include "game.h"
 #include "../tdreamsock/dreamSock.h"
 
 extern bool keys[256];
@@ -75,7 +75,7 @@ typedef struct clientData
 } clientData;
 
 // The main application class interface
-class NetworkedGame : public BaseApplication
+class NetworkedGame : public Game
 {
 
 public:
