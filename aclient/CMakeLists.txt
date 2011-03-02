@@ -103,6 +103,7 @@ set(SRCS
 	./game.cpp
 	./soloGame.cpp
 	./networkedGame.cpp
+	./main.cpp
 	
 	#dreamsock
 	../tdreamsock/dreamSockLog.cpp
@@ -130,6 +131,7 @@ set(SRCS
 	./game.cpp
 	./soloGame.cpp
 	./networkedGame.cpp
+	./main.cpp
 
 	#dreamsock
 	../tdreamsock/dreamSockLog.cpp

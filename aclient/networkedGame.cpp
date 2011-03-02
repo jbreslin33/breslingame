@@ -1,5 +1,5 @@
 #include "networkedGame.h"
-NetworkedGame* game;
+
 bool keys[256];
 
 NetworkedGame::NetworkedGame()
@@ -319,7 +319,7 @@ void NetworkedGame::createPlayer(int index)
     node->attachObject(NinjaEntity);
     //node->setPosition(Ogre::Vector3(10, 10, 10));
 
-    clientData *client = game->GetClientPointer(index);
+    clientData *client = GetClientPointer(index);
 
 	client->myNode = node;
 }
@@ -384,14 +384,14 @@ bool NetworkedGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
     if(!processUnbufferedInput(evt)) return false;
 
 
-	if(game != NULL)
-	{
+	//if(game != NULL)
+	//{
 
 
 		rendertime = evt.timeSinceLastFrame;
 
 		//game->Frame();
-	}
+	//}
 
     return ret;
 }
@@ -409,10 +409,10 @@ bool NetworkedGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
     if (!setup())
         return;
 
-	while(game->keepRunning) {
-		game->CheckKeys();
+	while(keepRunning) {
+		CheckKeys();
 
-		game->RunNetwork(rendertime * 1000);
+		RunNetwork(rendertime * 1000);
 Ogre::WindowEventUtilities::messagePump();
 		keepRunning = mRoot->renderOneFrame();
 	}
@@ -938,7 +938,7 @@ void NetworkedGame::RunNetwork(int msec)
 
 
 
-
+/*
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #define WIN32_LEAN_AND_MEAN
@@ -991,3 +991,4 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
+*/
