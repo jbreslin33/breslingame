@@ -62,21 +62,23 @@ extern "C" {
 		
 #else
 		//jim's crazy ass way to change game types while dealing with c++'s annoying way of dealing with chars.
-		
+		string gameMode;
+		gameMode = argv[1];
 		//SoloGame
-		if (argv[1] == "1")
+		if (gameMode == "1")
 		{
+			std::cout << "heredfddfdf";
 			game = new SoloGame;
 		}
 
 		//NetworkedGame
-		if (argv[1] == "2")
+		if (gameMode == "2")
 		{
 			//game = new NetworkedGame;
 		}
 
 		//PolyNetworkedGame
-		if (argv[1] == "3")
+		if (gameMode == "3")
 		{
 			game = new PolyNetworkedGame;
 			game->StartConnection(argv[2]);
