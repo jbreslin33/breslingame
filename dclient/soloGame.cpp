@@ -19,3 +19,11 @@ void SoloGame::createScene(void)
 	        Ogre::Light* light = mSceneMgr->getLight("pointLight");
         light->setVisible(true);
 }
+
+//**************************************************************
+//BEGIN NETWORK CODE FUNCTIONS
+//************************************************
+void SoloGame::StartConnection(char* serverIP)
+{
+	AddClient(1,1,'hello');
+}

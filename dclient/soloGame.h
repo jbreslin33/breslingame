@@ -11,5 +11,7 @@ SoloGame();
 ~SoloGame();
 
     virtual void createScene(void);
+	virtual void StartConnection(char* serverIP);
+
 };
 #endif
