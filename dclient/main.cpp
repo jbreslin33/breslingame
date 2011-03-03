@@ -47,17 +47,15 @@ extern "C" {
 		if (strCmdLine[0] == '3')
 		{
 			game = new PolyNetworkedGame;
-
-			int i = 0;
-			while(strCmdLine[i] != 'E')
-			{
-				ip[i] = strCmdLine[i + 2];
-				i++;
-			}
-
-			game->StartConnection(ip);
 		}
-
+		
+		int i = 0;
+		while(strCmdLine[i] != 'E')
+		{
+			ip[i] = strCmdLine[i + 2];
+			i++;
+		}
+		game->StartConnection(ip);
 
 		
 #else
@@ -81,8 +79,9 @@ extern "C" {
 		if (gameMode == "3")
 		{
 			game = new PolyNetworkedGame;
-			game->StartConnection(argv[2]);
+
 		}
+		game->StartConnection(argv[2]);
 #endif
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32

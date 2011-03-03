@@ -73,6 +73,16 @@ Game();
 ~Game();
 
 virtual	void StartConnection(char* serverIP) { bool doNothing = true; }
+virtual void AddClient(int local, int ind, char *name);
+virtual void createPlayer(int index);
+clientData *GetClientPointer(int index);
+
+	clientData *clientList;			// Client list
+	clientData *localClient;		// Pointer to the local client in the client list
+	int clients;
+
+	clientData inputClient;			// Handles all keyboard input
+
 
 };
 #endif

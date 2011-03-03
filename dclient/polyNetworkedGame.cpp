@@ -45,16 +45,6 @@ void PolyNetworkedGame::Shutdown(void)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-clientData *PolyNetworkedGame::GetClientPointer(int index)
-{
-	for(clientData *clList = clientList; clList != NULL; clList = clList->next)
-	{
-		if(clList->index == index)
-			return clList;
-	}
-
-	return NULL;
-}
 
 //-----------------------------------------------------------------------------
 // Name: empty()
@@ -308,21 +298,6 @@ void PolyNetworkedGame::MoveObjects(void)
 	}
 }
 
-
-
-
-void PolyNetworkedGame::createPlayer(int index)
-{
-	Ogre::Entity* NinjaEntity = mSceneMgr->createEntity("sinbad.mesh");
-	//Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "ogrehead.mesh");
-	Ogre::SceneNode* node = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-    node->attachObject(NinjaEntity);
-    //node->setPosition(Ogre::Vector3(10, 10, 10));
-
-    clientData *client = GetClientPointer(index);
-
-	client->myNode = node;
-}
 //-------------------------------------------------------------------------------------
 void PolyNetworkedGame::createScene(void)
 {
@@ -536,6 +511,8 @@ void PolyNetworkedGame::ReadPackets(void)
 //-----------------------------------------------------------------------------
 void PolyNetworkedGame::AddClient(int local, int ind, char *name)
 {
+	Game::AddClient(local,ind,name);
+	/*
 	// First get a pointer to the beginning of client list
 	clientData *list = clientList;
 	clientData *prev;
@@ -603,7 +580,7 @@ void PolyNetworkedGame::AddClient(int local, int ind, char *name)
 	}
 
 	clients++;
-
+*/
 	// If we just joined the game, request a non-delta compressed frame
 	if(local)
 		SendRequestNonDeltaFrame();

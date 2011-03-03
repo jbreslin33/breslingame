@@ -42,12 +42,6 @@ private:
 	// Network variables
 	dreamClient *networkClient;
 
-	clientData *clientList;			// Client list
-	clientData *localClient;		// Pointer to the local client in the client list
-	int clients;
-
-	clientData inputClient;			// Handles all keyboard input
-
 	float frametime;
 	float rendertime;
 
@@ -59,7 +53,7 @@ public:
 	PolyNetworkedGame();
 	~PolyNetworkedGame();
 
-    void createPlayer(int index);
+    //void createPlayer(int index);
     virtual void createScene(void);
     virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 
@@ -82,8 +76,6 @@ public:
 	int		GetGameIndex(void)		{ return gameIndex; }
 
 	clientData *GetClientList(void) { return clientList; }
-
-	clientData *GetClientPointer(int index);
 
 	bool keepRunning;
 	PolyNetworkedGame *next;
