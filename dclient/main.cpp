@@ -47,18 +47,40 @@ extern "C" {
 		if (strCmdLine[0] == '3')
 		{
 			game = new PolyNetworkedGame;
+
+			int i = 0;
+			while(strCmdLine[i] != 'E')
+			{
+				ip[i] = strCmdLine[i + 2];
+				i++;
+			}
+
 			game->StartConnection(ip);
 		}
 
-		int i = 0;
-		while(strCmdLine[i] != 'E')
-		{
-			ip[i] = strCmdLine[i + 2];
-			i++;
-		}
+
 		
 #else
+		//jim's crazy ass way to change game types while dealing with c++'s annoying way of dealing with chars.
+		
+		//SoloGame
+		if (argv[1] == "1")
+		{
+			game = new SoloGame;
+		}
 
+		//NetworkedGame
+		if (argv[1] == "2")
+		{
+			//game = new NetworkedGame;
+		}
+
+		//PolyNetworkedGame
+		if (argv[1] == "3")
+		{
+			game = new PolyNetworkedGame;
+			game->StartConnection(argv[2]);
+		}
 #endif
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
