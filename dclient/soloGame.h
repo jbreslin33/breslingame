@@ -10,5 +10,6 @@ public:
 SoloGame();
 ~SoloGame();
 
+    virtual void createScene(void);
 };
 #endif

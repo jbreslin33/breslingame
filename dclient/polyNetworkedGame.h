@@ -53,10 +53,7 @@ private:
 
 	char gamename[32];
 	bool init;
-
-	//bool mapdata[100][100];
 	int gameIndex;
-
 
 public:
 	PolyNetworkedGame();

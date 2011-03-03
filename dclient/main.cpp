@@ -34,7 +34,7 @@ extern "C" {
 		//NetworkedGame
 		if (strCmdLine[0] == '1')
 		{
-			//game = new SoloGame;
+			game = new SoloGame;
 		}
 
 		//NetworkedGame
