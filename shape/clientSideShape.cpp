@@ -1,4 +1,5 @@
 #include "clientSideShape.h"
+#include "../tdreamsock/dreamSock.h"
 
 #define RUN_SPEED 300
 
