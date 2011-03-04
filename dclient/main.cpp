@@ -54,6 +54,7 @@ extern "C" {
 		{
 			ip[i] = strCmdLine[i + 2];
 			i++;
+
 		}
 		game->StartConnection(ip);
 

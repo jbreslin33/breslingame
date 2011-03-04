@@ -3,6 +3,7 @@
 
 #include "../baseapplication/baseApplication.h"
 
+class ClientSideShape;
 
 extern bool keys[256];
 
@@ -59,7 +60,7 @@ typedef struct clientData
 	char		nickname[30];
 	char		password[30];
 
-	Ogre::SceneNode *myNode;
+	ClientSideShape *mClientSideShape;
 
 	clientData	*next;
 } clientData;

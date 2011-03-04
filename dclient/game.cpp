@@ -1,5 +1,5 @@
 #include "game.h"
-
+#include "../shape/clientSideShape.h"
 //#ifdef WIN32
 #include "../tdreamsock/dreamSockLog.h"
 //#endif
@@ -33,12 +33,10 @@ void Game::AddClient(int local, int ind, char *name)
 		}
 
 		clientList->index = ind;
+LogString("before");
 		strcpy(clientList->nickname, name);
-
-		if(clients % 2 == 0)
-			createPlayer(ind);
-		else
-			createPlayer(ind);
+LogString("after");
+		createPlayer(ind);
 
 		clientList->next = NULL;
 	}
@@ -64,19 +62,15 @@ void Game::AddClient(int local, int ind, char *name)
 		}
 
 		list->index = ind;
+LogString("before strcpy");
 		strcpy(list->nickname, name);
-
+LogString("after strcpy");
 		clientList->next = NULL;
 
 		list->next = NULL;
 		prev->next = list;
 
-		if(clients % 2 == 0)
-			createPlayer(ind);
-		else
-			createPlayer(ind);
-
-
+		createPlayer(ind);
 	}
 
 	clients++;
@@ -85,19 +79,6 @@ void Game::AddClient(int local, int ind, char *name)
 	if(local)
 		SendRequestNonDeltaFrame();
 */
-}
-
-void Game::createPlayer(int index)
-{
-	Ogre::Entity* NinjaEntity = mSceneMgr->createEntity("sinbad.mesh");
-	//Ogre::Entity* ogreHead = mSceneMgr->createEntity("Head", "ogrehead.mesh");
-	Ogre::SceneNode* node = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-    node->attachObject(NinjaEntity);
-    //node->setPosition(Ogre::Vector3(10, 10, 10));
-
-    clientData *client = GetClientPointer(index);
-
-	client->myNode = node;
 }
 
 clientData *Game::GetClientPointer(int index)
@@ -109,4 +90,16 @@ clientData *Game::GetClientPointer(int index)
 	}
 
 	return NULL;
+}
+
+//Player stuff
+void Game::createPlayer(int index)
+{
+	LogString("begin createPlayer");
+        //create a human player and or ghost player 
+        ClientSideShape* jay = new ClientSideShape(mSceneMgr,"jay" + index,0,0,0,"sinbad.mesh");
+        //mClientSideShapeVector.push_back(jay);
+	LogString("created Player");
+        clientData *client = GetClientPointer(index);
+        client->mClientSideShape = jay;
 }
