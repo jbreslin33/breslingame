@@ -1,4 +1,5 @@
 #include "polyNetworkedGame.h"
+#include "../shape/clientSideShape.h"
 
 bool keys[256];
 
@@ -232,7 +233,7 @@ void PolyNetworkedGame::MovePlayer(void)
 	}
 
 	if(localClient)
-	   localClient->myNode->translate(transVector * rendertime, Ogre::Node::TS_LOCAL);
+	   localClient->mClientSideShape->getSceneNode()->translate(transVector * rendertime, Ogre::Node::TS_LOCAL);
 
 }
 
@@ -262,7 +263,7 @@ void PolyNetworkedGame::MoveObjects(void)
             transVector.x = client->command.origin.x;
             transVector.y = client->command.origin.y;
 
-			client->myNode->setPosition(transVector);
+			client->mClientSideShape->getSceneNode()->setPosition(transVector);
 
 
 		}
@@ -286,7 +287,7 @@ void PolyNetworkedGame::MoveObjects(void)
             //transVector.y = client->command.vel.y;
 
 			//client->myNode->translate(transVector, Ogre::Node::TS_LOCAL);
-            client->myNode->setPosition(transVector);
+            client->mClientSideShape->getSceneNode()->setPosition(transVector);
 
 /*
             LogString("transVector.x %f: ", transVector.x);

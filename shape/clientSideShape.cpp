@@ -16,7 +16,8 @@ ClientSideShape::~ClientSideShape()
 
 void ClientSideShape::setupModel()
 {
-
+	//LogString("settingUPModel");
+	Ogre::LogManager::getSingletonPtr()->logMessage("*** ClientSideShape::setUpModel() ***");
 	Shape::setupModel();
 	Ogre::LogManager::getSingletonPtr()->logMessage("*** ClientSideShape::setUpModel() ***");
 

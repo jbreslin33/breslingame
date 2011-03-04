@@ -97,6 +97,10 @@ set(HDRS
 	#dreamsock
 	../tdreamsock/dreamSock.h
 	../tdreamsock/dreamSockLog.h
+
+	#shape
+	../shape/shape.h
+	../shape/clientSideShape.h
 )
  
 set(SRCS
@@ -112,6 +116,10 @@ set(SRCS
 	../tdreamsock/dreamSock.cpp
 	../tdreamsock/dreamSockGlobal.cpp
 	../tdreamsock/dreamWinSock.cpp
+
+	#shape
+	../shape/shape.cpp
+	../shape/clientSideShape.cpp
 )
 endif (WIN32)
 
@@ -127,6 +135,10 @@ set(HDRS
 	#dreamsock
 	../tdreamsock/dreamSock.h
 	../tdreamsock/dreamSockLog.h
+
+	#shape
+	../shape/shape.h
+	../shape/clientSideShape.h
 )
  
 set(SRCS
@@ -142,6 +154,10 @@ set(SRCS
 	../tdreamsock/dreamSock.cpp
 	../tdreamsock/dreamSockGlobal.cpp
 	../tdreamsock/dreamLinuxSock.cpp
+
+	#shape
+	../shape/shape.cpp
+	../shape/clientSideShape.cpp
 )
 endif (UNIX)
 
