@@ -1,4 +1,5 @@
 #include "soloGame.h"
+#include "../tdreamsock/dreamSock.h"
 
 SoloGame::SoloGame()
 {
