@@ -94,8 +94,6 @@ clientData *GetClientPointer(int index);
 
     virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 
- virtual void go(void);
-
 	void	Shutdown(void);
 	void	MoveObjects(void);
 	void    MovePlayer(void);

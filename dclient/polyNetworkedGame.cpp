@@ -80,12 +80,10 @@ bool PolyNetworkedGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
 	while(keepRunning) {
 		CheckKeys();
-
 		RunNetwork(rendertime * 1000);
-Ogre::WindowEventUtilities::messagePump();
+		Ogre::WindowEventUtilities::messagePump();
 		keepRunning = mRoot->renderOneFrame();
 	}
-    //mRoot->startRendering();
 
     // clean up
     destroyScene();
@@ -204,8 +202,6 @@ void PolyNetworkedGame::AddClient(int local, int ind, char *name)
 
 void PolyNetworkedGame::RunNetwork(int msec)
 {
-    //MovePlayer();
-
 	static int time = 0;
 	time += msec;
 
@@ -225,6 +221,8 @@ void PolyNetworkedGame::RunNetwork(int msec)
 	int ack = networkClient->GetIncomingAcknowledged();
 	int current = networkClient->GetOutgoingSequence();
 
+//iam going to put the following in Game.cpp's game loop...
+
 	// Check that we haven't gone too far
 	if(current - ack > COMMAND_HISTORY_SIZE)
 		return;
@@ -237,10 +235,7 @@ void PolyNetworkedGame::RunNetwork(int msec)
 
 		PredictMovement(prevframe, frame);
 	}
-
 	MoveObjects();
-
-
 }
 
 void PolyNetworkedGame::Shutdown(void)
