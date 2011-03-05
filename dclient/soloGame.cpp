@@ -53,7 +53,7 @@ void SoloGame::StartConnection(char* serverIP)
 	{
 		CheckKeys();
 		MovePlayer();
-		MoveObjects();
+		//MoveObjects();
 		Ogre::WindowEventUtilities::messagePump();
 		keepRunning = mRoot->renderOneFrame();
 	}
