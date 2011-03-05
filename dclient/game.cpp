@@ -120,3 +120,79 @@ void Game::createPlayer(int index)
         clientData *client = GetClientPointer(index);
         client->mClientSideShape = jay;
 }
+
+//-----------------------------------------------------------------------------
+// Name: empty()
+// Desc:
+//-----------------------------------------------------------------------------
+void Game::RemoveClients(void)
+{
+	clientData *list = clientList;
+	clientData *next;
+
+	while(list != NULL)
+	{
+		if(list)
+		{
+			next = list->next;
+			free(list);
+		}
+
+		list = next;
+	}
+
+	clientList = NULL;
+	clients = 0;
+}
+
+void Game::RemoveClient(int ind)
+{
+	clientData *list = clientList;
+	clientData *prev = NULL;
+	clientData *next = NULL;
+
+	// Look for correct client and update list
+	for( ; list != NULL; list = list->next)
+	{
+		if(list->index == ind)
+		{
+			if(prev != NULL)
+			{
+				prev->next = list->next;
+			}
+
+			break;
+		}
+
+		prev = list;
+	}
+
+	// First entry
+	if(list == clientList)
+	{
+		if(list)
+		{
+			next = list->next;
+			free(list);
+		}
+
+		list = NULL;
+		clientList = next;
+	}
+
+	// Other
+	else
+	{
+		if(list)
+		{
+			next = list->next;
+			free(list);
+		}
+
+		list = next;
+	}
+
+	clients--;
+
+}
+

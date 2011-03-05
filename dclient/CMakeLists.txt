@@ -92,6 +92,7 @@ set(HDRS
 	./game.h
 	./soloGame.h
 	./networkedGame.h
+	./soloNetworkedGame.h
 	./polyNetworkedGame.h
 	
 	#dreamsock
@@ -108,6 +109,7 @@ set(SRCS
 	./game.cpp
 	./soloGame.cpp
 	./networkedGame.cpp
+	./soloNetworkedGame.cpp
 	./polyNetworkedGame.cpp
 	./main.cpp
 	
@@ -130,6 +132,7 @@ set(HDRS
 	./game.h
 	./soloGame.h
 	./networkedGame.h
+	./soloNetworkedGame.h
 	./polyNetworkedGame.h
 	
 	#dreamsock
@@ -146,6 +149,7 @@ set(SRCS
 	./game.cpp
 	./soloGame.cpp
 	./networkedGame.cpp
+	./soloNetworkedGame.cpp
 	./polyNetworkedGame.cpp
 	./main.cpp
 

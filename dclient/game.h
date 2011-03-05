@@ -78,6 +78,11 @@ virtual void AddClient(int local, int ind, char *name);
 virtual void createPlayer(int index);
 clientData *GetClientPointer(int index);
 
+
+	void	RemoveClient(int index);
+	void	RemoveClients(void);
+
+
 	clientData *clientList;			// Client list
 	clientData *localClient;		// Pointer to the local client in the client list
 	int clients;
