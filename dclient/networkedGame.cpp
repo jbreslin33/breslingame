@@ -289,18 +289,4 @@ void NetworkedGame::CheckPredictionError(int a)
 		LogString("Prediction error for frame %d:     %f, %f\n", a,
 			errorX, errorY);
 	}
-	/*
-	// Fix the prediction error
-	if( (errorX != 0.0f) || (errorY != 0.0f) )
-	{
-		localClient->frame[a].predictedOrigin.x = localClient->serverFrame.origin.x;
-		localClient->frame[a].predictedOrigin.y = localClient->serverFrame.origin.y;
-
-		localClient->frame[a].vel.x = localClient->serverFrame.vel.x;
-		localClient->frame[a].vel.y = localClient->serverFrame.vel.y;
-
-		LogString("Prediction error for frame %d:     %f, %f\n", a,
-			errorX, errorY);
-	}
-*/
-	}
+}
