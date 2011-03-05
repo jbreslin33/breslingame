@@ -3,9 +3,11 @@
 
 SoloGame::SoloGame()
 {
+
 }
 SoloGame::~SoloGame()
 {
+
 }
 
 void SoloGame::createScene(void)
@@ -22,6 +24,9 @@ void SoloGame::createScene(void)
     pointLight->setDiffuseColour(Ogre::ColourValue::White);
     pointLight->setSpecularColour(Ogre::ColourValue::White);
 
+	AddClient(1,1,"hello");
+
+
 }
 
 //**************************************************************
@@ -29,8 +34,35 @@ void SoloGame::createScene(void)
 //************************************************
 void SoloGame::StartConnection(char* serverIP)
 {
-	AddClient(1,1,"hello");
+
 //
+}
+
+//-------------------------------------------------------------------------------------
+ void SoloGame::go(void)
+{
+#ifdef _DEBUG
+    mResourcesCfg = "resources_d.cfg";
+    mPluginsCfg = "plugins_d.cfg";
+#else
+    mResourcesCfg = "resources.cfg";
+    mPluginsCfg = "plugins.cfg";
+#endif
+
+    if (!setup())
+        return;
+
+//	while(keepRunning) {
+//		CheckKeys();
+
+//		RunNetwork(rendertime * 1000);
+Ogre::WindowEventUtilities::messagePump();
+		//mRoot->renderOneFrame();
+	//}
+    mRoot->startRendering();
+
+    // clean up
+    destroyScene();
 }
 
 
