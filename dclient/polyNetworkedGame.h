@@ -18,7 +18,7 @@ private:
 
 void Shutdown(void);
 
-	void	PredictMovement(int prevFrame, int curFrame);
+
 
 
 	void	AddClient(int local, int index, char *name);

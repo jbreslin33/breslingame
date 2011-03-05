@@ -90,7 +90,11 @@ virtual	void StartConnection(char* serverIP) { bool doNothing = true; }
 virtual void AddClient(int local, int ind, char *name);
 virtual void createPlayer(int index);
 clientData *GetClientPointer(int index);
+	void	PredictMovement(int prevFrame, int curFrame);
 
+    virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+
+ virtual void go(void);
 
 	void	Shutdown(void);
 	void	MoveObjects(void);
