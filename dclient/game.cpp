@@ -201,7 +201,6 @@ void Game::MovePlayer(void)
 	static Ogre::Real mMove = 17.0;
 	Ogre::Vector3 transVector = Ogre::Vector3::ZERO;
 
-LogString("MovePlayer in Game");
 	if(keys[VK_DOWN])
 	{
 		transVector.y -= mMove;
@@ -210,7 +209,6 @@ LogString("MovePlayer in Game");
 
 	if(keys[VK_UP])
 	{
-		LogString("VK_UP is pressed");
 		transVector.y += mMove;
 	}
 
@@ -226,9 +224,7 @@ LogString("MovePlayer in Game");
 
 	if(localClient)
 	{
-		LogString("localClient exists!");
 	   localClient->mClientSideShape->getSceneNode()->translate(transVector * rendertime, Ogre::Node::TS_LOCAL);
-		
 	}
 }
 
@@ -370,7 +366,6 @@ bool Game::CheckKeys(void)
 
 bool Game::processUnbufferedInput(const Ogre::FrameEvent& evt)
 {
-//LogString("unbuff");
     if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
     {
 		keys[VK_UP] = TRUE;
