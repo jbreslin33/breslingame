@@ -25,8 +25,6 @@ void SoloGame::createScene(void)
     pointLight->setSpecularColour(Ogre::ColourValue::White);
 
 	AddClient(1,1,"hello");
-
-
 }
 
 //**************************************************************
@@ -35,7 +33,6 @@ void SoloGame::createScene(void)
 void SoloGame::StartConnection(char* serverIP)
 {
 
-//
 }
 
 //-------------------------------------------------------------------------------------
@@ -52,22 +49,15 @@ void SoloGame::StartConnection(char* serverIP)
     if (!setup())
         return;
 
-	while(keepRunning) {
+	while(keepRunning)
+	{
 		CheckKeys();
-
-//		RunNetwork(rendertime * 1000);
-MovePlayer();
-MoveObjects();
-Ogre::WindowEventUtilities::messagePump();
-		mRoot->renderOneFrame();
+		MovePlayer();
+		MoveObjects();
+		Ogre::WindowEventUtilities::messagePump();
+		keepRunning = mRoot->renderOneFrame();
 	}
-    //mRoot->startRendering();
 
     // clean up
     destroyScene();
 }
-
-
-
-
-

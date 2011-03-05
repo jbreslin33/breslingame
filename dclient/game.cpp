@@ -50,9 +50,9 @@ void Game::AddClient(int local, int ind, char *name)
 		}
 
 		clientList->index = ind;
-LogString("before");
+
 		strcpy(clientList->nickname, name);
-LogString("after");
+
 		createPlayer(ind);
 
 		clientList->next = NULL;
@@ -79,9 +79,9 @@ LogString("after");
 		}
 
 		list->index = ind;
-LogString("before strcpy");
+
 		strcpy(list->nickname, name);
-LogString("after strcpy");
+
 		clientList->next = NULL;
 
 		list->next = NULL;
@@ -112,11 +112,9 @@ clientData *Game::GetClientPointer(int index)
 //Player stuff
 void Game::createPlayer(int index)
 {
-	LogString("begin createPlayer");
         //create a human player and or ghost player 
         ClientSideShape* jay = new ClientSideShape(mSceneMgr,"jay" + index,0,0,0,"sinbad.mesh");
-        //mClientSideShapeVector.push_back(jay);
-	LogString("created Player");
+
         clientData *client = GetClientPointer(index);
         client->mClientSideShape = jay;
 }
@@ -203,7 +201,7 @@ void Game::MovePlayer(void)
 	static Ogre::Real mMove = 17.0;
 	Ogre::Vector3 transVector = Ogre::Vector3::ZERO;
 
-
+LogString("MovePlayer in Game");
 	if(keys[VK_DOWN])
 	{
 		transVector.y -= mMove;
@@ -212,6 +210,7 @@ void Game::MovePlayer(void)
 
 	if(keys[VK_UP])
 	{
+		LogString("VK_UP is pressed");
 		transVector.y += mMove;
 	}
 
@@ -226,8 +225,11 @@ void Game::MovePlayer(void)
 	}
 
 	if(localClient)
+	{
+		LogString("localClient exists!");
 	   localClient->mClientSideShape->getSceneNode()->translate(transVector * rendertime, Ogre::Node::TS_LOCAL);
-
+		
+	}
 }
 
 //-----------------------------------------------------------------------------
@@ -333,7 +335,7 @@ void Game::CalculateVelocity(command_t *command, float frametime)
 bool Game::CheckKeys(void)
 {
 	inputClient.command.key = 0;
-LogString("chekc");
+
 	if(keys[VK_ESCAPE])
 	{
 		return false;
@@ -411,50 +413,16 @@ void Game::Shutdown(void)
 	//Disconnect();
 }
 
- void Game::go(void)
-{
-#ifdef _DEBUG
-    mResourcesCfg = "resources_d.cfg";
-    mPluginsCfg = "plugins_d.cfg";
-#else
-    mResourcesCfg = "resources.cfg";
-    mPluginsCfg = "plugins.cfg";
-#endif
 
-    if (!setup())
-        return;
-
-	while(keepRunning) {
-		CheckKeys();
-LogString("keeprunn");
-		//RunNetwork(rendertime * 1000);//dont run this for local run next line instead
-		MovePlayer();
-		MoveObjects();
-Ogre::WindowEventUtilities::messagePump();
-		keepRunning = mRoot->renderOneFrame();
-	}
-    //mRoot->startRendering();
-
-    // clean up
-    destroyScene();
-}
 bool Game::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
     bool ret = BaseApplication::frameRenderingQueued(evt);
 
-    if(!processUnbufferedInput(evt)) return false;
+    if(!processUnbufferedInput(evt))
+		return false;
+	rendertime = evt.timeSinceLastFrame;
 
-
-	//if(game != NULL)
-	//{
-
-//LogString("frameque");
-		rendertime = evt.timeSinceLastFrame;
-
-		//game->Frame();
-	//}
-
-    return ret;
+	return ret;
 }
 
 void Game::PredictMovement(int prevFrame, int curFrame)
@@ -474,7 +442,7 @@ void Game::PredictMovement(int prevFrame, int curFrame)
 	CalculateVelocity(&localClient->frame[curFrame], frametime);
 
 	// Calculate new predicted origin
-	localClient->frame[curFrame].predictedOrigin.x =
+	localClient->frame[curFrame].predictedOrigin.x = 
 		localClient->frame[prevFrame].predictedOrigin.x + localClient->frame[curFrame].vel.x;
 
 	localClient->frame[curFrame].predictedOrigin.y =
@@ -484,6 +452,5 @@ void Game::PredictMovement(int prevFrame, int curFrame)
 	localClient->command.predictedOrigin.x	= localClient->frame[curFrame].predictedOrigin.x;
 	localClient->command.predictedOrigin.y	= localClient->frame[curFrame].predictedOrigin.y;
 	localClient->command.vel.x				= localClient->frame[curFrame].vel.x;
-	localClient->command.vel.y
-		= localClient->frame[curFrame].vel.y;
+	localClient->command.vel.y      		= localClient->frame[curFrame].vel.y;
 }
