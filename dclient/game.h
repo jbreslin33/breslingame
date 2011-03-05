@@ -83,7 +83,12 @@ clientData *GetClientPointer(int index);
 	int clients;
 
 	clientData inputClient;			// Handles all keyboard input
-
+	float frametime;
+	float rendertime;
+	bool init;
+	int gameIndex;
+	bool keepRunning;
+	Game *next;
 
 };
 #endif

@@ -42,12 +42,10 @@ private:
 	// Network variables
 	dreamClient *networkClient;
 
-	float frametime;
-	float rendertime;
+
 
 	char gamename[32];
-	bool init;
-	int gameIndex;
+
 
 public:
 	PolyNetworkedGame();
@@ -77,8 +75,7 @@ public:
 
 	clientData *GetClientList(void) { return clientList; }
 
-	bool keepRunning;
-	PolyNetworkedGame *next;
+
 };
 
 #endif

@@ -6,22 +6,6 @@ bool keys[256];
 PolyNetworkedGame::PolyNetworkedGame()
 {
 	networkClient	= new dreamClient;
-	clientList		= NULL;
-	localClient		= NULL;
-	clients			= 0;
-
-	memset(&inputClient, 0, sizeof(clientData));
-
-	frametime		= 0.0f;
-
-	rendertime		= 0.0f;
-
-	init			= false;
-
-	gameIndex		= 0;
-
-	next			= NULL;
-	keepRunning = true;
 }
 
 //-----------------------------------------------------------------------------
