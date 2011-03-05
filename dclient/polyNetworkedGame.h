@@ -16,11 +16,10 @@ private:
 	// Client.cpp
 	void	DrawMap(void);
 
+void Shutdown(void);
 
-	void	CalculateVelocity(command_t *command, float frametime);
 	void	PredictMovement(int prevFrame, int curFrame);
-	void	MoveObjects(void);
-	void    MovePlayer(void);
+
 
 	void	AddClient(int local, int index, char *name);
 
@@ -29,7 +28,7 @@ private:
 
 
 
-	bool processUnbufferedInput(const Ogre::FrameEvent& evt);
+
 
 
 	// Variables
@@ -50,8 +49,8 @@ public:
     virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 
 	// Client.cpp
-	void	Shutdown(void);
-	bool	CheckKeys(void);
+
+
 	void	Frame(void);
 	void	RunNetwork(int msec);
 

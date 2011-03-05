@@ -21,100 +21,7 @@ PolyNetworkedGame::~PolyNetworkedGame()
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void PolyNetworkedGame::Shutdown(void)
-{
-	Disconnect();
-}
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
-bool PolyNetworkedGame::CheckKeys(void)
-{
-	inputClient.command.key = 0;
-
-	if(keys[VK_ESCAPE])
-	{
-		return false;
-		Shutdown();
-
-		keys[VK_ESCAPE] = false;
-	}
-
-	if(keys[VK_DOWN])
-	{
-		inputClient.command.key |= KEY_DOWN;
-	}
-
-	if(keys[VK_UP])
-	{
-		inputClient.command.key |= KEY_UP;
-	}
-
-	if(keys[VK_LEFT])
-	{
-		inputClient.command.key |= KEY_LEFT;
-	}
-
-	if(keys[VK_RIGHT])
-	{
-		inputClient.command.key |= KEY_RIGHT;
-	}
-
-	inputClient.command.msec = (int) (frametime * 1000);
-	return true;
-}
-
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
-
-
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
-void PolyNetworkedGame::CalculateVelocity(command_t *command, float frametime)
-{
-	float multiplier = 17.0f;
-
-	command->vel.x = 0.0f;
-	command->vel.y = 0.0f;
-	//localClient->command.vel.x = 0.0f;
-	//localClient->command.vel.y = 0.0f;
-
-
-	if(command->key & KEY_UP)
-	{
-		command->vel.y += multiplier * frametime;
-		//localClient->command.vel.y += multiplier * frametime;
-	}
-
-	if(command->key & KEY_DOWN)
-	{
-		command->vel.y += -multiplier * frametime;
-		//localClient->command.vel.y += -multiplier * frametime;
-	}
-
-	if(command->key & KEY_LEFT)
-	{
-		command->vel.x += -multiplier * frametime;
-		//localClient->command.vel.x += -multiplier * frametime;
-	}
-
-	if(command->key & KEY_RIGHT)
-	{
-		command->vel.x += multiplier * frametime;
-		//localClient->command.vel.x += multiplier * frametime;
-	}
-}
 
 //-----------------------------------------------------------------------------
 // Name: empty()
@@ -151,100 +58,6 @@ void PolyNetworkedGame::PredictMovement(int prevFrame, int curFrame)
 		= localClient->frame[curFrame].vel.y;
 }
 
-void PolyNetworkedGame::MovePlayer(void)
-{
-
-	static Ogre::Real mMove = 17.0;
-	Ogre::Vector3 transVector = Ogre::Vector3::ZERO;
-
-
-	if(keys[VK_DOWN])
-	{
-		transVector.y -= mMove;
-
-	}
-
-	if(keys[VK_UP])
-	{
-		transVector.y += mMove;
-	}
-
-	if(keys[VK_LEFT])
-	{
-		transVector.x -= mMove;
-	}
-
-	if(keys[VK_RIGHT])
-	{
-		transVector.x += mMove;
-	}
-
-	if(localClient)
-	   localClient->mClientSideShape->getSceneNode()->translate(transVector * rendertime, Ogre::Node::TS_LOCAL);
-
-}
-
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
-void PolyNetworkedGame::MoveObjects(void)
-{
-	if(!localClient)
-		return;
-
-	clientData *client = clientList;
-
-	Ogre::Vector3 transVector = Ogre::Vector3::ZERO;
-
-	for( ; client != NULL; client = client->next)
-	{
-		// Remote players
-		if(client != localClient)
-		{
-			CalculateVelocity(&client->command, frametime);
-
-			client->command.origin.x += client->command.vel.x;
-			client->command.origin.y += client->command.vel.y;
-
-            transVector.x = client->command.origin.x;
-            transVector.y = client->command.origin.y;
-
-			client->mClientSideShape->getSceneNode()->setPosition(transVector);
-
-
-		}
-
-		//Local player
-		else
-		{
-			client->command.origin.x = client->command.predictedOrigin.x;
-			client->command.origin.y = client->command.predictedOrigin.y;
-
-			//memcpy(&client->command, &inputClient.command, sizeof(command_t));
-			//CalculateVelocity(&inputClient.command, frametime);
-
-			//client->command.origin.x += client->command.vel.x;
-			//client->command.origin.y += client->command.vel.y;
-
-            transVector.x = client->command.predictedOrigin.x;
-            transVector.y = client->command.predictedOrigin.y;
-
-			//transVector.x = client->command.vel.x;
-            //transVector.y = client->command.vel.y;
-
-			//client->myNode->translate(transVector, Ogre::Node::TS_LOCAL);
-            client->mClientSideShape->getSceneNode()->setPosition(transVector);
-
-/*
-            LogString("transVector.x %f: ", transVector.x);
-			LogString("transVector.y %f: ", transVector.y);
-			LogString("predictedOrigin.x %f: ", client->command.predictedOrigin.x);
-			LogString("predictedOrigin.y %f: ", client->command.predictedOrigin.y);
-*/
-		}
-	}
-}
 
 //-------------------------------------------------------------------------------------
 void PolyNetworkedGame::createScene(void)
@@ -260,45 +73,7 @@ void PolyNetworkedGame::createScene(void)
         light->setVisible(true);
 }
 //-------------------------------------------------------------------------------------
-bool PolyNetworkedGame::processUnbufferedInput(const Ogre::FrameEvent& evt)
-{
 
-    if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
-    {
-		keys[VK_UP] = TRUE;
-    }
-	else
-	{
-        keys[VK_UP] = FALSE;
-	}
-    if (mKeyboard->isKeyDown(OIS::KC_K)) // Backward
-    {
-		keys[VK_DOWN] = TRUE;
-    }
-	else
-	{
-        keys[VK_DOWN] = FALSE;
-	}
-
-    if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
-    {
-		keys[VK_LEFT] = TRUE;
-    }
-	else
-	{
-        keys[VK_LEFT] = FALSE;
-	}
-    if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
-    {
-		keys[VK_RIGHT] = TRUE;
-    }
-	else
-	{
-        keys[VK_RIGHT] = FALSE;
-	}
-
-    return true;
-}
 //-------------------------------------------------------------------------------------
 bool PolyNetworkedGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
@@ -495,4 +270,9 @@ void PolyNetworkedGame::RunNetwork(int msec)
 	MoveObjects();
 
 
+}
+
+void PolyNetworkedGame::Shutdown(void)
+{
+	Disconnect();
 }
