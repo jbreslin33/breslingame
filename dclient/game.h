@@ -30,6 +30,19 @@ extern bool keys[256];
 
 #define USER_MES_KEEPALIVE		12
 
+#ifdef WIN32
+	
+#else
+	
+
+	#ifndef TRUE
+	#define TRUE 1
+	#endif
+	#ifndef FALSE
+	#define FALSE 0
+	#endif
+#endif
+
 typedef struct
 {
 	float x;
@@ -79,9 +92,16 @@ virtual void createPlayer(int index);
 clientData *GetClientPointer(int index);
 
 
+	void	Shutdown(void);
+	void	MoveObjects(void);
+	void    MovePlayer(void);
+
 	void	RemoveClient(int index);
 	void	RemoveClients(void);
 
+	void	CalculateVelocity(command_t *command, float frametime);
+	bool processUnbufferedInput(const Ogre::FrameEvent& evt);
+	bool	CheckKeys(void);
 
 	clientData *clientList;			// Client list
 	clientData *localClient;		// Pointer to the local client in the client list
