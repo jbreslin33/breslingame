@@ -91,11 +91,6 @@ void Game::AddClient(int local, int ind, char *name)
 	}
 
 	clients++;
-/*
-	// If we just joined the game, request a non-delta compressed frame
-	if(local)
-		SendRequestNonDeltaFrame();
-*/
 }
 
 clientData *Game::GetClientPointer(int index)
@@ -105,18 +100,17 @@ clientData *Game::GetClientPointer(int index)
 		if(clList->index == index)
 			return clList;
 	}
-
 	return NULL;
 }
 
 //Player stuff
 void Game::createPlayer(int index)
 {
-        //create a human player and or ghost player 
-        ClientSideShape* jay = new ClientSideShape(mSceneMgr,"jay" + index,0,0,0,"sinbad.mesh");
+	//create a human player and or ghost player 
+    ClientSideShape* jay = new ClientSideShape(mSceneMgr,"jay" + index,0,0,0,"sinbad.mesh");
 
-        clientData *client = GetClientPointer(index);
-        client->mClientSideShape = jay;
+    clientData *client = GetClientPointer(index);
+    client->mClientSideShape = jay;
 }
 
 //-----------------------------------------------------------------------------
@@ -197,14 +191,12 @@ void Game::RemoveClient(int ind)
 
 void Game::MovePlayer(void)
 {
-
 	static Ogre::Real mMove = 17.0;
 	Ogre::Vector3 transVector = Ogre::Vector3::ZERO;
 
 	if(keys[VK_DOWN])
 	{
 		transVector.y -= mMove;
-
 	}
 
 	if(keys[VK_UP])
@@ -224,7 +216,7 @@ void Game::MovePlayer(void)
 
 	if(localClient)
 	{
-	   localClient->mClientSideShape->getSceneNode()->translate(transVector * rendertime, Ogre::Node::TS_LOCAL);
+		localClient->mClientSideShape->getSceneNode()->translate(transVector * rendertime, Ogre::Node::TS_LOCAL);
 	}
 }
 
@@ -255,8 +247,6 @@ void Game::MoveObjects(void)
             transVector.y = client->command.origin.y;
 
 			client->mClientSideShape->getSceneNode()->setPosition(transVector);
-
-
 		}
 
 		//Local player
@@ -265,27 +255,10 @@ void Game::MoveObjects(void)
 			client->command.origin.x = client->command.predictedOrigin.x;
 			client->command.origin.y = client->command.predictedOrigin.y;
 
-			//memcpy(&client->command, &inputClient.command, sizeof(command_t));
-			//CalculateVelocity(&inputClient.command, frametime);
-
-			//client->command.origin.x += client->command.vel.x;
-			//client->command.origin.y += client->command.vel.y;
-
             transVector.x = client->command.predictedOrigin.x;
             transVector.y = client->command.predictedOrigin.y;
 
-			//transVector.x = client->command.vel.x;
-            //transVector.y = client->command.vel.y;
-
-			//client->myNode->translate(transVector, Ogre::Node::TS_LOCAL);
             client->mClientSideShape->getSceneNode()->setPosition(transVector);
-
-/*
-            LogString("transVector.x %f: ", transVector.x);
-			LogString("transVector.y %f: ", transVector.y);
-			LogString("predictedOrigin.x %f: ", client->command.predictedOrigin.x);
-			LogString("predictedOrigin.y %f: ", client->command.predictedOrigin.y);
-*/
 		}
 	}
 }
