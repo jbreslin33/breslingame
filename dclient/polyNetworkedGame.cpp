@@ -576,80 +576,8 @@ void PolyNetworkedGame::AddClient(int local, int ind, char *name)
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void PolyNetworkedGame::RemoveClient(int ind)
-{
-	clientData *list = clientList;
-	clientData *prev = NULL;
-	clientData *next = NULL;
 
-	// Look for correct client and update list
-	for( ; list != NULL; list = list->next)
-	{
-		if(list->index == ind)
-		{
-			if(prev != NULL)
-			{
-				prev->next = list->next;
-			}
 
-			break;
-		}
-
-		prev = list;
-	}
-
-	// First entry
-	if(list == clientList)
-	{
-		if(list)
-		{
-			next = list->next;
-			free(list);
-		}
-
-		list = NULL;
-		clientList = next;
-	}
-
-	// Other
-	else
-	{
-		if(list)
-		{
-			next = list->next;
-			free(list);
-		}
-
-		list = next;
-	}
-
-	clients--;
-
-}
-
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
-void PolyNetworkedGame::RemoveClients(void)
-{
-	clientData *list = clientList;
-	clientData *next;
-
-	while(list != NULL)
-	{
-		if(list)
-		{
-			next = list->next;
-			free(list);
-		}
-
-		list = next;
-	}
-
-	clientList = NULL;
-	clients = 0;
-}
 
 //-----------------------------------------------------------------------------
 // Name: empty()

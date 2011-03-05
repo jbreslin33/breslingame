@@ -23,8 +23,7 @@ private:
 	void    MovePlayer(void);
 
 	void	AddClient(int local, int index, char *name);
-	void	RemoveClient(int index);
-	void	RemoveClients(void);
+
 
 	// Network.cpp
 	void	ReadPackets(void);
