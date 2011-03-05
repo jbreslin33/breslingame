@@ -333,7 +333,7 @@ void Game::CalculateVelocity(command_t *command, float frametime)
 bool Game::CheckKeys(void)
 {
 	inputClient.command.key = 0;
-
+LogString("chekc");
 	if(keys[VK_ESCAPE])
 	{
 		return false;
@@ -368,7 +368,7 @@ bool Game::CheckKeys(void)
 
 bool Game::processUnbufferedInput(const Ogre::FrameEvent& evt)
 {
-
+//LogString("unbuff");
     if (mKeyboard->isKeyDown(OIS::KC_I)) // Forward
     {
 		keys[VK_UP] = TRUE;
@@ -411,3 +411,79 @@ void Game::Shutdown(void)
 	//Disconnect();
 }
 
+ void Game::go(void)
+{
+#ifdef _DEBUG
+    mResourcesCfg = "resources_d.cfg";
+    mPluginsCfg = "plugins_d.cfg";
+#else
+    mResourcesCfg = "resources.cfg";
+    mPluginsCfg = "plugins.cfg";
+#endif
+
+    if (!setup())
+        return;
+
+	while(keepRunning) {
+		CheckKeys();
+LogString("keeprunn");
+		//RunNetwork(rendertime * 1000);//dont run this for local run next line instead
+		MovePlayer();
+		MoveObjects();
+Ogre::WindowEventUtilities::messagePump();
+		keepRunning = mRoot->renderOneFrame();
+	}
+    //mRoot->startRendering();
+
+    // clean up
+    destroyScene();
+}
+bool Game::frameRenderingQueued(const Ogre::FrameEvent& evt)
+{
+    bool ret = BaseApplication::frameRenderingQueued(evt);
+
+    if(!processUnbufferedInput(evt)) return false;
+
+
+	//if(game != NULL)
+	//{
+
+//LogString("frameque");
+		rendertime = evt.timeSinceLastFrame;
+
+		//game->Frame();
+	//}
+
+    return ret;
+}
+
+void Game::PredictMovement(int prevFrame, int curFrame)
+{
+	if(!localClient)
+		return;
+
+	float frametime = inputClient.frame[curFrame].msec / 1000.0f;
+
+	localClient->frame[curFrame].key = inputClient.frame[curFrame].key;
+
+	//
+	// Player ->
+	//
+
+	// Process commands
+	CalculateVelocity(&localClient->frame[curFrame], frametime);
+
+	// Calculate new predicted origin
+	localClient->frame[curFrame].predictedOrigin.x =
+		localClient->frame[prevFrame].predictedOrigin.x + localClient->frame[curFrame].vel.x;
+
+	localClient->frame[curFrame].predictedOrigin.y =
+		localClient->frame[prevFrame].predictedOrigin.y + localClient->frame[curFrame].vel.y;
+
+	// Copy values to "current" values
+	localClient->command.predictedOrigin.x	= localClient->frame[curFrame].predictedOrigin.x;
+	localClient->command.predictedOrigin.y	= localClient->frame[curFrame].predictedOrigin.y;
+	localClient->command.vel.x				= localClient->frame[curFrame].vel.x;
+	localClient->command.vel.y
+		= localClient->frame[curFrame].vel.y;
+}

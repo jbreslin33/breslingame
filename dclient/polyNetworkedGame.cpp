@@ -27,36 +27,7 @@ PolyNetworkedGame::~PolyNetworkedGame()
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void PolyNetworkedGame::PredictMovement(int prevFrame, int curFrame)
-{
-	if(!localClient)
-		return;
 
-	float frametime = inputClient.frame[curFrame].msec / 1000.0f;
-
-	localClient->frame[curFrame].key = inputClient.frame[curFrame].key;
-
-	//
-	// Player ->
-	//
-
-	// Process commands
-	CalculateVelocity(&localClient->frame[curFrame], frametime);
-
-	// Calculate new predicted origin
-	localClient->frame[curFrame].predictedOrigin.x =
-		localClient->frame[prevFrame].predictedOrigin.x + localClient->frame[curFrame].vel.x;
-
-	localClient->frame[curFrame].predictedOrigin.y =
-		localClient->frame[prevFrame].predictedOrigin.y + localClient->frame[curFrame].vel.y;
-
-	// Copy values to "current" values
-	localClient->command.predictedOrigin.x	= localClient->frame[curFrame].predictedOrigin.x;
-	localClient->command.predictedOrigin.y	= localClient->frame[curFrame].predictedOrigin.y;
-	localClient->command.vel.x				= localClient->frame[curFrame].vel.x;
-	localClient->command.vel.y
-		= localClient->frame[curFrame].vel.y;
-}
 
 
 //-------------------------------------------------------------------------------------
