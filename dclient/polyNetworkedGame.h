@@ -11,35 +11,11 @@ class PolyNetworkedGame : public NetworkedGame
 public:
 	    virtual void go(void);
 private:
-	// Methods
-
-	// Client.cpp
 	void	DrawMap(void);
 
 void Shutdown(void);
-
-
-
-
 	void	AddClient(int local, int index, char *name);
-
-
-	// Network.cpp
-
-
-
-
-
-
-	// Variables
-
-
-
-
-
 	char gamename[32];
-
-
 public:
 	PolyNetworkedGame();
 	~PolyNetworkedGame();
@@ -47,9 +23,6 @@ public:
     //void createPlayer(int index);
     virtual void createScene(void);
     virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
-
-	// Client.cpp
-
 
 	void	Frame(void);
 	void	RunNetwork(int msec);
@@ -66,8 +39,6 @@ public:
 	int		GetGameIndex(void)		{ return gameIndex; }
 
 	clientData *GetClientList(void) { return clientList; }
-
-
 };
 
 #endif
