@@ -22,6 +22,7 @@ NetworkedGame();
 
 	void RunNetwork(int msec);
 
+	void StartConnection(char* serverIP);
 	void Connect(void);
 	void Disconnect(void);
 	void Shutdown(void);

@@ -334,3 +334,16 @@ void NetworkedGame::RunNetwork(int msec)
 	}
 	MoveObjects();
 }
+
+void NetworkedGame::StartConnection(char* serverIP)
+{
+	int ret = networkClient->Initialise("", serverIP, 30004);
+
+	if(ret == DREAMSOCK_CLIENT_ERROR)
+	{
+		char text[64];
+		sprintf(text, "Could not open client socket");
+	}
+
+	Connect();
+}
