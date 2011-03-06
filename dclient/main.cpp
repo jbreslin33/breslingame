@@ -42,7 +42,15 @@ extern "C" {
 		//NetworkedGame
 		if (strCmdLine[0] == '2')
 		{
-			//game = new NetworkedGame;
+			game = new NetworkedGame;
+			int i = 0;
+			while(strCmdLine[i] != 'E')
+			{
+				ip[i] = strCmdLine[i + 2];
+				i++;
+
+			}
+			game->StartConnection(ip);
 		}
 
 		//NetworkedGame
