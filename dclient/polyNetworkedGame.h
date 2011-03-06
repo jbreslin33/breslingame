@@ -18,12 +18,10 @@ PolyNetworkedGame();
 	
 	virtual void createScene(void);
 
-	void Frame(void);
-
 	void StartConnection(char* serverIP);
 
 	void SendStartGame(void);
-	clientData *GetClientList(void) { return clientList; }
+
 };
 
 #endif
