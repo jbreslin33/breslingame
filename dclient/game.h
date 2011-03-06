@@ -108,6 +108,8 @@ clientData *GetClientPointer(int index);
 	bool processUnbufferedInput(const Ogre::FrameEvent& evt);
 	bool	CheckKeys(void);
 
+
+	void RunNetwork(int msec);
 	clientData *clientList;			// Client list
 	clientData *localClient;		// Pointer to the local client in the client list
 	int clients;
