@@ -24,20 +24,8 @@ void PolyNetworkedGame::createScene(void)
 	        Ogre::Light* light = mSceneMgr->getLight("pointLight");
         light->setVisible(true);
 }
-/*
-bool PolyNetworkedGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
-{
-    bool ret = BaseApplication::frameRenderingQueued(evt);
 
-    if(!processUnbufferedInput(evt)) return false;
-
-		rendertime = evt.timeSinceLastFrame;
-
-    return ret;
-}
-*/
-//-------------------------------------------------------------------------------------
- void PolyNetworkedGame::go(void)
+void PolyNetworkedGame::go(void)
 {
 #ifdef _DEBUG
     mResourcesCfg = "resources_d.cfg";
@@ -50,18 +38,24 @@ bool PolyNetworkedGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
     if (!setup())
         return;
 
-	while(keepRunning) {
-		CheckKeys();
-		RunNetwork(rendertime * 1000);
-		Ogre::WindowEventUtilities::messagePump();
-		keepRunning = mRoot->renderOneFrame();
+	while(keepRunning)
+	{
+		gameLoop();
 	}
 
     // clean up
     destroyScene();
 }
 
- void PolyNetworkedGame::StartConnection(char* serverIP)
+void PolyNetworkedGame::gameLoop()
+{
+	CheckKeys();
+	RunNetwork(rendertime * 1000);
+	Ogre::WindowEventUtilities::messagePump();
+	keepRunning = mRoot->renderOneFrame();
+}
+
+void PolyNetworkedGame::StartConnection(char* serverIP)
 {
 	int ret = networkClient->Initialise("", serverIP, 30004);
 
