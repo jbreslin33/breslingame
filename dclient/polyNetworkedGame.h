@@ -4,41 +4,28 @@
 #include "networkedGame.h"
 #include "../tdreamsock/dreamSock.h"
 
-// The main application class interface
 class PolyNetworkedGame : public NetworkedGame
 {
 
 public:
-	    virtual void go(void);
-private:
-	void	DrawMap(void);
+	
+PolyNetworkedGame();
+~PolyNetworkedGame();
 
-void Shutdown(void);
-	void	AddClient(int local, int index, char *name);
-	char gamename[32];
-public:
-	PolyNetworkedGame();
-	~PolyNetworkedGame();
+virtual void go(void);
+		void Shutdown(void);
+		void AddClient(int local, int index, char *name);
+	
+virtual void createScene(void);
+virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 
-    //void createPlayer(int index);
-    virtual void createScene(void);
-    virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+		void Frame(void);
+		void RunNetwork(int msec);
 
-	void	Frame(void);
-	void	RunNetwork(int msec);
+		void StartConnection(char* serverIP);
 
-	// Network.cpp
-	void	StartConnection(char* serverIP);
-
-	void	SendStartGame(void);
-
-	void	SetName(char *n)		{ strcpy(gamename, n); }
-	char	*GetName(void)			{ return gamename; }
-
-	void	SetGameIndex(int index)	{ gameIndex = index; }
-	int		GetGameIndex(void)		{ return gameIndex; }
-
-	clientData *GetClientList(void) { return clientList; }
+		void SendStartGame(void);
+		clientData *GetClientList(void) { return clientList; }
 };
 
 #endif

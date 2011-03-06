@@ -13,6 +13,7 @@ NetworkedGame();
 
 	void	ReadPackets(void);
 	void	ReadDeltaMoveCommand(dreamMessage *mes, clientData *client);
+	void	BuildDeltaMoveCommand(dreamMessage *mes, clientData *theClient);
 	void	SendCommand(void);
 	void	SendRequestNonDeltaFrame(void);
 	void	ReadMoveCommand(dreamMessage *mes, clientData *client);
@@ -22,8 +23,6 @@ NetworkedGame();
 	void	Connect(void);
 	void	Disconnect(void);
 
-	void	BuildDeltaMoveCommand(dreamMessage *mes, clientData *theClient);
-	// Network variables
 	dreamClient *networkClient;
 };
 #endif
