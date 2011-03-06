@@ -17,20 +17,6 @@ PolyNetworkedGame::~PolyNetworkedGame()
 	delete networkClient;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
-
-
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
-
-
-
-//-------------------------------------------------------------------------------------
 void PolyNetworkedGame::createScene(void)
 {
     mSceneMgr->setAmbientLight(Ogre::ColourValue(0.75, 0.75, 0.75));
@@ -43,24 +29,14 @@ void PolyNetworkedGame::createScene(void)
 	        Ogre::Light* light = mSceneMgr->getLight("pointLight");
         light->setVisible(true);
 }
-//-------------------------------------------------------------------------------------
 
-//-------------------------------------------------------------------------------------
 bool PolyNetworkedGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
     bool ret = BaseApplication::frameRenderingQueued(evt);
 
     if(!processUnbufferedInput(evt)) return false;
 
-
-	//if(game != NULL)
-	//{
-
-
 		rendertime = evt.timeSinceLastFrame;
-
-		//game->Frame();
-	//}
 
     return ret;
 }
@@ -89,111 +65,23 @@ bool PolyNetworkedGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
     destroyScene();
 }
 
-
-
-//**************************************************************
-//BEGIN NETWORK CODE FUNCTIONS
-//************************************************
-void PolyNetworkedGame::StartConnection(char* serverIP)
+ void PolyNetworkedGame::StartConnection(char* serverIP)
 {
-//	LogString("StartConnection");
-
-	//gameIndex = ind;
-
 	int ret = networkClient->Initialise("", serverIP, 30004);
 
 	if(ret == DREAMSOCK_CLIENT_ERROR)
 	{
 		char text[64];
 		sprintf(text, "Could not open client socket");
-
-		//MessageBox(NULL, text, "Error", MB_OK);
 	}
 
 	Connect();
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
-
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
 void PolyNetworkedGame::AddClient(int local, int ind, char *name)
 {
 	Game::AddClient(local,ind,name);
-	/*
-	// First get a pointer to the beginning of client list
-	clientData *list = clientList;
-	clientData *prev;
 
-	LogString("App: Client: Adding client with index %d", ind);
-
-	// No clients yet, adding the first one
-	if(clientList == NULL)
-	{
-		LogString("App: Client: Adding first client");
-
-		clientList = (clientData *) calloc(1, sizeof(clientData));
-
-		if(local)
-		{
-			LogString("App: Client: This one is local");
-			localClient = clientList;
-		}
-
-		clientList->index = ind;
-		strcpy(clientList->nickname, name);
-
-		if(clients % 2 == 0)
-			createPlayer(ind);
-		else
-			createPlayer(ind);
-
-		clientList->next = NULL;
-	}
-	else
-	{
-		LogString("App: Client: Adding another client");
-
-		prev = list;
-		list = clientList->next;
-
-		while(list != NULL)
-		{
-			prev = list;
-			list = list->next;
-		}
-
-		list = (clientData *) calloc(1, sizeof(clientData));
-
-		if(local)
-		{
-			LogString("App: Client: This one is local");
-			localClient = list;
-		}
-
-		list->index = ind;
-		strcpy(list->nickname, name);
-
-		clientList->next = NULL;
-
-		list->next = NULL;
-		prev->next = list;
-
-		if(clients % 2 == 0)
-			createPlayer(ind);
-		else
-			createPlayer(ind);
-
-
-	}
-
-	clients++;
-*/
 	// If we just joined the game, request a non-delta compressed frame
 	if(local)
 		SendRequestNonDeltaFrame();
