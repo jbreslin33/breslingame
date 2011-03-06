@@ -87,6 +87,7 @@ Game();
 ~Game();
 
 virtual void go(void);
+virtual void createScene(void);
 
 virtual void gameLoop() { bool doNothing = true; }
 virtual	void StartConnection(char* serverIP) { bool doNothing = true; }
