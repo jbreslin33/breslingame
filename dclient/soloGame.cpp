@@ -3,20 +3,14 @@
 
 SoloGame::SoloGame()
 {
-
 }
 SoloGame::~SoloGame()
 {
-
 }
 
 void SoloGame::createScene(void)
 {
     mSceneMgr->setAmbientLight(Ogre::ColourValue(0.25, 0.25, 0.25));
-
-    //Ogre::Entity* ninjaEntity = mSceneMgr->createEntity("Ninja", "sinbad.mesh");
-    //Ogre::SceneNode *node = mSceneMgr->getRootSceneNode()->createChildSceneNode("NinjaNode");
-    //node->attachObject(ninjaEntity);
 
     Ogre::Light* pointLight = mSceneMgr->createLight("pointLight");
     pointLight->setType(Ogre::Light::LT_POINT);
@@ -32,33 +26,9 @@ void SoloGame::createScene(void)
 //************************************************
 void SoloGame::StartConnection(char* serverIP)
 {
-
 }
 
-/*
- void SoloGame::go(void)
-{
-#ifdef _DEBUG
-    mResourcesCfg = "resources_d.cfg";
-    mPluginsCfg = "plugins_d.cfg";
-#else
-    mResourcesCfg = "resources.cfg";
-    mPluginsCfg = "plugins.cfg";
-#endif
-
-    if (!setup())
-        return;
-
-	while(keepRunning)
-	{
-		gameLoop();
-	}
-
-    // clean up
-    destroyScene();
-}
-*/
- void SoloGame::gameLoop()
+void SoloGame::gameLoop()
 {
 	CheckKeys();
 	MovePlayer();
