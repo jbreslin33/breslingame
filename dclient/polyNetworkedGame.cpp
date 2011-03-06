@@ -9,7 +9,6 @@ PolyNetworkedGame::PolyNetworkedGame()
 
 PolyNetworkedGame::~PolyNetworkedGame()
 {
-
 }
 
 void PolyNetworkedGame::createScene(void)
@@ -24,29 +23,7 @@ void PolyNetworkedGame::createScene(void)
 	        Ogre::Light* light = mSceneMgr->getLight("pointLight");
         light->setVisible(true);
 }
-/*
-void PolyNetworkedGame::go(void)
-{
-#ifdef _DEBUG
-    mResourcesCfg = "resources_d.cfg";
-    mPluginsCfg = "plugins_d.cfg";
-#else
-    mResourcesCfg = "resources.cfg";
-    mPluginsCfg = "plugins.cfg";
-#endif
 
-    if (!setup())
-        return;
-
-	while(keepRunning)
-	{
-		gameLoop();
-	}
-
-    // clean up
-    destroyScene();
-}
-*/
 void PolyNetworkedGame::gameLoop()
 {
 	CheckKeys();
