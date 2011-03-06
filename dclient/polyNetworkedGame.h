@@ -17,7 +17,7 @@ PolyNetworkedGame();
 	void AddClient(int local, int index, char *name);
 	
 	virtual void createScene(void);
-	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+	//virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 
 	void Frame(void);
 	void RunNetwork(int msec);
