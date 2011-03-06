@@ -32,19 +32,6 @@ void PolyNetworkedGame::gameLoop()
 	keepRunning = mRoot->renderOneFrame();
 }
 
-void PolyNetworkedGame::StartConnection(char* serverIP)
-{
-	int ret = networkClient->Initialise("", serverIP, 30004);
-
-	if(ret == DREAMSOCK_CLIENT_ERROR)
-	{
-		char text[64];
-		sprintf(text, "Could not open client socket");
-	}
-
-	Connect();
-}
-
 void PolyNetworkedGame::AddClient(int local, int ind, char *name)
 {
 	Game::AddClient(local,ind,name);
@@ -52,7 +39,6 @@ void PolyNetworkedGame::AddClient(int local, int ind, char *name)
 	// If we just joined the game, request a non-delta compressed frame
 	if(local)
 		SendRequestNonDeltaFrame();
-
 }
 
 
