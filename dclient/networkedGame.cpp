@@ -347,3 +347,12 @@ void NetworkedGame::StartConnection(char* serverIP)
 
 	Connect();
 }
+
+void NetworkedGame::AddClient(int local, int ind, char *name)
+{
+	Game::AddClient(local,ind,name);
+
+	// If we just joined the game, request a non-delta compressed frame
+	if(local)
+		SendRequestNonDeltaFrame();
+}

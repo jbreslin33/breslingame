@@ -13,7 +13,7 @@ PolyNetworkedGame();
 ~PolyNetworkedGame();
 
 	virtual void gameLoop();
-	void AddClient(int local, int index, char *name);
+
 	virtual void createScene(void);
 
 };

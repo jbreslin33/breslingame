@@ -24,13 +24,6 @@ void PolyNetworkedGame::gameLoop()
 	keepRunning = mRoot->renderOneFrame();
 }
 
-void PolyNetworkedGame::AddClient(int local, int ind, char *name)
-{
-	Game::AddClient(local,ind,name);
 
-	// If we just joined the game, request a non-delta compressed frame
-	if(local)
-		SendRequestNonDeltaFrame();
-}
 
 

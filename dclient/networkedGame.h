@@ -18,6 +18,9 @@ NetworkedGame();
 	void SendRequestNonDeltaFrame(void);
 	void ReadMoveCommand(dreamMessage *mes, clientData *client);
 
+
+	void AddClient(int local, int index, char *name);
+
 	void CheckPredictionError(int a);
 
 	void RunNetwork(int msec);
