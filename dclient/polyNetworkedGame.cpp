@@ -24,7 +24,7 @@ void PolyNetworkedGame::createScene(void)
 	        Ogre::Light* light = mSceneMgr->getLight("pointLight");
         light->setVisible(true);
 }
-
+/*
 void PolyNetworkedGame::go(void)
 {
 #ifdef _DEBUG
@@ -46,7 +46,7 @@ void PolyNetworkedGame::go(void)
     // clean up
     destroyScene();
 }
-
+*/
 void PolyNetworkedGame::gameLoop()
 {
 	CheckKeys();

@@ -35,7 +35,7 @@ void SoloGame::StartConnection(char* serverIP)
 
 }
 
-//-------------------------------------------------------------------------------------
+/*
  void SoloGame::go(void)
 {
 #ifdef _DEBUG
@@ -57,7 +57,7 @@ void SoloGame::StartConnection(char* serverIP)
     // clean up
     destroyScene();
 }
-
+*/
  void SoloGame::gameLoop()
 {
 	CheckKeys();
