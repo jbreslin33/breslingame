@@ -11,18 +11,18 @@ public:
 NetworkedGame();
 ~NetworkedGame();
 
-	void	ReadPackets(void);
-	void	ReadDeltaMoveCommand(dreamMessage *mes, clientData *client);
-	void	BuildDeltaMoveCommand(dreamMessage *mes, clientData *theClient);
-	void	SendCommand(void);
-	void	SendRequestNonDeltaFrame(void);
-	void	ReadMoveCommand(dreamMessage *mes, clientData *client);
+	void ReadPackets(void);
+	void ReadDeltaMoveCommand(dreamMessage *mes, clientData *client);
+	void BuildDeltaMoveCommand(dreamMessage *mes, clientData *theClient);
+	void SendCommand(void);
+	void SendRequestNonDeltaFrame(void);
+	void ReadMoveCommand(dreamMessage *mes, clientData *client);
 
-	void	CheckPredictionError(int a);
+	void CheckPredictionError(int a);
 
-	void	Connect(void);
-	void	Disconnect(void);
-
+	void Connect(void);
+	void Disconnect(void);
+	void Shutdown(void);
 	dreamClient *networkClient;
 };
 #endif

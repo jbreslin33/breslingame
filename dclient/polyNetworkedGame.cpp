@@ -5,16 +5,11 @@ bool keys[256];
 
 PolyNetworkedGame::PolyNetworkedGame()
 {
-
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
 PolyNetworkedGame::~PolyNetworkedGame()
 {
-	delete networkClient;
+
 }
 
 void PolyNetworkedGame::createScene(void)
@@ -126,7 +121,4 @@ void PolyNetworkedGame::RunNetwork(int msec)
 	MoveObjects();
 }
 
-void PolyNetworkedGame::Shutdown(void)
-{
-	Disconnect();
-}
+

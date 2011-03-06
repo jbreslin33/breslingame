@@ -6,6 +6,7 @@ NetworkedGame::NetworkedGame()
 }
 NetworkedGame::~NetworkedGame()
 {
+	delete networkClient;
 }
 
 void NetworkedGame::ReadPackets(void)
@@ -289,4 +290,9 @@ void NetworkedGame::CheckPredictionError(int a)
 		LogString("Prediction error for frame %d:     %f, %f\n", a,
 			errorX, errorY);
 	}
+}
+
+void NetworkedGame::Shutdown(void)
+{
+	Disconnect();
 }
