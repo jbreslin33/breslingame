@@ -13,5 +13,6 @@ SoloGame();
     virtual void createScene(void);
 	virtual void StartConnection(char* serverIP);
 	virtual void go(void);
+	virtual void gameLoop();
 };
 #endif
