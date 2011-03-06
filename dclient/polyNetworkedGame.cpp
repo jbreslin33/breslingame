@@ -24,7 +24,7 @@ void PolyNetworkedGame::createScene(void)
 	        Ogre::Light* light = mSceneMgr->getLight("pointLight");
         light->setVisible(true);
 }
-
+/*
 bool PolyNetworkedGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 {
     bool ret = BaseApplication::frameRenderingQueued(evt);
@@ -35,6 +35,7 @@ bool PolyNetworkedGame::frameRenderingQueued(const Ogre::FrameEvent& evt)
 
     return ret;
 }
+*/
 //-------------------------------------------------------------------------------------
  void PolyNetworkedGame::go(void)
 {
