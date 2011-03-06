@@ -12,8 +12,6 @@ public:
 PolyNetworkedGame();
 ~PolyNetworkedGame();
 
-	virtual void gameLoop();
-
 	virtual void createScene(void);
 
 };
