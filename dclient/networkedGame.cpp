@@ -356,3 +356,11 @@ void NetworkedGame::AddClient(int local, int ind, char *name)
 	if(local)
 		SendRequestNonDeltaFrame();
 }
+
+void NetworkedGame::gameLoop()
+{
+	CheckKeys();
+	RunNetwork(rendertime * 1000);
+	Ogre::WindowEventUtilities::messagePump();
+	keepRunning = mRoot->renderOneFrame();
+}

@@ -23,6 +23,7 @@ NetworkedGame();
 
 	void CheckPredictionError(int a);
 
+	virtual void gameLoop();
 	void RunNetwork(int msec);
 
 	void StartConnection(char* serverIP);
