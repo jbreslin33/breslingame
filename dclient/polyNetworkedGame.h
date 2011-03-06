@@ -12,20 +12,20 @@ public:
 PolyNetworkedGame();
 ~PolyNetworkedGame();
 
-virtual void go(void);
-		void Shutdown(void);
-		void AddClient(int local, int index, char *name);
+	virtual void go(void);
+
+	void AddClient(int local, int index, char *name);
 	
-virtual void createScene(void);
-virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
+	virtual void createScene(void);
+	virtual bool frameRenderingQueued(const Ogre::FrameEvent& evt);
 
-		void Frame(void);
-		void RunNetwork(int msec);
+	void Frame(void);
+	void RunNetwork(int msec);
 
-		void StartConnection(char* serverIP);
+	void StartConnection(char* serverIP);
 
-		void SendStartGame(void);
-		clientData *GetClientList(void) { return clientList; }
+	void SendStartGame(void);
+	clientData *GetClientList(void) { return clientList; }
 };
 
 #endif
