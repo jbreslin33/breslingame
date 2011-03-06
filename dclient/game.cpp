@@ -28,6 +28,28 @@ Game::~Game()
 {
 }
 
+void Game::go(void)
+{
+#ifdef _DEBUG
+    mResourcesCfg = "resources_d.cfg";
+    mPluginsCfg = "plugins_d.cfg";
+#else
+    mResourcesCfg = "resources.cfg";
+    mPluginsCfg = "plugins.cfg";
+#endif
+
+    if (!setup())
+        return;
+
+	while(keepRunning)
+	{
+		gameLoop();
+	}
+
+    // clean up
+    destroyScene();
+}
+
 void Game::AddClient(int local, int ind, char *name)
 {
 	// First get a pointer to the beginning of client list

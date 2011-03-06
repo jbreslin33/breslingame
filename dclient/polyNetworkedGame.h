@@ -12,7 +12,7 @@ public:
 PolyNetworkedGame();
 ~PolyNetworkedGame();
 
-	virtual void go(void);
+
 	virtual void gameLoop();
 	void AddClient(int local, int index, char *name);
 	

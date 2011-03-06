@@ -86,6 +86,9 @@ public:
 Game();
 ~Game();
 
+virtual void go(void);
+
+virtual void gameLoop() { bool doNothing = true; }
 virtual	void StartConnection(char* serverIP) { bool doNothing = true; }
 virtual void AddClient(int local, int ind, char *name);
 virtual void createPlayer(int index);
