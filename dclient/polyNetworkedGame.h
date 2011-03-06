@@ -19,7 +19,6 @@ PolyNetworkedGame();
 	virtual void createScene(void);
 
 	void Frame(void);
-	void RunNetwork(int msec);
 
 	void StartConnection(char* serverIP);
 

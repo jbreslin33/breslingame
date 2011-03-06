@@ -55,42 +55,4 @@ void PolyNetworkedGame::AddClient(int local, int ind, char *name)
 
 }
 
-void PolyNetworkedGame::RunNetwork(int msec)
-{
-	static int time = 0;
-	time += msec;
-
-	// Framerate is too high
-	if(time < (1000 / 60)) {
-        MovePlayer();
-		return;
-	}
-
-	frametime = time / 1000.0f;
-	time = 0;
-
-	// Read packets from server, and send new commands
-	ReadPackets();
-	SendCommand();
-
-	int ack = networkClient->GetIncomingAcknowledged();
-	int current = networkClient->GetOutgoingSequence();
-
-//iam going to put the following in Game.cpp's game loop...
-
-	// Check that we haven't gone too far
-	if(current - ack > COMMAND_HISTORY_SIZE)
-		return;
-
-	// Predict the frames that we are waiting from the server
-	for(int a = ack + 1; a < current; a++)
-	{
-		int prevframe = (a-1) & (COMMAND_HISTORY_SIZE-1);
-		int frame = a & (COMMAND_HISTORY_SIZE-1);
-
-		PredictMovement(prevframe, frame);
-	}
-	MoveObjects();
-}
-
 

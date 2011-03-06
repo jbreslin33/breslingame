@@ -20,6 +20,8 @@ NetworkedGame();
 
 	void CheckPredictionError(int a);
 
+	void RunNetwork(int msec);
+
 	void Connect(void);
 	void Disconnect(void);
 	void Shutdown(void);
