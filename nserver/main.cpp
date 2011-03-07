@@ -39,7 +39,9 @@
 int runningDaemon;
 #endif
 #include "../ngame/serverSideGame.h"
-ServerSideGame* game;
+#include "../ngame/serverSideNetworkedGame.h"
+
+ServerSideGame* serverSideGame;
 
 #ifdef WIN32
 
@@ -104,9 +106,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 	StartLogConsole();
 
 
-	game = new ServerSideGame;
+	serverSideGame = new ServerSideNetworkedGame;
 
-	if(game->InitNetwork() != 0)
+	if(serverSideGame->InitNetwork() != 0)
 	{
 		LogString("Could not create game server");
 	}
@@ -143,7 +145,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLi
 				time = newTime - oldTime;
 			} while (time < 1);
 
-			game->Frame(time);
+			serverSideGame->Frame(time);
 
 
 			oldTime = newTime;
@@ -233,9 +235,9 @@ int main(int argc, char **argv)
 	LogString("Welcome to Army War Server v2.0");
 	LogString("-------------------------------\n");
 
-	game = new ServerSideGame;
+	serverSideGame = new ServerSideNetworkedGame;
 
-	if(game->InitNetwork() != 0)
+	if(serverSideGame->InitNetwork() != 0)
 	{
 		LogString("Could not create game server");
 	}
@@ -316,7 +318,7 @@ int main(int argc, char **argv)
 					list->Frame(time);
 				}
 */
-			game->Frame(time);
+			serverSideGame->Frame(time);
 				oldTime = newTime;
 			}
 		}

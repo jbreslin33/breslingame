@@ -64,7 +64,7 @@ typedef struct clientData
 
 class ServerSideGame
 {
-private:
+public:
 	dreamServer	*networkServer;
 
 	clientData	*clientList;		// Client list
@@ -81,12 +81,13 @@ private:
 
 	long	framenum;
 
-public:
+
 	ServerSideGame();
 	~ServerSideGame();
 
 	// Network.cpp
-	void	ReadPackets(void);
+
+	virtual void ReadPackets() { bool donothing; }
 	void	SendCommand(void);
 	void	SendExitNotification(void);
 	void	ReadDeltaMoveCommand(dreamMessage *mes, clientData *client);
