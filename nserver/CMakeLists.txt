@@ -68,7 +68,7 @@ set(HDRS
 	#game
 	../ngame/serverSideGame.h
 	#../ngame/serverSideNonNetworkedGame.h
-	#../ngame/serverSideNetworkedGame.h
+	../ngame/serverSideNetworkedGame.h
 
 	
 	#dreamsock
@@ -83,7 +83,7 @@ set(SRCS
 	#game
 	../ngame/serverSideGame.cpp
 	#../ngame/serverSideNonNetworkedGame.cpp
-	#../ngame/serverSideNetworkedGame.cpp
+	../ngame/serverSideNetworkedGame.cpp
 	
 	#dreamsock
 	../tdreamsock/dreamSockLog.cpp
@@ -101,7 +101,7 @@ set(HDRS
 	#game
 	../ngame/serverSideGame.h
 	#../ngame/serverSideNonNetworkedGame.h
-	#../ngame/serverSideNetworkedGame.h
+	../ngame/serverSideNetworkedGame.h
 	
 	#dreamsock
 	../tdreamsock/dreamSock.h
@@ -115,7 +115,7 @@ set(SRCS
 	#game
 	../ngame/serverSideGame.cpp
 	#../ngame/serverSideNonNetworkedGame.cpp
-	#../ngame/serverSideNetworkedGame.cpp
+	../ngame/serverSideNetworkedGame.cpp
 	
 	#dreamsock
 	../tdreamsock/dreamSockLog.cpp
