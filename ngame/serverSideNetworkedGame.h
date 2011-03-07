@@ -10,6 +10,8 @@ public:
 	ServerSideNetworkedGame();
 	~ServerSideNetworkedGame();
 
+	void	ReadPackets(void);
+
 };
 
 #endif
