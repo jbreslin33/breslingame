@@ -55,7 +55,6 @@ public:
 	~ServerSideNetworkedGame();
 
 	dreamServer	*networkServer;
-
 	clientData	*clientList;		// Client list
 	int		clients;				// Number of clients
 
@@ -65,11 +64,7 @@ public:
 
 	char	gamename[32];
 	int		index;
-
-	clientData *playerWithFlag;
-
 	long	framenum;
-
 	int		InitNetwork();
 	void	ReadPackets(void);
 
@@ -98,7 +93,6 @@ public:
 	void	SetIndex(int ind)	{ index = ind; }
 	int		GetIndex(void)		{ return index; }
 
-	ServerSideGame *next;
 };
 
 #endif
