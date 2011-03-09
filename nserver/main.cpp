@@ -41,6 +41,8 @@ int runningDaemon;
 #include "../ngame/serverSideGame.h"
 #include "../ngame/serverSideNetworkedGame.h"
 
+
+
 ServerSideNetworkedGame* serverSideNetworkedGame;
 
 #ifdef WIN32

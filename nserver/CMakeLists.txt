@@ -74,6 +74,13 @@ set(HDRS
 	#dreamsock
 	../tdreamsock/dreamSock.h
 	../tdreamsock/dreamSockLog.h
+	
+	#math
+	../math/Vector3D.h
+	
+	#command
+	../command/command.h
+	../command/serverSideCommand.h
 )
  
 set(SRCS
@@ -90,6 +97,13 @@ set(SRCS
 	../tdreamsock/dreamSock.cpp
 	../tdreamsock/dreamSockGlobal.cpp
 	../tdreamsock/dreamWinSock.cpp
+	
+	#math
+	../math/Vector3D.cpp
+	
+	#command
+	../command/command.cpp
+	../command/serverSideCommand.cpp
 )
 endif (WIN32)
 
@@ -106,6 +120,13 @@ set(HDRS
 	#dreamsock
 	../tdreamsock/dreamSock.h
 	../tdreamsock/dreamSockLog.h
+	
+	#math
+	../math/Vector3D.h
+	
+	#command
+	../command/command.h
+	../command/serverSideCommand.h
 )
  
 set(SRCS
@@ -122,6 +143,13 @@ set(SRCS
 	../tdreamsock/dreamSock.cpp
 	../tdreamsock/dreamSockGlobal.cpp
 	../tdreamsock/dreamLinuxSock.cpp
+	
+	#math
+	../math/Vector3D.cpp
+	
+	#command
+	../command/command.cpp
+	../command/serverSideCommand.cpp
 )
 endif (UNIX)
  
