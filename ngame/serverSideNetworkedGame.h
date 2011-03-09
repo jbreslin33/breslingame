@@ -10,6 +10,7 @@ public:
 	ServerSideNetworkedGame();
 	~ServerSideNetworkedGame();
 
+	int		InitNetwork();
 	void	ReadPackets(void);
 
 };
