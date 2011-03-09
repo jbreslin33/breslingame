@@ -75,34 +75,7 @@ ServerSideGame::~ServerSideGame()
 // Name: InitNetwork()
 // Desc: Initialize network
 //-----------------------------------------------------------------------------
-int ServerSideGame::InitNetwork()
-{
-	if(dreamSock_Initialize() != 0)
-	{
-		LogString("Error initialising Communication Library!");
-		return 1;
-	}
 
-	LogString("Initialising game");
-
-	// Create the game servers on new ports, starting from 30004
-	int ret = networkServer->Initialise("", 30004);
-
-	if(ret == DREAMSOCK_SERVER_ERROR)
-	{
-#ifdef WIN32
-		char text[64];
-		sprintf(text, "Could not open server on port %d", networkServer->GetPort());
-
-		MessageBox(NULL, text, "Error", MB_OK);
-#else
-		LogString("Could not open server on port %d", networkServer->GetPort());
-#endif
-		return 1;
-	}
-
-	return 0;
-}
 
 //-----------------------------------------------------------------------------
 // Name: ShutdownNetwork()

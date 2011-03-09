@@ -95,7 +95,7 @@ public:
 	void	BuildDeltaMoveCommand(dreamMessage *mes, clientData *client);
 
 	// Server.cpp
-	int		InitNetwork();
+
 	void	ShutdownNetwork(void);
 	void	CalculateVelocity(command_t *command, float frametime);
 	void	MovePlayers(void);
