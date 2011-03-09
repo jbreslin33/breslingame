@@ -1,11 +1,11 @@
 #include "client.h"
 
-Client::Client()
+ServerSideNonNetworkedClient::ServerSideNonNetworkedClient()
 {
 
 }
 
-Client::~Client()
+ServerSideNonNetworkedClient::~ServerSideNonNetworkedClient()
 {
 
 }
