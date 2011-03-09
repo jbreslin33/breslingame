@@ -30,7 +30,6 @@ ServerSideNetworkedGame::ServerSideNetworkedGame()
 	servertime	= 0;
 
 	index		= 0;
-	next		= NULL;
 
 	framenum	= 0;
 }
