@@ -1,16 +1,13 @@
-#ifndef CLIENT_H
-#define CLIENT_H
+#ifndef SERVERSIDENETWORKEDCLIENT_H
+#define SERVERSIDENETWORKEDCLIENT_H
 
-
-class Command;
-
-class Client
+class ServerSideNetworkedClient
 {
 
 public:
 
-Client();
-~Client();
+ServerSideNetworkedClient();
+~ServerSideNetworkedClient();
 
 };
 #endif
