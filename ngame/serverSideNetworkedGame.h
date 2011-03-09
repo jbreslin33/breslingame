@@ -2,44 +2,21 @@
 #define SERVERSIDENETWORKEDGAME_H
 
 #include "serverSideGame.h"
-
-
-typedef struct clientLoginData
-{
-	struct sockaddr		address;
-	dreamClient			*netClient;
-	clientLoginData		*next;
-} clientLoginData;
-
-typedef struct
-{
-	float x;
-	float y;
-} VECTOR2D;
-
-typedef struct
-{
-	int key;								// Pressed keys
-
-	VECTOR2D vel;							// Velocity
-	VECTOR2D origin;						// Position
-
-	int msec;								// How long to run command (in ms)
-
-} command_t;
+#include "../math/Vector3D.h"
+#include "../command/serverSideCommand.h"
 
 typedef struct clientData
 {
-	command_t frame[COMMAND_HISTORY_SIZE];
-	command_t serverFrame;
-	command_t command;
+	ServerSideCommand frame[COMMAND_HISTORY_SIZE];
+	ServerSideCommand serverFrame;
+	ServerSideCommand command;
 
 	long processedFrame;
 
 	struct sockaddr address;
 	dreamClient *netClient;
 
-	VECTOR2D startPos;
+	Vector3D startPos;
 	bool team;
 
 	clientData *next;
@@ -76,7 +53,7 @@ public:
 	void	SendExitNotification(void);
 	
 	void	ShutdownNetwork(void);
-	void	CalculateVelocity(command_t *command, float frametime);
+	void	CalculateVelocity(ServerSideCommand *command, float frametime);
 	void	MovePlayers(void);
 	void	MovePlayer(clientData *client);
 	void	AddClient(void);
