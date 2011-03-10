@@ -81,7 +81,7 @@ void ServerSideNetworkedGame::ReadPackets(void)
 
 	struct sockaddr address;
 
-	clientData *clList;
+	ServerSideNetworkedClient *clList;
 
 	dreamMessage mes;
 	mes.Init(data, sizeof(data));
@@ -132,7 +132,7 @@ void ServerSideNetworkedGame::ReadPackets(void)
 
 			case USER_MES_NONDELTAFRAME:
 				clList = clientList;
-				clientData *dataClient;
+				ServerSideNetworkedClient *dataClient;
 
 				for( ; clList != NULL; clList = clList->next)
 				{
@@ -166,7 +166,7 @@ void ServerSideNetworkedGame::ReadPackets(void)
 	}
 }
 
-void ServerSideNetworkedGame::ReadDeltaMoveCommand(dreamMessage *mes, clientData *client)
+void ServerSideNetworkedGame::ReadDeltaMoveCommand(dreamMessage *mes, ServerSideNetworkedClient *client)
 {
 	int flags = 0;
 
@@ -185,7 +185,7 @@ void ServerSideNetworkedGame::ReadDeltaMoveCommand(dreamMessage *mes, clientData
 	client->command.msec = mes->ReadByte();
 }
 
-void ServerSideNetworkedGame::BuildMoveCommand(dreamMessage *mes, clientData *client)
+void ServerSideNetworkedGame::BuildMoveCommand(dreamMessage *mes, ServerSideNetworkedClient *client)
 {
 	// Add to the message
 	// Key
@@ -200,7 +200,7 @@ void ServerSideNetworkedGame::BuildMoveCommand(dreamMessage *mes, clientData *cl
 	mes->WriteByte(client->command.msec);
 }
 
-void ServerSideNetworkedGame::BuildDeltaMoveCommand(dreamMessage *mes, clientData *client)
+void ServerSideNetworkedGame::BuildDeltaMoveCommand(dreamMessage *mes, ServerSideNetworkedClient *client)
 {
 	int flags = 0;
 
@@ -249,8 +249,8 @@ void ServerSideNetworkedGame::BuildDeltaMoveCommand(dreamMessage *mes, clientDat
 
 void ServerSideNetworkedGame::SendCommand(void)
 {
-	clientData *toClient;
-	clientData *dataClient;
+	ServerSideNetworkedClient *toClient;
+	ServerSideNetworkedClient *dataClient;
 
 	// Fill messages
 	for(toClient = clientList; toClient != NULL; toClient = toClient->next)
@@ -281,7 +281,7 @@ void ServerSideNetworkedGame::SendCommand(void)
 
 void ServerSideNetworkedGame::SendExitNotification(void)
 {
-	clientData *toClient = clientList;
+	ServerSideNetworkedClient *toClient = clientList;
 
 	for( ; toClient != NULL; toClient = toClient->next)
 	{
@@ -415,7 +415,7 @@ void ServerSideNetworkedGame::CalculateVelocity(ServerSideCommand *command, floa
 // Name: empty()
 // Desc:
 //-----------------------------------------------------------------------------
-void ServerSideNetworkedGame::MovePlayer(clientData *client)
+void ServerSideNetworkedGame::MovePlayer(ServerSideNetworkedClient *client)
 {
 	float clientFrametime;
 
@@ -440,8 +440,8 @@ void ServerSideNetworkedGame::MovePlayer(clientData *client)
 void ServerSideNetworkedGame::AddClient(void)
 {
 	// First get a pointer to the beginning of client list
-	clientData *list = clientList;
-	clientData *prev;
+	ServerSideNetworkedClient *list = clientList;
+	ServerSideNetworkedClient *prev;
 	dreamClient *netList = networkServer->GetClientList();
 
 	// No clients yet, adding the first one
@@ -449,7 +449,7 @@ void ServerSideNetworkedGame::AddClient(void)
 	{
 		LogString("App: Server: Adding first client");
 
-		clientList = (clientData *) calloc(1, sizeof(clientData));
+		clientList = (ServerSideNetworkedClient *) calloc(1, sizeof(ServerSideNetworkedClient));
 
 		clientList->netClient = netList;
 
@@ -491,7 +491,7 @@ void ServerSideNetworkedGame::AddClient(void)
 			netList = netList->next;
 		}
 
-		list = (clientData *) calloc(1, sizeof(clientData));
+		list = (ServerSideNetworkedClient *) calloc(1, sizeof(ServerSideNetworkedClient));
 
 		list->netClient = netList;
 
@@ -531,9 +531,9 @@ void ServerSideNetworkedGame::AddClient(void)
 //-----------------------------------------------------------------------------
 void ServerSideNetworkedGame::RemoveClient(struct sockaddr *address)
 {
-	clientData *list = clientList;
-	clientData *prev = NULL;
-	clientData *next = NULL;
+	ServerSideNetworkedClient *list = clientList;
+	ServerSideNetworkedClient *prev = NULL;
+	ServerSideNetworkedClient *next = NULL;
 
 	for( ; list != NULL; list = list->next)
 	{
@@ -581,8 +581,8 @@ void ServerSideNetworkedGame::RemoveClient(struct sockaddr *address)
 //-----------------------------------------------------------------------------
 void ServerSideNetworkedGame::RemoveClients(void)
 {
-	clientData *list = clientList;
-	clientData *next;
+	ServerSideNetworkedClient *list = clientList;
+	ServerSideNetworkedClient *next;
 
 	while(list != NULL)
 	{
