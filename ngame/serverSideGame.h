@@ -28,8 +28,10 @@ public:
 	~ServerSideGame();
 
 	virtual void ReadPackets() { bool donothing; }
+	void	CalculateVelocity(ServerSideCommand *command, float frametime);
 
-		ServerSideNetworkedClient	*clientList;		// Client list
+	ServerSideNetworkedClient	*clientList;		// Client list
+	void	RemoveClients(void);
 	int		clients;				// Number of clients
 
 	int		realtime;				// Real server up-time in ms
