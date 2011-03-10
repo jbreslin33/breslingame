@@ -4,7 +4,7 @@
 #include <string.h>
 
 #include "../tdreamsock/dreamSock.h"
-
+#include "../client/serverSideNetworkedClient.h"
 #define COMMAND_HISTORY_SIZE		64
 
 #define KEY_UP						1
@@ -29,6 +29,16 @@ public:
 
 	virtual void ReadPackets() { bool donothing; }
 
+		ServerSideNetworkedClient	*clientList;		// Client list
+	int		clients;				// Number of clients
+
+	int		realtime;				// Real server up-time in ms
+	int		servertime;				// Server frame * 100 ms
+	float	frametime;				// Frame time in seconds
+
+	char	gamename[32];
+	int		index;
+	long	framenum;
 };
 
 #endif

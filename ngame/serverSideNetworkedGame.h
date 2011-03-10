@@ -12,16 +12,7 @@ public:
 	~ServerSideNetworkedGame();
 
 	dreamServer	*networkServer;
-	ServerSideNetworkedClient	*clientList;		// Client list
-	int		clients;				// Number of clients
 
-	int		realtime;				// Real server up-time in ms
-	int		servertime;				// Server frame * 100 ms
-	float	frametime;				// Frame time in seconds
-
-	char	gamename[32];
-	int		index;
-	long	framenum;
 	int		InitNetwork();
 	void	ReadPackets(void);
 
