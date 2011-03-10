@@ -85,6 +85,7 @@ set(HDRS
 	#client
 	../client/client.h
 	../client/serverSideNetworkedClient.h
+	../client/serverSideNonNetworkedClient.h
 )
  
 set(SRCS
@@ -112,6 +113,7 @@ set(SRCS
 	#client
 	../client/client.cpp
 	../client/serverSideNetworkedClient.cpp
+	../client/serverSideNonNetworkedClient.cpp
 )
 endif (WIN32)
 
@@ -139,6 +141,7 @@ set(HDRS
 	#client
 	../client/client.h
 	../client/serverSideNetworkedClient.h
+	../client/serverSideNonNetworkedClient.h
 )
  
 set(SRCS
@@ -166,6 +169,7 @@ set(SRCS
 	#client
 	../client/client.cpp
 	../client/serverSideNetworkedClient.cpp
+	../client/serverSideNonNetworkedClient.cpp
 )
 endif (UNIX)
  

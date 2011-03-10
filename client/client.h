@@ -20,7 +20,7 @@ Client();
 
 	long processedFrame;
 
-		Vector3D startPos;
+	Vector3D startPos;
 	bool team;
 
 };
