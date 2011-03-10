@@ -2,10 +2,9 @@
 #define SERVERSIDENETWORKEDGAME_H
 
 #include "serverSideGame.h"
-#include "../math/Vector3D.h"
-#include "../command/serverSideCommand.h"
-
-typedef struct clientData
+#include "../client/serverSideNetworkedClient.h"
+/*
+typedef struct ServerSideNetworkedClient
 {
 	ServerSideCommand frame[COMMAND_HISTORY_SIZE];
 	ServerSideCommand serverFrame;
@@ -19,9 +18,9 @@ typedef struct clientData
 	Vector3D startPos;
 	bool team;
 
-	clientData *next;
-} clientData;
-
+	ServerSideNetworkedClient *next;
+} ServerSideNetworkedClient;
+*/
 
 
 class ServerSideNetworkedGame : public ServerSideGame
@@ -32,7 +31,7 @@ public:
 	~ServerSideNetworkedGame();
 
 	dreamServer	*networkServer;
-	clientData	*clientList;		// Client list
+	ServerSideNetworkedClient	*clientList;		// Client list
 	int		clients;				// Number of clients
 
 	int		realtime;				// Real server up-time in ms
@@ -45,9 +44,9 @@ public:
 	int		InitNetwork();
 	void	ReadPackets(void);
 
-	void	ReadDeltaMoveCommand(dreamMessage *mes, clientData *client);
-	void	BuildMoveCommand(dreamMessage *mes, clientData *client);
-	void	BuildDeltaMoveCommand(dreamMessage *mes, clientData *client);
+	void	ReadDeltaMoveCommand(dreamMessage *mes, ServerSideNetworkedClient *client);
+	void	BuildMoveCommand(dreamMessage *mes, ServerSideNetworkedClient *client);
+	void	BuildDeltaMoveCommand(dreamMessage *mes, ServerSideNetworkedClient *client);
 
 	void	SendCommand(void);
 	void	SendExitNotification(void);
@@ -55,13 +54,13 @@ public:
 	void	ShutdownNetwork(void);
 	void	CalculateVelocity(ServerSideCommand *command, float frametime);
 	void	MovePlayers(void);
-	void	MovePlayer(clientData *client);
+	void	MovePlayer(ServerSideNetworkedClient *client);
 	void	AddClient(void);
 	void	RemoveClient(struct sockaddr *address);
 	void	RemoveClients(void);
 
 
-	clientData *GetClientList(void)	{ return clientList; }
+	ServerSideNetworkedClient *GetClientList(void)	{ return clientList; }
 	void Frame(int msec);
 
 	void	SetName(char *n)		{ strcpy(gamename, n); }

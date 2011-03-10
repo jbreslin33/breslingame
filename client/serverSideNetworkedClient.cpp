@@ -1,11 +1,11 @@
-#include "client.h"
+#include "serverSideNetworkedClient.h"
 
-Client::Client()
+ServerSideNetworkedClient::ServerSideNetworkedClient()
 {
 
 }
 
-Client::~Client()
+ServerSideNetworkedClient::~ServerSideNetworkedClient()
 {
 
 }
