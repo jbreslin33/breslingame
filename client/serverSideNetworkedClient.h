@@ -1,12 +1,7 @@
 #ifndef SERVERSIDENETWORKEDCLIENT_H
 #define SERVERSIDENETWORKEDCLIENT_H
 
-
-
 #include "../client/client.h"
-
-
-
 
 #include "../tdreamsock/dreamSock.h"
 
@@ -18,12 +13,8 @@ public:
 ServerSideNetworkedClient();
 ~ServerSideNetworkedClient();
 
-
-
 	struct sockaddr address;
 	dreamClient *netClient;
-
-
 
 	ServerSideNetworkedClient *next;
 };

@@ -1,4 +1,4 @@
-#include "client.h"
+#include "serverSideNonNetworkedClient.h"
 
 ServerSideNonNetworkedClient::ServerSideNonNetworkedClient()
 {

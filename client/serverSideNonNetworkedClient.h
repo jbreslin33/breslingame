@@ -10,6 +10,7 @@ public:
 ServerSideNonNetworkedClient();
 ~ServerSideNonNetworkedClient();
 
+ServerSideNonNetworkedClient *next;
 
 };
 #endif
