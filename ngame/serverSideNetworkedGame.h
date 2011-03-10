@@ -3,25 +3,6 @@
 
 #include "serverSideGame.h"
 #include "../client/serverSideNetworkedClient.h"
-/*
-typedef struct ServerSideNetworkedClient
-{
-	ServerSideCommand frame[COMMAND_HISTORY_SIZE];
-	ServerSideCommand serverFrame;
-	ServerSideCommand command;
-
-	long processedFrame;
-
-	struct sockaddr address;
-	dreamClient *netClient;
-
-	Vector3D startPos;
-	bool team;
-
-	ServerSideNetworkedClient *next;
-} ServerSideNetworkedClient;
-*/
-
 
 class ServerSideNetworkedGame : public ServerSideGame
 {

@@ -35,10 +35,6 @@ ServerSideNetworkedGame::ServerSideNetworkedGame()
 	framenum	= 0;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
 ServerSideNetworkedGame::~ServerSideNetworkedGame()
 {
 	delete networkServer;
@@ -295,10 +291,6 @@ void ServerSideNetworkedGame::SendExitNotification(void)
 	networkServer->SendPackets();
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
 void ServerSideNetworkedGame::Frame(int msec)
 {
 	realtime += msec;
@@ -329,45 +321,6 @@ void ServerSideNetworkedGame::Frame(int msec)
 	SendCommand();
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
-float VectorLength(Vector3D *vec)
-{
-	return (float) sqrt(vec->x*vec->x + vec->y*vec->y);
-}
-
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
-Vector3D VectorSubstract(Vector3D *vec1, Vector3D *vec2)
-{
-	Vector3D vec;
-
-	vec.x = vec1->x - vec2->x;
-	vec.y = vec1->y - vec2->y;
-
-	return vec;
-}
-
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
-
-
-//-----------------------------------------------------------------------------
-// Name: InitNetwork()
-// Desc: Initialize network
-//-----------------------------------------------------------------------------
-
-
-//-----------------------------------------------------------------------------
-// Name: ShutdownNetwork()
-// Desc: Shutdown network
-//-----------------------------------------------------------------------------
 void ServerSideNetworkedGame::ShutdownNetwork(void)
 {
 	LogString("Shutting down game server...");
@@ -377,44 +330,7 @@ void ServerSideNetworkedGame::ShutdownNetwork(void)
 	networkServer->Uninitialise();
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
-void ServerSideNetworkedGame::CalculateVelocity(ServerSideCommand *command, float frametime)
-{
 
-	float multiplier = 17.0f;
-
-	command->vel.x = 0.0f;
-	command->vel.y = 0.0f;
-
-	if(command->key & KEY_UP)
-	{
-
-		command->vel.y += multiplier * frametime;
-	}
-
-	if(command->key & KEY_DOWN)
-	{
-		command->vel.y += -multiplier * frametime;
-	}
-
-	if(command->key & KEY_LEFT)
-	{
-		command->vel.x += -multiplier * frametime;
-	}
-
-	if(command->key & KEY_RIGHT)
-	{
-		command->vel.x += multiplier * frametime;
-	}
-}
-
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
 void ServerSideNetworkedGame::MovePlayer(ServerSideNetworkedClient *client)
 {
 	float clientFrametime;
@@ -433,10 +349,6 @@ void ServerSideNetworkedGame::MovePlayer(ServerSideNetworkedClient *client)
 	client->processedFrame = f;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
 void ServerSideNetworkedGame::AddClient(void)
 {
 	// First get a pointer to the beginning of client list
@@ -525,10 +437,6 @@ void ServerSideNetworkedGame::AddClient(void)
 	clients++;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
 void ServerSideNetworkedGame::RemoveClient(struct sockaddr *address)
 {
 	ServerSideNetworkedClient *list = clientList;
@@ -575,10 +483,36 @@ void ServerSideNetworkedGame::RemoveClient(struct sockaddr *address)
 	clients--;
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
+
+void ServerSideNetworkedGame::CalculateVelocity(ServerSideCommand *command, float frametime)
+{
+
+        float multiplier = 17.0f;
+
+        command->vel.x = 0.0f;
+        command->vel.y = 0.0f;
+
+        if(command->key & KEY_UP)
+        {
+
+                command->vel.y += multiplier * frametime;
+        }
+
+        if(command->key & KEY_DOWN)
+        {
+                command->vel.y += -multiplier * frametime;
+        }
+
+        if(command->key & KEY_LEFT)
+        {
+                command->vel.x += -multiplier * frametime;
+        }
+
+        if(command->key & KEY_RIGHT)
+        {
+                command->vel.x += multiplier * frametime;
+        }
+}
 void ServerSideNetworkedGame::RemoveClients(void)
 {
 	ServerSideNetworkedClient *list = clientList;
