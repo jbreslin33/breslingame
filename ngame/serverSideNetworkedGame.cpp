@@ -23,16 +23,6 @@
 ServerSideNetworkedGame::ServerSideNetworkedGame()
 {
 	networkServer = new dreamServer;
-
-	clientList	= NULL;
-	clients		= 0;
-
-	realtime	= 0;
-	servertime	= 0;
-
-	index		= 0;
-
-	framenum	= 0;
 }
 
 ServerSideNetworkedGame::~ServerSideNetworkedGame()
