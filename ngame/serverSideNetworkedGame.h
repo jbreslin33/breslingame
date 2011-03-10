@@ -24,12 +24,12 @@ public:
 	void	SendExitNotification(void);
 	
 	void	ShutdownNetwork(void);
-	void	CalculateVelocity(ServerSideCommand *command, float frametime);
+
 	void	MovePlayers(void);
 	void	MovePlayer(ServerSideNetworkedClient *client);
 	void	AddClient(void);
 	void	RemoveClient(struct sockaddr *address);
-	void	RemoveClients(void);
+
 
 
 	ServerSideNetworkedClient *GetClientList(void)	{ return clientList; }
