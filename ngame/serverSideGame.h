@@ -3,8 +3,8 @@
 
 #include <string.h>
 
-#include "../tdreamsock/dreamSock.h"
 #include "../client/serverSideNetworkedClient.h"
+
 #define COMMAND_HISTORY_SIZE		64
 
 #define KEY_UP						1
