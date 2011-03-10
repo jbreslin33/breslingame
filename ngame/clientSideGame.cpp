@@ -227,7 +227,6 @@ void ClientSideGame::RemoveClient(int ind)
 
 }
 
-
 void ClientSideGame::MovePlayer(void)
 {
 	static Ogre::Real mMove = 17.0;
@@ -339,7 +338,7 @@ void ClientSideGame::CalculateVelocity(command_t *command, float frametime)
 }
 
 
-
+//eventually modify this to allow for more than one player on one machine. i.e 2 joysticks etc even 2 people on 1 keyboard
 bool ClientSideGame::CheckKeys(void)
 {
 	inputClient.command.key = 0;
