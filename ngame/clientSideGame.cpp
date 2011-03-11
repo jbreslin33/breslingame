@@ -234,12 +234,12 @@ void ClientSideGame::MovePlayer(void)
 
 	if(keys[VK_DOWN])
 	{
-		transVector.y -= mMove;
+		transVector.z -= mMove;
 	}
 
 	if(keys[VK_UP])
 	{
-		transVector.y += mMove;
+		transVector.z += mMove;
 	}
 
 	if(keys[VK_LEFT])
@@ -254,7 +254,7 @@ void ClientSideGame::MovePlayer(void)
 
 	if(localClient)
 	{
-		localClient->mClientSideShape->getSceneNode()->translate(transVector * rendertime, Ogre::Node::TS_LOCAL);
+		localClient->mClientSideShape->getSceneNode()->translate(transVector * rendertime, Ogre::Node::TS_WORLD);
 	}
 }
 
@@ -282,7 +282,7 @@ void ClientSideGame::MoveObjects(void)
 			client->command.origin.y += client->command.vel.y;
 
             transVector.x = client->command.origin.x;
-            transVector.y = client->command.origin.y;
+            transVector.z = client->command.origin.y;
 
 			client->mClientSideShape->getSceneNode()->setPosition(transVector);
 		}
@@ -294,13 +294,12 @@ void ClientSideGame::MoveObjects(void)
 			client->command.origin.y = client->command.predictedOrigin.y;
 
             transVector.x = client->command.predictedOrigin.x;
-            transVector.y = client->command.predictedOrigin.y;
+            transVector.z = client->command.predictedOrigin.y;
 
             client->mClientSideShape->getSceneNode()->setPosition(transVector);
 		}
 	}
 }
-
 
 void ClientSideGame::CalculateVelocity(command_t *command, float frametime)
 {
