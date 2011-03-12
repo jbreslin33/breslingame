@@ -100,6 +100,7 @@ clientData *GetClientPointer(int index);
 	void	MoveObjects(void);
 	void    MovePlayer(void);
 	void	MoveInWorldSpaceRelativeToCamera(void);
+	Ogre::Vector3 getLocalClientMoveVector();
 
 	void	RemoveClient(int index);
 	void	RemoveClients(void);

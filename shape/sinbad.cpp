@@ -2,7 +2,7 @@
 
 Sinbad::Sinbad(Ogre::SceneManager* sceneMgr, std::string shapeName,int x, int y, int z,std::string meshName) : ClientSideShape(sceneMgr,shapeName,x,y,z,meshName)
 {
-
+	setupAnimations();
 }
 
 Sinbad::~Sinbad()
@@ -39,16 +39,7 @@ void Sinbad::setupModel()
 
 	mVerticalVelocity = 0;
 }
-/*
-void Sinbad::setupAnimations()
-{
-	
-	mEntity->getSkeleton()->setBlendMode(ANIMBLEND_CUMULATIVE);
-	mAnimationState = mEntity->getAnimationState("RunBase");
-    mAnimationState->setLoop(true);
-    mAnimationState->setEnabled(true);
-}
-*/
+
 void Sinbad::setupAnimations()
 	{
 		// this is very important due to the nature of the exported animations
@@ -75,6 +66,135 @@ void Sinbad::setupAnimations()
 		mAnims[ANIM_HANDS_RELAXED]->setEnabled(true);
 
 		mSwordsDrawn = false;
+	}
+
+void Sinbad::addTime(Real deltaTime)
+{
+	updateBody(deltaTime);
+	updateAnimations(deltaTime);
+	//updateCamera(deltaTime);
+}
+
+void Sinbad::injectKeyDown(const OIS::KeyEvent& evt)
+	{
+		/*
+		if (evt.key == OIS::KC_Q && (mTopAnimID == ANIM_IDLE_TOP || mTopAnimID == ANIM_RUN_TOP))
+		{
+			// take swords out (or put them back, since it's the same animation but reversed)
+			setTopAnimation(ANIM_DRAW_SWORDS, true);
+			mTimer = 0;
+		}
+		else if (evt.key == OIS::KC_E && !mSwordsDrawn)
+		{
+			if (mTopAnimID == ANIM_IDLE_TOP || mTopAnimID == ANIM_RUN_TOP)
+			{
+				// start dancing
+				setBaseAnimation(ANIM_DANCE, true);
+				setTopAnimation(ANIM_NONE);
+				// disable hand animation because the dance controls hands
+				mAnims[ANIM_HANDS_RELAXED]->setEnabled(false);
+			}
+			else if (mBaseAnimID == ANIM_DANCE)
+			{
+				// stop dancing
+				setBaseAnimation(ANIM_IDLE_BASE);
+				setTopAnimation(ANIM_IDLE_TOP);
+				// re-enable hand animation
+				mAnims[ANIM_HANDS_RELAXED]->setEnabled(true);
+			}
+		}
+
+		// keep track of the player's intended direction
+		else if (evt.key == OIS::KC_W) mKeyDirection.z = -1;
+		else if (evt.key == OIS::KC_A) mKeyDirection.x = -1;
+		else if (evt.key == OIS::KC_S) mKeyDirection.z = 1;
+		else if (evt.key == OIS::KC_D) mKeyDirection.x = 1;
+
+		else if (evt.key == OIS::KC_SPACE && (mTopAnimID == ANIM_IDLE_TOP || mTopAnimID == ANIM_RUN_TOP))
+		{
+			// jump if on ground
+			setBaseAnimation(ANIM_JUMP_START, true);
+			setTopAnimation(ANIM_NONE);
+			mTimer = 0;
+		}
+
+		if (!mKeyDirection.isZeroLength() && mBaseAnimID == ANIM_IDLE_BASE)
+		{
+			// start running if not already moving and the player wants to move
+			setBaseAnimation(ANIM_RUN_BASE, true);
+			if (mTopAnimID == ANIM_IDLE_TOP) setTopAnimation(ANIM_RUN_TOP, true);
+		}
+		*/
+	}
+
+void Sinbad::injectKeyUp(const OIS::KeyEvent& evt)
+	{
+		/*
+		// keep track of the player's intended direction
+		if (evt.key == OIS::KC_W && mKeyDirection.z == -1) mKeyDirection.z = 0;
+		else if (evt.key == OIS::KC_A && mKeyDirection.x == -1) mKeyDirection.x = 0;
+		else if (evt.key == OIS::KC_S && mKeyDirection.z == 1) mKeyDirection.z = 0;
+		else if (evt.key == OIS::KC_D && mKeyDirection.x == 1) mKeyDirection.x = 0;
+
+		if (mKeyDirection.isZeroLength() && mBaseAnimID == ANIM_RUN_BASE)
+		{
+			// stop running if already moving and the player doesn't want to move
+			setBaseAnimation(ANIM_IDLE_BASE);
+			if (mTopAnimID == ANIM_RUN_TOP) setTopAnimation(ANIM_IDLE_TOP);
+		}
+		*/
+	}
+
+void Sinbad::updateBody(Real deltaTime)
+	{
+/*
+		mGoalDirection = Vector3::ZERO;   // we will calculate this
+
+		if (mKeyDirection != Vector3::ZERO && mBaseAnimID != ANIM_DANCE)
+		{
+			// calculate actually goal direction in world based on player's key directions
+			mGoalDirection += mKeyDirection.z * mCameraNode->getOrientation().zAxis();
+			mGoalDirection += mKeyDirection.x * mCameraNode->getOrientation().xAxis();
+			mGoalDirection.y = 0;
+			mGoalDirection.normalise();
+
+			Quaternion toGoal = mBodyNode->getOrientation().zAxis().getRotationTo(mGoalDirection);
+
+			// calculate how much the character has to turn to face goal direction
+			Real yawToGoal = toGoal.getYaw().valueDegrees();
+			// this is how much the character CAN turn this frame
+			Real yawAtSpeed = yawToGoal / Math::Abs(yawToGoal) * deltaTime * TURN_SPEED;
+			// reduce "turnability" if we're in midair
+			if (mBaseAnimID == ANIM_JUMP_LOOP) yawAtSpeed *= 0.2f;
+
+			// turn as much as we can, but not more than we need to
+			if (yawToGoal < 0) yawToGoal = std::min<Real>(0, std::max<Real>(yawToGoal, yawAtSpeed)); //yawToGoal = Math::Clamp<Real>(yawToGoal, yawAtSpeed, 0);
+			else if (yawToGoal > 0) yawToGoal = std::max<Real>(0, std::min<Real>(yawToGoal, yawAtSpeed)); //yawToGoal = Math::Clamp<Real>(yawToGoal, 0, yawAtSpeed);
+			
+			mBodyNode->yaw(Degree(yawToGoal));
+
+			// move in current body direction (not the goal direction)
+			mBodyNode->translate(0, 0, deltaTime * RUN_SPEED * mAnims[mBaseAnimID]->getWeight(),
+				Node::TS_LOCAL);
+		}
+
+		if (mBaseAnimID == ANIM_JUMP_LOOP)
+		{
+			// if we're jumping, add a vertical offset too, and apply gravity
+			mBodyNode->translate(0, mVerticalVelocity * deltaTime, 0, Node::TS_LOCAL);
+			mVerticalVelocity -= GRAVITY * deltaTime;
+			
+			Vector3 pos = mBodyNode->getPosition();
+			if (pos.y <= CHAR_HEIGHT)
+			{
+				// if we've hit the ground, change to landing state
+				pos.y = CHAR_HEIGHT;
+				mBodyNode->setPosition(pos);
+				setBaseAnimation(ANIM_JUMP_END, true);
+				mTimer = 0;
+			}
+		}
+*/
 	}
 
 void Sinbad::updateAnimations(Real deltaTime)
@@ -249,13 +369,4 @@ void Sinbad::updateAnimations(Real deltaTime)
 			if (reset) mAnims[id]->setTimePosition(0);
 		}
 	}
-	/*
-void Sinbad::updateAnimations(Real rendertime)
-{
-	mAnimationState = mEntity->getAnimationState("RunBase");
-	mAnimationState->setLoop(true);
-	mAnimationState->setEnabled(true);
 
-	mAnimationState->addTime(rendertime);
-}
-*/

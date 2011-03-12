@@ -46,11 +46,14 @@ Sinbad(Ogre::SceneManager* mSceneMgr, std::string name, int xPos, int yPos, int 
 ~Sinbad();
 
 virtual void updateAnimations(Real renderTime);
+void updateBody(Real deltaTime);
 virtual void setupAnimations();
 void fadeAnimations(Real deltaTime);
 void setTopAnimation(AnimID id, bool reset);
 void setBaseAnimation(AnimID id, bool reset);
-
+void addTime(Real deltaTime);
+void injectKeyDown(const OIS::KeyEvent& evt);
+void injectKeyUp(const OIS::KeyEvent& evt);
 virtual void setupModel();
 
 
