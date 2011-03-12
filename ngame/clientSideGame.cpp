@@ -259,6 +259,33 @@ void ClientSideGame::MovePlayer(void)
 	}
 }
 
+
+Ogre::Vector3 ClientSideGame::getLocalClientMoveVector()
+{
+	static Ogre::Real mMove = 17.0;
+	Ogre::Vector3 transVector = Ogre::Vector3::ZERO;
+
+	if(keys[VK_DOWN])
+	{
+		transVector.z -= mMove;
+	}
+
+	if(keys[VK_UP])
+	{
+		transVector.z += mMove;
+	}
+
+	if(keys[VK_LEFT])
+	{
+		transVector.x += mMove;
+	}
+
+	if(keys[VK_RIGHT])
+	{
+		transVector.x -= mMove;
+	}
+	return transVector;
+}
 void ClientSideGame::MoveInWorldSpaceRelativeToCamera(void)
 {
 	static Ogre::Real mMove = 17.0;

@@ -19,7 +19,7 @@ ClientSideShape(Ogre::SceneManager* mSceneMgr, std::string name, int xPos, int y
 
 virtual void setupModel();
 void updatePosition(Real deltaTime);
-virtual void updateAnimations(Real renderTime);
+virtual void updateAnimations(Real renderTime) { bool donothing; }
 virtual void setupAnimations() { bool donothing; }
 
 //stats

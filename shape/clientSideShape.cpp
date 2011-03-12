@@ -23,15 +23,6 @@ void ClientSideShape::setupModel()
 	mSceneNode->attachObject(mEntity);
 }
 
-void ClientSideShape::updateAnimations(Real rendertime)
-{
-		mAnimationState = mEntity->getAnimationState("RunBase");
-		mAnimationState->setLoop(true);
-		mAnimationState->setEnabled(true);
-
-		mAnimationState->addTime(rendertime);
-}
-
 void ClientSideShape::updatePosition(Real deltaTime)
 {
  mGoalDirection = Vector3::ZERO;
