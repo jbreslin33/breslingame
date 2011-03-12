@@ -130,24 +130,27 @@ void Sinbad::injectKeyDown(const OIS::KeyEvent& evt)
 
 void Sinbad::injectKeyUp(const OIS::KeyEvent& evt)
 	{
-		/*
+		
 		// keep track of the player's intended direction
-		if (evt.key == OIS::KC_W && mKeyDirection.z == -1) mKeyDirection.z = 0;
-		else if (evt.key == OIS::KC_A && mKeyDirection.x == -1) mKeyDirection.x = 0;
-		else if (evt.key == OIS::KC_S && mKeyDirection.z == 1) mKeyDirection.z = 0;
-		else if (evt.key == OIS::KC_D && mKeyDirection.x == 1) mKeyDirection.x = 0;
+		if (evt.key == OIS::KC_I && mKeyDirection.z == -1) mKeyDirection.z = 0;
+		else if (evt.key == OIS::KC_J && mKeyDirection.x == -1) mKeyDirection.x = 0;
+		else if (evt.key == OIS::KC_K && mKeyDirection.z == 1) mKeyDirection.z = 0;
+		else if (evt.key == OIS::KC_L && mKeyDirection.x == 1) mKeyDirection.x = 0;
 
 		if (mKeyDirection.isZeroLength() && mBaseAnimID == ANIM_RUN_BASE)
 		{
 			// stop running if already moving and the player doesn't want to move
-			setBaseAnimation(ANIM_IDLE_BASE);
-			if (mTopAnimID == ANIM_RUN_TOP) setTopAnimation(ANIM_IDLE_TOP);
+			setBaseAnimation(ANIM_IDLE_BASE,false);
+			if (mTopAnimID == ANIM_RUN_TOP,false) setTopAnimation(ANIM_IDLE_TOP,false);
 		}
-		*/
+		
 	}
 
 void Sinbad::updateBody(Real deltaTime)
 	{
+
+		getSceneNode()->translate(mKeyDirection * deltaTime * RUN_SPEED, Ogre::Node::TS_WORLD);
+
 /*
 		mGoalDirection = Vector3::ZERO;   // we will calculate this
 

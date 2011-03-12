@@ -329,8 +329,9 @@ bool ClientSideGame::keyPressed( const OIS::KeyEvent &arg )
 
 bool ClientSideGame::keyReleased( const OIS::KeyEvent &arg )
 {
+	localClient->mClientSideShape->injectKeyUp(arg);
 	BaseApplication::keyReleased(arg);
-	//mCameraMan->injectKeyUp(arg);
+
     return true;
 }
 
