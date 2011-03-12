@@ -1,6 +1,6 @@
 #include "clientSideNonNetworkedGame.h"
 #include "../tdreamsock/dreamSock.h"
-
+#include "../shape/clientSideShape.h"
 ClientSideNonNetworkedGame::ClientSideNonNetworkedGame()
 {
 }
@@ -30,8 +30,12 @@ void ClientSideNonNetworkedGame::StartConnection(char* serverIP)
 
 void ClientSideNonNetworkedGame::gameLoop()
 {
-	CheckKeys();
-	MovePlayer();
+	//CheckKeys();
+	//MovePlayer();
+	if(localClient)
+	{
+		localClient->mClientSideShape->addTime(rendertime);
+	}
 	Ogre::WindowEventUtilities::messagePump();
 	keepRunning = mRoot->renderOneFrame();
 }

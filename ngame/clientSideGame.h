@@ -109,6 +109,9 @@ clientData *GetClientPointer(int index);
 	bool    processUnbufferedInput(const Ogre::FrameEvent& evt);
 	bool	CheckKeys(void);
 
+    // OIS::KeyListener
+    virtual bool keyPressed( const OIS::KeyEvent &arg );
+    virtual bool keyReleased( const OIS::KeyEvent &arg );
 
 	void RunNetwork(int msec);
 	clientData *clientList;			// Client list
