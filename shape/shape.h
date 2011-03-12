@@ -16,7 +16,7 @@ Shape(Ogre::SceneManager* mSceneMgr, std::string name, int xPos, int yPos, int z
 SceneNode* getSceneNode() { return mSceneNode; }
 
 
-void setupModel();
+virtual void setupModel();
 void cleanupContent();
 
 //objects
