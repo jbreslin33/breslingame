@@ -99,12 +99,13 @@ clientData *GetClientPointer(int index);
 	void	Shutdown(void);
 	void	MoveObjects(void);
 	void    MovePlayer(void);
+	void	MoveInWorldSpaceRelativeToCamera(void);
 
 	void	RemoveClient(int index);
 	void	RemoveClients(void);
 
 	void	CalculateVelocity(command_t *command, float frametime);
-	bool processUnbufferedInput(const Ogre::FrameEvent& evt);
+	bool    processUnbufferedInput(const Ogre::FrameEvent& evt);
 	bool	CheckKeys(void);
 
 

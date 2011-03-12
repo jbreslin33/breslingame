@@ -103,6 +103,7 @@ set(HDRS
 	#shape
 	../shape/shape.h
 	../shape/clientSideShape.h
+	../shape/sinbad.h
 )
  
 set(SRCS
@@ -125,6 +126,7 @@ set(SRCS
 	#shape
 	../shape/shape.cpp
 	../shape/clientSideShape.cpp
+	../shape/sinbad.cpp
 )
 endif (WIN32)
 
@@ -146,6 +148,7 @@ set(HDRS
 	#shape
 	../shape/shape.h
 	../shape/clientSideShape.h
+	../shape/sinbad.h
 )
  
 set(SRCS
@@ -168,6 +171,7 @@ set(SRCS
 	#shape
 	../shape/shape.cpp
 	../shape/clientSideShape.cpp
+	../shape/sinbad.cpp
 )
 endif (UNIX)
 

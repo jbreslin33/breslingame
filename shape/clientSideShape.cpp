@@ -5,9 +5,8 @@
 
 ClientSideShape::ClientSideShape(Ogre::SceneManager* sceneMgr, std::string shapeName,int x, int y, int z,std::string meshName) : Shape(sceneMgr,shapeName,x,y,z)
 {
-	//character traits
-    	mMeshName  = meshName;
-
+   	mMeshName = meshName;
+	mEntity = NULL;
 	setupModel();
 }
 
@@ -17,18 +16,20 @@ ClientSideShape::~ClientSideShape()
 
 void ClientSideShape::setupModel()
 {
-	//LogString("settingUPModel");
-	Ogre::LogManager::getSingletonPtr()->logMessage("*** ClientSideShape::setUpModel() ***");
 	Shape::setupModel();
-	Ogre::LogManager::getSingletonPtr()->logMessage("*** ClientSideShape::setUpModel() ***");
-
-	//SceneNode* sn = NULL;
-	Entity* entity = NULL;
 	
 	// create entity and attach mesh to it
-	entity = mSceneManager->createEntity(mShapeName, mMeshName);
-	mSceneNode->attachObject(entity);
+	mEntity = mSceneManager->createEntity(mShapeName, mMeshName);
+	mSceneNode->attachObject(mEntity);
+}
 
+void ClientSideShape::updateAnimations(Real rendertime)
+{
+		mAnimationState = mEntity->getAnimationState("RunBase");
+		mAnimationState->setLoop(true);
+		mAnimationState->setEnabled(true);
+
+		mAnimationState->addTime(rendertime);
 }
 
 void ClientSideShape::updatePosition(Real deltaTime)

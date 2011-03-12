@@ -1,5 +1,5 @@
 #include "clientSideGame.h"
-#include "../shape/clientSideShape.h"
+#include "../shape/sinbad.h"
 //#ifdef WIN32
 #include "../tdreamsock/dreamSockLog.h"
 //#endif
@@ -146,7 +146,7 @@ clientData *ClientSideGame::GetClientPointer(int index)
 void ClientSideGame::createPlayer(int index)
 {
 	//create a human player and or ghost player
-    ClientSideShape* jay = new ClientSideShape(mSceneMgr,"jay" + index,0,0,0,"sinbad.mesh");
+    Sinbad* jay = new Sinbad(mSceneMgr,"jay" + index,0,0,0,"sinbad.mesh");
 
     clientData *client = GetClientPointer(index);
     client->mClientSideShape = jay;
@@ -244,12 +244,44 @@ void ClientSideGame::MovePlayer(void)
 
 	if(keys[VK_LEFT])
 	{
-		transVector.x -= mMove;
+		transVector.x += mMove;
 	}
 
 	if(keys[VK_RIGHT])
 	{
+		transVector.x -= mMove;
+	}
+
+	if(localClient)
+	{
+		localClient->mClientSideShape->updateAnimations(rendertime);
+		localClient->mClientSideShape->getSceneNode()->translate(transVector * rendertime, Ogre::Node::TS_WORLD);
+	}
+}
+
+void ClientSideGame::MoveInWorldSpaceRelativeToCamera(void)
+{
+	static Ogre::Real mMove = 17.0;
+	Ogre::Vector3 transVector = Ogre::Vector3::ZERO;
+
+	if(keys[VK_DOWN])
+	{
+		transVector.z -= mMove;
+	}
+
+	if(keys[VK_UP])
+	{
+		transVector.z += mMove;
+	}
+
+	if(keys[VK_LEFT])
+	{
 		transVector.x += mMove;
+	}
+
+	if(keys[VK_RIGHT])
+	{
+		transVector.x -= mMove;
 	}
 
 	if(localClient)
