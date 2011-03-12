@@ -38,6 +38,7 @@ void Sinbad::setupModel()
 	}
 
 	mVerticalVelocity = 0;
+	mKeyDirection = Vector3::ZERO;
 }
 
 void Sinbad::setupAnimations()
@@ -77,7 +78,7 @@ void Sinbad::addTime(Real deltaTime)
 
 void Sinbad::injectKeyDown(const OIS::KeyEvent& evt)
 	{
-		/*
+
 		if (evt.key == OIS::KC_Q && (mTopAnimID == ANIM_IDLE_TOP || mTopAnimID == ANIM_RUN_TOP))
 		{
 			// take swords out (or put them back, since it's the same animation but reversed)
@@ -90,31 +91,31 @@ void Sinbad::injectKeyDown(const OIS::KeyEvent& evt)
 			{
 				// start dancing
 				setBaseAnimation(ANIM_DANCE, true);
-				setTopAnimation(ANIM_NONE);
+				setTopAnimation(ANIM_NONE,false);
 				// disable hand animation because the dance controls hands
 				mAnims[ANIM_HANDS_RELAXED]->setEnabled(false);
 			}
 			else if (mBaseAnimID == ANIM_DANCE)
 			{
 				// stop dancing
-				setBaseAnimation(ANIM_IDLE_BASE);
-				setTopAnimation(ANIM_IDLE_TOP);
+				setBaseAnimation(ANIM_IDLE_BASE,false);
+				setTopAnimation(ANIM_IDLE_TOP,false);
 				// re-enable hand animation
 				mAnims[ANIM_HANDS_RELAXED]->setEnabled(true);
 			}
 		}
 
 		// keep track of the player's intended direction
-		else if (evt.key == OIS::KC_W) mKeyDirection.z = -1;
-		else if (evt.key == OIS::KC_A) mKeyDirection.x = -1;
-		else if (evt.key == OIS::KC_S) mKeyDirection.z = 1;
-		else if (evt.key == OIS::KC_D) mKeyDirection.x = 1;
+		else if (evt.key == OIS::KC_I) mKeyDirection.z = -1;
+		else if (evt.key == OIS::KC_J) mKeyDirection.x = -1;
+		else if (evt.key == OIS::KC_K) mKeyDirection.z = 1;
+		else if (evt.key == OIS::KC_L) mKeyDirection.x = 1;
 
 		else if (evt.key == OIS::KC_SPACE && (mTopAnimID == ANIM_IDLE_TOP || mTopAnimID == ANIM_RUN_TOP))
 		{
 			// jump if on ground
 			setBaseAnimation(ANIM_JUMP_START, true);
-			setTopAnimation(ANIM_NONE);
+			setTopAnimation(ANIM_NONE,false);
 			mTimer = 0;
 		}
 
@@ -124,7 +125,7 @@ void Sinbad::injectKeyDown(const OIS::KeyEvent& evt)
 			setBaseAnimation(ANIM_RUN_BASE, true);
 			if (mTopAnimID == ANIM_IDLE_TOP) setTopAnimation(ANIM_RUN_TOP, true);
 		}
-		*/
+		
 	}
 
 void Sinbad::injectKeyUp(const OIS::KeyEvent& evt)

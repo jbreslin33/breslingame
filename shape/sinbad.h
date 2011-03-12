@@ -51,9 +51,9 @@ virtual void setupAnimations();
 void fadeAnimations(Real deltaTime);
 void setTopAnimation(AnimID id, bool reset);
 void setBaseAnimation(AnimID id, bool reset);
-void addTime(Real deltaTime);
-void injectKeyDown(const OIS::KeyEvent& evt);
-void injectKeyUp(const OIS::KeyEvent& evt);
+virtual void addTime(Real deltaTime);
+virtual void injectKeyDown(const OIS::KeyEvent& evt);
+virtual void injectKeyUp(const OIS::KeyEvent& evt);
 virtual void setupModel();
 
 
@@ -68,6 +68,7 @@ virtual void setupModel();
 	bool mSwordsDrawn;
 	Real mTimer;                // general timer to see how long animations have been playing
 	Real mVerticalVelocity;     // for jumping
+	Vector3 mKeyDirection;      // player's local intended direction based on WASD keys
 };
 
 #endif

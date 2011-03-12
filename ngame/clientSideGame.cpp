@@ -317,10 +317,23 @@ void ClientSideGame::MoveInWorldSpaceRelativeToCamera(void)
 	}
 }
 
-//-----------------------------------------------------------------------------
-// Name: empty()
-// Desc:
-//-----------------------------------------------------------------------------
+bool ClientSideGame::keyPressed( const OIS::KeyEvent &arg )
+{
+	localClient->mClientSideShape->injectKeyDown(arg);
+	BaseApplication::keyPressed(arg);
+	
+    //mCameraMan->injectKeyDown(arg);
+
+    return true;
+}
+
+bool ClientSideGame::keyReleased( const OIS::KeyEvent &arg )
+{
+	BaseApplication::keyReleased(arg);
+	//mCameraMan->injectKeyUp(arg);
+    return true;
+}
+
 void ClientSideGame::MoveObjects(void)
 {
 	if(!localClient)

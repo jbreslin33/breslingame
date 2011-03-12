@@ -286,6 +286,7 @@ bool BaseApplication::frameRenderingQueued(const Ogre::FrameEvent& evt)
 //-------------------------------------------------------------------------------------
 bool BaseApplication::keyPressed( const OIS::KeyEvent &arg )
 {
+
     if (mTrayMgr->isDialogVisible()) return true;   // don't process any more keys if dialog is up
 
     if (arg.key == OIS::KC_F)   // toggle visibility of advanced frame stats
@@ -375,12 +376,13 @@ bool BaseApplication::keyPressed( const OIS::KeyEvent &arg )
     }
 
     mCameraMan->injectKeyDown(arg);
+	
     return true;
 }
 
 bool BaseApplication::keyReleased( const OIS::KeyEvent &arg )
 {
-    mCameraMan->injectKeyUp(arg);
+	mCameraMan->injectKeyUp(arg);
     return true;
 }
 

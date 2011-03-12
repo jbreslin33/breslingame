@@ -16,6 +16,10 @@ public:
 ClientSideShape(Ogre::SceneManager* mSceneMgr, std::string name, int xPos, int yPos, int zPos, std::string mesh); 
 ~ClientSideShape();
 
+virtual void addTime(Real deltaTime) { bool donothing; }
+
+virtual void injectKeyDown(const OIS::KeyEvent& evt) { bool donothing; }
+virtual void injectKeyUp(const OIS::KeyEvent& evt) { bool donothing; }
 
 virtual void setupModel();
 void updatePosition(Real deltaTime);
