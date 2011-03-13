@@ -269,6 +269,7 @@ void ClientSideNetworkedGame::Disconnect(void)
 
 void ClientSideNetworkedGame::CheckPredictionError(int a)
 {
+	LogString("CheckPredictionError");
 	if(a < 0 && a > COMMAND_HISTORY_SIZE)
 		return;
 
@@ -317,8 +318,6 @@ void ClientSideNetworkedGame::RunNetwork(int msec)
 
 	int ack = networkClient->GetIncomingAcknowledged();
 	int current = networkClient->GetOutgoingSequence();
-
-//iam going to put the following in Game.cpp's game loop...
 
 	// Check that we haven't gone too far
 	if(current - ack > COMMAND_HISTORY_SIZE)
