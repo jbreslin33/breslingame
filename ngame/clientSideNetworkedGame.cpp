@@ -269,7 +269,6 @@ void ClientSideNetworkedGame::Disconnect(void)
 
 void ClientSideNetworkedGame::CheckPredictionError(int a)
 {
-	LogString("CheckPredictionError");
 	if(a < 0 && a > COMMAND_HISTORY_SIZE)
 		return;
 
