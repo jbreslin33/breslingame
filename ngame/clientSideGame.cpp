@@ -321,9 +321,6 @@ bool ClientSideGame::keyPressed( const OIS::KeyEvent &arg )
 {
 	localClient->mClientSideShape->injectKeyDown(arg);
 	BaseApplication::keyPressed(arg);
-	
-    //mCameraMan->injectKeyDown(arg);
-
     return true;
 }
 
