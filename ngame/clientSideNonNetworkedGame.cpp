@@ -31,11 +31,11 @@ void ClientSideNonNetworkedGame::StartConnection(char* serverIP)
 void ClientSideNonNetworkedGame::gameLoop()
 {
 	//CheckKeys();
-	//MovePlayer();
-	if(localClient)
-	{
-		localClient->mClientSideShape->addTime(rendertime);
-	}
+	MovePlayer();
+	//if(localClient)
+	//{
+	//	localClient->mClientSideShape->addTime(rendertime);
+	//}
 	Ogre::WindowEventUtilities::messagePump();
 	keepRunning = mRoot->renderOneFrame();
 }
