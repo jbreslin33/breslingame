@@ -229,6 +229,12 @@ void ClientSideGame::RemoveClient(int ind)
 
 void ClientSideGame::MovePlayer(void)
 {
+	if(localClient)
+	{
+		localClient->mClientSideShape->addTime(rendertime);
+	}
+
+	/*
 	static Ogre::Real mMove = 17.0;
 	Ogre::Vector3 transVector = Ogre::Vector3::ZERO;
 
@@ -257,6 +263,7 @@ void ClientSideGame::MovePlayer(void)
 		localClient->mClientSideShape->updateAnimations(rendertime);
 		localClient->mClientSideShape->getSceneNode()->translate(transVector * rendertime, Ogre::Node::TS_WORLD);
 	}
+*/
 }
 
 
@@ -358,6 +365,7 @@ void ClientSideGame::MoveObjects(void)
 		}
 
 		//Local player
+		/*
 		else
 		{
 			client->command.origin.x = client->command.predictedOrigin.x;
@@ -368,6 +376,7 @@ void ClientSideGame::MoveObjects(void)
 
             client->mClientSideShape->getSceneNode()->setPosition(transVector);
 		}
+		*/
 	}
 }
 
