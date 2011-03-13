@@ -106,10 +106,10 @@ void Sinbad::injectKeyDown(const OIS::KeyEvent& evt)
 		}
 
 		// keep track of the player's intended direction
-		else if (evt.key == OIS::KC_I) mKeyDirection.z = -1;
-		else if (evt.key == OIS::KC_J) mKeyDirection.x = -1;
-		else if (evt.key == OIS::KC_K) mKeyDirection.z = 1;
-		else if (evt.key == OIS::KC_L) mKeyDirection.x = 1;
+		else if (evt.key == OIS::KC_I) mKeyDirection.z = +1;
+		else if (evt.key == OIS::KC_J) mKeyDirection.x = +1;
+		else if (evt.key == OIS::KC_K) mKeyDirection.z = -1;
+		else if (evt.key == OIS::KC_L) mKeyDirection.x = -1;
 
 		else if (evt.key == OIS::KC_SPACE && (mTopAnimID == ANIM_IDLE_TOP || mTopAnimID == ANIM_RUN_TOP))
 		{
@@ -132,10 +132,10 @@ void Sinbad::injectKeyUp(const OIS::KeyEvent& evt)
 	{
 		
 		// keep track of the player's intended direction
-		if (evt.key == OIS::KC_I && mKeyDirection.z == -1) mKeyDirection.z = 0;
-		else if (evt.key == OIS::KC_J && mKeyDirection.x == -1) mKeyDirection.x = 0;
-		else if (evt.key == OIS::KC_K && mKeyDirection.z == 1) mKeyDirection.z = 0;
-		else if (evt.key == OIS::KC_L && mKeyDirection.x == 1) mKeyDirection.x = 0;
+		if (evt.key == OIS::KC_I && mKeyDirection.z == 1) mKeyDirection.z = 0;
+		else if (evt.key == OIS::KC_J && mKeyDirection.x == 1) mKeyDirection.x = 0;
+		else if (evt.key == OIS::KC_K && mKeyDirection.z == -1) mKeyDirection.z = 0;
+		else if (evt.key == OIS::KC_L && mKeyDirection.x == -1) mKeyDirection.x = 0;
 
 		if (mKeyDirection.isZeroLength() && mBaseAnimID == ANIM_RUN_BASE)
 		{
