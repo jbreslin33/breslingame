@@ -300,7 +300,7 @@ void ClientSideNetworkedGame::Shutdown(void)
 
 void ClientSideNetworkedGame::RunNetwork(int msec)
 {
-	//LogString("Running Network");
+	LogString("Running Network");
 	static int time = 0;
 	time += msec;
 
