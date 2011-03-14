@@ -224,6 +224,7 @@ void ClientSideNetworkedGame::SendCommand(void)
 
 void ClientSideNetworkedGame::SendRequestNonDeltaFrame(void)
 {
+	LogString("SendRequest..........");
 	char data[1400];
 	dreamMessage message;
 	message.Init(data, sizeof(data));
@@ -299,6 +300,7 @@ void ClientSideNetworkedGame::Shutdown(void)
 
 void ClientSideNetworkedGame::RunNetwork(int msec)
 {
+	//LogString("Running Network");
 	static int time = 0;
 	time += msec;
 
@@ -307,7 +309,7 @@ void ClientSideNetworkedGame::RunNetwork(int msec)
         MovePlayer();
 		return;
 	}
-
+//LogString("didn't mobe player but ran network");
 	frametime = time / 1000.0f;
 	time = 0;
 
