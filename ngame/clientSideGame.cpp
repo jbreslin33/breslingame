@@ -365,7 +365,7 @@ void ClientSideGame::MoveObjects(void)
 		}
 
 		//Local player
-		/*
+		
 		else
 		{
 			client->command.origin.x = client->command.predictedOrigin.x;
@@ -376,7 +376,7 @@ void ClientSideGame::MoveObjects(void)
 
             client->mClientSideShape->getSceneNode()->setPosition(transVector);
 		}
-		*/
+		
 	}
 }
 
