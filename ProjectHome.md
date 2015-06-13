@@ -1,0 +1,1 @@
+right now this holds pointer to BaseClass Game Server.
